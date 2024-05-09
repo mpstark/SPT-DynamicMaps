@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using BepInEx.Configuration;
-using UnityEngine;
 
 // THIS IS HEAVILY BASED ON DRAKIAXYZ'S SPT-QuickMoveToContainer
-namespace SimpleCrosshair.Config
+namespace InGameMap.Config
 {
     internal class Settings
     {
@@ -13,20 +10,20 @@ namespace SimpleCrosshair.Config
         public static List<ConfigEntryBase> ConfigEntries = new List<ConfigEntryBase>();
 
         public const string GeneralTitle = "1. General";
-        // public static ConfigEntry<string> ImageFileName;
+        public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
 
         public static void Init(ConfigFile Config)
         {
             Settings.Config = Config;
 
-            // ConfigEntries.Add(Show = Config.Bind(
-            //     GeneralTitle,
-            //     "Show Crosshair",
-            //     true,
-            //     new ConfigDescription(
-            //         "If the crosshair should be displayed on raid load, can still be toggled on by Toggle keybind",
-            //         null,
-            //         new ConfigurationManagerAttributes { })));
+            ConfigEntries.Add(KeyboardShortcut = Config.Bind(
+                GeneralTitle,
+                "Keyboard Shortcut",
+                new KeyboardShortcut(UnityEngine.KeyCode.M),
+                new ConfigDescription(
+                    "The keyboard shortcut to open the map",
+                    null,
+                    new ConfigurationManagerAttributes { })));
 
             RecalcOrder();
         }

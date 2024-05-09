@@ -25,6 +25,9 @@
     <Reference Include="Comfort">
       <HintPath>$(TarkovManagedDir)Comfort.dll</HintPath>
     </Reference>
+    <Reference Include="Comfort.Unity">
+      <HintPath>$(TarkovManagedDir)Comfort.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>$(TarkovManagedDir)DOTween.dll</HintPath>
     </Reference>
@@ -112,10 +115,10 @@
     </ItemGroup>
 
     <!-- Copies the output and resources to tarkov game folder -->
-    <Copy
+    <!-- <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
       DestinationFolder="$(TarkovDir)BepInEx\plugins\InGameMap"
-    />
+    /> -->
     <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
       DestinationFolder="$(TarkovDebugDir)BepInEx\plugins\InGameMap"
