@@ -34,6 +34,9 @@
     <Reference Include="DOTween.Modules">
       <HintPath>$(TarkovManagedDir)DOTween.Modules.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(TarkovManagedDir)Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>$(TarkovManagedDir)Sirenix.Serialization.dll</HintPath>
     </Reference>
@@ -111,7 +114,7 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <ItemGroup>
       <OutputDLL Include="$(ProjectDir)$(OutDir)$(TargetName).dll" />
-      <Resources Include="$(ProjectDir)Resources\*" />
+      <Resources Include="$(ProjectDir)Resources\**\*.*" />
     </ItemGroup>
 
     <!-- Copies the output and resources to tarkov game folder -->
@@ -121,7 +124,7 @@
     /> -->
     <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
-      DestinationFolder="$(TarkovDebugDir)BepInEx\plugins\InGameMap"
+      DestinationFolder="$(TarkovDebugDir)BepinEx\plugins\InGameMap\%(RecursiveDir)"
     />
 
     <!-- Creates a release zip file -->

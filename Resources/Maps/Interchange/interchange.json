@@ -1,0 +1,52 @@
+{
+    "Rotation": 180,
+    "Bounds": [
+        {"x": 530, "y": -439},
+        {"x": -364, "y": 452}
+    ],
+    "Layers": [
+        {
+            "LayerNumber": 0,
+            "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_0.png",
+            "Bounds": [
+                {"x": 530, "y": -439},
+                {"x": -364, "y": 452}
+            ]
+        },
+        {
+            "LayerNumber": 1,
+            "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_1.png",
+            "Bounds": [
+                {"x": 530, "y": -439},
+                {"x": -364, "y": 452}
+            ]
+        },
+        {
+            "LayerNumber": 2,
+            "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_2.png",
+            "Bounds": [
+                {"x": 530, "y": -439},
+                {"x": -364, "y": 452}
+            ]
+        }
+    ],
+    "StaticMarkers": {
+        "Mall Main Power Switch": {
+            "ImagePath": "Markers\\switch.png",
+            "Position": {"x": -201.16, "y": -357.81},
+            "Category": "Switch"
+        },
+
+        "Saferoom Exfil Switch": {
+            "ImagePath": "Markers\\switch.png",
+            "Position": {"x": -50.65, "y": 45.67},
+            "Category": "Switch"
+        },
+
+        "Object 14 Container Switch": {
+            "ImagePath": "Markers\\switch.png",
+            "Position": {"x": -47.77, "y": 42.67},
+            "Category": "Switch"
+        }
+    }
+}
