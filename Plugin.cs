@@ -108,7 +108,7 @@ namespace InGameMap
                 return;
             }
 
-            Map = ModdedMapScreen.Create(screen.gameObject);
+            Map = ModdedMapScreen.AttachTo(screen.gameObject);
         }
     }
 }
