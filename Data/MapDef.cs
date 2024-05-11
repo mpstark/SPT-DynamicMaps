@@ -8,7 +8,7 @@ namespace InGameMap.Data
 {
     public class MapLayerDef
     {
-        public int LayerNumber { get; set; }
+        public int Level { get; set; }
         public string ImagePath { get; set; }
 
         // 3d points, z is heights -- this is different than how unity does it
@@ -25,10 +25,11 @@ namespace InGameMap.Data
 
     public class MapDef
     {
-        public float Rotation { get; set; }
+        public float CoordinateRotation { get; set; }
         public Dictionary<string, MapLayerDef> Layers { get; set; } = new Dictionary<string, MapLayerDef>();
         public Dictionary<string, MapMarkerDef> StaticMarkers { get; set; } = new Dictionary<string, MapMarkerDef>();
         public List<Vector2> Bounds { get; set; } = new List<Vector2>();
+        public int DefaultLevel { get; set; } = 0;
 
         public static MapDef LoadFromPath(string relativePath)
         {

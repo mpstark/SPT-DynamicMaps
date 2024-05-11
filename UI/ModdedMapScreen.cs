@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Comfort.Common;
 using DG.Tweening;
 using EFT;
@@ -31,8 +32,7 @@ namespace InGameMap.UI
         private float _zoomMin; // set when map loaded
         private float _zoomMax; // set when map loaded
         private float _zoomCurrent = 0.5f;
-        private float _mapRotation = 0;
-        private int _selectedLayer;
+        private float _coordinateRotation = 0;
 
         private void Update()
         {
@@ -57,7 +57,7 @@ namespace InGameMap.UI
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 mapRectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
 
-            var rotatedPos = MathUtils.GetRotatedVector2(mouseRelative, _mapRotation);
+            var rotatedPos = MathUtils.GetRotatedVector2(mouseRelative, _coordinateRotation);
 
             var oldZoom = _zoomCurrent;
             var zoomDelta = scroll * _zoomCurrent * _zoomScaler;
@@ -143,11 +143,11 @@ namespace InGameMap.UI
         private void LoadMap(MapDef mapDef)
         {
             _currentMapDef = mapDef;
-            _mapRotation = mapDef.Rotation;
+            _coordinateRotation = mapDef.CoordinateRotation;
 
             // set width and height for top level
             var size = MathUtils.GetBoundingRectangle(mapDef.Bounds);
-            var rotatedSize = MathUtils.GetRotatedRectangle(size, _mapRotation);
+            var rotatedSize = MathUtils.GetRotatedRectangle(size, _coordinateRotation);
             _mapContentGO.GetRectTransform().sizeDelta = rotatedSize;
 
             // set offset
@@ -162,22 +162,29 @@ namespace InGameMap.UI
             _mapContentGO.GetRectTransform().localScale = _zoomCurrent * Vector2.one;
 
             // rotate all of the map content
-            var _mapRotationQ = Quaternion.Euler(0, 0, _mapRotation);
+            var _mapRotationQ = Quaternion.Euler(0, 0, _coordinateRotation);
             _mapContentGO.RectTransform().localRotation = _mapRotationQ;
 
             // load all layers
             foreach (var (layerName, layerDef) in mapDef.Layers)
             {
-                _layers[layerName] = new MapLayer(_mapLayersGO, layerName, layerDef, -_mapRotation);
+                _layers[layerName] = new MapLayer(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
             }
 
-            // TODO: should check if layer 0 exists
-            SelectLayerByNumber(0);
+            // set layer order
+            int i = 0;
+            foreach (var layer in _layers.Values.OrderBy(l => l.Level))
+            {
+                layer.RectTransform.SetSiblingIndex(i++);
+            }
+
+            // select layer by the default level
+            SelectLayersByLevel(mapDef.DefaultLevel);
 
             // load static markers from def
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
-                _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_mapRotation, _zoomCurrent);
+                _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation, _zoomCurrent);
             }
         }
 
@@ -186,44 +193,37 @@ namespace InGameMap.UI
             // TODO: this
         }
 
-        private void SelectLayerByNumber(int layerNum)
+        private void SelectLayersByLevel(int level)
         {
-            _selectedLayer = layerNum;
-            string selectedLayer = null;
-
             // go through each layer and set fade color
             foreach (var (layerName, layer) in _layers)
             {
-                // FIXME: this won't work with multiple layers per layerNum
-                if (layer.LayerNumber == layerNum)
-                {
-                    selectedLayer = layerName;
-                }
+                // show layer if at or below the current level
+                layer.GameObject.SetActive(layer.Level <= level);
 
-                // show layer if at or below the current layer
-                layer.GameObject.SetActive(layer.LayerNumber <= layerNum);
-
-                // fade other layers according to difference in layer number
-                var c = Mathf.Pow(_fadeMultiplierPerLayer, layerNum - layer.LayerNumber);
+                // fade other layers according to difference in level
+                var c = Mathf.Pow(_fadeMultiplierPerLayer, level - layer.Level);
                 layer.Image.color = new Color(c, c, c, 1);
             }
 
-            // go through all markers and hide the ones that have exclusive layer
+            // go through all markers and call OnLayerSelect
             foreach (var (markerName, marker) in _markers)
             {
-                marker.OnLayerSelect(selectedLayer);
+                foreach (var (layerName, layer) in _layers)
+                {
+                    marker.OnLayerSelect(layerName, layer.Level == level);
+                }
             }
         }
 
-        private void SelectLayerByCoords(Vector2 coords, float height)
+        private void SelectLayersByCoords(Vector2 coords, float height)
         {
             // TODO: better select that shows only layers in coords
-            // this way you can do multiple layers per layer number
             foreach(var (name, layer) in _layers)
             {
                 if (height > layer.HeightBounds.x && height < layer.HeightBounds.y)
                 {
-                    SelectLayerByNumber(layer.LayerNumber);
+                    SelectLayersByLevel(layer.Level);
                     return;
                 }
             }
@@ -239,7 +239,7 @@ namespace InGameMap.UI
             if (!_markers.ContainsKey("player"))
             {
                 _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
-                                                    new Vector2(0f, 0f), _markerSize, -_mapRotation, _zoomCurrent);
+                                                    new Vector2(0f, 0f), _markerSize, -_coordinateRotation, _zoomCurrent);
                 _markers["player"].Image.color = Color.cyan;
             }
 
@@ -250,7 +250,7 @@ namespace InGameMap.UI
             _markers["player"].Move(player2dPos, -angles.y); // I'm unsure why negative rotation here
 
             // select layers to show
-            SelectLayerByCoords(player2dPos, player3dPos.y);
+            SelectLayersByCoords(player2dPos, player3dPos.y);
         }
 
         private void ShowOutOfRaid()

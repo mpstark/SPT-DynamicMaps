@@ -54,10 +54,14 @@ namespace InGameMap.UI
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
         }
 
-        public void OnLayerSelect(string layer)
+        public void OnLayerSelect(string layerName, bool layerSelected)
         {
-            var active = LinkedLayer.IsNullOrEmpty() || layer == LinkedLayer;
-            GameObject.SetActive(active);
+            if (LinkedLayer.IsNullOrEmpty() || LinkedLayer != layerName)
+            {
+                return;
+            }
+
+            GameObject.SetActive(layerSelected);
         }
     }
 }

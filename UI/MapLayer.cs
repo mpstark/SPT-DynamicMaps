@@ -13,7 +13,7 @@ namespace InGameMap.UI
         public GameObject GameObject { get; private set; }
         public Vector2 HeightBounds { get; private set; }
 
-        public int LayerNumber => _def.LayerNumber;
+        public int Level => _def.Level;
         public RectTransform RectTransform => GameObject.transform as RectTransform;
 
         private MapLayerDef _def = new MapLayerDef();

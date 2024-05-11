@@ -4,9 +4,10 @@
         {"x": 530, "y": -439},
         {"x": -364, "y": 452}
     ],
+    "DefaultLevel": 0,
     "Layers": {
         "Ground Floor": {
-            "LayerNumber": 0,
+            "Level": 0,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_0.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": -1000},
@@ -14,7 +15,7 @@
             ]
         },
         "2nd Floor": {
-            "LayerNumber": 1,
+            "Level": 1,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_1.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": 25},
@@ -22,7 +23,7 @@
             ]
         },
         "3rd Floor": {
-            "LayerNumber": 2,
+            "Level": 2,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_2.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": 34},

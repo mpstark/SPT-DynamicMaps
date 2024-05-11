@@ -4,9 +4,10 @@
         {"x": 79, "y": -64.5},
         {"x": -66.5, "y": 67.4}
     ],
+    "DefaultLevel": 0,
     "Layers": {
         "Tunnels": {
-            "LayerNumber": -1,
+            "Level": -1,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_-1.png",
             "Bounds": [
                 {"x": 79, "y": -64.5, "z": -1000},
@@ -14,7 +15,7 @@
             ]
         },
         "Ground Floor": {
-            "LayerNumber": 0,
+            "Level": 0,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_0.png",
             "Bounds": [
                 {"x": 79, "y": -64.5, "z": -1},
@@ -22,7 +23,7 @@
             ]
         },
         "2nd Floor": {
-            "LayerNumber": 1,
+            "Level": 1,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_1.png",
             "Bounds": [
                 {"x": 79, "y": -64.5, "z": 3},
@@ -30,7 +31,7 @@
             ]
         },
         "3rd Floor": {
-            "LayerNumber": 2,
+            "Level": 2,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_2.png",
             "Bounds": [
                 {"x": 79, "y": -64.5, "z": 6},
