@@ -3,6 +3,7 @@ using System.Linq;
 using Comfort.Common;
 using DG.Tweening;
 using EFT;
+using EFT.UI;
 using InGameMap.Data;
 using InGameMap.Utils;
 using UnityEngine;
@@ -23,12 +24,16 @@ namespace InGameMap.UI
         private GameObject _mapContentGO;
         private GameObject _mapLayersGO;
         private GameObject _mapMarkersGO;
+        private Scrollbar _mapLevelScrollbar;
 
         private RectTransform _mapRectTransform => _mapContentGO.GetRectTransform();
 
         private MapDef _currentMapDef;
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
+
+        private List<int> _levels = new List<int>();
+        private int _selectedLevel = int.MinValue;
 
         private Vector2 _immediateMapAnchor = Vector2.zero;
         private float _zoomMin; // set when map loaded
@@ -63,8 +68,9 @@ namespace InGameMap.UI
             var zoomNew = Mathf.Clamp(_zoomCurrent + zoomDelta, _zoomMin, _zoomMax);
             var actualDelta = zoomNew - _zoomCurrent;
 
-            SetMapZoom(zoomNew, _zoomTweenTime);
+            // have to shift first, so that the tween is started in the shift first
             ShiftMap(-rotatedRelative * actualDelta, _zoomTweenTime);
+            SetMapZoom(zoomNew, _zoomTweenTime);
         }
 
         public void SetMapZoom(float zoomNew, float tweenTime)
@@ -139,28 +145,67 @@ namespace InGameMap.UI
             _scrollRect.viewport = _scrollMask.GetRectTransform();
 
             // set up container for the map content that will scroll
-            _mapContentGO = new GameObject("MapContent", typeof(RectTransform), typeof(CanvasRenderer));
+            _mapContentGO = new GameObject("MapContent", typeof(RectTransform));
             _mapContentGO.layer = gameObject.layer;
             _mapContentGO.transform.SetParent(scrollMaskGO.transform);
             _mapContentGO.ResetRectTransform();
             _scrollRect.content = _mapRectTransform;
 
             // put all map layers in a container for neatness
-            _mapLayersGO = new GameObject("MapLayers", typeof(RectTransform), typeof(CanvasRenderer));
+            _mapLayersGO = new GameObject("MapLayers", typeof(RectTransform));
             _mapLayersGO.layer = gameObject.layer;
             _mapLayersGO.transform.SetParent(_mapContentGO.transform);
             _mapLayersGO.ResetRectTransform();
 
             // map markers need to inverse scale, so make a container for them so we can do them all at once
-            _mapMarkersGO = new GameObject("MapMarkers", typeof(RectTransform), typeof(CanvasRenderer));
+            _mapMarkersGO = new GameObject("MapMarkers", typeof(RectTransform));
             _mapMarkersGO.layer = gameObject.layer;
             _mapMarkersGO.transform.SetParent(_mapContentGO.transform);
             _mapMarkersGO.ResetRectTransform();
 
+            // copy the zoom scroll to repurpose as level select
+            CreateLevelSelectScrollbar();
+
             // TODO: remove this and load map dynamically or from dropdown
-            // var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
-            var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
+            var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
+            // var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
             LoadMap(mapDef);
+        }
+
+        private void CreateLevelSelectScrollbar()
+        {
+            var prefab = transform.parent.Find("MapBlock/ZoomScroll").gameObject;
+            var scrollbarGO = Instantiate(prefab);
+            scrollbarGO.transform.SetParent(gameObject.transform);
+            scrollbarGO.transform.localScale = Vector3.one;
+
+            // position to top left
+            // TODO: here
+            var oldPosition = scrollbarGO.GetRectTransform().anchoredPosition;
+            scrollbarGO.GetRectTransform().anchoredPosition = new Vector2(oldPosition.x, 750f);
+
+            // remove useless component
+            Destroy(scrollbarGO.GetComponent<MapZoomer>());
+
+            var actualScrollbarGO = scrollbarGO.transform.Find("Scrollbar").gameObject;
+            _mapLevelScrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
+            _mapLevelScrollbar.direction = Scrollbar.Direction.BottomToTop;
+            _mapLevelScrollbar.onValueChanged.AddListener(OnLevelScrollValueChanged);
+        }
+
+        private void OnLevelScrollValueChanged(float newValue)
+        {
+            var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
+            var level = _levels[levelIndex];
+            if (_selectedLevel != level)
+            {
+                SelectLayersByLevel(level);
+            }
+        }
+
+        private void SetLevelScrollValue(int level)
+        {
+            _mapLevelScrollbar.value = _levels.IndexOf(level) / (_levels.Count - 1f);
         }
 
         private void LoadMap(MapDef mapDef)
@@ -179,7 +224,7 @@ namespace InGameMap.UI
 
             // set zoom min and max based on size of map and size of mask
             var maskSize = _scrollMask.RectTransform().sizeDelta;
-            _zoomMin = Mathf.Min(maskSize.x / size.x, maskSize.y / size.y);
+            _zoomMin = Mathf.Min(maskSize.x / rotatedSize.x, maskSize.y / rotatedSize.y);
             _zoomMax = _zoomMaxScaler * _zoomMin;
 
             // rotate all of the map content
@@ -190,6 +235,12 @@ namespace InGameMap.UI
             foreach (var (layerName, layerDef) in mapDef.Layers)
             {
                 _layers[layerName] = new MapLayer(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
+
+                // FIXME: this probably allocates more than I want?
+                if (!_levels.Contains(layerDef.Level))
+                {
+                    _levels.Add(layerDef.Level);
+                }
             }
 
             // set layer order
@@ -198,6 +249,10 @@ namespace InGameMap.UI
             {
                 layer.RectTransform.SetSiblingIndex(i++);
             }
+
+            // set number of levels into the level scrollbar
+            _levels.Sort();
+            _mapLevelScrollbar.numberOfSteps = _levels.Count();
 
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
@@ -218,6 +273,14 @@ namespace InGameMap.UI
 
         private void SelectLayersByLevel(int level)
         {
+            if (_selectedLevel == level)
+            {
+                return;
+            }
+
+            _selectedLevel = level;
+            SetLevelScrollValue(_selectedLevel);
+
             // go through each layer and set fade color
             foreach (var (layerName, layer) in _layers)
             {
