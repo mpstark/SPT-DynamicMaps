@@ -4,8 +4,8 @@
         {"x": 530, "y": -439},
         {"x": -364, "y": 452}
     ],
-    "Layers": [
-        {
+    "Layers": {
+        "layer_0": {
             "LayerNumber": 0,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_0.png",
             "Bounds": [
@@ -13,7 +13,7 @@
                 {"x": -364, "y": 452}
             ]
         },
-        {
+        "layer_1": {
             "LayerNumber": 1,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_1.png",
             "Bounds": [
@@ -21,7 +21,7 @@
                 {"x": -364, "y": 452}
             ]
         },
-        {
+        "layer_2": {
             "LayerNumber": 2,
             "ImagePath": "Maps\\Interchange\\Layers\\interchange_layer_2.png",
             "Bounds": [
@@ -29,7 +29,7 @@
                 {"x": -364, "y": 452}
             ]
         }
-    ],
+    },
     "StaticMarkers": {
         "Mall Main Power Switch": {
             "ImagePath": "Markers\\switch.png",

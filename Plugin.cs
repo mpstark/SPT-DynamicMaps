@@ -8,6 +8,7 @@ using EFT.UI.Map;
 using HarmonyLib;
 using InGameMap.Config;
 using InGameMap.Patches;
+using InGameMap.UI;
 
 namespace InGameMap
 {

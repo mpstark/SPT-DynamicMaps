@@ -9,8 +9,8 @@ namespace InGameMap.Data
     public class MapDef
     {
         public float Rotation { get; set; }
-        public List<LayerDef> Layers { get; set; } = new List<LayerDef>();
-        public Dictionary<string, MarkerDef> StaticMarkers { get; set; } = new Dictionary<string, MarkerDef>();
+        public Dictionary<string, MapLayerDef> Layers { get; set; } = new Dictionary<string, MapLayerDef>();
+        public Dictionary<string, MapMarkerDef> StaticMarkers { get; set; } = new Dictionary<string, MapMarkerDef>();
         public List<Vector2> Bounds { get; set; } = new List<Vector2>();
 
         public static MapDef LoadFromPath(string relativePath)
