@@ -14,13 +14,13 @@ namespace InGameMap.UI
         public GameObject GameObject { get; private set; }
         public RectTransform RectTransform => GameObject.transform as RectTransform;
 
-        public MapMarker(GameObject parent, string name, MapMarkerDef def, Vector2 size, float degreesRotation, float zoom)
-            : this(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, zoom)
+        public MapMarker(GameObject parent, string name, MapMarkerDef def, Vector2 size, float degreesRotation = 0, float scale = 0)
+            : this(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, scale)
         {
             LinkedLayer = def.LinkedLayer;
         }
 
-        public MapMarker(GameObject parent, string name, string category, string imageRelativePath, Vector2 position, Vector2 size, float degreesRotation, float zoom)
+        public MapMarker(GameObject parent, string name, string category, string imageRelativePath, Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
         {
             Name = name;
 
@@ -28,14 +28,14 @@ namespace InGameMap.UI
             GameObject.layer = parent.layer;
             GameObject.transform.SetParent(parent.transform);
 
-            // set position
+            // set size, position and scale
             GameObject.ResetRectTransform();
             RectTransform.anchoredPosition = position;
             RectTransform.sizeDelta = size;
+            RectTransform.localScale = scale * Vector2.one;
 
             // set rotation to combat when we rotate the whole map content
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
-            RectTransform.localScale = (1 / zoom) * Vector3.one;
 
             // load image
             Image = GameObject.AddComponent<Image>();

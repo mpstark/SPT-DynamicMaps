@@ -24,6 +24,8 @@ namespace InGameMap.UI
         private GameObject _mapLayersGO;
         private GameObject _mapMarkersGO;
 
+        private RectTransform _mapRectTransform => _mapContentGO.GetRectTransform();
+
         private MapDef _currentMapDef;
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
@@ -45,7 +47,7 @@ namespace InGameMap.UI
             if (Input.GetKeyDown(KeyCode.L))
             {
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    _mapContentGO.GetRectTransform(), Input.mousePosition, null, out Vector2 relativePosition);
+                    _mapRectTransform, Input.mousePosition, null, out Vector2 relativePosition);
 
                 Plugin.Log.LogInfo($"Position: {relativePosition}");
             }
@@ -53,42 +55,63 @@ namespace InGameMap.UI
 
         private void OnScroll(float scroll)
         {
-            var mapRectTransform = _mapContentGO.GetRectTransform();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                mapRectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
+                _mapRectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
+            var rotatedRelative = MathUtils.GetRotatedVector2(mouseRelative, _coordinateRotation);
 
-            var rotatedPos = MathUtils.GetRotatedVector2(mouseRelative, _coordinateRotation);
-
-            var oldZoom = _zoomCurrent;
             var zoomDelta = scroll * _zoomCurrent * _zoomScaler;
-            _zoomCurrent = Mathf.Clamp(_zoomCurrent + zoomDelta, _zoomMin, _zoomMax);
-            zoomDelta = _zoomCurrent - oldZoom;
+            var zoomNew = Mathf.Clamp(_zoomCurrent + zoomDelta, _zoomMin, _zoomMax);
+            var actualDelta = zoomNew - _zoomCurrent;
 
-            if (_zoomCurrent != mapRectTransform.localScale.x)
+            SetMapZoom(zoomNew, _zoomTweenTime);
+            ShiftMap(-rotatedRelative * actualDelta, _zoomTweenTime);
+        }
+
+        public void SetMapZoom(float zoomNew, float tweenTime)
+        {
+            zoomNew = Mathf.Clamp(zoomNew, _zoomMin, _zoomMax);
+
+            // already there
+            if (zoomNew == _zoomCurrent)
             {
-                _scrollRect.StopMovement();
-
-                // check if tweening to update _immediateMapAnchor, since the scroll rect might have moved the anchor
-                if (!DOTween.IsTweening(mapRectTransform, true))
-                {
-                    _immediateMapAnchor = mapRectTransform.GetRectTransform().anchoredPosition;
-                }
-
-                // scale all map content up by scaling parent
-                mapRectTransform.DOScale(_zoomCurrent * Vector3.one, _zoomTweenTime);
-
-                // adjust position to new scroll, since we're moving towards cursor
-                _immediateMapAnchor -= rotatedPos * zoomDelta;
-                mapRectTransform.DOAnchorPos(_immediateMapAnchor, _zoomTweenTime);
-
-                // inverse scale all map markers
-                // FIXME: does this generate large amounts of garbage?
-                var mapMarkers = _mapMarkersGO.transform.GetChildren();
-                foreach (var mapMarker in mapMarkers)
-                {
-                    mapMarker.DOScale(1/_zoomCurrent * Vector3.one, _zoomTweenTime);
-                }
+                return;
             }
+
+            _zoomCurrent = zoomNew;
+
+            // stop any movement that the scroll rect is doing because of momentum
+            _scrollRect.StopMovement();
+
+            // scale all map content up by scaling parent
+            _mapRectTransform.DOScale(_zoomCurrent * Vector3.one, tweenTime);
+
+            // inverse scale all map markers
+            // FIXME: does this generate large amounts of garbage?
+            var mapMarkers = _mapMarkersGO.transform.GetChildren();
+            foreach (var mapMarker in mapMarkers)
+            {
+                mapMarker.DOScale(1/_zoomCurrent * Vector3.one, tweenTime);
+            }
+        }
+
+        public void ShiftMap(Vector2 shift, float tweenTime)
+        {
+            if (shift == Vector2.zero)
+            {
+                return;
+            }
+
+            // stop any movement that the scroll rect is doing because of momentum
+            _scrollRect.StopMovement();
+
+            // check if tweening to update _immediateMapAnchor, since the scroll rect might have moved the anchor
+            if (!DOTween.IsTweening(_mapRectTransform, true))
+            {
+                _immediateMapAnchor = _mapRectTransform.anchoredPosition;
+            }
+
+            _immediateMapAnchor += shift;
+            _mapRectTransform.DOAnchorPos(_immediateMapAnchor, tweenTime);
         }
 
         private void Awake()
@@ -120,7 +143,7 @@ namespace InGameMap.UI
             _mapContentGO.layer = gameObject.layer;
             _mapContentGO.transform.SetParent(scrollMaskGO.transform);
             _mapContentGO.ResetRectTransform();
-            _scrollRect.content = _mapContentGO.GetRectTransform();
+            _scrollRect.content = _mapRectTransform;
 
             // put all map layers in a container for neatness
             _mapLayersGO = new GameObject("MapLayers", typeof(RectTransform), typeof(CanvasRenderer));
@@ -148,18 +171,16 @@ namespace InGameMap.UI
             // set width and height for top level
             var size = MathUtils.GetBoundingRectangle(mapDef.Bounds);
             var rotatedSize = MathUtils.GetRotatedRectangle(size, _coordinateRotation);
-            _mapContentGO.GetRectTransform().sizeDelta = rotatedSize;
+            _mapRectTransform.sizeDelta = rotatedSize;
 
             // set offset
             var offset = MathUtils.GetMidpoint(mapDef.Bounds);
-            _mapContentGO.GetRectTransform().anchoredPosition = offset;
+            _mapRectTransform.anchoredPosition = offset;
 
-            // set initial zoom
+            // set zoom min and max based on size of map and size of mask
             var maskSize = _scrollMask.RectTransform().sizeDelta;
             _zoomMin = Mathf.Min(maskSize.x / size.x, maskSize.y / size.y);
             _zoomMax = _zoomMaxScaler * _zoomMin;
-            _zoomCurrent = _zoomMin;
-            _mapContentGO.GetRectTransform().localScale = _zoomCurrent * Vector2.one;
 
             // rotate all of the map content
             var _mapRotationQ = Quaternion.Euler(0, 0, _coordinateRotation);
@@ -178,14 +199,16 @@ namespace InGameMap.UI
                 layer.RectTransform.SetSiblingIndex(i++);
             }
 
-            // select layer by the default level
-            SelectLayersByLevel(mapDef.DefaultLevel);
-
-            // load static markers from def
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
-                _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation, _zoomCurrent);
+                _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
             }
+
+            // this will set everything up for initial zoom
+            SetMapZoom(_zoomMin, 0);
+
+            // select layer by the default level
+            SelectLayersByLevel(mapDef.DefaultLevel);
         }
 
         private void UnloadMap()
@@ -239,7 +262,7 @@ namespace InGameMap.UI
             if (!_markers.ContainsKey("player"))
             {
                 _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
-                                                    new Vector2(0f, 0f), _markerSize, -_coordinateRotation, _zoomCurrent);
+                                                    new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
                 _markers["player"].Image.color = Color.cyan;
             }
 
