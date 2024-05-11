@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Comfort.Common;
 using DG.Tweening;
 using EFT;
 using InGameMap.Data;
 using SimpleCrosshair.Utils;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace InGameMap
@@ -16,6 +19,7 @@ namespace InGameMap
         private static float _fadeMultiplierPerLayer = 0.66f;
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
+        private float _zoomMaxScaler = 10f;
         private static Vector2 _markerSize = new Vector2(16, 16);
 
         private ScrollRect _scrollRect;
@@ -29,9 +33,9 @@ namespace InGameMap
         private Dictionary<string, Image> _markers = new Dictionary<string, Image>();
 
         private Vector2 _immediateMapAnchor = Vector2.zero;
-        private float _zoomMin = 1f; // will be replaced with the min zoom based on size of map
-        private float _zoomMax = 10f; // TODO: set this one from size of map too?
-        private float _zoom = 0.5f;
+        private float _zoomMin;
+        private float _zoomMax;
+        private float _zoomCurrent = 0.5f;
 
         private float _mapRotation = 0;
         private Quaternion _mapRotationQ;
@@ -57,21 +61,16 @@ namespace InGameMap
         {
             var mapRectTransform = _mapContentGO.GetRectTransform();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                mapRectTransform, Input.mousePosition, null, out Vector2 relPos);
+                mapRectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
 
-            var x = relPos.x;
-            var y = relPos.y;
-            var sin = Mathf.Sin(_mapRotation * Mathf.Deg2Rad);
-            var cos = Mathf.Cos(_mapRotation * Mathf.Deg2Rad);
-            // FIXME: this is busted
-            var rotatedPos = new Vector2(x * cos + y * sin, x * sin + y * cos);
+            var rotatedPos = GetRotatedVector2(mouseRelative, _mapRotation);
 
-            var oldZoom = _zoom;
-            var zoomDelta = scroll * _zoom * _zoomScaler;
-            _zoom = Mathf.Clamp(_zoom + zoomDelta, _zoomMin, _zoomMax);
-            zoomDelta = _zoom - oldZoom;
+            var oldZoom = _zoomCurrent;
+            var zoomDelta = scroll * _zoomCurrent * _zoomScaler;
+            _zoomCurrent = Mathf.Clamp(_zoomCurrent + zoomDelta, _zoomMin, _zoomMax);
+            zoomDelta = _zoomCurrent - oldZoom;
 
-            if (_zoom != mapRectTransform.localScale.x)
+            if (_zoomCurrent != mapRectTransform.localScale.x)
             {
                 _scrollRect.StopMovement();
 
@@ -82,7 +81,7 @@ namespace InGameMap
                 }
 
                 // scale all map content up by scaling parent
-                mapRectTransform.DOScale(_zoom * Vector3.one, _zoomTweenTime);
+                mapRectTransform.DOScale(_zoomCurrent * Vector3.one, _zoomTweenTime);
 
                 // adjust position to new scroll, since we're moving towards cursor
                 _immediateMapAnchor -= rotatedPos * zoomDelta;
@@ -93,7 +92,7 @@ namespace InGameMap
                 var mapMarkers = _mapMarkersGO.transform.GetChildren();
                 foreach (var mapMarker in mapMarkers)
                 {
-                    mapMarker.DOScale(1/_zoom * Vector3.one, _zoomTweenTime);
+                    mapMarker.DOScale(1/_zoomCurrent * Vector3.one, _zoomTweenTime);
                 }
             }
         }
@@ -141,47 +140,34 @@ namespace InGameMap
             _mapMarkersGO.transform.SetParent(_mapContentGO.transform);
             _mapMarkersGO.ResetRectTransform();
 
-            // TODO: remove this
+            // TODO: remove this and load map dynamically or from dropdown
+            // var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
             var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
             LoadMap(mapDef);
         }
 
         private void LoadMap(MapDef mapDef)
         {
-            // TODO: unload old map
-
-
             _currentMapDef = mapDef;
-
-            // TODO: there is surely a better way to do this
-            float minX = float.MaxValue;
-            float maxX = float.MinValue;
-            float minY = float.MaxValue;
-            float maxY = float.MinValue;
-            foreach (var bound in mapDef.Bounds)
-            {
-                minX = Mathf.Min(minX, bound.x);
-                maxX = Mathf.Max(maxX, bound.x);
-                minY = Mathf.Min(minY, bound.y);
-                maxY = Mathf.Max(maxY, bound.y);
-            }
+            _mapRotation = mapDef.Rotation;
 
             // set width and height for top level
-            var size = new Vector2(maxX - minX, maxY - minY);
-            _mapContentGO.GetRectTransform().sizeDelta = size;
+            var size = GetRectangleFromBounds(mapDef.Bounds);
+            var rotatedSize = GetRotatedRectangle(size, _mapRotation);
+            _mapContentGO.GetRectTransform().sizeDelta = rotatedSize;
 
             // set offset
-            var offset = new Vector2((maxX + minX) / 2, (maxY + minY) / 2);
+            var offset = GetMidpoint(mapDef.Bounds);
             _mapContentGO.GetRectTransform().anchoredPosition = offset;
 
             // set initial zoom
             var maskSize = _scrollMask.RectTransform().sizeDelta;
             _zoomMin = Mathf.Min(maskSize.x / size.x, maskSize.y / size.y);
-            _zoom = _zoomMin;
-            _mapContentGO.GetRectTransform().localScale = _zoom * Vector2.one;
+            _zoomMax = _zoomMaxScaler * _zoomMin;
+            _zoomCurrent = _zoomMin;
+            _mapContentGO.GetRectTransform().localScale = _zoomCurrent * Vector2.one;
 
             // rotate all of the map content
-            _mapRotation = mapDef.Rotation;
             _mapRotationQ = Quaternion.Euler(0, 0, _mapRotation);
             _mapContentGO.RectTransform().localRotation = _mapRotationQ;
 
@@ -201,6 +187,11 @@ namespace InGameMap
             }
         }
 
+        private void UnloadMap()
+        {
+            // TODO: this
+        }
+
         private void LoadLayer(LayerDef layerDef)
         {
             // set base image
@@ -213,25 +204,13 @@ namespace InGameMap
             layerImage.type = Image.Type.Simple;
             layerImage.sprite = LoadSprite(layerDef.ImagePath);
 
-            // TODO: there is surely a better way to do this
-            float minX = float.MaxValue;
-            float maxX = float.MinValue;
-            float minY = float.MaxValue;
-            float maxY = float.MinValue;
-            foreach (var bound in layerDef.Bounds)
-            {
-                minX = Mathf.Min(minX, bound.x);
-                maxX = Mathf.Max(maxX, bound.x);
-                minY = Mathf.Min(minY, bound.y);
-                maxY = Mathf.Max(maxY, bound.y);
-            }
-
             // set layer size
-            var size = new Vector2(maxX - minX, maxY - minY);
-            layerImage.GetRectTransform().sizeDelta = size;
+            var size = GetRectangleFromBounds(layerDef.Bounds);
+            var rotatedSize = GetRotatedRectangle(size, _mapRotation);
+            layerImage.GetRectTransform().sizeDelta = rotatedSize;
 
             // set layer offset
-            var offset = new Vector2((maxX + minX) / 2, (maxY + minY) / 2);
+            var offset = GetMidpoint(layerDef.Bounds);
             layerImage.GetRectTransform().anchoredPosition = offset;
 
             // rotate base layer image, to combat when we rotate the whole map content
@@ -289,7 +268,8 @@ namespace InGameMap
             markerGO.GetRectTransform().sizeDelta = size;
 
             // set rotation to combat when we rotate the whole map content
-            markerGO.RectTransform().localRotation = Quaternion.Euler(0, 0, -_mapRotation);
+            markerGO.GetRectTransform().localRotation = Quaternion.Euler(0, 0, -_mapRotation);
+            markerGO.GetRectTransform().localScale = 1 / _zoomCurrent * Vector3.one;
 
             // load image
             var markerImage = markerGO.AddComponent<Image>();
@@ -309,7 +289,7 @@ namespace InGameMap
             var marker = _markers[name];
             marker.GetRectTransform().anchoredPosition = position;
             // FIXME: this is almost certainly incorrect
-            marker.RectTransform().localRotation = Quaternion.Euler(0, 0, -rotation);
+            marker.GetRectTransform().localRotation = Quaternion.Euler(0, 0, -rotation);
         }
 
         private void PlaceOrMovePlayerMarker(Player player)
@@ -325,9 +305,6 @@ namespace InGameMap
             var angles = player.CameraPosition.eulerAngles;
 
             MoveMarker("player", player2dPos, angles.y);
-
-            // FIXME: this is temporary to always center player and doesn't work with zoom very well
-            _mapContentGO.GetRectTransform().anchoredPosition = player2dPos;
         }
 
         internal void Show()
@@ -362,6 +339,65 @@ namespace InGameMap
             go.GetRectTransform().sizeDelta = new Vector2(rect.width, rect.height);
 
             return go.AddComponent<ModdedMapScreen>();
+        }
+
+        private static Vector2 GetRotatedVector2(Vector2 rotateMe, float degreeRotation)
+        {
+            var x = rotateMe.x;
+            var y = rotateMe.y;
+            var sin = Mathf.Sin(degreeRotation * Mathf.Deg2Rad);
+            var cos = Mathf.Cos(degreeRotation * Mathf.Deg2Rad);
+            return new Vector2(x * cos - y * sin, x * sin + y * cos);
+        }
+
+        private static Vector2 GetRotatedRectangle(Vector2 rectangle, float degreeRotation)
+        {
+            // adapted from https://stackoverflow.com/questions/54072295/get-bounds-of-unrotated-rotated-rectangle
+            // Under CC BY-SA 4.0 Deed License
+            var AB = rectangle.x;
+            var AD = rectangle.y;
+            var alpha = degreeRotation * Mathf.Deg2Rad;
+            var gamma = (float)(Math.PI / 2f);
+            var beta = gamma - alpha;
+            var EA = Mathf.Abs(AD * Mathf.Sin(alpha));
+            var ED = Mathf.Abs(AD * Mathf.Sin(beta));
+            var FB = Mathf.Abs(AB * Mathf.Sin(alpha));
+            var AF = Mathf.Abs(AB * Mathf.Sin(beta));
+
+            return new Vector2(EA + AF, ED + FB);
+            // END CC BY-SA 4.0 Deed License
+        }
+
+        private static Vector2 GetRectangleFromBounds(List<Vector2> bounds)
+        {
+            // TODO: there is probably a better way to do this
+            float minX = float.MaxValue;
+            float maxX = float.MinValue;
+            float minY = float.MaxValue;
+            float maxY = float.MinValue;
+            foreach (var bound in bounds)
+            {
+                minX = Mathf.Min(minX, bound.x);
+                maxX = Mathf.Max(maxX, bound.x);
+                minY = Mathf.Min(minY, bound.y);
+                maxY = Mathf.Max(maxY, bound.y);
+            }
+
+            return new Vector2(maxX - minX, maxY - minY);
+        }
+
+        private static Vector2 GetMidpoint(List<Vector2> bounds)
+        {
+            var sum = Vector2.zero;
+            var count = 0;
+
+            foreach (var bound in bounds)
+            {
+                sum += bound;
+                count++;
+            }
+
+            return sum / count;
         }
     }
 }

@@ -1,0 +1,48 @@
+{
+    "Rotation": 90,
+    "Bounds": [
+        {"x": 79, "y": -64.5},
+        {"x": -66.5, "y": 67.4}
+    ],
+    "Layers": [
+        {
+            "LayerNumber": -1,
+            "ImagePath": "Maps\\factory\\Layers\\factory_layer_-1.png",
+            "Bounds": [
+                {"x": 79, "y": -64.5},
+                {"x": -66.5, "y": 67.4}
+            ]
+        },
+        {
+            "LayerNumber": 0,
+            "ImagePath": "Maps\\factory\\Layers\\factory_layer_0.png",
+            "Bounds": [
+                {"x": 79, "y": -64.5},
+                {"x": -66.5, "y": 67.4}
+            ]
+        },
+        {
+            "LayerNumber": 1,
+            "ImagePath": "Maps\\factory\\Layers\\factory_layer_1.png",
+            "Bounds": [
+                {"x": 79, "y": -64.5},
+                {"x": -66.5, "y": 67.4}
+            ]
+        },
+        {
+            "LayerNumber": 2,
+            "ImagePath": "Maps\\factory\\Layers\\factory_layer_2.png",
+            "Bounds": [
+                {"x": 79, "y": -64.5},
+                {"x": -66.5, "y": 67.4}
+            ]
+        }
+    ],
+    "StaticMarkers": {
+        "Sealed letter": {
+            "ImagePath": "Markers\\switch.png",
+            "Position": {"x": -18.83, "y": 21.66},
+            "Category": "Switch"
+        }
+    }
+}
