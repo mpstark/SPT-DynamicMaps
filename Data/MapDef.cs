@@ -6,6 +6,23 @@ using UnityEngine;
 
 namespace InGameMap.Data
 {
+    public class MapLayerDef
+    {
+        public int LayerNumber { get; set; }
+        public string ImagePath { get; set; }
+
+        // 3d points, z is heights -- this is different than how unity does it
+        public List<Vector3> Bounds { get; set; } = new List<Vector3>();
+    }
+
+    public class MapMarkerDef
+    {
+        public string ImagePath { get; set; }
+        public Vector2 Position { get; set; }
+        public string Category { get; set; }
+        public string LinkedLayer { get; set; }
+    }
+
     public class MapDef
     {
         public float Rotation { get; set; }

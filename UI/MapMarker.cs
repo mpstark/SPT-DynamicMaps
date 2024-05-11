@@ -9,12 +9,16 @@ namespace InGameMap.UI
     {
         public string Name { get; private set; }
         public string Category { get; private set; }
+        public string LinkedLayer { get; private set; }
         public Image Image { get; private set; }
         public GameObject GameObject { get; private set; }
         public RectTransform RectTransform => GameObject.transform as RectTransform;
 
         public MapMarker(GameObject parent, string name, MapMarkerDef def, Vector2 size, float degreesRotation, float zoom)
-            : this(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, zoom) {}
+            : this(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, zoom)
+        {
+            LinkedLayer = def.LinkedLayer;
+        }
 
         public MapMarker(GameObject parent, string name, string category, string imageRelativePath, Vector2 position, Vector2 size, float degreesRotation, float zoom)
         {
@@ -37,6 +41,23 @@ namespace InGameMap.UI
             Image = GameObject.AddComponent<Image>();
             Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             Image.type = Image.Type.Simple;
+        }
+
+        public void Move(Vector2 position)
+        {
+            RectTransform.anchoredPosition = position;
+        }
+
+        public void Move(Vector2 position, float degreesRotation)
+        {
+            RectTransform.anchoredPosition = position;
+            RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+        }
+
+        public void OnLayerSelect(string layer)
+        {
+            var active = LinkedLayer.IsNullOrEmpty() || layer == LinkedLayer;
+            GameObject.SetActive(active);
         }
     }
 }

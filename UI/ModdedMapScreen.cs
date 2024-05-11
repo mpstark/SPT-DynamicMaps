@@ -11,7 +11,7 @@ namespace InGameMap.UI
 {
     public class ModdedMapScreen : MonoBehaviour
     {
-        private static float _fadeMultiplierPerLayer = 0.66f;
+        private static float _fadeMultiplierPerLayer = 0.5f;
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
         private static float _zoomMaxScaler = 10f;
@@ -172,7 +172,7 @@ namespace InGameMap.UI
             }
 
             // TODO: should check if layer 0 exists
-            SelectLayer(0);
+            SelectLayerByNumber(0);
 
             // load static markers from def
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
@@ -186,36 +186,56 @@ namespace InGameMap.UI
             // TODO: this
         }
 
-        private void SelectLayer(int layerNum)
+        private void SelectLayerByNumber(int layerNum)
         {
             _selectedLayer = layerNum;
+            string selectedLayer = null;
 
             // go through each layer and set fade color
-            foreach(var (name, layer) in _layers)
+            foreach (var (layerName, layer) in _layers)
             {
+                // FIXME: this won't work with multiple layers per layerNum
+                if (layer.LayerNumber == layerNum)
+                {
+                    selectedLayer = layerName;
+                }
+
+                // show layer if at or below the current layer
                 layer.GameObject.SetActive(layer.LayerNumber <= layerNum);
 
+                // fade other layers according to difference in layer number
                 var c = Mathf.Pow(_fadeMultiplierPerLayer, layerNum - layer.LayerNumber);
                 layer.Image.color = new Color(c, c, c, 1);
             }
-        }
 
-        public void MoveMarker(string name, Vector2 position, float rotation)
-        {
-            if (!_markers.ContainsKey(name))
+            // go through all markers and hide the ones that have exclusive layer
+            foreach (var (markerName, marker) in _markers)
             {
-                return;
+                marker.OnLayerSelect(selectedLayer);
             }
-
-            var marker = _markers[name];
-            marker.RectTransform.anchoredPosition = position;
-
-            // FIXME: I'm unsure why this is correct
-            marker.RectTransform.localRotation = Quaternion.Euler(0, 0, -rotation);
         }
 
-        private void PlaceOrMovePlayerMarker(Player player)
+        private void SelectLayerByCoords(Vector2 coords, float height)
         {
+            // TODO: better select that shows only layers in coords
+            // this way you can do multiple layers per layer number
+            foreach(var (name, layer) in _layers)
+            {
+                if (height > layer.HeightBounds.x && height < layer.HeightBounds.y)
+                {
+                    SelectLayerByNumber(layer.LayerNumber);
+                    return;
+                }
+            }
+        }
+
+        private void ShowInRaid(Player player)
+        {
+            // TODO: adjust mask
+
+            // TODO: hide map selector and make sure that current map is loaded
+
+            // create player marker if one doesn't already exist
             if (!_markers.ContainsKey("player"))
             {
                 _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
@@ -223,11 +243,21 @@ namespace InGameMap.UI
                 _markers["player"].Image.color = Color.cyan;
             }
 
+            // move player marker
             var player3dPos = player.CameraPosition.position;
             var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
             var angles = player.CameraPosition.eulerAngles;
+            _markers["player"].Move(player2dPos, -angles.y); // I'm unsure why negative rotation here
 
-            MoveMarker("player", player2dPos, angles.y);
+            // select layers to show
+            SelectLayerByCoords(player2dPos, player3dPos.y);
+        }
+
+        private void ShowOutOfRaid()
+        {
+            // TODO: adjust mask
+
+            // TODO: show map selector
         }
 
         internal void Show()
@@ -242,7 +272,11 @@ namespace InGameMap.UI
             if (game != null && game is LocalGame)
             {
                 var owner = (game as LocalGame).PlayerOwner;
-                PlaceOrMovePlayerMarker(owner.Player);
+                ShowInRaid(owner.Player);
+            }
+            else
+            {
+                ShowOutOfRaid();
             }
         }
 

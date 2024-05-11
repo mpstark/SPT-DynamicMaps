@@ -32,7 +32,7 @@ namespace InGameMap.Utils
             // END CC BY-SA 4.0 Deed License
         }
 
-        public static Vector2 GetBoundingRectangle(List<Vector2> points)
+        public static Vector2 GetBoundingRectangle(IEnumerable<Vector2> points)
         {
             // TODO: there is probably a better way to do this
             float minX = float.MaxValue;
@@ -50,7 +50,7 @@ namespace InGameMap.Utils
             return new Vector2(maxX - minX, maxY - minY);
         }
 
-        public static Vector2 GetMidpoint(List<Vector2> points)
+        public static Vector2 GetMidpoint(IEnumerable<Vector2> points)
         {
             var sum = Vector2.zero;
             var count = 0;

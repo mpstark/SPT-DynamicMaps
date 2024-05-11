@@ -5,36 +5,36 @@
         {"x": -66.5, "y": 67.4}
     ],
     "Layers": {
-        "layer_-1": {
+        "Tunnels": {
             "LayerNumber": -1,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_-1.png",
             "Bounds": [
-                {"x": 79, "y": -64.5},
-                {"x": -66.5, "y": 67.4}
+                {"x": 79, "y": -64.5, "z": -1000},
+                {"x": -66.5, "y": 67.4, "z": -1}
             ]
         },
-        "layers_0": {
+        "Ground Floor": {
             "LayerNumber": 0,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_0.png",
             "Bounds": [
-                {"x": 79, "y": -64.5},
-                {"x": -66.5, "y": 67.4}
+                {"x": 79, "y": -64.5, "z": -1},
+                {"x": -66.5, "y": 67.4, "z": 3}
             ]
         },
-        "layers_1": {
+        "2nd Floor": {
             "LayerNumber": 1,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_1.png",
             "Bounds": [
-                {"x": 79, "y": -64.5},
-                {"x": -66.5, "y": 67.4}
+                {"x": 79, "y": -64.5, "z": 3},
+                {"x": -66.5, "y": 67.4, "z": 6}
             ]
         },
-        "layers_2": {
+        "3rd Floor": {
             "LayerNumber": 2,
             "ImagePath": "Maps\\factory\\Layers\\factory_layer_2.png",
             "Bounds": [
-                {"x": 79, "y": -64.5},
-                {"x": -66.5, "y": 67.4}
+                {"x": 79, "y": -64.5, "z": 6},
+                {"x": -66.5, "y": 67.4, "z": 1000}
             ]
         }
     },
@@ -42,7 +42,8 @@
         "Sealed letter": {
             "ImagePath": "Markers\\switch.png",
             "Position": {"x": -18.83, "y": 21.66},
-            "Category": "Switch"
+            "Category": "Switch",
+            "LinkedLayer": "Ground Floor"
         }
     }
 }
