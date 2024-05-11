@@ -1,5 +1,5 @@
 {
-    "Rotation": 180,
+    "CoordinateRotation": 180,
     "Bounds": [
         {"x": 530, "y": -439},
         {"x": -364, "y": 452}

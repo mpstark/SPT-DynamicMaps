@@ -1,5 +1,5 @@
 {
-    "Rotation": 90,
+    "CoordinateRotation": 90,
     "Bounds": [
         {"x": 79, "y": -64.5},
         {"x": -66.5, "y": 67.4}
