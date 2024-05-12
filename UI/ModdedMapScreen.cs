@@ -16,6 +16,7 @@ namespace InGameMap.UI
         private static float _fadeMultiplierPerLayer = 0.5f;
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
+        private static float _positionTweenTime = 0.25f;
         private static float _zoomMaxScaler = 10f;
         private static Vector2 _markerSize = new Vector2(16, 16);
 
@@ -55,6 +56,15 @@ namespace InGameMap.UI
                     _mapRectTransform, Input.mousePosition, null, out Vector2 relativePosition);
 
                 Plugin.Log.LogInfo($"Position: {relativePosition}");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Semicolon))
+            {
+                if (_markers.ContainsKey("player"))
+                {
+                    var playerPosition = _markers["player"].RectTransform.anchoredPosition;
+                    ShiftMapToCoord(playerPosition, _positionTweenTime);
+                }
             }
         }
 
@@ -96,7 +106,7 @@ namespace InGameMap.UI
             var mapMarkers = _mapMarkersGO.transform.GetChildren();
             foreach (var mapMarker in mapMarkers)
             {
-                mapMarker.DOScale(1/_zoomCurrent * Vector3.one, tweenTime);
+                mapMarker.DOScale(1 / _zoomCurrent * Vector3.one, tweenTime);
             }
         }
 
@@ -118,6 +128,12 @@ namespace InGameMap.UI
 
             _immediateMapAnchor += shift;
             _mapRectTransform.DOAnchorPos(_immediateMapAnchor, tweenTime);
+        }
+
+        public void ShiftMapToCoord(Vector2 coord, float tweenTime)
+        {
+            var currentCenter = _mapRectTransform.anchoredPosition / _zoomCurrent;
+            ShiftMap((coord - currentCenter) * _zoomCurrent, tweenTime);
         }
 
         private void Awake()
@@ -167,8 +183,8 @@ namespace InGameMap.UI
             CreateLevelSelectScrollbar();
 
             // TODO: remove this and load map dynamically or from dropdown
-            var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
-            // var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
+            // var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
+            var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
             LoadMap(mapDef);
         }
 
@@ -337,6 +353,9 @@ namespace InGameMap.UI
 
             // select layers to show
             SelectLayersByCoords(player2dPos, player3dPos.y);
+
+            // shift map to player position
+            ShiftMapToCoord(player2dPos, 0);
         }
 
         private void ShowOutOfRaid()
@@ -359,11 +378,10 @@ namespace InGameMap.UI
             {
                 var owner = (game as LocalGame).PlayerOwner;
                 ShowInRaid(owner.Player);
+                return;
             }
-            else
-            {
-                ShowOutOfRaid();
-            }
+
+            ShowOutOfRaid();
         }
 
         internal void Close()
@@ -378,6 +396,8 @@ namespace InGameMap.UI
             go.layer = parent.layer;
             go.transform.SetParent(parent.transform);
             go.ResetRectTransform();
+
+            // set width and height based on parent
             var rect = parent.GetRectTransform().rect;
             go.GetRectTransform().sizeDelta = new Vector2(rect.width, rect.height);
 
