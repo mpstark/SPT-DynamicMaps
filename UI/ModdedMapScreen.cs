@@ -29,6 +29,7 @@ namespace InGameMap.UI
 
         private RectTransform _mapRectTransform => _mapContentGO.GetRectTransform();
 
+        private MapMapping _mapMapping;
         private MapDef _currentMapDef;
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
@@ -139,53 +140,42 @@ namespace InGameMap.UI
         private void Awake()
         {
             // set up scroll rect
-            var scrollRectGO = new GameObject("Scroll", typeof(RectTransform), typeof(CanvasRenderer));
-            scrollRectGO.layer = gameObject.layer;
-            scrollRectGO.transform.SetParent(gameObject.transform);
+            var scrollRectGO = UIUtils.CreateUIGameObject(gameObject, "Scroll");
+            scrollRectGO.AddComponent<CanvasRenderer>();
             scrollRectGO.GetRectTransform().sizeDelta = gameObject.RectTransform().sizeDelta;
-            scrollRectGO.ResetRectTransform();
             _scrollRect = scrollRectGO.AddComponent<ScrollRect>();
             _scrollRect.scrollSensitivity = 0;  // don't scroll on mouse wheel
             _scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
 
             // set up mask
-            var scrollMaskGO = new GameObject("ScrollMask", typeof(RectTransform), typeof(CanvasRenderer));
-            scrollMaskGO.layer = gameObject.layer;
-            scrollMaskGO.transform.SetParent(scrollRectGO.transform);
+            var scrollMaskGO = UIUtils.CreateUIGameObject(scrollRectGO, "ScrollMask");
+            scrollRectGO.AddComponent<CanvasRenderer>();
             // FIXME: adjust scroll mask to exact fit
             scrollMaskGO.GetRectTransform().sizeDelta = gameObject.RectTransform().sizeDelta - new Vector2(0, 80f);
-            scrollMaskGO.ResetRectTransform();
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
             scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
             _scrollMask = scrollMaskGO.AddComponent<Mask>();
             _scrollRect.viewport = _scrollMask.GetRectTransform();
 
             // set up container for the map content that will scroll
-            _mapContentGO = new GameObject("MapContent", typeof(RectTransform));
-            _mapContentGO.layer = gameObject.layer;
-            _mapContentGO.transform.SetParent(scrollMaskGO.transform);
-            _mapContentGO.ResetRectTransform();
+            _mapContentGO = UIUtils.CreateUIGameObject(scrollMaskGO, "MapContent");
             _scrollRect.content = _mapRectTransform;
 
-            // put all map layers in a container for neatness
-            _mapLayersGO = new GameObject("MapLayers", typeof(RectTransform));
-            _mapLayersGO.layer = gameObject.layer;
-            _mapLayersGO.transform.SetParent(_mapContentGO.transform);
-            _mapLayersGO.ResetRectTransform();
+            _mapLayersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapLayers");
+            _mapMarkersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapMarkers");
 
-            // map markers need to inverse scale, so make a container for them so we can do them all at once
-            _mapMarkersGO = new GameObject("MapMarkers", typeof(RectTransform));
-            _mapMarkersGO.layer = gameObject.layer;
-            _mapMarkersGO.transform.SetParent(_mapContentGO.transform);
-            _mapMarkersGO.ResetRectTransform();
-
-            // copy the zoom scroll to repurpose as level select
+            // create map controls
             CreateLevelSelectScrollbar();
+            CreateMapSelectDropdown();
 
-            // TODO: remove this and load map dynamically or from dropdown
-            // var mapDef = MapDef.LoadFromPath("Maps\\Factory\\factory.json");
-            var mapDef = MapDef.LoadFromPath("Maps\\Interchange\\interchange.json");
-            LoadMap(mapDef);
+            // load map mapping from file and load the first map
+            _mapMapping = MapMapping.LoadFromPath("maps.jsonc");
+            var mapDefPath = _mapMapping.GetMapDefPaths().FirstOrDefault();
+            if (!mapDefPath.IsNullOrEmpty())
+            {
+                var mapDef = MapDef.LoadFromPath(mapDefPath);
+                LoadMap(mapDef);
+            }
         }
 
         private void CreateLevelSelectScrollbar()
@@ -207,6 +197,11 @@ namespace InGameMap.UI
             _mapLevelScrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
             _mapLevelScrollbar.direction = Scrollbar.Direction.BottomToTop;
             _mapLevelScrollbar.onValueChanged.AddListener(OnLevelScrollValueChanged);
+        }
+
+        private void CreateMapSelectDropdown()
+        {
+            // TODO: this
         }
 
         private void OnLevelScrollValueChanged(float newValue)
@@ -331,15 +326,17 @@ namespace InGameMap.UI
             }
         }
 
-        private void ShowInRaid(Player player)
+        private void ShowInRaid(LocalGame game)
         {
             // TODO: adjust mask
 
             // TODO: hide map selector and make sure that current map is loaded
+            var player = game.PlayerOwner.Player;
 
             // create player marker if one doesn't already exist
             if (!_markers.ContainsKey("player"))
             {
+                // TODO: this seems gross
                 _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
                                                     new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
                 _markers["player"].Image.color = Color.cyan;
@@ -376,8 +373,8 @@ namespace InGameMap.UI
             var game = Singleton<AbstractGame>.Instance;
             if (game != null && game is LocalGame)
             {
-                var owner = (game as LocalGame).PlayerOwner;
-                ShowInRaid(owner.Player);
+                var localGame = game as LocalGame;
+                ShowInRaid(localGame);
                 return;
             }
 
@@ -392,10 +389,7 @@ namespace InGameMap.UI
 
         internal static ModdedMapScreen AttachTo(GameObject parent)
         {
-            var go = new GameObject("ModdedMapBlock", typeof(RectTransform));
-            go.layer = parent.layer;
-            go.transform.SetParent(parent.transform);
-            go.ResetRectTransform();
+            var go = UIUtils.CreateUIGameObject(parent, "ModdedMapBlock");
 
             // set width and height based on parent
             var rect = parent.GetRectTransform().rect;

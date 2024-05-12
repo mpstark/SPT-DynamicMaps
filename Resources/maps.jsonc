@@ -1,0 +1,16 @@
+{
+    "Maps": {
+        "factory4_day": [ "Maps\\Factory\\factory.json" ],
+        "factory4_night": [ "Maps\\Factory\\factory.json" ],
+        "Interchange": [ "Maps\\Interchange\\interchange.json" ]
+
+        // "Woods": [ "Maps\\Woods\\woods.json" ],
+        // "bigmap": [ "Maps\\Customs\\customs.json" ],
+        // "Shoreline": [ "Maps\\Shoreline\\shoreline.json" ],
+        // "RezervBase": [ "Maps\\Reserve\\reserve.json" ],
+        // "laboratory": [ "Maps\\Labs\\labs.json" ],
+        // "Lighthouse": [ "Maps\\Lighthouse\\lighthouse.json" ],
+        // "TarkovStreets": [ "Maps\\Streets\\streets.json" ],
+        // "Sandbox": [ "Maps\\GroundZero\\groundzero.json" ]
+    }
+}

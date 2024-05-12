@@ -33,5 +33,15 @@ namespace InGameMap.Utils
         {
             return DOTween.To(() => image.color, c => image.color = c, to, duration);
         }
+
+        public static GameObject CreateUIGameObject(GameObject parent, string name)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.layer = parent.layer;
+            go.transform.SetParent(parent.transform);
+            go.ResetRectTransform();
+
+            return go;
+        }
     }
 }
