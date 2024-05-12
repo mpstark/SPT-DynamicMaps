@@ -22,6 +22,8 @@ namespace InGameMap.UI
         private static float _zoomMinScaler = 1.1f; // divider against ratio of screen
         private static Vector2 _markerSize = new Vector2(16, 16);
 
+        private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
+
         private RectTransform _rectTransform;
         private RectTransform _parentTransform;
         private RectTransform _mapRectTransform;
@@ -43,10 +45,7 @@ namespace InGameMap.UI
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
 
-        private Scrollbar _mapLevelScrollbar;
-        private TextMeshProUGUI _levelText;
-        private List<int> _levels = new List<int>();
-        private int _selectedLevel = int.MinValue;
+        private LevelSelectSlider _levelSelectSlider;
 
         private Vector2 _immediateMapAnchor = Vector2.zero;
         private float _zoomMin; // set when map loaded
@@ -168,7 +167,6 @@ namespace InGameMap.UI
             _scrollMask = scrollMaskGO.AddComponent<Mask>();
 
             // set up scroll rect
-            // scrollRectGO.AddComponent<CanvasRenderer>();
             scrollRectGO.GetRectTransform().sizeDelta = _rectTransform.sizeDelta;
             _scrollRect = scrollRectGO.AddComponent<ScrollRect>();
             _scrollRect.scrollSensitivity = 0;  // don't scroll on mouse wheel
@@ -177,8 +175,11 @@ namespace InGameMap.UI
             _scrollRect.content = _mapRectTransform;
 
             // create map controls
+            // level select slider
+            var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
+            _levelSelectSlider = new LevelSelectSlider(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
+
             CreateMapSelectDropdown();
-            CreateLevelSelectScrollbar();
             CreatePositionTexts();
 
             // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to mapdef
@@ -196,51 +197,6 @@ namespace InGameMap.UI
 
             RefreshMapSelectDropdown();
             _mapSelectDropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
-        }
-
-        private void CreateLevelSelectScrollbar()
-        {
-            var prefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            var scrollbarGO = Instantiate(prefab);
-            scrollbarGO.name = "LevelSelectScrollbar";
-            scrollbarGO.transform.SetParent(_rectTransform);
-            scrollbarGO.transform.localScale = Vector3.one;
-
-            // position to top left
-            var oldPosition = scrollbarGO.GetRectTransform().anchoredPosition;
-            scrollbarGO.GetRectTransform().anchoredPosition = new Vector2(oldPosition.x, 750f);
-
-            // remove useless component
-            Destroy(scrollbarGO.GetComponent<MapZoomer>());
-
-            // create layer text
-            var slidingArea = scrollbarGO.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
-            var layerTextGO = UIUtils.CreateUIGameObject(slidingArea, "SlidingLayerText");
-            _levelText = layerTextGO.AddComponent<TextMeshProUGUI>();
-            _levelText.fontSize = 14;
-            _levelText.GetRectTransform().anchoredPosition = new Vector2(110, -17);
-
-            // setup the scrollbar component
-            var actualScrollbarGO = scrollbarGO.transform.Find("Scrollbar").gameObject;
-            _mapLevelScrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
-            _mapLevelScrollbar.direction = Scrollbar.Direction.BottomToTop;
-            _mapLevelScrollbar.onValueChanged.AddListener(OnLevelScrollValueChanged);
-        }
-
-        private void OnLevelScrollValueChanged(float newValue)
-        {
-            var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
-            var level = _levels[levelIndex];
-            if (_selectedLevel != level)
-            {
-                SelectLayersByLevel(level);
-            }
-        }
-
-        private void SetLevelScrollValue(int level)
-        {
-            _mapLevelScrollbar.value = _levels.IndexOf(level) / (_levels.Count - 1f);
-            _levelText.text = $"Level {level}";
         }
 
         private void CreateMapSelectDropdown()
@@ -329,12 +285,6 @@ namespace InGameMap.UI
             foreach (var (layerName, layerDef) in mapDef.Layers)
             {
                 _layers[layerName] = new MapLayer(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
-
-                // FIXME: this probably allocates more than I want?
-                if (!_levels.Contains(layerDef.Level))
-                {
-                    _levels.Add(layerDef.Level);
-                }
             }
 
             // set layer order
@@ -343,10 +293,6 @@ namespace InGameMap.UI
             {
                 layer.RectTransform.SetSiblingIndex(i++);
             }
-
-            // set number of levels into the level scrollbar
-            _levels.Sort();
-            _mapLevelScrollbar.numberOfSteps = _levels.Count();
 
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
@@ -357,6 +303,7 @@ namespace InGameMap.UI
             SetMapZoom(_zoomMin, 0);
 
             // select layer by the default level
+            _levelSelectSlider.OnMapLoaded(mapDef);
             SelectLayersByLevel(mapDef.DefaultLevel);
 
             // shift map by the offset to center it in the scroll mask
@@ -365,8 +312,6 @@ namespace InGameMap.UI
 
         private void UnloadMap()
         {
-            _levels.Clear();
-            _selectedLevel = int.MinValue;
             _immediateMapAnchor = Vector2.zero;
 
             // clear markers
@@ -386,14 +331,6 @@ namespace InGameMap.UI
 
         private void SelectLayersByLevel(int level)
         {
-            if (_selectedLevel == level)
-            {
-                return;
-            }
-
-            _selectedLevel = level;
-            SetLevelScrollValue(_selectedLevel);
-
             // go through each layer and set fade color
             foreach (var (layerName, layer) in _layers)
             {
@@ -413,6 +350,8 @@ namespace InGameMap.UI
                     marker.OnLayerSelect(layerName, layer.Level == level);
                 }
             }
+
+            _levelSelectSlider.OnLevelSelected(level);
         }
 
         private void SelectLayersByCoords(Vector2 coords, float height)
