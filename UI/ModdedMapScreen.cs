@@ -22,6 +22,8 @@ namespace InGameMap.UI
 
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
+        private RectTransform _rectTransform;
+        private RectTransform _parentTransform;
         private GameObject _mapContentGO;
         private GameObject _mapLayersGO;
         private GameObject _mapMarkersGO;
@@ -133,36 +135,37 @@ namespace InGameMap.UI
 
         public void ShiftMapToCoord(Vector2 coord, float tweenTime)
         {
+            var rotatedCoord = MathUtils.GetRotatedVector2(coord, _coordinateRotation);
             var currentCenter = _mapRectTransform.anchoredPosition / _zoomCurrent;
-            ShiftMap((coord - currentCenter) * _zoomCurrent, tweenTime);
+            ShiftMap((-rotatedCoord - currentCenter) * _zoomCurrent, tweenTime);
         }
 
         private void Awake()
         {
-            // set up scroll rect
+            _rectTransform = gameObject.transform as RectTransform;
+            _parentTransform = gameObject.transform.parent as RectTransform;
+
+            // make our game object hierarchy
             var scrollRectGO = UIUtils.CreateUIGameObject(gameObject, "Scroll");
-            scrollRectGO.AddComponent<CanvasRenderer>();
-            scrollRectGO.GetRectTransform().sizeDelta = gameObject.RectTransform().sizeDelta;
+            var scrollMaskGO = UIUtils.CreateUIGameObject(scrollRectGO, "ScrollMask");
+            _mapContentGO = UIUtils.CreateUIGameObject(scrollMaskGO, "MapContent");
+            _mapLayersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapLayers");
+            _mapMarkersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapMarkers");
+
+            // set up mask; size will be set later in Raid/NoRaid
+            var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
+            scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
+            scrollMaskGO.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 80f);
+            _scrollMask = scrollMaskGO.AddComponent<Mask>();
+
+            // set up scroll rect
+            // scrollRectGO.AddComponent<CanvasRenderer>();
+            scrollRectGO.GetRectTransform().sizeDelta = _rectTransform.sizeDelta;
             _scrollRect = scrollRectGO.AddComponent<ScrollRect>();
             _scrollRect.scrollSensitivity = 0;  // don't scroll on mouse wheel
             _scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
-
-            // set up mask
-            var scrollMaskGO = UIUtils.CreateUIGameObject(scrollRectGO, "ScrollMask");
-            scrollRectGO.AddComponent<CanvasRenderer>();
-            // FIXME: adjust scroll mask to exact fit
-            scrollMaskGO.GetRectTransform().sizeDelta = gameObject.RectTransform().sizeDelta - new Vector2(0, 80f);
-            var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
-            scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
-            _scrollMask = scrollMaskGO.AddComponent<Mask>();
             _scrollRect.viewport = _scrollMask.GetRectTransform();
-
-            // set up container for the map content that will scroll
-            _mapContentGO = UIUtils.CreateUIGameObject(scrollMaskGO, "MapContent");
             _scrollRect.content = _mapRectTransform;
-
-            _mapLayersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapLayers");
-            _mapMarkersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapMarkers");
 
             // create map controls
             CreateLevelSelectScrollbar();
@@ -180,9 +183,9 @@ namespace InGameMap.UI
 
         private void CreateLevelSelectScrollbar()
         {
-            var prefab = transform.parent.Find("MapBlock/ZoomScroll").gameObject;
+            var prefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
             var scrollbarGO = Instantiate(prefab);
-            scrollbarGO.transform.SetParent(gameObject.transform);
+            scrollbarGO.transform.SetParent(_rectTransform);
             scrollbarGO.transform.localScale = Vector3.one;
 
             // position to top left
@@ -193,6 +196,7 @@ namespace InGameMap.UI
             // remove useless component
             Destroy(scrollbarGO.GetComponent<MapZoomer>());
 
+            // setup the scrollbar component
             var actualScrollbarGO = scrollbarGO.transform.Find("Scrollbar").gameObject;
             _mapLevelScrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
             _mapLevelScrollbar.direction = Scrollbar.Direction.BottomToTop;
@@ -234,13 +238,13 @@ namespace InGameMap.UI
             _mapRectTransform.anchoredPosition = offset;
 
             // set zoom min and max based on size of map and size of mask
-            var maskSize = _scrollMask.RectTransform().sizeDelta;
+            var maskSize = _scrollMask.GetRectTransform().sizeDelta;
             _zoomMin = Mathf.Min(maskSize.x / rotatedSize.x, maskSize.y / rotatedSize.y);
             _zoomMax = _zoomMaxScaler * _zoomMin;
 
             // rotate all of the map content
             var _mapRotationQ = Quaternion.Euler(0, 0, _coordinateRotation);
-            _mapContentGO.RectTransform().localRotation = _mapRotationQ;
+            _mapRectTransform.localRotation = _mapRotationQ;
 
             // load all layers
             foreach (var (layerName, layerDef) in mapDef.Layers)
@@ -358,6 +362,7 @@ namespace InGameMap.UI
         private void ShowOutOfRaid()
         {
             // TODO: adjust mask
+            // _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 80f);
 
             // TODO: show map selector
         }
@@ -383,7 +388,7 @@ namespace InGameMap.UI
 
         internal void Close()
         {
-            transform.parent.gameObject.SetActive(false);
+            _parentTransform.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 

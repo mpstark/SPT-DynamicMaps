@@ -17,7 +17,7 @@ namespace InGameMap.Patches
         {
             // show instead
             Plugin.Instance.TryAttachToMapScreen(__instance);
-            Plugin.Instance.Map.Show();
+            Plugin.Instance.Map?.Show();
             return false;
         }
     }
@@ -33,7 +33,7 @@ namespace InGameMap.Patches
         public static bool PatchPrefix(MapScreen __instance)
         {
             // show instead
-            Plugin.Instance.Map.Close();
+            Plugin.Instance.Map?.Close();
             return false;
         }
     }
