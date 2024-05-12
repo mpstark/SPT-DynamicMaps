@@ -6,6 +6,7 @@ using EFT;
 using EFT.UI;
 using InGameMap.Data;
 using InGameMap.Utils;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,8 @@ namespace InGameMap.UI
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
         private static float _positionTweenTime = 0.25f;
-        private static float _zoomMaxScaler = 10f;
+        private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
+        private static float _zoomMinScaler = 1.1f; // divider against ratio of screen
         private static Vector2 _markerSize = new Vector2(16, 16);
 
         private RectTransform _rectTransform;
@@ -27,19 +29,19 @@ namespace InGameMap.UI
         private GameObject _mapContentGO;
         private GameObject _mapLayersGO;
         private GameObject _mapMarkersGO;
-
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
-        private Scrollbar _mapLevelScrollbar;
-        private DropDownBox _mapSelectDropdown;
 
+        private DropDownBox _mapSelectDropdown;
+        private MapMapping _mapMapping;
+        private List<MapDef> _mapDefs = new List<MapDef>();
         private MapDef _currentMapDef;
+
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
 
-        private MapMapping _mapMapping;
-        private List<MapDef> _mapDefs = new List<MapDef>();
-
+        private Scrollbar _mapLevelScrollbar;
+        private TextMeshProUGUI _levelText;
         private List<int> _levels = new List<int>();
         private int _selectedLevel = int.MinValue;
 
@@ -173,8 +175,8 @@ namespace InGameMap.UI
             _scrollRect.content = _mapRectTransform;
 
             // create map controls
-            CreateLevelSelectScrollbar();
             CreateMapSelectDropdown();
+            CreateLevelSelectScrollbar();
 
             // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to mapdef
             // load map mapping from file, load mapdefs, and load first one
@@ -202,12 +204,18 @@ namespace InGameMap.UI
             scrollbarGO.transform.localScale = Vector3.one;
 
             // position to top left
-            // TODO: here
             var oldPosition = scrollbarGO.GetRectTransform().anchoredPosition;
             scrollbarGO.GetRectTransform().anchoredPosition = new Vector2(oldPosition.x, 750f);
 
             // remove useless component
             Destroy(scrollbarGO.GetComponent<MapZoomer>());
+
+            // create layer text
+            var slidingArea = scrollbarGO.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
+            var layerTextGO = UIUtils.CreateUIGameObject(slidingArea, "SlidingLayerText");
+            _levelText = layerTextGO.AddComponent<TextMeshProUGUI>();
+            _levelText.fontSize = 14;
+            _levelText.GetRectTransform().anchoredPosition = new Vector2(110, -17);
 
             // setup the scrollbar component
             var actualScrollbarGO = scrollbarGO.transform.Find("Scrollbar").gameObject;
@@ -229,6 +237,7 @@ namespace InGameMap.UI
         private void SetLevelScrollValue(int level)
         {
             _mapLevelScrollbar.value = _levels.IndexOf(level) / (_levels.Count - 1f);
+            _levelText.text = $"Level {level}";
         }
 
         private void CreateMapSelectDropdown()
@@ -275,6 +284,8 @@ namespace InGameMap.UI
                 UnloadMap();
             }
 
+            Plugin.Log.LogInfo($"Loading map {mapDef.DisplayName}");
+
             _currentMapDef = mapDef;
             ChangeMapSelectedInDropdown(mapDef);
             _coordinateRotation = mapDef.CoordinateRotation;
@@ -290,7 +301,7 @@ namespace InGameMap.UI
 
             // set zoom min and max based on size of map and size of mask
             var maskSize = _scrollMask.GetRectTransform().sizeDelta;
-            _zoomMin = Mathf.Min(maskSize.x / rotatedSize.x, maskSize.y / rotatedSize.y);
+            _zoomMin = Mathf.Min(maskSize.x / rotatedSize.x, maskSize.y / rotatedSize.y) / _zoomMinScaler;
             _zoomMax = _zoomMaxScaler * _zoomMin;
 
             // rotate all of the map content
@@ -331,7 +342,7 @@ namespace InGameMap.UI
             SelectLayersByLevel(mapDef.DefaultLevel);
 
             // shift map by the offset to center it in the scroll mask
-            ShiftMap(-_scrollMask.GetRectTransform().anchoredPosition, 0);
+            ShiftMap(_scrollMask.GetRectTransform().anchoredPosition * _zoomCurrent, 0);
         }
 
         private void UnloadMap()
@@ -416,7 +427,7 @@ namespace InGameMap.UI
                 // TODO: this seems gross
                 _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
                                                     new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
-                _markers["player"].Image.color = Color.cyan;
+                _markers["player"].Image.color = Color.green;
             }
 
             // move player marker
