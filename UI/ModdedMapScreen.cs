@@ -20,9 +20,11 @@ namespace InGameMap.UI
         private static float _positionTweenTime = 0.25f;
         private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
         private static float _zoomMinScaler = 1.1f; // divider against ratio of screen
-        private static Vector2 _markerSize = new Vector2(16, 16);
 
+        private static Vector2 _markerSize = new Vector2(30, 30);
         private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
+        private static Vector2 _mapSelectDropdownPosition = new Vector2(-780, -50);
+        private static Vector2 _mapSelectDropdownSize = new Vector2(360, 31);
 
         private RectTransform _rectTransform;
         private RectTransform _parentTransform;
@@ -34,7 +36,6 @@ namespace InGameMap.UI
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
 
-        private DropDownBox _mapSelectDropdown;
         private MapMapping _mapMapping;
         private List<MapDef> _mapDefs = new List<MapDef>();
         private MapDef _currentMapDef;
@@ -46,6 +47,7 @@ namespace InGameMap.UI
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
 
         private LevelSelectSlider _levelSelectSlider;
+        private MapSelectDropdown _mapSelectDropdown;
 
         private Vector2 _immediateMapAnchor = Vector2.zero;
         private float _zoomMin; // set when map loaded
@@ -174,16 +176,10 @@ namespace InGameMap.UI
             _scrollRect.viewport = _scrollMask.GetRectTransform();
             _scrollRect.content = _mapRectTransform;
 
-            // create map controls
-            // level select slider
-            var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            _levelSelectSlider = new LevelSelectSlider(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
-
-            CreateMapSelectDropdown();
             CreatePositionTexts();
 
-            // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to mapdef
-            // load map mapping from file, load mapdefs, and load first one
+            // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to MapDef
+            // load map mapping from file, load MapDefs, and load first one
             _mapMapping = MapMapping.LoadFromPath("maps.jsonc");
             foreach (var path in _mapMapping.GetMapDefPaths())
             {
@@ -195,40 +191,16 @@ namespace InGameMap.UI
                 _mapDefs.Add(MapDef.LoadFromPath(path));
             }
 
-            RefreshMapSelectDropdown();
-            _mapSelectDropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
-        }
+            // create map controls
+            // level select slider
+            var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
+            _levelSelectSlider = new LevelSelectSlider(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
 
-        private void CreateMapSelectDropdown()
-        {
-            // TODO: this
-            var prefab = Singleton<CommonUI>.Instance.transform.Find("Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
-            var dropdownGO = Instantiate(prefab);
-            dropdownGO.name = "MapSelectDropdown";
-
-            var rectTransform = dropdownGO.GetRectTransform();
-            rectTransform.SetParent(_rectTransform);
-            rectTransform.localScale = Vector3.one;
-            var oldSize = rectTransform.sizeDelta;
-            rectTransform.sizeDelta = new Vector2(360, oldSize.y);
-            rectTransform.anchoredPosition = new Vector2(-780, -50);  // this is lazy, prob should adjust all of the anchors
-
-            _mapSelectDropdown = dropdownGO.GetComponentInChildren<DropDownBox>();
-        }
-
-        private void RefreshMapSelectDropdown()
-        {
-            _mapSelectDropdown.Show(_mapDefs.Select(def => def.DisplayName));
-        }
-
-        private void ChangeMapSelectedInDropdown(MapDef selected)
-        {
-            _mapSelectDropdown.UpdateValue(_mapDefs.IndexOf(selected));
-        }
-
-        private void OnSelectDropdownMap(int index)
-        {
-            LoadMap(_mapDefs[index]);
+            // map select dropdown, this will call LoadMap on the first option
+            var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
+                "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
+            _mapSelectDropdown = new MapSelectDropdown(
+                selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize, _mapDefs, LoadMap);
         }
 
         private void CreatePositionTexts()
@@ -261,7 +233,6 @@ namespace InGameMap.UI
             Plugin.Log.LogInfo($"Loading map {mapDef.DisplayName}");
 
             _currentMapDef = mapDef;
-            ChangeMapSelectedInDropdown(mapDef);
             _coordinateRotation = mapDef.CoordinateRotation;
 
             // set width and height for top level
@@ -299,11 +270,13 @@ namespace InGameMap.UI
                 _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
             }
 
+            _levelSelectSlider.OnMapLoaded(mapDef);
+            _mapSelectDropdown.OnMapLoaded(mapDef);
+
             // this will set everything up for initial zoom
             SetMapZoom(_zoomMin, 0);
 
             // select layer by the default level
-            _levelSelectSlider.OnMapLoaded(mapDef);
             SelectLayersByLevel(mapDef.DefaultLevel);
 
             // shift map by the offset to center it in the scroll mask
@@ -374,7 +347,7 @@ namespace InGameMap.UI
             _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 40f);
 
             // hide map selector and make sure that current map is loaded
-            _mapSelectDropdown.gameObject.SetActive(false);
+            _mapSelectDropdown.GameObject.SetActive(false);
             // TODO: make sure that the current map is loaded
 
             // create player marker if one doesn't already exist
@@ -411,7 +384,7 @@ namespace InGameMap.UI
             _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 70f);
 
             // show map selector
-            _mapSelectDropdown.gameObject.SetActive(true);
+            _mapSelectDropdown.GameObject.SetActive(true);
 
             // hide player position text
             _playerPositionText.gameObject.SetActive(false);

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI
 {
-    public class LevelSelectSlider
+    internal class LevelSelectSlider
     {
         public int SelectedLevel { get; private set; }
         public GameObject GameObject { get; private set; }
@@ -22,9 +22,9 @@ namespace InGameMap.UI
         private List<int> _levels = new List<int>();
         private Action<int> _onLevelSelected;
 
-        public LevelSelectSlider(GameObject prefab, Transform parent, Vector2 position, Action<int> onLevelSelected)
+        internal LevelSelectSlider(GameObject prefab, Transform parent, Vector2 position, Action<int> onLevelSelected)
         {
-            GameObject = UnityEngine.Object.Instantiate(prefab);
+            GameObject = GameObject.Instantiate(prefab);
             GameObject.name = "LevelSelectScrollbar";
             GameObject.transform.SetParent(parent);
             GameObject.transform.localScale = Vector3.one;
@@ -34,7 +34,7 @@ namespace InGameMap.UI
             GameObject.GetRectTransform().anchoredPosition = position;
 
             // remove useless component
-            UnityEngine.Object.Destroy(GameObject.GetComponent<MapZoomer>());
+            GameObject.Destroy(GameObject.GetComponent<MapZoomer>());
 
             // create layer text
             var slidingArea = GameObject.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
@@ -51,6 +51,9 @@ namespace InGameMap.UI
             _scrollbar.onValueChanged.AddListener(OnScrollbarChanged);
 
             _onLevelSelected = onLevelSelected;
+
+            // initially hide until map loaded
+            GameObject.SetActive(false);
         }
 
         private void OnScrollbarChanged(float newValue)
@@ -63,7 +66,7 @@ namespace InGameMap.UI
             }
         }
 
-        public void OnLevelSelected(int level)
+        internal void OnLevelSelected(int level)
         {
             if (SelectedLevel == level)
             {
@@ -75,7 +78,7 @@ namespace InGameMap.UI
             SelectedLevel = level;
         }
 
-        public void OnMapLoaded(MapDef mapDef)
+        internal void OnMapLoaded(MapDef mapDef)
         {
             _levels.Clear();
             SelectedLevel = int.MinValue;
@@ -91,6 +94,7 @@ namespace InGameMap.UI
             _levels.Sort();
 
             _scrollbar.numberOfSteps = _levels.Count();
+            GameObject.SetActive(true);
         }
     }
 }
