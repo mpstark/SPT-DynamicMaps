@@ -63,5 +63,10 @@ namespace InGameMap.UI
 
             GameObject.SetActive(layerSelected);
         }
+
+        internal void Destroy()
+        {
+            Object.Destroy(GameObject);
+        }
     }
 }

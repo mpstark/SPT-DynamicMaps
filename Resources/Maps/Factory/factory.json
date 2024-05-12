@@ -1,4 +1,6 @@
 {
+    "DisplayName": "Factory (TarkovData)",
+    "MapInternalNames": [ "factory4_day", "factory4_night" ],
     "CoordinateRotation": 90,
     "Bounds": [
         {"x": 79, "y": -64.5},

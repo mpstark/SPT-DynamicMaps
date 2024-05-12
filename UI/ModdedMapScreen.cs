@@ -20,21 +20,25 @@ namespace InGameMap.UI
         private static float _zoomMaxScaler = 10f;
         private static Vector2 _markerSize = new Vector2(16, 16);
 
-        private ScrollRect _scrollRect;
-        private Mask _scrollMask;
         private RectTransform _rectTransform;
         private RectTransform _parentTransform;
+        private RectTransform _mapRectTransform;
+
         private GameObject _mapContentGO;
         private GameObject _mapLayersGO;
         private GameObject _mapMarkersGO;
+
+        private ScrollRect _scrollRect;
+        private Mask _scrollMask;
         private Scrollbar _mapLevelScrollbar;
+        private DropDownBox _mapSelectDropdown;
 
-        private RectTransform _mapRectTransform => _mapContentGO.GetRectTransform();
-
-        private MapMapping _mapMapping;
         private MapDef _currentMapDef;
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
+
+        private MapMapping _mapMapping;
+        private List<MapDef> _mapDefs = new List<MapDef>();
 
         private List<int> _levels = new List<int>();
         private int _selectedLevel = int.MinValue;
@@ -142,7 +146,7 @@ namespace InGameMap.UI
 
         private void Awake()
         {
-            _rectTransform = gameObject.transform as RectTransform;
+            _rectTransform = gameObject.GetRectTransform();
             _parentTransform = gameObject.transform.parent as RectTransform;
 
             // make our game object hierarchy
@@ -151,6 +155,7 @@ namespace InGameMap.UI
             _mapContentGO = UIUtils.CreateUIGameObject(scrollMaskGO, "MapContent");
             _mapLayersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapLayers");
             _mapMarkersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapMarkers");
+            _mapRectTransform = _mapContentGO.GetRectTransform();
 
             // set up mask; size will be set later in Raid/NoRaid
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
@@ -171,20 +176,28 @@ namespace InGameMap.UI
             CreateLevelSelectScrollbar();
             CreateMapSelectDropdown();
 
-            // load map mapping from file and load the first map
+            // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to mapdef
+            // load map mapping from file, load mapdefs, and load first one
             _mapMapping = MapMapping.LoadFromPath("maps.jsonc");
-            var mapDefPath = _mapMapping.GetMapDefPaths().FirstOrDefault();
-            if (!mapDefPath.IsNullOrEmpty())
+            foreach (var path in _mapMapping.GetMapDefPaths())
             {
-                var mapDef = MapDef.LoadFromPath(mapDefPath);
-                LoadMap(mapDef);
+                if (path.IsNullOrEmpty())
+                {
+                    continue;
+                }
+
+                _mapDefs.Add(MapDef.LoadFromPath(path));
             }
+
+            RefreshMapSelectDropdown();
+            _mapSelectDropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
         }
 
         private void CreateLevelSelectScrollbar()
         {
             var prefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
             var scrollbarGO = Instantiate(prefab);
+            scrollbarGO.name = "LevelSelectScrollbar";
             scrollbarGO.transform.SetParent(_rectTransform);
             scrollbarGO.transform.localScale = Vector3.one;
 
@@ -203,11 +216,6 @@ namespace InGameMap.UI
             _mapLevelScrollbar.onValueChanged.AddListener(OnLevelScrollValueChanged);
         }
 
-        private void CreateMapSelectDropdown()
-        {
-            // TODO: this
-        }
-
         private void OnLevelScrollValueChanged(float newValue)
         {
             var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
@@ -223,9 +231,52 @@ namespace InGameMap.UI
             _mapLevelScrollbar.value = _levels.IndexOf(level) / (_levels.Count - 1f);
         }
 
+        private void CreateMapSelectDropdown()
+        {
+            // TODO: this
+            var prefab = Singleton<CommonUI>.Instance.transform.Find("Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
+            var dropdownGO = Instantiate(prefab);
+            dropdownGO.name = "MapSelectDropdown";
+
+            var rectTransform = dropdownGO.GetRectTransform();
+            rectTransform.SetParent(_rectTransform);
+            rectTransform.localScale = Vector3.one;
+            var oldSize = rectTransform.sizeDelta;
+            rectTransform.sizeDelta = new Vector2(360, oldSize.y);
+            rectTransform.anchoredPosition = new Vector2(-780, -50);  // this is lazy, prob should adjust all of the anchors
+
+            _mapSelectDropdown = dropdownGO.GetComponentInChildren<DropDownBox>();
+        }
+
+        private void RefreshMapSelectDropdown()
+        {
+            _mapSelectDropdown.Show(_mapDefs.Select(def => def.DisplayName));
+        }
+
+        private void ChangeMapSelectedInDropdown(MapDef selected)
+        {
+            _mapSelectDropdown.UpdateValue(_mapDefs.IndexOf(selected));
+        }
+
+        private void OnSelectDropdownMap(int index)
+        {
+            LoadMap(_mapDefs[index]);
+        }
+
         private void LoadMap(MapDef mapDef)
         {
+            if (mapDef == null || _currentMapDef == mapDef)
+            {
+                return;
+            }
+
+            if (_currentMapDef != null)
+            {
+                UnloadMap();
+            }
+
             _currentMapDef = mapDef;
+            ChangeMapSelectedInDropdown(mapDef);
             _coordinateRotation = mapDef.CoordinateRotation;
 
             // set width and height for top level
@@ -243,8 +294,7 @@ namespace InGameMap.UI
             _zoomMax = _zoomMaxScaler * _zoomMin;
 
             // rotate all of the map content
-            var _mapRotationQ = Quaternion.Euler(0, 0, _coordinateRotation);
-            _mapRectTransform.localRotation = _mapRotationQ;
+            _mapRectTransform.localRotation = Quaternion.Euler(0, 0, _coordinateRotation);
 
             // load all layers
             foreach (var (layerName, layerDef) in mapDef.Layers)
@@ -279,11 +329,30 @@ namespace InGameMap.UI
 
             // select layer by the default level
             SelectLayersByLevel(mapDef.DefaultLevel);
+
+            // shift map by the offset to center it in the scroll mask
+            ShiftMap(-_scrollMask.GetRectTransform().anchoredPosition, 0);
         }
 
         private void UnloadMap()
         {
-            // TODO: this
+            _levels.Clear();
+            _selectedLevel = int.MinValue;
+            _immediateMapAnchor = Vector2.zero;
+
+            // clear markers
+            foreach (var (name, marker) in _markers)
+            {
+                marker.Destroy();
+            }
+            _markers.Clear();
+
+            // clear layers
+            foreach (var (name, layer) in _layers)
+            {
+                layer.Destroy();
+            }
+            _layers.Clear();
         }
 
         private void SelectLayersByLevel(int level)
@@ -332,12 +401,16 @@ namespace InGameMap.UI
 
         private void ShowInRaid(LocalGame game)
         {
-            // TODO: adjust mask
+            // adjust mask
+            _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -22);
+            _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 40f);
 
-            // TODO: hide map selector and make sure that current map is loaded
-            var player = game.PlayerOwner.Player;
+            // hide map selector and make sure that current map is loaded
+            _mapSelectDropdown.gameObject.SetActive(false);
+            // TODO: make sure that the current map is loaded
 
             // create player marker if one doesn't already exist
+            var player = game.PlayerOwner.Player;
             if (!_markers.ContainsKey("player"))
             {
                 // TODO: this seems gross
@@ -361,10 +434,12 @@ namespace InGameMap.UI
 
         private void ShowOutOfRaid()
         {
-            // TODO: adjust mask
-            // _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 80f);
+            // adjust mask
+            _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -5);
+            _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 70f);
 
-            // TODO: show map selector
+            // show map selector
+            _mapSelectDropdown.gameObject.SetActive(true);
         }
 
         internal void Show()

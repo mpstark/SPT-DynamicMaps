@@ -49,5 +49,10 @@ namespace InGameMap.UI
             Image.sprite = TextureUtils.GetOrLoadCachedSprite(_def.ImagePath);
             Image.type = Image.Type.Simple;
         }
+
+        internal void Destroy()
+        {
+            Object.Destroy(GameObject);
+        }
     }
 }

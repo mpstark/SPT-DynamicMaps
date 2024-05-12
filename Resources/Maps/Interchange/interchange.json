@@ -1,4 +1,6 @@
 {
+    "DisplayName": "Interchange (TarkovData)",
+    "MapInternalNames": [ "Interchange" ],
     "CoordinateRotation": 180,
     "Bounds": [
         {"x": 530, "y": -439},

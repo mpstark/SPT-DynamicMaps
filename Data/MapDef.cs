@@ -25,6 +25,8 @@ namespace InGameMap.Data
 
     public class MapDef
     {
+        public string DisplayName { get; set; }
+        public List<string> MapInternalNames { get; set; } = new List<string>();
         public float CoordinateRotation { get; set; }
         public Dictionary<string, MapLayerDef> Layers { get; set; } = new Dictionary<string, MapLayerDef>();
         public Dictionary<string, MapMarkerDef> StaticMarkers { get; set; } = new Dictionary<string, MapMarkerDef>();
