@@ -37,6 +37,9 @@ namespace InGameMap.UI
         private List<MapDef> _mapDefs = new List<MapDef>();
         private MapDef _currentMapDef;
 
+        private TextMeshProUGUI _playerPositionText;
+        private TextMeshProUGUI _cursorPositionText;
+
         private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
         private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
 
@@ -59,14 +62,6 @@ namespace InGameMap.UI
                 OnScroll(scroll);
             }
 
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    _mapRectTransform, Input.mousePosition, null, out Vector2 relativePosition);
-
-                Plugin.Log.LogInfo($"Position: {relativePosition}");
-            }
-
             if (Input.GetKeyDown(KeyCode.Semicolon))
             {
                 if (_markers.ContainsKey("player"))
@@ -74,6 +69,13 @@ namespace InGameMap.UI
                     var playerPosition = _markers["player"].RectTransform.anchoredPosition;
                     ShiftMapToCoord(playerPosition, _positionTweenTime);
                 }
+            }
+
+            if (_cursorPositionText != null)
+            {
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    _mapRectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
+                _cursorPositionText.text = $"Cursor: {mouseRelative.x:F} {mouseRelative.y:F}";
             }
         }
 
@@ -177,6 +179,7 @@ namespace InGameMap.UI
             // create map controls
             CreateMapSelectDropdown();
             CreateLevelSelectScrollbar();
+            CreatePositionTexts();
 
             // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to mapdef
             // load map mapping from file, load mapdefs, and load first one
@@ -270,6 +273,21 @@ namespace InGameMap.UI
         private void OnSelectDropdownMap(int index)
         {
             LoadMap(_mapDefs[index]);
+        }
+
+        private void CreatePositionTexts()
+        {
+            var cursorPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "CursorPositionText");
+            _cursorPositionText = cursorPositionTextGO.AddComponent<TextMeshProUGUI>();
+            _cursorPositionText.fontSize = 14;
+            _cursorPositionText.GetRectTransform().anchoredPosition = new Vector2(-850, 485);
+            _cursorPositionText.alignment = TextAlignmentOptions.Left;
+
+            var playerPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "PlayerPositionText");
+            _playerPositionText = playerPositionTextGO.AddComponent<TextMeshProUGUI>();
+            _playerPositionText.fontSize = 14;
+            _playerPositionText.GetRectTransform().anchoredPosition = new Vector2(-850, 471);
+            _playerPositionText.alignment = TextAlignmentOptions.Left;
         }
 
         private void LoadMap(MapDef mapDef)
@@ -441,6 +459,10 @@ namespace InGameMap.UI
 
             // shift map to player position
             ShiftMapToCoord(player2dPos, 0);
+
+            // show and update text
+            _playerPositionText.gameObject.SetActive(true);
+            _playerPositionText.text = $"Player: {player3dPos.x:F} {player3dPos.z:F} {player3dPos.y:F}";
         }
 
         private void ShowOutOfRaid()
@@ -451,6 +473,9 @@ namespace InGameMap.UI
 
             // show map selector
             _mapSelectDropdown.gameObject.SetActive(true);
+
+            // hide player position text
+            _playerPositionText.gameObject.SetActive(false);
         }
 
         internal void Show()
