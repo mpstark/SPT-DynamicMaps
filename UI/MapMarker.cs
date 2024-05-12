@@ -20,9 +20,11 @@ namespace InGameMap.UI
             LinkedLayer = def.LinkedLayer;
         }
 
-        public MapMarker(GameObject parent, string name, string category, string imageRelativePath, Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
+        public MapMarker(GameObject parent, string name, string category, string imageRelativePath,
+                         Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
         {
             Name = name;
+            Category = category;
 
             GameObject = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
             GameObject.layer = parent.layer;
@@ -48,13 +50,13 @@ namespace InGameMap.UI
             RectTransform.anchoredPosition = position;
         }
 
-        public void Move(Vector2 position, float degreesRotation)
+        public void MoveAndRotate(Vector2 position, float degreesRotation)
         {
             RectTransform.anchoredPosition = position;
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
         }
 
-        public void OnLayerSelect(string layerName, bool layerSelected)
+        internal void OnLayerSelect(string layerName, bool layerSelected)
         {
             if (LinkedLayer.IsNullOrEmpty() || LinkedLayer != layerName)
             {

@@ -452,7 +452,7 @@ namespace InGameMap.UI
             var player3dPos = player.CameraPosition.position;
             var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
             var angles = player.CameraPosition.eulerAngles;
-            _markers["player"].Move(player2dPos, -angles.y); // I'm unsure why negative rotation here
+            _markers["player"].MoveAndRotate(player2dPos, -angles.y); // I'm unsure why negative rotation here
 
             // select layers to show
             SelectLayersByCoords(player2dPos, player3dPos.y);
