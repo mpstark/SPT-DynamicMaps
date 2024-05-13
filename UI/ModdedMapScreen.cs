@@ -198,8 +198,8 @@ namespace InGameMap.UI
             // map select dropdown, this will call LoadMap on the first option
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
-            _mapSelectDropdown = new MapSelectDropdown(
-                selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize, _mapDefs, LoadMap);
+            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize, LoadMap);
+            _mapSelectDropdown.ChangeAvailableMapDefs(_mapDefs);
         }
 
         private void CreatePositionTexts()
@@ -350,7 +350,7 @@ namespace InGameMap.UI
             _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 40f);
 
             // hide map selector and make sure that current map is loaded
-            _mapSelectDropdown.GameObject.SetActive(false);
+            _mapSelectDropdown.gameObject.SetActive(false);
             // TODO: make sure that the current map is loaded
 
             // create player marker if one doesn't already exist
@@ -387,7 +387,7 @@ namespace InGameMap.UI
             _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 70f);
 
             // show map selector
-            _mapSelectDropdown.GameObject.SetActive(true);
+            _mapSelectDropdown.gameObject.SetActive(true);
 
             // hide player position text
             _playerPositionText.gameObject.SetActive(false);

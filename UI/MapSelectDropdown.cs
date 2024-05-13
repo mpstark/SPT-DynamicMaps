@@ -8,34 +8,37 @@ using UnityEngine;
 
 namespace InGameMap.UI
 {
-    internal class MapSelectDropdown
+    internal class MapSelectDropdown : MonoBehaviour
     {
-        public GameObject GameObject { get; private set; }
-        public RectTransform RectTransform => GameObject.transform as RectTransform;
+        public Action<MapDef> OnSelected { get; set; }
+        public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         private DropDownBox _dropdown;
         private List<MapDef> _mapDefs;
-        private Action<MapDef> _onSelected;
         private bool _hasBindInitiallyCalled = false;
 
-        internal MapSelectDropdown(GameObject prefab, Transform parent, Vector2 position, Vector2 size,
-                                   List<MapDef> mapDefs, Action<MapDef> onSelected)
+        internal static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size,
+                                                 Action<MapDef> onSelected)
         {
-            GameObject = GameObject.Instantiate(prefab);
-            GameObject.name = "MapSelectDropdown";
+            var go = GameObject.Instantiate(prefab);
+            go.name = "MapSelectDropdown";
 
-            var rectTransform = GameObject.GetRectTransform();
+            var rectTransform = go.GetRectTransform();
             rectTransform.SetParent(parent);
             rectTransform.localScale = Vector3.one;
             rectTransform.sizeDelta = size;
             rectTransform.anchoredPosition = position; // this is lazy, prob should adjust all of the anchors
 
-            _dropdown = GameObject.GetComponentInChildren<DropDownBox>();
+            var dropdown = go.AddComponent<MapSelectDropdown>();
+            dropdown.OnSelected = onSelected;
+
+            return dropdown;
+        }
+
+        private void Awake()
+        {
+            _dropdown = gameObject.GetComponentInChildren<DropDownBox>();
             _dropdown.SetLabelText("Select a Map");
-
-            _onSelected = onSelected;
-
-            ChangeAvailableMapDefs(mapDefs);
         }
 
         private void OnSelectDropdownMap(int index)
@@ -46,7 +49,7 @@ namespace InGameMap.UI
                 return;
             }
 
-            _onSelected(_mapDefs[index]);
+            OnSelected(_mapDefs[index]);
         }
 
         internal void ChangeAvailableMapDefs(List<MapDef> mapDefs)
