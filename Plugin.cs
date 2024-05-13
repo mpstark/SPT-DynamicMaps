@@ -20,9 +20,6 @@ namespace InGameMap
         public static ManualLogSource Log => Instance.Logger;
         public static string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        private FieldInfo AppMainMenuController = typeof(TarkovApplication).GetFields(BindingFlags.Instance | BindingFlags.NonPublic).First(f => f.FieldType == typeof(MainMenuController));
-        private FieldInfo InventoryControllerTab = AccessTools.Field(typeof(InventoryScreen.GClass3116), nameof(InventoryScreen.GClass3116.InventoryTab));
-
         public ModdedMapScreen Map;
 
         internal void Awake()
