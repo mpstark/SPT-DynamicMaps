@@ -4,7 +4,7 @@ using InGameMap.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGameMap.UI
+namespace InGameMap.UI.Components
 {
     public class MapLayer : MonoBehaviour
     {

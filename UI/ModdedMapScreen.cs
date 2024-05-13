@@ -6,6 +6,8 @@ using EFT;
 using EFT.UI;
 using InGameMap.Data;
 using InGameMap.Utils;
+using InGameMap.UI.Controls;
+using InGameMap.UI.Components;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

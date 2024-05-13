@@ -6,7 +6,7 @@ using InGameMap.Data;
 using InGameMap.Utils;
 using UnityEngine;
 
-namespace InGameMap.UI
+namespace InGameMap.UI.Controls
 {
     internal class MapSelectDropdown : MonoBehaviour
     {
