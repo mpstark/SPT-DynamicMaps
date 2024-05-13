@@ -6,53 +6,51 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI
 {
-    public class MapLayer
+    public class MapLayer : MonoBehaviour
     {
         public string Name { get; private set; }
         public Image Image { get; private set; }
-        public GameObject GameObject { get; private set; }
         public Vector2 HeightBounds { get; private set; }
-
         public int Level => _def.Level;
-        public RectTransform RectTransform => GameObject.transform as RectTransform;
+        public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         private MapLayerDef _def = new MapLayerDef();
 
-        public MapLayer(GameObject parent, string name, MapLayerDef layerDef, float degreesRotation)
+        public static MapLayer Create(GameObject parent, string name, MapLayerDef def, float degreesRotation)
         {
-            Name = name;
-            _def = layerDef;
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
+            go.layer = parent.layer;
+            go.transform.SetParent(parent.transform);
+            go.ResetRectTransform();
 
-            GameObject = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
-            GameObject.layer = parent.layer;
-            GameObject.transform.SetParent(parent.transform);
-            GameObject.ResetRectTransform();
+            var rectTransform = go.GetRectTransform();
+            var layer = go.AddComponent<MapLayer>();
 
             // convert 3d bounds to 2d ones
-            var bounds2d = _def.Bounds.Select(p => new Vector2(p.x, p.y));
-            HeightBounds = new Vector2(_def.Bounds.Min(p => p.z), _def.Bounds.Max(p => p.z));
+            var bounds2d = def.Bounds.Select(p => new Vector2(p.x, p.y));
+            layer.HeightBounds = new Vector2(def.Bounds.Min(p => p.z), def.Bounds.Max(p => p.z));
 
             // set layer size
             var size = MathUtils.GetBoundingRectangle(bounds2d);
             var rotatedSize = MathUtils.GetRotatedRectangle(size, degreesRotation);
-            RectTransform.sizeDelta = rotatedSize;
+            rectTransform.sizeDelta = rotatedSize;
 
             // set layer offset
             var offset = MathUtils.GetMidpoint(bounds2d);
-            RectTransform.anchoredPosition = offset;
+            rectTransform.anchoredPosition = offset;
 
             // set rotation to combat when we rotate the whole map content
-            RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+            rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+
+            layer.Name = name;
+            layer._def = def;
 
             // load image
-            Image = GameObject.AddComponent<Image>();
-            Image.sprite = TextureUtils.GetOrLoadCachedSprite(_def.ImagePath);
-            Image.type = Image.Type.Simple;
-        }
+            layer.Image = go.AddComponent<Image>();
+            layer.Image.sprite = TextureUtils.GetOrLoadCachedSprite(def.ImagePath);
+            layer.Image.type = Image.Type.Simple;
 
-        internal void Destroy()
-        {
-            Object.Destroy(GameObject);
+            return layer;
         }
     }
 }

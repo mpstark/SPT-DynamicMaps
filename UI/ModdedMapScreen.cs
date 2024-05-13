@@ -258,7 +258,7 @@ namespace InGameMap.UI
             // load all layers
             foreach (var (layerName, layerDef) in mapDef.Layers)
             {
-                _layers[layerName] = new MapLayer(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
+                _layers[layerName] = MapLayer.Create(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
             }
 
             // set layer order
@@ -291,16 +291,16 @@ namespace InGameMap.UI
             _immediateMapAnchor = Vector2.zero;
 
             // clear markers
-            foreach (var (name, marker) in _markers)
+            foreach (var marker in _markers.Values)
             {
                 GameObject.Destroy(marker.gameObject);
             }
             _markers.Clear();
 
             // clear layers
-            foreach (var (name, layer) in _layers)
+            foreach (var layer in _layers.Values)
             {
-                layer.Destroy();
+                GameObject.Destroy(layer.gameObject);
             }
             _layers.Clear();
         }
@@ -308,10 +308,10 @@ namespace InGameMap.UI
         private void SelectLayersByLevel(int level)
         {
             // go through each layer and set fade color
-            foreach (var (layerName, layer) in _layers)
+            foreach (var layer in _layers.Values)
             {
                 // show layer if at or below the current level
-                layer.GameObject.SetActive(layer.Level <= level);
+                layer.gameObject.SetActive(layer.Level <= level);
 
                 // fade other layers according to difference in level
                 var c = Mathf.Pow(_fadeMultiplierPerLayer, level - layer.Level);
@@ -319,7 +319,7 @@ namespace InGameMap.UI
             }
 
             // go through all markers and call OnLayerSelect
-            foreach (var (markerName, marker) in _markers)
+            foreach (var marker in _markers.Values)
             {
                 foreach (var (layerName, layer) in _layers)
                 {
@@ -333,7 +333,7 @@ namespace InGameMap.UI
         private void SelectLayersByCoords(Vector2 coords, float height)
         {
             // TODO: better select that shows only layers in coords
-            foreach(var (name, layer) in _layers)
+            foreach(var layer in _layers.Values)
             {
                 if (height > layer.HeightBounds.x && height < layer.HeightBounds.y)
                 {
