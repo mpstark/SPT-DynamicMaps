@@ -1,11 +1,7 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
-using EFT;
-using EFT.UI;
 using EFT.UI.Map;
-using HarmonyLib;
 using InGameMap.Config;
 using InGameMap.Patches;
 using InGameMap.UI;
