@@ -5,44 +5,46 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI
 {
-    public class MapMarker
+    public class MapMarker : MonoBehaviour
     {
-        public string Name { get; private set; }
-        public string Category { get; private set; }
-        public string LinkedLayer { get; private set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public string LinkedLayer { get; set; }
+        public RectTransform RectTransform => gameObject.transform as RectTransform;
         public Image Image { get; private set; }
-        public GameObject GameObject { get; private set; }
-        public RectTransform RectTransform => GameObject.transform as RectTransform;
 
-        public MapMarker(GameObject parent, string name, MapMarkerDef def, Vector2 size, float degreesRotation = 0, float scale = 0)
-            : this(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, scale)
+        public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,
+                                       float degreesRotation = 0, float scale = 0)
         {
-            LinkedLayer = def.LinkedLayer;
+            var mapMarker = Create(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, scale);
+            mapMarker.LinkedLayer = def.LinkedLayer;
+
+            return mapMarker;
         }
 
-        public MapMarker(GameObject parent, string name, string category, string imageRelativePath,
+        public static MapMarker Create(GameObject parent, string name, string category, string imageRelativePath,
                          Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
         {
-            Name = name;
-            Category = category;
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
+            go.layer = parent.layer;
+            go.transform.SetParent(parent.transform);
 
-            GameObject = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
-            GameObject.layer = parent.layer;
-            GameObject.transform.SetParent(parent.transform);
+            go.ResetRectTransform();
 
-            // set size, position and scale
-            GameObject.ResetRectTransform();
-            RectTransform.anchoredPosition = position;
-            RectTransform.sizeDelta = size;
-            RectTransform.localScale = scale * Vector2.one;
+            var rectTransform = go.GetRectTransform();
+            rectTransform.anchoredPosition = position;
+            rectTransform.sizeDelta = size;
+            rectTransform.localScale = scale * Vector2.one;
+            rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
 
-            // set rotation to combat when we rotate the whole map content
-            RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+            var marker = go.AddComponent<MapMarker>();
+            marker.Name = name;
+            marker.Category = category;
+            marker.Image = go.AddComponent<Image>();
+            marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
+            marker.Image.type = Image.Type.Simple;
 
-            // load image
-            Image = GameObject.AddComponent<Image>();
-            Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
-            Image.type = Image.Type.Simple;
+            return marker;
         }
 
         public void Move(Vector2 position)
@@ -63,12 +65,7 @@ namespace InGameMap.UI
                 return;
             }
 
-            GameObject.SetActive(layerSelected);
-        }
-
-        internal void Destroy()
-        {
-            Object.Destroy(GameObject);
+            gameObject.SetActive(layerSelected);
         }
     }
 }

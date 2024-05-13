@@ -215,8 +215,8 @@ namespace InGameMap.UI
             var playerPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "PlayerPositionText");
             _playerPositionText = playerPositionTextGO.AddComponent<TextMeshProUGUI>();
             _playerPositionText.fontSize = 14;
-            _cursorPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
-            _cursorPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
+            _playerPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
+            _playerPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
             _playerPositionText.GetRectTransform().anchoredPosition = new Vector2(15, -64);
             _playerPositionText.alignment = TextAlignmentOptions.Left;
         }
@@ -270,7 +270,7 @@ namespace InGameMap.UI
 
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
-                _markers[name] = new MapMarker(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
+                _markers[name] = MapMarker.Create(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
             }
 
             _levelSelectSlider.OnMapLoaded(mapDef);
@@ -293,7 +293,7 @@ namespace InGameMap.UI
             // clear markers
             foreach (var (name, marker) in _markers)
             {
-                marker.Destroy();
+                GameObject.Destroy(marker.gameObject);
             }
             _markers.Clear();
 
@@ -358,8 +358,8 @@ namespace InGameMap.UI
             if (!_markers.ContainsKey("player"))
             {
                 // TODO: this seems gross
-                _markers["player"] = new MapMarker(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
-                                                    new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
+                _markers["player"] = MapMarker.Create(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
+                                                      new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
                 _markers["player"].Image.color = Color.green;
             }
 
