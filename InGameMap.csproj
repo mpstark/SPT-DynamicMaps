@@ -28,6 +28,9 @@
     <Reference Include="Comfort.Unity">
       <HintPath>$(TarkovManagedDir)Comfort.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="DissonanceVoip">
+      <HintPath>$(TarkovManagedDir)DissonanceVoip.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>$(TarkovManagedDir)DOTween.dll</HintPath>
     </Reference>

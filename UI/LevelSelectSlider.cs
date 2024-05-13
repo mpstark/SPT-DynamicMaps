@@ -12,8 +12,10 @@ namespace InGameMap.UI
 {
     internal class LevelSelectSlider : MonoBehaviour
     {
+        public event Action<int> OnLevelSelected;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
-        public Action<int> OnLevelSelected { get; set; }
+
+        private int _selectedLevel = int.MinValue;
         public int SelectedLevel
         {
             get
@@ -37,9 +39,8 @@ namespace InGameMap.UI
         private TextMeshProUGUI _text;
         private Scrollbar _scrollbar;
         private List<int> _levels = new List<int>();
-        private int _selectedLevel = int.MinValue;
 
-        internal static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position, Action<int> onLevelSelected)
+        internal static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "LevelSelectScrollbar";
@@ -54,7 +55,6 @@ namespace InGameMap.UI
             GameObject.Destroy(go.GetComponent<MapZoomer>());
 
             var slider = go.AddComponent<LevelSelectSlider>();
-            slider.OnLevelSelected = onLevelSelected;
             return slider;
         }
 
@@ -75,9 +75,24 @@ namespace InGameMap.UI
             _scrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
             _scrollbar.direction = Scrollbar.Direction.BottomToTop;
             _scrollbar.onValueChanged.AddListener(OnScrollbarChanged);
+            _scrollbar.onValueChanged.SetPersistentListenerState(0, UnityEngine.Events.UnityEventCallState.Off);
+
+            // setup the +/- buttons
+            var plusButton = gameObject.transform.Find("Plus").gameObject.GetComponent<Button>();
+            plusButton.onClick.AddListener(() => ChangeLevelBy(1));
+            plusButton.onClick.SetPersistentListenerState(0, UnityEngine.Events.UnityEventCallState.Off);
+
+            var minusButton = gameObject.transform.Find("Minus").gameObject.GetComponent<Button>();
+            minusButton.onClick.AddListener(() => ChangeLevelBy(-1));
+            minusButton.onClick.SetPersistentListenerState(0, UnityEngine.Events.UnityEventCallState.Off);
 
             // initially hide until map loaded
             gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            OnLevelSelected = null;
         }
 
         private void OnScrollbarChanged(float newValue)
@@ -86,8 +101,19 @@ namespace InGameMap.UI
             var level = _levels[levelIndex];
             if (_selectedLevel != level)
             {
-                OnLevelSelected(level);
+                OnLevelSelected?.Invoke(level);
             }
+        }
+
+        private void ChangeLevelBy(int delta)
+        {
+            var newIndex = _levels.IndexOf(_selectedLevel) + delta;
+            if (newIndex < 0 || newIndex >= _levels.Count)
+            {
+                return;
+            }
+
+            OnLevelSelected?.Invoke(_levels[newIndex]);
         }
 
         internal void OnMapLoaded(MapDef mapDef)

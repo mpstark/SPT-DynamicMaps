@@ -35,10 +35,10 @@ namespace InGameMap.Utils
         public static Vector2 GetBoundingRectangle(IEnumerable<Vector2> points)
         {
             // TODO: there is probably a better way to do this
-            float minX = float.MaxValue;
-            float maxX = float.MinValue;
-            float minY = float.MaxValue;
-            float maxY = float.MinValue;
+            var minX = float.MaxValue;
+            var maxX = float.MinValue;
+            var minY = float.MaxValue;
+            var maxY = float.MinValue;
             foreach (var point in points)
             {
                 minX = Mathf.Min(minX, point.x);

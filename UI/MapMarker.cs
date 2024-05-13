@@ -9,21 +9,43 @@ namespace InGameMap.UI
     {
         public string Name { get; set; }
         public string Category { get; set; }
-        public string LinkedLayer { get; set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
         public Image Image { get; protected set; }
 
+        private MapLayer _linkedLayer;
+        public MapLayer LinkedLayer
+        {
+            get
+            {
+                return _linkedLayer;
+            }
+            set
+            {
+                if (_linkedLayer == value)
+                {
+                    return;
+                }
+
+                if (_linkedLayer != null)
+                {
+                    _linkedLayer.OnLayerDisplayChanged -= OnLinkedLayerChanged;
+                }
+
+                _linkedLayer = value;
+                _linkedLayer.OnLayerDisplayChanged += OnLinkedLayerChanged;
+                OnLinkedLayerChanged(_linkedLayer.IsDisplayed, _linkedLayer.IsOnTopLevel);
+            }
+        }
+
         public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,
-                                       float degreesRotation = 0, float scale = 0)
+                                       float degreesRotation = 0, float scale = 1)
         {
             var mapMarker = Create(parent, name, def.Category, def.ImagePath, def.Position, size, degreesRotation, scale);
-            mapMarker.LinkedLayer = def.LinkedLayer;
-
             return mapMarker;
         }
 
         public static MapMarker Create(GameObject parent, string name, string category, string imageRelativePath,
-                         Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
+                                       Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
             go.layer = parent.layer;
@@ -46,6 +68,16 @@ namespace InGameMap.UI
             return marker;
         }
 
+        protected virtual void OnDestroy()
+        {
+            if (_linkedLayer == null)
+            {
+                return;
+            }
+
+            _linkedLayer.OnLayerDisplayChanged -= OnLinkedLayerChanged;
+        }
+
         public void Move(Vector2 position)
         {
             RectTransform.anchoredPosition = position;
@@ -57,14 +89,22 @@ namespace InGameMap.UI
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
         }
 
-        internal void OnLayerSelect(string layerName, bool layerSelected)
+        protected virtual void OnLinkedLayerChanged(bool isDisplayed, bool isOnTopLevel)
         {
-            if (LinkedLayer.IsNullOrEmpty() || LinkedLayer != layerName)
+            // TODO: revisit this
+            var color = Image.color;
+            var alpha = 1f;
+            if (!isDisplayed)
             {
-                return;
+                alpha = 0.0f;
+            }
+            else if (!isOnTopLevel)
+            {
+                alpha = 0.25f;
             }
 
-            gameObject.SetActive(layerSelected);
+            var newColor = new Color(color.r, color.g, color.b, alpha);
+            Image.color = newColor;
         }
     }
 }

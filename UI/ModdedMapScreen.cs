@@ -14,7 +14,6 @@ namespace InGameMap.UI
 {
     public class ModdedMapScreen : MonoBehaviour
     {
-        private static float _fadeMultiplierPerLayer = 0.5f;
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
         private static float _positionTweenTime = 0.25f;
@@ -148,6 +147,28 @@ namespace InGameMap.UI
             ShiftMap((-rotatedCoord - currentCenter) * _zoomCurrent, tweenTime);
         }
 
+        public void AddMapMarker(MapMarker marker)
+        {
+            if (_markers.ContainsKey(marker.name))
+            {
+                RemoveMapMarker(_markers[marker.name]);
+            }
+
+            _markers[marker.name] = marker;
+        }
+
+        public void RemoveMapMarker(MapMarker marker)
+        {
+            if (!_markers.ContainsKey(marker.name))
+            {
+                return;
+            }
+
+            _markers.Remove(marker.name);
+            marker.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
+            GameObject.Destroy(marker.gameObject);
+        }
+
         private void Awake()
         {
             _rectTransform = gameObject.GetRectTransform();
@@ -175,6 +196,7 @@ namespace InGameMap.UI
             _scrollRect.viewport = _scrollMask.GetRectTransform();
             _scrollRect.content = _mapRectTransform;
 
+            // TODO: make own components
             CreatePositionTexts();
 
             // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to MapDef
@@ -191,15 +213,18 @@ namespace InGameMap.UI
             }
 
             // create map controls
+
             // level select slider
             var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
+            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, _rectTransform, _levelSliderPosition);
+            _levelSelectSlider.OnLevelSelected += SelectTopLevel;
 
             // map select dropdown, this will call LoadMap on the first option
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
-            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize, LoadMap);
+            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
             _mapSelectDropdown.ChangeAvailableMapDefs(_mapDefs);
+            _mapSelectDropdown.OnMapSelected += LoadMap;
         }
 
         private void CreatePositionTexts()
@@ -270,7 +295,15 @@ namespace InGameMap.UI
 
             foreach (var (name, markerDef) in mapDef.StaticMarkers)
             {
-                _markers[name] = MapMarker.Create(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
+                var marker = MapMarker.Create(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
+
+                // setup linked layer for marker
+                if (!markerDef.LinkedLayer.IsNullOrEmpty() && _layers.ContainsKey(markerDef.LinkedLayer))
+                {
+                   marker.LinkedLayer = _layers[markerDef.LinkedLayer];
+                }
+
+                AddMapMarker(marker);
             }
 
             _levelSelectSlider.OnMapLoaded(mapDef);
@@ -280,7 +313,7 @@ namespace InGameMap.UI
             SetMapZoom(_zoomMin, 0);
 
             // select layer by the default level
-            SelectLayersByLevel(mapDef.DefaultLevel);
+            SelectTopLevel(mapDef.DefaultLevel);
 
             // shift map by the offset to center it in the scroll mask
             ShiftMap(_scrollMask.GetRectTransform().anchoredPosition * _zoomCurrent, 0);
@@ -291,11 +324,12 @@ namespace InGameMap.UI
             _immediateMapAnchor = Vector2.zero;
 
             // clear markers
-            foreach (var marker in _markers.Values)
+            var markers = _markers.Values.ToList();
+            foreach (var marker in markers)
             {
-                GameObject.Destroy(marker.gameObject);
+                RemoveMapMarker(marker);
             }
-            _markers.Clear();
+            markers.Clear();
 
             // clear layers
             foreach (var layer in _layers.Values)
@@ -305,42 +339,41 @@ namespace InGameMap.UI
             _layers.Clear();
         }
 
-        private void SelectLayersByLevel(int level)
+        private void SelectTopLevel(int level)
         {
-            // go through each layer and set fade color
+            // go through each layer and change top level
             foreach (var layer in _layers.Values)
             {
-                // show layer if at or below the current level
-                layer.gameObject.SetActive(layer.Level <= level);
-
-                // fade other layers according to difference in level
-                var c = Mathf.Pow(_fadeMultiplierPerLayer, level - layer.Level);
-                layer.Image.color = new Color(c, c, c, 1);
-            }
-
-            // go through all markers and call OnLayerSelect
-            foreach (var marker in _markers.Values)
-            {
-                foreach (var (layerName, layer) in _layers)
-                {
-                    marker.OnLayerSelect(layerName, layer.Level == level);
-                }
+                layer.OnTopLevelSelected(level);
             }
 
             _levelSelectSlider.SelectedLevel = level;
         }
 
-        private void SelectLayersByCoords(Vector2 coords, float height)
+        private void SelectLevelByCoords(Vector2 coords, float height)
         {
-            // TODO: better select that shows only layers in coords
+            var matchingLayer = FindMatchingLayerByCoords(coords, height);
+            if (matchingLayer == null)
+            {
+                return;
+            }
+
+            SelectTopLevel(matchingLayer.Level);
+        }
+
+        private MapLayer FindMatchingLayerByCoords(Vector2 coord, float height)
+        {
+            // TODO: what if there are multiple matching?
+            // probably want to "select" the smaller bounds one in that case
             foreach(var layer in _layers.Values)
             {
-                if (height > layer.HeightBounds.x && height < layer.HeightBounds.y)
+                if (layer.IsCoordInLayer(coord, height))
                 {
-                    SelectLayersByLevel(layer.Level);
-                    return;
+                    return layer;
                 }
             }
+
+            return null;
         }
 
         private void ShowInRaid(LocalGame game)
@@ -359,33 +392,37 @@ namespace InGameMap.UI
             var player = game.PlayerOwner.Player;
             // if (!_markers.ContainsKey("player"))
             // {
-            //     _markers["player"] = TransformMarker.Create(player.CameraPosition, _mapMarkersGO, "Markers/arrow.png",
-            //                                                 "players", _markerSize, 1/_zoomCurrent);
-            //     _markers["player"].Image.color = Color.green;
+            //     var playerMarker = IPlayerMapMarker.Create(player, _mapMarkersGO, "Markers/arrow.png",
+            //                                                "players", _markerSize, 1/_zoomCurrent);
+            //     playerMarker.TraversableLayers = _layers.Values.ToList();
+            //     playerMarker.Image.color = Color.green;
+            //     AddMapMarker(playerMarker);
             // }
 
-            // test bot markers
+            // // test bot markers
             // var gameWorld = Singleton<GameWorld>.Instance;
             // if (gameWorld.AllAlivePlayersList.Count > 1)
             // {
             //     foreach (var person in gameWorld.AllAlivePlayersList)
             //     {
-            //         if (person.IsYourPlayer || _markers.ContainsKey(person.name))
+            //         if (person.IsYourPlayer || _markers.ContainsKey($"{person.Profile.Nickname} marker"))
             //         {
             //             continue;
             //         }
 
-            //         _markers[person.name] = TransformMarker.Create(person.CameraPosition, _mapMarkersGO, "Markers/arrow.png",
-            //                                                        "bots", _markerSize, 1/_zoomCurrent);
-            //         _markers[person.name].Image.color = Color.red;
+            //         var botMarker = IPlayerMapMarker.Create(person, _mapMarkersGO, "Markers/arrow.png",
+            //                                                 "bots", _markerSize, 1/_zoomCurrent);
+            //         botMarker.TraversableLayers = _layers.Values.ToList();
+            //         botMarker.Image.color = Color.red;
+            //         botMarker.OnDeathOrDespawn += RemoveMapMarker;
+            //         AddMapMarker(botMarker);
             //     }
             // }
-
 
             // select layers to show
             var player3dPos = player.CameraPosition.position;
             var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
-            SelectLayersByCoords(player2dPos, player3dPos.y);
+            SelectLevelByCoords(player2dPos, player3dPos.y);
 
             // shift map to player position
             ShiftMapToCoord(player2dPos, 0);

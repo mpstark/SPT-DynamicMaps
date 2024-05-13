@@ -10,15 +10,14 @@ namespace InGameMap.UI
 {
     internal class MapSelectDropdown : MonoBehaviour
     {
-        public Action<MapDef> OnSelected { get; set; }
+        public event Action<MapDef> OnMapSelected;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         private DropDownBox _dropdown;
         private List<MapDef> _mapDefs;
         private bool _hasBindInitiallyCalled = false;
 
-        internal static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size,
-                                                 Action<MapDef> onSelected)
+        internal static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "MapSelectDropdown";
@@ -30,8 +29,6 @@ namespace InGameMap.UI
             rectTransform.anchoredPosition = position; // this is lazy, prob should adjust all of the anchors
 
             var dropdown = go.AddComponent<MapSelectDropdown>();
-            dropdown.OnSelected = onSelected;
-
             return dropdown;
         }
 
@@ -49,7 +46,7 @@ namespace InGameMap.UI
                 return;
             }
 
-            OnSelected(_mapDefs[index]);
+            OnMapSelected?.Invoke(_mapDefs[index]);
         }
 
         internal void ChangeAvailableMapDefs(List<MapDef> mapDefs)
