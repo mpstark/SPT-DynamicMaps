@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI.Controls
 {
-    internal class LevelSelectSlider : MonoBehaviour
+    public class LevelSelectSlider : MonoBehaviour
     {
         public event Action<int> OnLevelSelected;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
@@ -40,7 +40,7 @@ namespace InGameMap.UI.Controls
         private Scrollbar _scrollbar;
         private List<int> _levels = new List<int>();
 
-        internal static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position)
+        public static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "LevelSelectScrollbar";
@@ -116,7 +116,7 @@ namespace InGameMap.UI.Controls
             OnLevelSelected?.Invoke(_levels[newIndex]);
         }
 
-        internal void OnMapLoaded(MapDef mapDef)
+        public void OnMapLoaded(MapDef mapDef)
         {
             _levels.Clear();
             _selectedLevel = int.MinValue;

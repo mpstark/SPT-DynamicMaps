@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace InGameMap.UI.Controls
 {
-    internal class MapSelectDropdown : MonoBehaviour
+    public class MapSelectDropdown : MonoBehaviour
     {
         public event Action<MapDef> OnMapSelected;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
@@ -17,7 +17,7 @@ namespace InGameMap.UI.Controls
         private List<MapDef> _mapDefs;
         private bool _hasBindInitiallyCalled = false;
 
-        internal static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size)
+        public static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "MapSelectDropdown";
@@ -49,7 +49,7 @@ namespace InGameMap.UI.Controls
             OnMapSelected?.Invoke(_mapDefs[index]);
         }
 
-        internal void ChangeAvailableMapDefs(List<MapDef> mapDefs)
+        public void ChangeAvailableMapDefs(List<MapDef> mapDefs)
         {
             _hasBindInitiallyCalled = false;
             _mapDefs = mapDefs;
@@ -57,7 +57,7 @@ namespace InGameMap.UI.Controls
             _dropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
         }
 
-        internal void OnMapLoaded(MapDef mapDef)
+        public void OnMapLoaded(MapDef mapDef)
         {
             _dropdown.UpdateValue(_mapDefs.IndexOf(mapDef));
         }

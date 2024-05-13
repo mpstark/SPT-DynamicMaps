@@ -30,7 +30,7 @@ namespace InGameMap
         }
 
         /// <summary>
-        /// Attach to the map
+        /// Attach to the map screen
         /// </summary>
         internal void TryAttachToMapScreen(MapScreen screen)
         {

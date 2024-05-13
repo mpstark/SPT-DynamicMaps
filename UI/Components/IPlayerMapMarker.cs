@@ -84,6 +84,20 @@ namespace InGameMap.UI.Components
             base.OnDestroy();
         }
 
+        protected override void OnLinkedLayerChanged(bool isDisplayed, bool isOnTopLevel)
+        {
+            // TODO: revisit this
+            var color = Image.color;
+            var alpha = 1f;
+            if (!isDisplayed || !isOnTopLevel)
+            {
+                alpha = 0.25f;
+            }
+
+            var newColor = new Color(color.r, color.g, color.b, alpha);
+            Image.color = newColor;
+        }
+
         private MapLayer FindBestLayer(Vector2 coord, float height)
         {
             // FIXME: this is a duplicate of FindMatchingLayerByCoords in ModdedMapScreen
@@ -98,20 +112,6 @@ namespace InGameMap.UI.Components
             }
 
             return null;
-        }
-
-        protected override void OnLinkedLayerChanged(bool isDisplayed, bool isOnTopLevel)
-        {
-            // TODO: revisit this
-            var color = Image.color;
-            var alpha = 1f;
-            if (!isDisplayed || !isOnTopLevel)
-            {
-                alpha = 0.25f;
-            }
-
-            var newColor = new Color(color.r, color.g, color.b, alpha);
-            Image.color = newColor;
         }
 
         private void HandleDeathOrDespawn(IPlayer player)
