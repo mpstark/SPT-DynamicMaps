@@ -10,78 +10,90 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI
 {
-    internal class LevelSelectSlider
+    internal class LevelSelectSlider : MonoBehaviour
     {
-        public int SelectedLevel { get; private set; }
-        public GameObject GameObject { get; private set; }
-        public RectTransform RectTransform => GameObject.transform as RectTransform;
+        public RectTransform RectTransform => gameObject.transform as RectTransform;
+        public Action<int> OnLevelSelected { get; set; }
+        public int SelectedLevel
+        {
+            get
+            {
+                return _selectedLevel;
+            }
+
+            set
+            {
+                if (_selectedLevel == value)
+                {
+                    return;
+                }
+
+                _scrollbar.value = _levels.IndexOf(value) / (_levels.Count - 1f);
+                _text.text = $"Level {value}";
+                _selectedLevel = value;
+            }
+        }
 
         private TextMeshProUGUI _text;
         private Scrollbar _scrollbar;
-
         private List<int> _levels = new List<int>();
-        private Action<int> _onLevelSelected;
+        private int _selectedLevel = int.MinValue;
 
-        internal LevelSelectSlider(GameObject prefab, Transform parent, Vector2 position, Action<int> onLevelSelected)
+        internal static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position, Action<int> onLevelSelected)
         {
-            GameObject = GameObject.Instantiate(prefab);
-            GameObject.name = "LevelSelectScrollbar";
-            GameObject.transform.SetParent(parent);
-            GameObject.transform.localScale = Vector3.one;
+            var go = GameObject.Instantiate(prefab);
+            go.name = "LevelSelectScrollbar";
+            go.transform.SetParent(parent);
+            go.transform.localScale = Vector3.one;
 
             // position to top left
-            var oldPosition = GameObject.GetRectTransform().anchoredPosition;
-            GameObject.GetRectTransform().anchoredPosition = position;
+            var oldPosition = go.GetRectTransform().anchoredPosition;
+            go.GetRectTransform().anchoredPosition = position;
 
             // remove useless component
-            GameObject.Destroy(GameObject.GetComponent<MapZoomer>());
+            GameObject.Destroy(go.GetComponent<MapZoomer>());
 
+            var slider = go.AddComponent<LevelSelectSlider>();
+            slider.OnLevelSelected = onLevelSelected;
+            return slider;
+        }
+
+        private void Awake()
+        {
             // create layer text
-            var slidingArea = GameObject.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
+            var slidingArea = gameObject.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
             var layerTextGO = UIUtils.CreateUIGameObject(slidingArea, "SlidingLayerText");
             _text = layerTextGO.AddComponent<TextMeshProUGUI>();
             _text.fontSize = 14;
             _text.alignment = TextAlignmentOptions.Left;
-            _text.GetRectTransform().anchoredPosition = new Vector2(0, -17);
+            _text.GetRectTransform().offsetMin = Vector2.zero;
+            _text.GetRectTransform().offsetMax = Vector2.zero;
+            _text.GetRectTransform().anchoredPosition = new Vector2(10, 0);
 
             // setup the scrollbar component
-            var actualScrollbarGO = GameObject.transform.Find("Scrollbar").gameObject;
+            var actualScrollbarGO = gameObject.transform.Find("Scrollbar").gameObject;
             _scrollbar = actualScrollbarGO.GetComponent<Scrollbar>();
             _scrollbar.direction = Scrollbar.Direction.BottomToTop;
             _scrollbar.onValueChanged.AddListener(OnScrollbarChanged);
 
-            _onLevelSelected = onLevelSelected;
-
             // initially hide until map loaded
-            GameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         private void OnScrollbarChanged(float newValue)
         {
             var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
             var level = _levels[levelIndex];
-            if (SelectedLevel != level)
+            if (_selectedLevel != level)
             {
-                _onLevelSelected(level);
+                OnLevelSelected(level);
             }
-        }
-
-        internal void OnLevelSelected(int level)
-        {
-            if (SelectedLevel == level)
-            {
-                return;
-            }
-
-            _scrollbar.value = _levels.IndexOf(level) / (_levels.Count - 1f);
-            _text.text = $"Level {level}";
-            SelectedLevel = level;
         }
 
         internal void OnMapLoaded(MapDef mapDef)
         {
             _levels.Clear();
-            SelectedLevel = int.MinValue;
+            _selectedLevel = int.MinValue;
 
             // extract the unique levels from mapDef layers
             var uniqueLevels = new HashSet<int>();
@@ -94,7 +106,7 @@ namespace InGameMap.UI
             _levels.Sort();
 
             _scrollbar.numberOfSteps = _levels.Count();
-            GameObject.SetActive(true);
+            gameObject.SetActive(true);
         }
     }
 }

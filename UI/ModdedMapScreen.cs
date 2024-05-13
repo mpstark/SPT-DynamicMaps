@@ -36,16 +36,15 @@ namespace InGameMap.UI
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
 
+        private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
+        private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
+
         private MapMapping _mapMapping;
         private List<MapDef> _mapDefs = new List<MapDef>();
         private MapDef _currentMapDef;
 
         private TextMeshProUGUI _playerPositionText;
         private TextMeshProUGUI _cursorPositionText;
-
-        private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
-        private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
-
         private LevelSelectSlider _levelSelectSlider;
         private MapSelectDropdown _mapSelectDropdown;
 
@@ -194,7 +193,7 @@ namespace InGameMap.UI
             // create map controls
             // level select slider
             var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            _levelSelectSlider = new LevelSelectSlider(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
+            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, _rectTransform, _levelSliderPosition, SelectLayersByLevel);
 
             // map select dropdown, this will call LoadMap on the first option
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
@@ -208,13 +207,17 @@ namespace InGameMap.UI
             var cursorPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "CursorPositionText");
             _cursorPositionText = cursorPositionTextGO.AddComponent<TextMeshProUGUI>();
             _cursorPositionText.fontSize = 14;
-            _cursorPositionText.GetRectTransform().anchoredPosition = new Vector2(-850, 485);
+            _cursorPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
+            _cursorPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
+            _cursorPositionText.GetRectTransform().anchoredPosition = new Vector2(15, -50);
             _cursorPositionText.alignment = TextAlignmentOptions.Left;
 
             var playerPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "PlayerPositionText");
             _playerPositionText = playerPositionTextGO.AddComponent<TextMeshProUGUI>();
             _playerPositionText.fontSize = 14;
-            _playerPositionText.GetRectTransform().anchoredPosition = new Vector2(-850, 471);
+            _cursorPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
+            _cursorPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
+            _playerPositionText.GetRectTransform().anchoredPosition = new Vector2(15, -64);
             _playerPositionText.alignment = TextAlignmentOptions.Left;
         }
 
@@ -324,7 +327,7 @@ namespace InGameMap.UI
                 }
             }
 
-            _levelSelectSlider.OnLevelSelected(level);
+            _levelSelectSlider.SelectedLevel = level;
         }
 
         private void SelectLayersByCoords(Vector2 coords, float height)
