@@ -353,23 +353,38 @@ namespace InGameMap.UI
             _mapSelectDropdown.gameObject.SetActive(false);
             // TODO: make sure that the current map is loaded
 
+            // TODO: this should be in another method
+            // FIXME: on exit raid will struggle with transform not being valid
             // create player marker if one doesn't already exist
             var player = game.PlayerOwner.Player;
-            if (!_markers.ContainsKey("player"))
-            {
-                // TODO: this seems gross
-                _markers["player"] = MapMarker.Create(_mapMarkersGO, "player", "player", "Markers\\arrow.png",
-                                                      new Vector2(0f, 0f), _markerSize, -_coordinateRotation, 1 / _zoomCurrent);
-                _markers["player"].Image.color = Color.green;
-            }
+            // if (!_markers.ContainsKey("player"))
+            // {
+            //     _markers["player"] = TransformMarker.Create(player.CameraPosition, _mapMarkersGO, "Markers/arrow.png",
+            //                                                 "players", _markerSize, 1/_zoomCurrent);
+            //     _markers["player"].Image.color = Color.green;
+            // }
 
-            // move player marker
-            var player3dPos = player.CameraPosition.position;
-            var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
-            var angles = player.CameraPosition.eulerAngles;
-            _markers["player"].MoveAndRotate(player2dPos, -angles.y); // I'm unsure why negative rotation here
+            // test bot markers
+            // var gameWorld = Singleton<GameWorld>.Instance;
+            // if (gameWorld.AllAlivePlayersList.Count > 1)
+            // {
+            //     foreach (var person in gameWorld.AllAlivePlayersList)
+            //     {
+            //         if (person.IsYourPlayer || _markers.ContainsKey(person.name))
+            //         {
+            //             continue;
+            //         }
+
+            //         _markers[person.name] = TransformMarker.Create(person.CameraPosition, _mapMarkersGO, "Markers/arrow.png",
+            //                                                        "bots", _markerSize, 1/_zoomCurrent);
+            //         _markers[person.name].Image.color = Color.red;
+            //     }
+            // }
+
 
             // select layers to show
+            var player3dPos = player.CameraPosition.position;
+            var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
             SelectLayersByCoords(player2dPos, player3dPos.y);
 
             // shift map to player position

@@ -11,7 +11,7 @@ namespace InGameMap.UI
         public string Category { get; set; }
         public string LinkedLayer { get; set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
-        public Image Image { get; private set; }
+        public Image Image { get; protected set; }
 
         public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,
                                        float degreesRotation = 0, float scale = 0)
@@ -28,7 +28,6 @@ namespace InGameMap.UI
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
             go.layer = parent.layer;
             go.transform.SetParent(parent.transform);
-
             go.ResetRectTransform();
 
             var rectTransform = go.GetRectTransform();
