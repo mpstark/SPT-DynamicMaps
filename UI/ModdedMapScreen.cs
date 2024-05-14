@@ -110,7 +110,6 @@ namespace InGameMap.UI
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
             _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, RectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
-            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
             _mapSelectDropdown.OnMapSelected += ChangeMap;
         }
 
@@ -148,21 +147,19 @@ namespace InGameMap.UI
             _levelSelectSlider.OnLoadMap(mapDef, _mapView.SelectedLevel);
         }
 
-        private void ShowInRaid(LocalGame game)
+        private void ShowInRaid()
         {
             // adjust mask
             _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -22);
             _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 40f);
 
-            // TODO: make sure that the current map is loaded
-
-            // TODO: don't hide, just show map selector for only this map
-            // hide map selector
-            // _mapSelectDropdown.gameObject.SetActive(false);
+            // filter dropdown to only maps containing the internal map name
+            // this forces the load of the first of those
+            _mapSelectDropdown.FilterByInternalMapName(GameUtils.GetCurrentMap());
 
             // TODO: this should be in another place
             // create player marker if one doesn't already exist
-            var player = game.PlayerOwner.Player;
+            var player = GameUtils.GetPlayer();
             if (_playerMarker == null)
             {
                 _playerMarker = _mapView.AddPlayerMarker(player);
@@ -207,8 +204,8 @@ namespace InGameMap.UI
             _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -5);
             _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 70f);
 
-            // show map selector
-            // _mapSelectDropdown.gameObject.SetActive(true);
+            // clear filter on dropdown
+            _mapSelectDropdown.ClearFilter();
 
             // hide player position text
             _playerPositionText.gameObject.SetActive(false);
@@ -233,15 +230,14 @@ namespace InGameMap.UI
             transform.parent.gameObject.SetActive(true);
             gameObject.SetActive(true);
 
-            // FIXME: this is gross
+            // populate map select dropdown
             _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
 
             // check if raid
             var game = Singleton<AbstractGame>.Instance;
-            if (game != null && game is LocalGame)
+            if (game != null && game.InRaid)
             {
-                var localGame = game as LocalGame;
-                ShowInRaid(localGame);
+                ShowInRaid();
                 return;
             }
 
