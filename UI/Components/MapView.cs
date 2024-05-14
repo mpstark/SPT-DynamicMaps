@@ -37,9 +37,6 @@ namespace InGameMap.UI.Components
         public static MapView Create(GameObject parent, string name)
         {
             var go = UIUtils.CreateUIGameObject(parent, name);
-
-            // TODO: this
-
             var view = go.AddComponent<MapView>();
             return view;
         }
@@ -49,11 +46,9 @@ namespace InGameMap.UI.Components
             MapLayerContainer = UIUtils.CreateUIGameObject(gameObject, "MapLayers");
             MapLabelsContainer = UIUtils.CreateUIGameObject(gameObject, "MapLabels");
             MapMarkerContainer = UIUtils.CreateUIGameObject(gameObject, "MapMarkers");
-
-            // TODO: this
         }
 
-        public void AddMapMarker(MapMarker marker)
+        public void AddMapMarker(MapMarker marker, float scale = 1f)
         {
             if (_markers.Contains(marker))
             {
@@ -62,26 +57,28 @@ namespace InGameMap.UI.Components
 
             // TODO: create category go
 
+            marker.gameObject.transform.localScale = scale * Vector3.one;
+
             _markers.Add(marker);
         }
 
-        public MapMarker AddMapMarker(string name, MapMarkerDef markerDef)
+        public MapMarker AddMapMarker(string name, MapMarkerDef markerDef, float scale = 1f)
         {
             var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation);
             marker.LinkedLayer = _layers.FirstOrDefault(l => l.Name == markerDef.LinkedLayer);
 
-            AddMapMarker(marker);
+            AddMapMarker(marker, scale);
             return marker;
         }
 
-        public IPlayerMapMarker AddPlayerMarker(IPlayer player)
+        public IPlayerMapMarker AddPlayerMarker(IPlayer player, float scale = 1f)
         {
             var marker = IPlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
                                                  "players", _markerSize);
             marker.TraversableLayers = _layers;
             marker.OnDeathOrDespawn += RemoveMapMarker;
 
-            AddMapMarker(marker);
+            AddMapMarker(marker, scale);
 
             return marker;
         }

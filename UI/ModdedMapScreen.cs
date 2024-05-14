@@ -174,8 +174,6 @@ namespace InGameMap.UI
             // TODO: make own components
             CreatePositionTexts();
 
-            // TODO: load all json files in Maps\*.json instead and add map string to MapDef
-
             // create map controls
 
             // level select slider
@@ -262,7 +260,7 @@ namespace InGameMap.UI
             var player = game.PlayerOwner.Player;
             if (_playerMarker == null)
             {
-                _playerMarker = _mapView.AddPlayerMarker(player);
+                _playerMarker = _mapView.AddPlayerMarker(player, 1 / _zoomCurrent);
                 _playerMarker.Image.color = Color.green;
             }
 
@@ -278,9 +276,7 @@ namespace InGameMap.UI
                         continue;
                     }
 
-                    // var botMarker = IPlayerMapMarker.Create(person, _mapMarkersGO, "Markers/arrow.png",
-                    //                                         "bots", _markerSize, 1/_zoomCurrent);
-                    var botMarker = _mapView.AddPlayerMarker(person);
+                    var botMarker = _mapView.AddPlayerMarker(person, 1 / _zoomCurrent);
                     botMarker.Image.color = (person.Fraction == ETagStatus.Scav) ? Color.yellow : Color.red;
                     person.OnIPlayerDeadOrUnspawn += (bot) => _otherPlayers.Remove(bot);
                     _otherPlayers[person] = botMarker;
