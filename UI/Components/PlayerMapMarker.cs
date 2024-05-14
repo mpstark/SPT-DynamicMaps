@@ -52,6 +52,7 @@ namespace InGameMap.UI.Components
             marker.Player = player;
             marker.Name = player.Profile.Nickname;
             marker.Category = category;
+            marker.IsDynamic = true;
             marker.Image = go.AddComponent<Image>();
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imagePath);
             marker.Image.type = Image.Type.Simple;

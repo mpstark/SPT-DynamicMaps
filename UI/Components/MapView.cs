@@ -39,8 +39,6 @@ namespace InGameMap.UI.Components
 
         private Vector2 _immediateMapAnchor = Vector2.zero;
 
-        private Dictionary<string, GameObject> _mapMarkersCategories = new Dictionary<string, GameObject>();
-
         private List<MapMarker> _markers = new List<MapMarker>();
         private List<MapLayer> _layers = new List<MapLayer>();
         // private List<MapLabel> _labels = new List<MapLabel>();
@@ -66,14 +64,12 @@ namespace InGameMap.UI.Components
                 return;
             }
 
-            // TODO: create category go
-
             marker.gameObject.transform.localScale = (1 / ZoomCurrent) * Vector3.one;
 
             // hook marker position changed event up, so that when markers change position, they get notified
             // about layer status
-            marker.OnPositionChanged += OnMarkerChangedPosition;
-            OnMarkerChangedPosition(marker);  // call immediately
+            marker.OnPositionChanged += UpdateMarkerLayerStatus;
+            UpdateMarkerLayerStatus(marker);  // call immediately
 
             _markers.Add(marker);
         }
@@ -96,7 +92,7 @@ namespace InGameMap.UI.Components
             return marker;
         }
 
-        public void OnMarkerChangedPosition(MapMarker marker)
+        public void UpdateMarkerLayerStatus(MapMarker marker)
         {
             var layer = FindMatchingLayerByCoordinate(marker.Position);
             marker.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
@@ -107,13 +103,21 @@ namespace InGameMap.UI.Components
             // TODO: revisit
             foreach (var marker in _markers)
             {
-                OnMarkerChangedPosition(marker);
+                UpdateMarkerLayerStatus(marker);
             }
         }
 
-        public void HideMapMarkerCategory(string category)
+        public void ChangeMarkerCategoryStatus(string category, bool status)
         {
-            // TODO: this
+            foreach (var marker in _markers)
+            {
+                if (marker.Category != category)
+                {
+                    continue;
+                }
+
+                marker.gameObject.SetActive(status);
+            }
         }
 
         public void RemoveMapMarker(MapMarker marker)
@@ -163,8 +167,11 @@ namespace InGameMap.UI.Components
             SetMinMaxZoom(transform.parent as RectTransform);
 
             // load all layers in the order of level
-            foreach (var (layerName, layerDef) in mapDef.Layers.OrderBy(pair => pair.Value.Level))
+            // BSG has extension method deconstruct for KVP, so have to do this
+            foreach (var pair in mapDef.Layers.OrderBy(pair => pair.Value.Level))
             {
+                var layerName = pair.Key;
+                var layerDef = pair.Value;
                 var layer = MapLayer.Create(MapLayerContainer, layerName, layerDef, -CoordinateRotation);
                 _layers.Add(layer);
             }
@@ -173,8 +180,11 @@ namespace InGameMap.UI.Components
             SelectTopLevel(mapDef.DefaultLevel);
 
             // load all static map markers
-            foreach (var (markerName, markerDef) in mapDef.StaticMarkers)
+            // BSG has extension method deconstruct for KVP, so have to do this
+            foreach (var pair in mapDef.StaticMarkers)
             {
+                var markerName = pair.Key;
+                var markerDef = pair.Value;
                 AddMapMarker(markerName, markerDef);
             }
 
@@ -266,10 +276,9 @@ namespace InGameMap.UI.Components
             // inverse scale all map markers
             // THIS SEEMS GROSS!
             // FIXME: does this generate large amounts of garbage?
-            var mapMarkers = MapMarkerContainer.transform.GetChildren();
-            foreach (var mapMarker in mapMarkers)
+            foreach (var marker in _markers)
             {
-                mapMarker.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
+                marker.RectTransform.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
             }
         }
 

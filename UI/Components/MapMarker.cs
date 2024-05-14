@@ -14,6 +14,7 @@ namespace InGameMap.UI.Components
         public string Category { get; protected set; }
         public Vector3 Position { get; protected set;}
         public Image Image { get; protected set; }
+        public bool IsDynamic { get; protected set; } = false;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,

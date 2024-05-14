@@ -218,7 +218,7 @@ namespace InGameMap.UI
             {
                 _mapView.RemoveMapMarker(_playerMarker);
             }
-            foreach (var (bot, botMarker) in _otherPlayers)
+            foreach (var botMarker in _otherPlayers.Values)
             {
                 _mapView.RemoveMapMarker(botMarker);
             }

@@ -56,6 +56,8 @@ namespace InGameMap.UI.Controls
         {
             _hasBindInitiallyCalled = false;
             _dropdown.Show(_mapDefs.Select(def => def.DisplayName));
+
+            // TODO: this references a BSG method of GInterface390
             _dropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
         }
 
