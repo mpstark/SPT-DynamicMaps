@@ -51,8 +51,8 @@ namespace InGameMap.UI
         private float _zoomCurrent = 0.5f;
 
         // TODO: remove this and put it somewhere else
-        private IPlayerMapMarker _playerMarker;
-        private Dictionary<IPlayer, IPlayerMapMarker> _otherPlayers = new Dictionary<IPlayer, IPlayerMapMarker>();
+        private PlayerMapMarker _playerMarker;
+        private Dictionary<IPlayer, PlayerMapMarker> _otherPlayers = new Dictionary<IPlayer, PlayerMapMarker>();
 
         private void Update()
         {

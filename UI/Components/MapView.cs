@@ -71,9 +71,9 @@ namespace InGameMap.UI.Components
             return marker;
         }
 
-        public IPlayerMapMarker AddPlayerMarker(IPlayer player, float scale = 1f)
+        public PlayerMapMarker AddPlayerMarker(IPlayer player, float scale = 1f)
         {
-            var marker = IPlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
+            var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
                                                  "players", _markerSize);
             marker.TraversableLayers = _layers;
             marker.OnDeathOrDespawn += RemoveMapMarker;
@@ -157,14 +157,16 @@ namespace InGameMap.UI.Components
                 return;
             }
 
+            // remove all markers and reset to empty
             var markersCopy = _markers.ToList();
             foreach (var marker in markersCopy)
             {
                 RemoveMapMarker(marker);
             }
             markersCopy.Clear();
+            _markers.Clear();
 
-            // clear layers
+            // clear layers and reset to empty
             foreach (var layer in _layers)
             {
                 GameObject.Destroy(layer.gameObject);

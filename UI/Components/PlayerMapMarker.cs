@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
-    public class IPlayerMapMarker : MapMarker
+    public class PlayerMapMarker : MapMarker
     {
         public event Action<MapMarker> OnDeathOrDespawn;
         public List<MapLayer> TraversableLayers { get; set; }
@@ -37,7 +37,7 @@ namespace InGameMap.UI.Components
             }
         }
 
-        public static IPlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category, Vector2 size)
+        public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category, Vector2 size)
         {
             var name = $"{player.Profile.Nickname} marker";
 
@@ -49,7 +49,7 @@ namespace InGameMap.UI.Components
             var rectTransform = go.GetRectTransform();
             rectTransform.sizeDelta = size;
 
-            var marker = go.AddComponent<IPlayerMapMarker>();
+            var marker = go.AddComponent<PlayerMapMarker>();
             marker.Player = player;
             marker.Name = player.Profile.Nickname;
             marker.Category = category;
