@@ -79,7 +79,7 @@ namespace InGameMap.UI.Controls
             ChangeAvailableMapDefs();
         }
 
-        public void OnMapLoading(MapDef mapDef)
+        public void OnLoadMap(MapDef mapDef)
         {
             _dropdown.UpdateValue(_mapDefs.IndexOf(mapDef));
         }

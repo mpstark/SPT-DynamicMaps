@@ -116,7 +116,7 @@ namespace InGameMap.UI.Controls
             OnLevelSelectedBySlider?.Invoke(_levels[newIndex]);
         }
 
-        public void OnMapLoading(MapDef mapDef)
+        public void OnLoadMap(MapDef mapDef, int initialLevel)
         {
             _levels.Clear();
             _selectedLevel = int.MinValue;
@@ -132,6 +132,8 @@ namespace InGameMap.UI.Controls
             _levels.Sort();
 
             _scrollbar.numberOfSteps = _levels.Count();
+            SelectedLevel = initialLevel;
+
             gameObject.SetActive(true);
         }
     }

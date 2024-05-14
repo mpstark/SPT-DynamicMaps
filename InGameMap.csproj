@@ -123,7 +123,7 @@
     <!-- Copies the output and resources to tarkov game folder -->
     <!-- <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
-      DestinationFolder="$(TarkovDir)BepInEx\plugins\InGameMap"
+      DestinationFolder="$(TarkovDir)BepInEx\plugins\InGameMap\%(RecursiveDir)"
     /> -->
     <Copy
       SourceFiles="@(OutputDLL);@(Resources)"

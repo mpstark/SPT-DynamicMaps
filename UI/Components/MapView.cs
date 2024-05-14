@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using EFT;
 using InGameMap.Data;
 using InGameMap.Utils;
@@ -11,14 +12,20 @@ namespace InGameMap.UI.Components
     public class MapView : MonoBehaviour
     {
         private static Vector2 _markerSize = new Vector2(30, 30);
+        private static float _zoomTweenTime = 0.25f;
+        private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
+        private static float _zoomMinScaler = 1.1f; // divider against ratio of a provided rect
 
         public event Action<int> OnLevelSelected;
+
+        // do we need these?
         // public event Action<MapMarker> OnMarkerAdded;
         // public event Action OnMarkerRemoved;
         // public event Action<MapDef> OnMapLoaded;
         // public event Action<MapDef> OnMapUnloaded;
 
         public RectTransform RectTransform => gameObject.transform as RectTransform;
+        public MapDef CurrentMapDef { get; private set; }
         public float CoordinateRotation { get; private set; }
         public int SelectedLevel { get; private set; }
 
@@ -26,13 +33,17 @@ namespace InGameMap.UI.Components
         public GameObject MapLabelsContainer { get; private set; }
         public GameObject MapLayerContainer { get; private set; }
 
+        public float ZoomMin { get; private set; }      // set when map loaded
+        public float ZoomMax { get; private set; }      // set when map loaded
+        public float ZoomCurrent { get; private set; }  // set when map loaded
+
+        private Vector2 _immediateMapAnchor = Vector2.zero;
+
         private Dictionary<string, GameObject> _mapMarkersCategories = new Dictionary<string, GameObject>();
 
         private List<MapMarker> _markers = new List<MapMarker>();
         private List<MapLayer> _layers = new List<MapLayer>();
         // private List<MapLabel> _labels = new List<MapLabel>();
-
-        private MapDef _currentMapDef;
 
         public static MapView Create(GameObject parent, string name)
         {
@@ -48,7 +59,7 @@ namespace InGameMap.UI.Components
             MapMarkerContainer = UIUtils.CreateUIGameObject(gameObject, "MapMarkers");
         }
 
-        public void AddMapMarker(MapMarker marker, float scale = 1f)
+        public void AddMapMarker(MapMarker marker)
         {
             if (_markers.Contains(marker))
             {
@@ -57,29 +68,28 @@ namespace InGameMap.UI.Components
 
             // TODO: create category go
 
-            marker.gameObject.transform.localScale = scale * Vector3.one;
+            marker.gameObject.transform.localScale = (1 / ZoomCurrent) * Vector3.one;
 
             _markers.Add(marker);
         }
 
-        public MapMarker AddMapMarker(string name, MapMarkerDef markerDef, float scale = 1f)
+        public MapMarker AddMapMarker(string name, MapMarkerDef markerDef)
         {
             var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation);
             marker.LinkedLayer = _layers.FirstOrDefault(l => l.Name == markerDef.LinkedLayer);
 
-            AddMapMarker(marker, scale);
+            AddMapMarker(marker);
             return marker;
         }
 
-        public PlayerMapMarker AddPlayerMarker(IPlayer player, float scale = 1f)
+        public PlayerMapMarker AddPlayerMarker(IPlayer player)
         {
             var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
                                                  "players", _markerSize);
             marker.TraversableLayers = _layers;
             marker.OnDeathOrDespawn += RemoveMapMarker;
 
-            AddMapMarker(marker, scale);
-
+            AddMapMarker(marker);
             return marker;
         }
 
@@ -106,17 +116,17 @@ namespace InGameMap.UI.Components
 
         public void LoadMap(MapDef mapDef)
         {
-            if (mapDef == null || _currentMapDef == mapDef)
+            if (mapDef == null || CurrentMapDef == mapDef)
             {
                 return;
             }
 
-            if (_currentMapDef != null)
+            if (CurrentMapDef != null)
             {
                 UnloadMap();
             }
 
-            _currentMapDef = mapDef;
+            CurrentMapDef = mapDef;
             CoordinateRotation = mapDef.CoordinateRotation;
 
             // set width and height for top level
@@ -148,11 +158,14 @@ namespace InGameMap.UI.Components
 
             // select layer by the default level
             SelectTopLevel(mapDef.DefaultLevel);
+
+            // set min/max zoom based on parent's rect transform
+            SetMinMaxZoom(transform.parent as RectTransform);
         }
 
         public void UnloadMap()
         {
-            if (_currentMapDef == null)
+            if (CurrentMapDef == null)
             {
                 return;
             }
@@ -173,7 +186,8 @@ namespace InGameMap.UI.Components
             }
             _layers.Clear();
 
-            _currentMapDef = null;
+            _immediateMapAnchor = Vector2.zero;
+            CurrentMapDef = null;
         }
 
         public void SelectTopLevel(int level)
@@ -197,6 +211,80 @@ namespace InGameMap.UI.Components
             }
 
             SelectTopLevel(matchingLayer.Level);
+        }
+
+        public void SetMinMaxZoom(RectTransform parentTransform)
+        {
+            // set zoom min and max based on size of map and size of mask
+            var mapSize = RectTransform.sizeDelta;
+            ZoomMin = Mathf.Min(parentTransform.sizeDelta.x / mapSize.x, parentTransform.sizeDelta.y / mapSize.y) / _zoomMinScaler;
+            ZoomMax = _zoomMaxScaler * ZoomMin;
+
+            // this will set everything up for initial zoom
+            SetMapZoom(ZoomMin, 0);
+
+            // shift map by the offset to center it in the scroll mask
+            ShiftMap(parentTransform.anchoredPosition * ZoomCurrent, 0);
+        }
+
+        public void SetMapZoom(float zoomNew, float tweenTime)
+        {
+            zoomNew = Mathf.Clamp(zoomNew, ZoomMin, ZoomMax);
+
+            // already there
+            if (zoomNew == ZoomCurrent)
+            {
+                return;
+            }
+
+            ZoomCurrent = zoomNew;
+
+            // scale all map content up by scaling parent
+            RectTransform.DOScale(ZoomCurrent * Vector3.one, tweenTime);
+
+            // inverse scale all map markers
+            // THIS SEEMS GROSS!
+            // FIXME: does this generate large amounts of garbage?
+            var mapMarkers = MapMarkerContainer.transform.GetChildren();
+            foreach (var mapMarker in mapMarkers)
+            {
+                mapMarker.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
+            }
+        }
+
+        public void IncrementalZoomInto(float zoomDelta, Vector2 rectPoint)
+        {
+            var zoomNew = Mathf.Clamp(ZoomCurrent + zoomDelta, ZoomMin, ZoomMax);
+            var actualDelta = zoomNew - ZoomCurrent;
+            var rotatedPoint = MathUtils.GetRotatedVector2(rectPoint, CoordinateRotation);
+
+            // have to shift first, so that the tween is started in the shift first
+            ShiftMap(-rotatedPoint * actualDelta, _zoomTweenTime);
+            SetMapZoom(zoomNew, _zoomTweenTime);
+        }
+
+        public void ShiftMap(Vector2 shift, float tweenTime)
+        {
+            if (shift == Vector2.zero)
+            {
+                return;
+            }
+
+            // check if tweening to update _immediateMapAnchor, since the scroll rect might have moved the anchor
+            if (!DOTween.IsTweening(RectTransform, true))
+            {
+                _immediateMapAnchor = RectTransform.anchoredPosition;
+            }
+
+            _immediateMapAnchor += shift;
+            RectTransform.DOAnchorPos(_immediateMapAnchor, tweenTime);
+        }
+
+        public void ShiftMapToCoord(Vector2 coord, float tweenTime)
+        {
+            var rotatedCoord = MathUtils.GetRotatedVector2(coord, CoordinateRotation);
+            var currentCenter = RectTransform.anchoredPosition / ZoomCurrent;
+            ShiftMap((-rotatedCoord - currentCenter) * ZoomCurrent, tweenTime);
         }
 
         private MapLayer FindMatchingLayerByCoords(Vector2 coord, float height)
