@@ -12,7 +12,7 @@ namespace InGameMap.UI.Controls
 {
     public class LevelSelectSlider : MonoBehaviour
     {
-        public event Action<int> OnLevelSelected;
+        public event Action<int> OnLevelSelectedBySlider;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         private int _selectedLevel = int.MinValue;
@@ -92,16 +92,16 @@ namespace InGameMap.UI.Controls
 
         private void OnDestroy()
         {
-            OnLevelSelected = null;
+            OnLevelSelectedBySlider = null;
         }
 
         private void OnScrollbarChanged(float newValue)
         {
             var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
             var level = _levels[levelIndex];
-            if (_selectedLevel != level)
+            if (_selectedLevel != int.MinValue && _selectedLevel != level)
             {
-                OnLevelSelected?.Invoke(level);
+                OnLevelSelectedBySlider?.Invoke(level);
             }
         }
 
@@ -113,10 +113,10 @@ namespace InGameMap.UI.Controls
                 return;
             }
 
-            OnLevelSelected?.Invoke(_levels[newIndex]);
+            OnLevelSelectedBySlider?.Invoke(_levels[newIndex]);
         }
 
-        public void OnMapLoaded(MapDef mapDef)
+        public void OnMapLoading(MapDef mapDef)
         {
             _levels.Clear();
             _selectedLevel = int.MinValue;

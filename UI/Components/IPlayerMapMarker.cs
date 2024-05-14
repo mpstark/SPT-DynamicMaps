@@ -37,8 +37,7 @@ namespace InGameMap.UI.Components
             }
         }
 
-        public static IPlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category,
-                                              Vector2 size, float scale = 1)
+        public static IPlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category, Vector2 size)
         {
             var name = $"{player.Profile.Nickname} marker";
 
@@ -49,7 +48,6 @@ namespace InGameMap.UI.Components
 
             var rectTransform = go.GetRectTransform();
             rectTransform.sizeDelta = size;
-            rectTransform.localScale = scale * Vector2.one;
 
             var marker = go.AddComponent<IPlayerMapMarker>();
             marker.Player = player;

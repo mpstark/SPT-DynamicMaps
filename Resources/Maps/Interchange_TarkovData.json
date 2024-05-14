@@ -10,7 +10,7 @@
     "Layers": {
         "Ground Floor": {
             "Level": 0,
-            "ImagePath": "Maps/Interchange/Layers/interchange_layer_0.png",
+            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_0.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": -1000},
                 {"x": -364, "y": 452, "z": 25}
@@ -18,7 +18,7 @@
         },
         "2nd Floor": {
             "Level": 1,
-            "ImagePath": "Maps/Interchange/Layers/interchange_layer_1.png",
+            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_1.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": 25},
                 {"x": -364, "y": 452, "z": 34}
@@ -26,7 +26,7 @@
         },
         "3rd Floor": {
             "Level": 2,
-            "ImagePath": "Maps/Interchange/Layers/interchange_layer_2.png",
+            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_2.png",
             "Bounds": [
                 {"x": 530, "y": -439, "z": 34},
                 {"x": -364, "y": 452, "z": 1000}

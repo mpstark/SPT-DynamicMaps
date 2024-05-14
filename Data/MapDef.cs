@@ -33,9 +33,8 @@ namespace InGameMap.Data
         public List<Vector2> Bounds { get; set; } = new List<Vector2>();
         public int DefaultLevel { get; set; } = 0;
 
-        public static MapDef LoadFromPath(string relativePath)
+        public static MapDef LoadFromPath(string absolutePath)
         {
-            var absolutePath = Path.Combine(Plugin.Path, relativePath);
             try
             {
                 return JsonConvert.DeserializeObject<MapDef>(File.ReadAllText(absolutePath));
@@ -45,8 +44,9 @@ namespace InGameMap.Data
                 Plugin.Log.LogError($"Loading MapMappingDef failed from json at path: {absolutePath}");
                 Plugin.Log.LogError($"Exception given was: {e.Message}");
                 Plugin.Log.LogError($"{e.StackTrace}");
-                throw e;
             }
+
+            return null;
         }
     }
 }

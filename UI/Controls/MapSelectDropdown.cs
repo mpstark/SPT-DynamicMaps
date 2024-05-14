@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EFT.UI;
 using InGameMap.Data;
@@ -10,11 +11,13 @@ namespace InGameMap.UI.Controls
 {
     public class MapSelectDropdown : MonoBehaviour
     {
+        private static HashSet<string> _acceptableExtensions = new HashSet<string>{ "json", "jsonc" };
+
         public event Action<MapDef> OnMapSelected;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         private DropDownBox _dropdown;
-        private List<MapDef> _mapDefs;
+        private List<MapDef> _mapDefs = new List<MapDef>();
         private bool _hasBindInitiallyCalled = false;
 
         public static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size)
@@ -49,15 +52,34 @@ namespace InGameMap.UI.Controls
             OnMapSelected?.Invoke(_mapDefs[index]);
         }
 
-        public void ChangeAvailableMapDefs(List<MapDef> mapDefs)
+        private void ChangeAvailableMapDefs()
         {
             _hasBindInitiallyCalled = false;
-            _mapDefs = mapDefs;
             _dropdown.Show(_mapDefs.Select(def => def.DisplayName));
             _dropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
         }
 
-        public void OnMapLoaded(MapDef mapDef)
+        public void LoadMapDefsFromPath(string relPath)
+        {
+            _mapDefs.Clear();
+
+            var absolutePath = Path.Combine(Plugin.Path, relPath);
+            var paths = Directory.EnumerateFiles(absolutePath, "*.*", SearchOption.AllDirectories)
+                .Where(p => _acceptableExtensions.Contains(Path.GetExtension(p).TrimStart('.').ToLowerInvariant()));
+
+            foreach (var path in paths)
+            {
+                var mapDef = MapDef.LoadFromPath(path);
+                if (mapDef != null)
+                {
+                    _mapDefs.Add(mapDef);
+                }
+            }
+
+            ChangeAvailableMapDefs();
+        }
+
+        public void OnMapLoading(MapDef mapDef)
         {
             _dropdown.UpdateValue(_mapDefs.IndexOf(mapDef));
         }

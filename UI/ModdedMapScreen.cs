@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Comfort.Common;
 using DG.Tweening;
 using EFT;
@@ -16,32 +15,29 @@ namespace InGameMap.UI
 {
     public class ModdedMapScreen : MonoBehaviour
     {
+        private const string _mapRelPath = "Maps";
+
         private static float _zoomScaler = 1.75f;
         private static float _zoomTweenTime = 0.25f;
         private static float _positionTweenTime = 0.25f;
         private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
         private static float _zoomMinScaler = 1.1f; // divider against ratio of screen
 
-        private static Vector2 _markerSize = new Vector2(30, 30);
         private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
         private static Vector2 _mapSelectDropdownPosition = new Vector2(-780, -50);
         private static Vector2 _mapSelectDropdownSize = new Vector2(360, 31);
 
-        private RectTransform _rectTransform;
-        private RectTransform _parentTransform;
-        private RectTransform _mapRectTransform;
+        public RectTransform RectTransform => gameObject.GetRectTransform();
+        private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
 
-        private GameObject _mapContentGO;
-        private GameObject _mapLayersGO;
-        private GameObject _mapMarkersGO;
+        private MapView _mapView;
+        private GameObject _mapContentGO => _mapView.gameObject;
+        private RectTransform _mapRectTransform => _mapView.GetRectTransform();
+        private float _coordinateRotation => _mapView.CoordinateRotation;
+
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
 
-        private Dictionary<string, MapLayer> _layers = new Dictionary<string, MapLayer>();
-        private Dictionary<string, MapMarker> _markers = new Dictionary<string, MapMarker>();
-
-        private MapMapping _mapMapping;
-        private List<MapDef> _mapDefs = new List<MapDef>();
         private MapDef _currentMapDef;
 
         private TextMeshProUGUI _playerPositionText;
@@ -53,7 +49,10 @@ namespace InGameMap.UI
         private float _zoomMin; // set when map loaded
         private float _zoomMax; // set when map loaded
         private float _zoomCurrent = 0.5f;
-        private float _coordinateRotation = 0;
+
+        // TODO: remove this and put it somewhere else
+        private IPlayerMapMarker _playerMarker;
+        private Dictionary<IPlayer, IPlayerMapMarker> _otherPlayers = new Dictionary<IPlayer, IPlayerMapMarker>();
 
         private void Update()
         {
@@ -65,9 +64,9 @@ namespace InGameMap.UI
 
             if (Input.GetKeyDown(KeyCode.Semicolon))
             {
-                if (_markers.ContainsKey("player"))
+                if (_playerMarker != null)
                 {
-                    var playerPosition = _markers["player"].RectTransform.anchoredPosition;
+                    var playerPosition = _playerMarker.RectTransform.anchoredPosition;
                     ShiftMapToCoord(playerPosition, _positionTweenTime);
                 }
             }
@@ -114,8 +113,9 @@ namespace InGameMap.UI
             _mapRectTransform.DOScale(_zoomCurrent * Vector3.one, tweenTime);
 
             // inverse scale all map markers
+            // THIS SEEMS GROSS!
             // FIXME: does this generate large amounts of garbage?
-            var mapMarkers = _mapMarkersGO.transform.GetChildren();
+            var mapMarkers = _mapView.MapMarkerContainer.transform.GetChildren();
             foreach (var mapMarker in mapMarkers)
             {
                 mapMarker.DOScale(1 / _zoomCurrent * Vector3.one, tweenTime);
@@ -149,49 +149,22 @@ namespace InGameMap.UI
             ShiftMap((-rotatedCoord - currentCenter) * _zoomCurrent, tweenTime);
         }
 
-        public void AddMapMarker(MapMarker marker)
-        {
-            if (_markers.ContainsKey(marker.name))
-            {
-                RemoveMapMarker(_markers[marker.name]);
-            }
-
-            _markers[marker.name] = marker;
-        }
-
-        public void RemoveMapMarker(MapMarker marker)
-        {
-            if (!_markers.ContainsKey(marker.name))
-            {
-                return;
-            }
-
-            _markers.Remove(marker.name);
-            marker.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
-            GameObject.Destroy(marker.gameObject);
-        }
-
         private void Awake()
         {
-            _rectTransform = gameObject.GetRectTransform();
-            _parentTransform = gameObject.transform.parent as RectTransform;
-
             // make our game object hierarchy
             var scrollRectGO = UIUtils.CreateUIGameObject(gameObject, "Scroll");
             var scrollMaskGO = UIUtils.CreateUIGameObject(scrollRectGO, "ScrollMask");
-            _mapContentGO = UIUtils.CreateUIGameObject(scrollMaskGO, "MapContent");
-            _mapLayersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapLayers");
-            _mapMarkersGO = UIUtils.CreateUIGameObject(_mapContentGO, "MapMarkers");
-            _mapRectTransform = _mapContentGO.GetRectTransform();
+
+            _mapView = MapView.Create(scrollMaskGO, "MapContent");
 
             // set up mask; size will be set later in Raid/NoRaid
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
             scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
-            scrollMaskGO.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 80f);
+            scrollMaskGO.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 80f);
             _scrollMask = scrollMaskGO.AddComponent<Mask>();
 
             // set up scroll rect
-            scrollRectGO.GetRectTransform().sizeDelta = _rectTransform.sizeDelta;
+            scrollRectGO.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
             _scrollRect = scrollRectGO.AddComponent<ScrollRect>();
             _scrollRect.scrollSensitivity = 0;  // don't scroll on mouse wheel
             _scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
@@ -201,32 +174,22 @@ namespace InGameMap.UI
             // TODO: make own components
             CreatePositionTexts();
 
-            // TODO: map mapping is dumb, load all json files in Maps\*.json instead and add map string to MapDef
-            // load map mapping from file, load MapDefs, and load first one
-            _mapMapping = MapMapping.LoadFromPath("maps.jsonc");
-            foreach (var path in _mapMapping.GetMapDefPaths())
-            {
-                if (path.IsNullOrEmpty())
-                {
-                    continue;
-                }
-
-                _mapDefs.Add(MapDef.LoadFromPath(path));
-            }
+            // TODO: load all json files in Maps\*.json instead and add map string to MapDef
 
             // create map controls
 
             // level select slider
             var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, _rectTransform, _levelSliderPosition);
-            _levelSelectSlider.OnLevelSelected += SelectTopLevel;
+            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, RectTransform, _levelSliderPosition);
+            _levelSelectSlider.OnLevelSelectedBySlider += _mapView.SelectTopLevel;
+            _mapView.OnLevelSelected += (level) => _levelSelectSlider.SelectedLevel = level;
 
             // map select dropdown, this will call LoadMap on the first option
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
-            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, _rectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
-            _mapSelectDropdown.ChangeAvailableMapDefs(_mapDefs);
-            _mapSelectDropdown.OnMapSelected += LoadMap;
+            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, RectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
+            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
+            _mapSelectDropdown.OnMapSelected += ChangeMap;
         }
 
         private void CreatePositionTexts()
@@ -248,7 +211,7 @@ namespace InGameMap.UI
             _playerPositionText.alignment = TextAlignmentOptions.Left;
         }
 
-        private void LoadMap(MapDef mapDef)
+        private void ChangeMap(MapDef mapDef)
         {
             if (mapDef == null || _currentMapDef == mapDef)
             {
@@ -257,174 +220,77 @@ namespace InGameMap.UI
 
             if (_currentMapDef != null)
             {
-                UnloadMap();
+                _immediateMapAnchor = Vector2.zero;
+                _mapView.UnloadMap();
             }
 
-            Plugin.Log.LogInfo($"Loading map {mapDef.DisplayName}");
+            Plugin.Log.LogInfo($"MapScreen: Loading map {mapDef.DisplayName}");
 
             _currentMapDef = mapDef;
-            _coordinateRotation = mapDef.CoordinateRotation;
 
-            // set width and height for top level
-            var size = MathUtils.GetBoundingRectangle(mapDef.Bounds);
-            var rotatedSize = MathUtils.GetRotatedRectangle(size, _coordinateRotation);
-            _mapRectTransform.sizeDelta = rotatedSize;
-
-            // set offset
-            var offset = MathUtils.GetMidpoint(mapDef.Bounds);
-            _mapRectTransform.anchoredPosition = offset;
+            _levelSelectSlider.OnMapLoading(mapDef);
+            _mapSelectDropdown.OnMapLoading(mapDef);
+            _mapView.LoadMap(mapDef);
 
             // set zoom min and max based on size of map and size of mask
             var maskSize = _scrollMask.GetRectTransform().sizeDelta;
-            _zoomMin = Mathf.Min(maskSize.x / rotatedSize.x, maskSize.y / rotatedSize.y) / _zoomMinScaler;
+            var mapSize = _mapView.RectTransform.sizeDelta;
+            _zoomMin = Mathf.Min(maskSize.x / mapSize.x, maskSize.y / mapSize.y) / _zoomMinScaler;
             _zoomMax = _zoomMaxScaler * _zoomMin;
-
-            // rotate all of the map content
-            _mapRectTransform.localRotation = Quaternion.Euler(0, 0, _coordinateRotation);
-
-            // load all layers
-            foreach (var (layerName, layerDef) in mapDef.Layers)
-            {
-                _layers[layerName] = MapLayer.Create(_mapLayersGO, layerName, layerDef, -_coordinateRotation);
-            }
-
-            // set layer order
-            int i = 0;
-            foreach (var layer in _layers.Values.OrderBy(l => l.Level))
-            {
-                layer.RectTransform.SetSiblingIndex(i++);
-            }
-
-            foreach (var (name, markerDef) in mapDef.StaticMarkers)
-            {
-                var marker = MapMarker.Create(_mapMarkersGO, name, markerDef, _markerSize, -_coordinateRotation);
-
-                // setup linked layer for marker
-                if (!markerDef.LinkedLayer.IsNullOrEmpty() && _layers.ContainsKey(markerDef.LinkedLayer))
-                {
-                   marker.LinkedLayer = _layers[markerDef.LinkedLayer];
-                }
-
-                AddMapMarker(marker);
-            }
-
-            _levelSelectSlider.OnMapLoaded(mapDef);
-            _mapSelectDropdown.OnMapLoaded(mapDef);
 
             // this will set everything up for initial zoom
             SetMapZoom(_zoomMin, 0);
 
-            // select layer by the default level
-            SelectTopLevel(mapDef.DefaultLevel);
-
             // shift map by the offset to center it in the scroll mask
             ShiftMap(_scrollMask.GetRectTransform().anchoredPosition * _zoomCurrent, 0);
-        }
-
-        private void UnloadMap()
-        {
-            _immediateMapAnchor = Vector2.zero;
-
-            // clear markers
-            var markers = _markers.Values.ToList();
-            foreach (var marker in markers)
-            {
-                RemoveMapMarker(marker);
-            }
-            markers.Clear();
-
-            // clear layers
-            foreach (var layer in _layers.Values)
-            {
-                GameObject.Destroy(layer.gameObject);
-            }
-            _layers.Clear();
-        }
-
-        private void SelectTopLevel(int level)
-        {
-            // go through each layer and change top level
-            foreach (var layer in _layers.Values)
-            {
-                layer.OnTopLevelSelected(level);
-            }
-
-            _levelSelectSlider.SelectedLevel = level;
-        }
-
-        private void SelectLevelByCoords(Vector2 coords, float height)
-        {
-            var matchingLayer = FindMatchingLayerByCoords(coords, height);
-            if (matchingLayer == null)
-            {
-                return;
-            }
-
-            SelectTopLevel(matchingLayer.Level);
-        }
-
-        private MapLayer FindMatchingLayerByCoords(Vector2 coord, float height)
-        {
-            // TODO: what if there are multiple matching?
-            // probably want to "select" the smaller bounds one in that case
-            foreach(var layer in _layers.Values)
-            {
-                if (layer.IsCoordInLayer(coord, height))
-                {
-                    return layer;
-                }
-            }
-
-            return null;
         }
 
         private void ShowInRaid(LocalGame game)
         {
             // adjust mask
             _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -22);
-            _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 40f);
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 40f);
 
-            // hide map selector and make sure that current map is loaded
-            _mapSelectDropdown.gameObject.SetActive(false);
             // TODO: make sure that the current map is loaded
 
-            // TODO: this should be in another method
-            // FIXME: on exit raid will struggle with transform not being valid
+            // TODO: don't hide, just show map selector for only this map
+            // hide map selector
+            // _mapSelectDropdown.gameObject.SetActive(false);
+
+            // TODO: this should be in another place
             // create player marker if one doesn't already exist
             var player = game.PlayerOwner.Player;
-            // if (!_markers.ContainsKey("player"))
-            // {
-            //     var playerMarker = IPlayerMapMarker.Create(player, _mapMarkersGO, "Markers/arrow.png",
-            //                                                "players", _markerSize, 1/_zoomCurrent);
-            //     playerMarker.TraversableLayers = _layers.Values.ToList();
-            //     playerMarker.Image.color = Color.green;
-            //     AddMapMarker(playerMarker);
-            // }
+            if (_playerMarker == null)
+            {
+                _playerMarker = _mapView.AddPlayerMarker(player);
+                _playerMarker.Image.color = Color.green;
+            }
 
-            // // test bot markers
-            // var gameWorld = Singleton<GameWorld>.Instance;
-            // if (gameWorld.AllAlivePlayersList.Count > 1)
-            // {
-            //     foreach (var person in gameWorld.AllAlivePlayersList)
-            //     {
-            //         if (person.IsYourPlayer || _markers.ContainsKey($"{person.Profile.Nickname} marker"))
-            //         {
-            //             continue;
-            //         }
+            // TODO: remove this
+            // test bot markers
+            var gameWorld = Singleton<GameWorld>.Instance;
+            if (gameWorld.AllAlivePlayersList.Count > 1)
+            {
+                foreach (var person in gameWorld.AllAlivePlayersList)
+                {
+                    if (person.IsYourPlayer || _otherPlayers.ContainsKey(person))
+                    {
+                        continue;
+                    }
 
-            //         var botMarker = IPlayerMapMarker.Create(person, _mapMarkersGO, "Markers/arrow.png",
-            //                                                 "bots", _markerSize, 1/_zoomCurrent);
-            //         botMarker.TraversableLayers = _layers.Values.ToList();
-            //         botMarker.Image.color = Color.red;
-            //         botMarker.OnDeathOrDespawn += RemoveMapMarker;
-            //         AddMapMarker(botMarker);
-            //     }
-            // }
+                    // var botMarker = IPlayerMapMarker.Create(person, _mapMarkersGO, "Markers/arrow.png",
+                    //                                         "bots", _markerSize, 1/_zoomCurrent);
+                    var botMarker = _mapView.AddPlayerMarker(person);
+                    botMarker.Image.color = (person.Fraction == ETagStatus.Scav) ? Color.yellow : Color.red;
+                    person.OnIPlayerDeadOrUnspawn += (bot) => _otherPlayers.Remove(bot);
+                    _otherPlayers[person] = botMarker;
+                }
+            }
 
             // select layers to show
             var player3dPos = player.CameraPosition.position;
             var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
-            SelectLevelByCoords(player2dPos, player3dPos.y);
+            _mapView.SelectLevelByCoords(player2dPos, player3dPos.y);
 
             // shift map to player position
             ShiftMapToCoord(player2dPos, 0);
@@ -438,21 +304,36 @@ namespace InGameMap.UI
         {
             // adjust mask
             _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -5);
-            _scrollMask.GetRectTransform().sizeDelta = _rectTransform.sizeDelta - new Vector2(0, 70f);
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 70f);
 
             // show map selector
-            _mapSelectDropdown.gameObject.SetActive(true);
+            // _mapSelectDropdown.gameObject.SetActive(true);
 
             // hide player position text
             _playerPositionText.gameObject.SetActive(false);
+
+            // TODO: remove this
+            if (_playerMarker != null)
+            {
+                _mapView.RemoveMapMarker(_playerMarker);
+            }
+            foreach (var (bot, botMarker) in _otherPlayers)
+            {
+                _mapView.RemoveMapMarker(botMarker);
+            }
+            _otherPlayers.Clear();
         }
 
         internal void Show()
         {
+            // make sure that the BSG map is disabled
             transform.parent.Find("MapBlock").gameObject.SetActive(false);
             transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
             transform.parent.gameObject.SetActive(true);
             gameObject.SetActive(true);
+
+            // FIXME: this is gross
+            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
 
             // check if raid
             var game = Singleton<AbstractGame>.Instance;
