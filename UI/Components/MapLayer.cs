@@ -64,7 +64,7 @@ namespace InGameMap.UI.Components
             OnLayerDisplayChanged = null;
         }
 
-        public bool IsCoordInLayer(Vector2 coords, float height)
+        public bool IsCoordinateInLayer(Vector3 coords)
         {
             // TODO: there is probably a better way to do this
             var minX = float.MaxValue;
@@ -85,7 +85,7 @@ namespace InGameMap.UI.Components
 
             return coords.x > minX && coords.x < maxX
                 && coords.y > minY && coords.y < maxY
-                && height > minZ && height < maxZ;
+                && coords.z > minZ && coords.z < maxZ;
         }
 
         public void OnTopLevelSelected(int newLevel)

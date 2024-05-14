@@ -1,3 +1,4 @@
+using System;
 using InGameMap.Data;
 using InGameMap.Utils;
 using UnityEngine;
@@ -7,35 +8,13 @@ namespace InGameMap.UI.Components
 {
     public class MapMarker : MonoBehaviour
     {
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public RectTransform RectTransform => gameObject.transform as RectTransform;
+        public event Action<MapMarker> OnPositionChanged;
+
+        public string Name { get; protected set; }
+        public string Category { get; protected set; }
+        public Vector3 Position { get; protected set;}
         public Image Image { get; protected set; }
-
-        private MapLayer _linkedLayer;
-        public MapLayer LinkedLayer
-        {
-            get
-            {
-                return _linkedLayer;
-            }
-            set
-            {
-                if (_linkedLayer == value)
-                {
-                    return;
-                }
-
-                if (_linkedLayer != null)
-                {
-                    _linkedLayer.OnLayerDisplayChanged -= OnLinkedLayerChanged;
-                }
-
-                _linkedLayer = value;
-                _linkedLayer.OnLayerDisplayChanged += OnLinkedLayerChanged;
-                OnLinkedLayerChanged(_linkedLayer.IsDisplayed, _linkedLayer.IsOnTopLevel);
-            }
-        }
+        public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,
                                        float degreesRotation = 0, float scale = 1)
@@ -45,7 +24,7 @@ namespace InGameMap.UI.Components
         }
 
         public static MapMarker Create(GameObject parent, string name, string category, string imageRelativePath,
-                                       Vector2 position, Vector2 size, float degreesRotation = 0, float scale = 0)
+                                       Vector3 position, Vector2 size, float degreesRotation = 0, float scale = 1)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
             go.layer = parent.layer;
@@ -70,26 +49,29 @@ namespace InGameMap.UI.Components
 
         protected virtual void OnDestroy()
         {
-            if (_linkedLayer == null)
-            {
-                return;
-            }
-
-            _linkedLayer.OnLayerDisplayChanged -= OnLinkedLayerChanged;
+            OnPositionChanged = null;
         }
 
-        public void Move(Vector2 position)
+        public void Move(Vector3 newPosition)
         {
-            RectTransform.anchoredPosition = position;
+            RectTransform.anchoredPosition = newPosition; // vector3 to vector2 discards z
+            Position = newPosition;
+
+            OnPositionChanged?.Invoke(this);
         }
 
-        public void MoveAndRotate(Vector2 position, float degreesRotation)
+        public void Rotate(float degreesRotation)
         {
-            RectTransform.anchoredPosition = position;
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
         }
 
-        protected virtual void OnLinkedLayerChanged(bool isDisplayed, bool isOnTopLevel)
+        public void MoveAndRotate(Vector3 newPosition, float rotation)
+        {
+            Move(newPosition);
+            Rotate(rotation);
+        }
+
+        public virtual void OnContainingLayerChanged(bool isDisplayed, bool isOnTopLevel)
         {
             // TODO: revisit this
             var color = Image.color;

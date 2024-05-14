@@ -18,9 +18,8 @@ namespace InGameMap.Data
     public class MapMarkerDef
     {
         public string ImagePath { get; set; }
-        public Vector2 Position { get; set; }
+        public Vector3 Position { get; set; }
         public string Category { get; set; }
-        public string LinkedLayer { get; set; }
     }
 
     public class MapDef

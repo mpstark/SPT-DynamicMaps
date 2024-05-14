@@ -10,7 +10,6 @@ namespace InGameMap.UI.Components
     public class PlayerMapMarker : MapMarker
     {
         public event Action<MapMarker> OnDeathOrDespawn;
-        public List<MapLayer> TraversableLayers { get; set; }
 
         private IPlayer _player;
         public IPlayer Player
@@ -62,54 +61,18 @@ namespace InGameMap.UI.Components
 
         private void Update()
         {
-            // move marker to follow transform
-            var position3D = Player.Position;
-            var position2D = new Vector2(position3D.x, position3D.z);
-
-            MoveAndRotate(position2D, -Player.Rotation.x); // I'm unsure why negative rotation here
-            LinkedLayer = FindBestLayer(position2D, position3D.y);
+            MoveAndRotate(MathUtils.UnityPositionToMapPosition(Player.Position),
+                          -Player.Rotation.x); // TODO: I'm unsure why negative rotation here
         }
 
         protected override void OnDestroy()
         {
-            if (_player == null)
-            {
-                return;
-            }
-
-            _player.OnIPlayerDeadOrUnspawn -= HandleDeathOrDespawn;
-            OnDeathOrDespawn = null;
             base.OnDestroy();
-        }
 
-        protected override void OnLinkedLayerChanged(bool isDisplayed, bool isOnTopLevel)
-        {
-            // TODO: revisit this
-            var color = Image.color;
-            var alpha = 1f;
-            if (!isDisplayed || !isOnTopLevel)
+            if (_player != null)
             {
-                alpha = 0.25f;
+                _player.OnIPlayerDeadOrUnspawn -= HandleDeathOrDespawn;
             }
-
-            var newColor = new Color(color.r, color.g, color.b, alpha);
-            Image.color = newColor;
-        }
-
-        private MapLayer FindBestLayer(Vector2 coord, float height)
-        {
-            // FIXME: this is a duplicate of FindMatchingLayerByCoords in ModdedMapScreen
-            // FIXME: what if there are multiple matching?
-            // probably want to "select" the smaller bounds one in that case
-            foreach(var layer in TraversableLayers)
-            {
-                if (layer.IsCoordInLayer(coord, height))
-                {
-                    return layer;
-                }
-            }
-
-            return null;
         }
 
         private void HandleDeathOrDespawn(IPlayer player)
@@ -120,6 +83,20 @@ namespace InGameMap.UI.Components
             }
 
             OnDeathOrDespawn?.Invoke(this);
+        }
+
+        public override void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTopLevel)
+        {
+            // TODO: revisit this
+            var color = Image.color;
+            var alpha = 1f;
+            if (!isLayerDisplayed || !isLayerOnTopLevel)
+            {
+                alpha = 0.25f;
+            }
+
+            var newColor = new Color(color.r, color.g, color.b, alpha);
+            Image.color = newColor;
         }
     }
 }

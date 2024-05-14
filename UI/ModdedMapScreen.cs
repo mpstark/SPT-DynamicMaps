@@ -52,7 +52,7 @@ namespace InGameMap.UI
                 if (_playerMarker != null)
                 {
                     var playerPosition = _playerMarker.RectTransform.anchoredPosition;
-                    _mapView.ShiftMapToCoord(playerPosition, _positionTweenTime);
+                    _mapView.ShiftMapToCoordinate(playerPosition, _positionTweenTime);
                 }
             }
 
@@ -189,16 +189,16 @@ namespace InGameMap.UI
             }
 
             // select layers to show
-            var player3dPos = player.CameraPosition.position;
-            var player2dPos = new Vector2(player3dPos.x, player3dPos.z);
-            _mapView.SelectLevelByCoords(player2dPos, player3dPos.y);
+            var mapPosition = MathUtils.TransformToMapPosition(player.CameraPosition);
+            _mapView.SelectLevelByCoords(mapPosition);
 
-            // shift map to player position
-            _mapView.ShiftMapToCoord(player2dPos, 0);
+            // shift map to player position, Vector3 to Vector2 discards z
+            // TODO: this is annoying, but need something like it
+            // _mapView.ShiftMapToCoordinate(mapPosition, 0);
 
             // show and update text
             _playerPositionText.gameObject.SetActive(true);
-            _playerPositionText.text = $"Player: {player3dPos.x:F} {player3dPos.z:F} {player3dPos.y:F}";
+            _playerPositionText.text = $"Player: {mapPosition.x:F} {mapPosition.y:F} {mapPosition.z:F}";
         }
 
         private void ShowOutOfRaid()

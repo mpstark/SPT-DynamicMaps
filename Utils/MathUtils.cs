@@ -63,5 +63,20 @@ namespace InGameMap.Utils
 
             return sum / count;
         }
+
+        public static Vector3 UnityPositionToMapPosition(Vector3 unityPosition)
+        {
+            return new Vector3(unityPosition.x, unityPosition.z, unityPosition.y);
+        }
+
+        public static Vector3 TransformToMapPosition(Transform transform)
+        {
+            return UnityPositionToMapPosition(transform.position);
+        }
+
+        public static float TransformToMapRotation(Transform transform)
+        {
+            return -transform.rotation.eulerAngles.y;  // TODO: figure out why negative
+        }
     }
 }

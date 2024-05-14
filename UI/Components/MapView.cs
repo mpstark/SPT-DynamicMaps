@@ -18,7 +18,7 @@ namespace InGameMap.UI.Components
 
         public event Action<int> OnLevelSelected;
 
-        // do we need these?
+        // TODO: do we need these?
         // public event Action<MapMarker> OnMarkerAdded;
         // public event Action OnMarkerRemoved;
         // public event Action<MapDef> OnMapLoaded;
@@ -70,13 +70,17 @@ namespace InGameMap.UI.Components
 
             marker.gameObject.transform.localScale = (1 / ZoomCurrent) * Vector3.one;
 
+            // hook marker position changed event up, so that when markers change position, they get notified
+            // about layer status
+            marker.OnPositionChanged += OnMarkerChangedPosition;
+            OnMarkerChangedPosition(marker);  // call immediately
+
             _markers.Add(marker);
         }
 
         public MapMarker AddMapMarker(string name, MapMarkerDef markerDef)
         {
             var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation);
-            marker.LinkedLayer = _layers.FirstOrDefault(l => l.Name == markerDef.LinkedLayer);
 
             AddMapMarker(marker);
             return marker;
@@ -86,11 +90,25 @@ namespace InGameMap.UI.Components
         {
             var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
                                                  "players", _markerSize);
-            marker.TraversableLayers = _layers;
             marker.OnDeathOrDespawn += RemoveMapMarker;
 
             AddMapMarker(marker);
             return marker;
+        }
+
+        public void OnMarkerChangedPosition(MapMarker marker)
+        {
+            var layer = FindMatchingLayerByCoordinate(marker.Position);
+            marker.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
+        }
+
+        public void UpdateMarkersLayer()
+        {
+            // TODO: revisit
+            foreach (var marker in _markers)
+            {
+                OnMarkerChangedPosition(marker);
+            }
         }
 
         public void HideMapMarkerCategory(string category)
@@ -141,12 +159,18 @@ namespace InGameMap.UI.Components
             // rotate all of the map content
             RectTransform.localRotation = Quaternion.Euler(0, 0, CoordinateRotation);
 
+            // set min/max zoom based on parent's rect transform
+            SetMinMaxZoom(transform.parent as RectTransform);
+
             // load all layers in the order of level
             foreach (var (layerName, layerDef) in mapDef.Layers.OrderBy(pair => pair.Value.Level))
             {
                 var layer = MapLayer.Create(MapLayerContainer, layerName, layerDef, -CoordinateRotation);
                 _layers.Add(layer);
             }
+
+            // select layer by the default level
+            SelectTopLevel(mapDef.DefaultLevel);
 
             // load all static map markers
             foreach (var (markerName, markerDef) in mapDef.StaticMarkers)
@@ -155,12 +179,6 @@ namespace InGameMap.UI.Components
             }
 
             // TODO: load all static labels
-
-            // select layer by the default level
-            SelectTopLevel(mapDef.DefaultLevel);
-
-            // set min/max zoom based on parent's rect transform
-            SetMinMaxZoom(transform.parent as RectTransform);
         }
 
         public void UnloadMap()
@@ -199,12 +217,15 @@ namespace InGameMap.UI.Components
             }
 
             SelectedLevel = level;
+
+            UpdateMarkersLayer();
+
             OnLevelSelected?.Invoke(level);
         }
 
-        public void SelectLevelByCoords(Vector2 coords, float height)
+        public void SelectLevelByCoords(Vector3 coords)
         {
-            var matchingLayer = FindMatchingLayerByCoords(coords, height);
+            var matchingLayer = FindMatchingLayerByCoordinate(coords);
             if (matchingLayer == null)
             {
                 return;
@@ -280,18 +301,18 @@ namespace InGameMap.UI.Components
             RectTransform.DOAnchorPos(_immediateMapAnchor, tweenTime);
         }
 
-        public void ShiftMapToCoord(Vector2 coord, float tweenTime)
+        public void ShiftMapToCoordinate(Vector2 coord, float tweenTime)
         {
             var rotatedCoord = MathUtils.GetRotatedVector2(coord, CoordinateRotation);
             var currentCenter = RectTransform.anchoredPosition / ZoomCurrent;
             ShiftMap((-rotatedCoord - currentCenter) * ZoomCurrent, tweenTime);
         }
 
-        private MapLayer FindMatchingLayerByCoords(Vector2 coord, float height)
+        private MapLayer FindMatchingLayerByCoordinate(Vector3 coordinate)
         {
             // TODO: what if there are multiple matching?
             // probably want to "select" the smaller bounds one in that case
-            return _layers.FirstOrDefault(l => l.IsCoordInLayer(coord, height));
+            return _layers.FirstOrDefault(l => l.IsCoordinateInLayer(coordinate));
         }
     }
 }
