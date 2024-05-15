@@ -51,29 +51,30 @@
             ]
         }
     },
-    "StaticMarkers": {
-        "Mall Main Power Switch": {
+    "StaticMarkers": [
+        {
+            "Text": "Mall Main Power Switch",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -201.16, "y": -357.81, "z": 10},
             "Category": "Switch"
         },
-
-        "Saferoom Exfil Switch": {
+        {
+            "Text": "Saferoom Exfil Switch",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -50.65, "y": 45.67, "z": 10},
             "Category": "Switch"
         },
-
-        "Object 14 Container Switch": {
+        {
+            "Text": "Object 14 Container Switch",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -47.77, "y": 42.67, "z": 10},
             "Category": "Switch"
         },
-
-        "Non-Kiba Alarms Switch": {
+        {
+            "Text": "Non-Kiba Alarms Switch",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -46.60, "y": -55.21, "z": 35},
             "Category": "Switch"
         }
-    }
+    ]
 }

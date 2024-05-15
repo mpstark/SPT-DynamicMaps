@@ -129,11 +129,19 @@
             ]
         }
     },
-    "StaticMarkers": {
-        "ZB-013 Power Switch": {
+    "Labels": [
+        {
+            "Text": "Dorms",
+            "Position": {"x": 200, "y": 150, "z": 0},
+            "FontSize": 16
+        }
+    ],
+    "StaticMarkers": [
+        {
+            "Text": "ZB-013 Switch",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": 352.22, "y": -40.79, "z": -1},
             "Category": "Switch"
         }
-    }
+    ]
 }

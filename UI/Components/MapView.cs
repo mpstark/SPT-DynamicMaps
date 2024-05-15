@@ -41,7 +41,7 @@ namespace InGameMap.UI.Components
 
         private List<MapMarker> _markers = new List<MapMarker>();
         private List<MapLayer> _layers = new List<MapLayer>();
-        // private List<MapLabel> _labels = new List<MapLabel>();
+        private List<MapLabel> _labels = new List<MapLabel>();
 
         public static MapView Create(GameObject parent, string name)
         {
@@ -64,8 +64,6 @@ namespace InGameMap.UI.Components
                 return;
             }
 
-            marker.gameObject.transform.localScale = (1 / ZoomCurrent) * Vector3.one;
-
             // hook marker position changed event up, so that when markers change position, they get notified
             // about layer status
             marker.OnPositionChanged += UpdateMarkerLayerStatus;
@@ -74,10 +72,11 @@ namespace InGameMap.UI.Components
             _markers.Add(marker);
         }
 
-        public MapMarker AddMapMarker(string name, MapMarkerDef markerDef)
+        public MapMarker AddMapMarker(MapMarkerDef markerDef)
         {
-            var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation, 1/ZoomCurrent);
+            var marker = MapMarker.Create(MapMarkerContainer, markerDef, _markerSize, -CoordinateRotation, 1/ZoomCurrent);
             AddMapMarker(marker);
+
             return marker;
         }
 
@@ -131,9 +130,30 @@ namespace InGameMap.UI.Components
             GameObject.Destroy(marker.gameObject);
         }
 
-        // TODO: this
-        // public void AddMapLabel(MapLabel label)
-        // public void RemoveMapLabel(MapLabel label)
+        public void AddMapLabel(MapLabelDef labelDef)
+        {
+            var label = MapLabel.Create(MapLabelsContainer, labelDef, -CoordinateRotation, 1/ZoomCurrent);
+
+            // FIXME: labels should be able to be placed in layers like markers
+            // hook marker position changed event up, so that when markers change position, they get notified
+            // about layer status
+            // marker.OnPositionChanged += UpdateMarkerLayerStatus;
+            // UpdateMarkerLayerStatus(marker);  // call immediately
+
+            _labels.Add(label);
+        }
+
+        public void RemoveMapLabel(MapLabel label)
+        {
+            if (!_labels.Contains(label))
+            {
+                return;
+            }
+
+            _labels.Remove(label);
+            label.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
+            GameObject.Destroy(label.gameObject);
+        }
 
         public void LoadMap(MapDef mapDef)
         {
@@ -181,15 +201,16 @@ namespace InGameMap.UI.Components
             SelectTopLevel(mapDef.DefaultLevel);
 
             // load all static map markers
-            // BSG has extension method deconstruct for KVP, so have to do this
-            foreach (var pair in mapDef.StaticMarkers)
+            foreach (var markerDef in mapDef.StaticMarkers)
             {
-                var markerName = pair.Key;
-                var markerDef = pair.Value;
-                AddMapMarker(markerName, markerDef);
+                AddMapMarker(markerDef);
             }
 
-            // TODO: load all static labels
+            // load all static labels
+            foreach (var labelDef in mapDef.Labels)
+            {
+                AddMapLabel(labelDef);
+            }
         }
 
         public void UnloadMap()
@@ -207,6 +228,15 @@ namespace InGameMap.UI.Components
             }
             markersCopy.Clear();
             _markers.Clear();
+
+            // remove all markers and reset to empty
+            var labelsCopy = _labels.ToList();
+            foreach (var label in labelsCopy)
+            {
+                RemoveMapLabel(label);
+            }
+            labelsCopy.Clear();
+            _labels.Clear();
 
             // clear layers and reset to empty
             foreach (var layer in _layers)
@@ -274,12 +304,16 @@ namespace InGameMap.UI.Components
             // scale all map content up by scaling parent
             RectTransform.DOScale(ZoomCurrent * Vector3.one, tweenTime);
 
-            // inverse scale all map markers
-            // THIS SEEMS GROSS!
+            // inverse scale all map markers and labels
             // FIXME: does this generate large amounts of garbage?
             foreach (var marker in _markers)
             {
                 marker.RectTransform.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
+            }
+
+            foreach (var label in _labels)
+            {
+                label.RectTransform.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
             }
         }
 

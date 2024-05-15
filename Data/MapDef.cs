@@ -41,8 +41,24 @@ namespace InGameMap.Data
         [JsonRequired]
         public Vector3 Position { get; set; }
 
-        public string Category { get; set; } = "No Category";
+        public string Text { get; set; } = "";
+        public string Category { get; set; } = "None";
         public Vector2 Pivot { get; set; } = new Vector2(0.5f, 0.5f);
+    }
+
+    public class MapLabelDef
+    {
+        [JsonRequired]
+        public string Text { get; set; }
+
+        [JsonRequired]
+        public Vector3 Position { get; set; }
+
+        [JsonRequired]
+        public float FontSize { get; set; }
+
+        public Color Color { get; set; } = Color.white;
+        public string Category { get; set; } = "None";
     }
 
     public class MapDef
@@ -58,7 +74,8 @@ namespace InGameMap.Data
 
         public List<string> MapInternalNames { get; set; } = new List<string>();
         public float CoordinateRotation { get; set; } = 0;
-        public Dictionary<string, MapMarkerDef> StaticMarkers { get; set; } = new Dictionary<string, MapMarkerDef>();
+        public List<MapLabelDef> Labels { get; set; } = new List<MapLabelDef>();
+        public List<MapMarkerDef> StaticMarkers { get; set; } = new List<MapMarkerDef>();
         public int DefaultLevel { get; set; } = 0;
 
         public static MapDef LoadFromPath(string absolutePath)

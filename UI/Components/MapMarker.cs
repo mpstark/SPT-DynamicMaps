@@ -17,7 +17,7 @@ namespace InGameMap.UI.Components
 
         public event Action<MapMarker> OnPositionChanged;
 
-        public string Name { get; protected set; }
+        public string Text { get; protected set; }
         public string Category { get; protected set; }
 
         public Image Image { get; protected set; }
@@ -43,19 +43,18 @@ namespace InGameMap.UI.Components
         private Color _color = Color.white;
         private float _initialRotation;
 
-        public static MapMarker Create(GameObject parent, string name, MapMarkerDef def, Vector2 size,
-                                       float degreesRotation, float scale)
+        public static MapMarker Create(GameObject parent, MapMarkerDef def, Vector2 size, float degreesRotation, float scale)
         {
-            var mapMarker = Create<MapMarker>(parent, name, def.Category, def.ImagePath, def.Position, size,
-                                              degreesRotation, scale);
+            var mapMarker = Create<MapMarker>(parent, def.Text, def.Category, def.ImagePath, def.Position, size,
+                                              def.Pivot, degreesRotation, scale);
             return mapMarker;
         }
 
-        public static T Create<T>(GameObject parent, string name, string category, string imageRelativePath,
-                                  Vector3 position, Vector2 size, float degreesRotation, float scale)
+        public static T Create<T>(GameObject parent, string text, string category, string imageRelativePath,
+                                  Vector3 position, Vector2 size, Vector2 pivot, float degreesRotation, float scale)
                             where T : MapMarker
         {
-            var go = UIUtils.CreateUIGameObject(parent, name);
+            var go = UIUtils.CreateUIGameObject(parent, $"MapMarker {text}");
 
             var rectTransform = go.GetRectTransform();
             rectTransform.anchoredPosition = position;
@@ -64,21 +63,22 @@ namespace InGameMap.UI.Components
             rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
 
             var marker = go.AddComponent<T>();
-            marker.Name = name;
+            marker.Text = text;
             marker.Category = category;
             marker.Position = position;
             marker._initialRotation = degreesRotation;
 
             // image
-            var imageGO = UIUtils.CreateUIGameObject(go, $"{name} image");
+            var imageGO = UIUtils.CreateUIGameObject(go, "image");
             imageGO.AddComponent<CanvasRenderer>();
             imageGO.GetRectTransform().sizeDelta = size;
+            imageGO.GetRectTransform().pivot = pivot;
             marker.Image = imageGO.AddComponent<Image>();
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
 
             // label
-            var labelGO = UIUtils.CreateUIGameObject(go, $"{name} label");
+            var labelGO = UIUtils.CreateUIGameObject(go, "label");
             labelGO.AddComponent<CanvasRenderer>();
             labelGO.GetRectTransform().anchorMin = new Vector2(0.5f, 0f);
             labelGO.GetRectTransform().anchorMax = new Vector2(0.5f, 0f);
@@ -93,7 +93,7 @@ namespace InGameMap.UI.Components
             marker.Label.outlineColor = new Color32(0, 0, 0, 255);
             marker.Label.outlineWidth = 0.15f;
             marker.Label.fontStyle = FontStyles.Bold; // for some reason this refreshes the outline and applies the outline
-            marker.Label.text = marker.Name;
+            marker.Label.text = marker.Text;
 
             return marker;
         }

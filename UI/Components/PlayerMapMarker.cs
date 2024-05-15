@@ -9,6 +9,7 @@ namespace InGameMap.UI.Components
     public class PlayerMapMarker : MapMarker
     {
         private static float _maxCallbackTime = 0.5f;  // how often to call callback in seconds
+        private static Vector2 _pivot = new Vector2(0.5f, 0.5f);
 
         public event Action<MapMarker> OnDeathOrDespawn;
 
@@ -44,7 +45,7 @@ namespace InGameMap.UI.Components
         {
             var name = $"{player.Profile.Nickname}";
             var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, Vector3.zero,
-                                                 size, degreesRotation, scale);
+                                                 size, _pivot, degreesRotation, scale);
             marker.IsDynamic = true;
             marker.Player = player;
 
