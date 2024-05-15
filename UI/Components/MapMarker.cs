@@ -41,6 +41,7 @@ namespace InGameMap.UI.Components
             var marker = go.AddComponent<MapMarker>();
             marker.Name = name;
             marker.Category = category;
+            marker.Position = position;
             marker.Image = go.AddComponent<Image>();
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
