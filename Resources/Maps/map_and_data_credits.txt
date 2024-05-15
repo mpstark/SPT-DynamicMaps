@@ -1,4 +1,4 @@
-Map data used is from TarkovTracker/tarkovData: https://github.com/TarkovTracker/tarkovdata/
+Default map data used is from TarkovTracker/tarkovData: https://github.com/TarkovTracker/tarkovdata/
 Online maps using this data are here: https://tarkov.dev/maps/
 Additional map data gotten from Tarkov.dev
 
