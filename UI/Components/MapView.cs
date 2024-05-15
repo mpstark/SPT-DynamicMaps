@@ -173,6 +173,8 @@ namespace InGameMap.UI.Components
                 var layerName = pair.Key;
                 var layerDef = pair.Value;
                 var layer = MapLayer.Create(MapLayerContainer, layerName, layerDef, -CoordinateRotation);
+                layer.IsOnDefaultLevel = layerDef.Level == mapDef.DefaultLevel;
+
                 _layers.Add(layer);
             }
 

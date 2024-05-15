@@ -8,6 +8,7 @@ namespace InGameMap.UI.Components
     public class MapLayer : MonoBehaviour
     {
         private static float _fadeMultiplierPerLayer = 0.5f;
+        private static float _defaultLevelFallbackAlpha = 0.1f;
 
         public delegate void LayerDisplayChangeHandler(bool isDisplayed, bool isOnTopLevel);
         public event LayerDisplayChangeHandler OnLayerDisplayChanged;
@@ -19,6 +20,7 @@ namespace InGameMap.UI.Components
         public int Level => _def.Level;
         public bool IsDisplayed { get; private set; }
         public bool IsOnTopLevel { get; private set; }
+        public bool IsOnDefaultLevel { get; set; }
 
         private MapLayerDef _def = new MapLayerDef();
 
@@ -101,11 +103,18 @@ namespace InGameMap.UI.Components
             IsDisplayed = Level <= newLevel;
 
             // hide if not on the level or below
-            gameObject.SetActive(IsDisplayed);
+            gameObject.SetActive(IsDisplayed || IsOnDefaultLevel);
+
+            // change alpha for default level if not only displayed because of it
+            var a = 1f;
+            if (Level > newLevel && IsOnDefaultLevel)
+            {
+                a = _defaultLevelFallbackAlpha;
+            }
 
             // fade if level is lower than the new level according to difference in level
             var c = Mathf.Pow(_fadeMultiplierPerLayer, levelDelta);
-            Image.color = new Color(c, c, c, 1);
+            Image.color = new Color(c, c, c, a);
 
             OnLayerDisplayChanged?.Invoke(IsDisplayed, IsOnTopLevel);
         }
