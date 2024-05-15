@@ -113,7 +113,7 @@ namespace InGameMap.UI.Components
             }
 
             // fade if level is lower than the new level according to difference in level
-            var c = Mathf.Pow(_fadeMultiplierPerLayer, levelDelta);
+            var c = Mathf.Clamp01(Mathf.Pow(_fadeMultiplierPerLayer, levelDelta));
             Image.color = new Color(c, c, c, a);
 
             OnLayerDisplayChanged?.Invoke(IsDisplayed, IsOnTopLevel);
