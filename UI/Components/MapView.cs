@@ -76,16 +76,15 @@ namespace InGameMap.UI.Components
 
         public MapMarker AddMapMarker(string name, MapMarkerDef markerDef)
         {
-            var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation);
-
+            var marker = MapMarker.Create(MapMarkerContainer, name, markerDef, _markerSize, -CoordinateRotation, 1/ZoomCurrent);
             AddMapMarker(marker);
             return marker;
         }
 
-        public PlayerMapMarker AddPlayerMarker(IPlayer player)
+        public PlayerMapMarker AddPlayerMarker(IPlayer player, string category)
         {
-            var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png",
-                                                 "players", _markerSize);
+            var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png", category,
+                                                _markerSize, -CoordinateRotation, 1/ZoomCurrent);
             marker.OnDeathOrDespawn += RemoveMapMarker;
 
             AddMapMarker(marker);

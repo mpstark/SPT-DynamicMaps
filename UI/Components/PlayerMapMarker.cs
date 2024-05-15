@@ -39,26 +39,14 @@ namespace InGameMap.UI.Components
 
         private float _callbackTime = _maxCallbackTime;  // make sure to start with a callback
 
-        public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category, Vector2 size)
+        public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category,
+                                             Vector2 size, float degreesRotation, float scale)
         {
-            var name = $"{player.Profile.Nickname} marker";
-
-            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer));
-            go.layer = parent.layer;
-            go.transform.SetParent(parent.transform);
-            go.ResetRectTransform();
-
-            var rectTransform = go.GetRectTransform();
-            rectTransform.sizeDelta = size;
-
-            var marker = go.AddComponent<PlayerMapMarker>();
-            marker.Player = player;
-            marker.Name = player.Profile.Nickname;
-            marker.Category = category;
+            var name = $"{player.Profile.Nickname}";
+            var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, Vector3.zero,
+                                                 size, degreesRotation, scale);
             marker.IsDynamic = true;
-            marker.Image = go.AddComponent<Image>();
-            marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imagePath);
-            marker.Image.type = Image.Type.Simple;
+            marker.Player = player;
 
             return marker;
         }
@@ -97,18 +85,12 @@ namespace InGameMap.UI.Components
             OnDeathOrDespawn?.Invoke(this);
         }
 
-        public override void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTopLevel)
+        protected override Color GetLayerAdjustedImageColor(bool isLayerDisplayed, bool isLayerOnTop)
         {
-            // TODO: revisit this
-            var color = Image.color;
-            var alpha = 1f;
-            if (!isLayerDisplayed || !isLayerOnTopLevel)
-            {
-                alpha = 0.25f;
-            }
-
-            var newColor = new Color(color.r, color.g, color.b, alpha);
-            Image.color = newColor;
+            var alpha = (!isLayerDisplayed || !isLayerOnTop)
+                        ? 0.25f
+                        : 1.0f;
+            return new Color(Image.color.r, Image.color.g, Image.color.b, alpha);
         }
     }
 }

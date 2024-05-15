@@ -162,8 +162,8 @@ namespace InGameMap.UI
             var player = GameUtils.GetPlayer();
             if (_playerMarker == null)
             {
-                _playerMarker = _mapView.AddPlayerMarker(player);
-                _playerMarker.Image.color = Color.green;
+                _playerMarker = _mapView.AddPlayerMarker(player, "player");
+                _playerMarker.Color = Color.green;
             }
 
             // TODO: remove this
@@ -178,8 +178,8 @@ namespace InGameMap.UI
                         continue;
                     }
 
-                    var botMarker = _mapView.AddPlayerMarker(person);
-                    botMarker.Image.color = (person.Fraction == ETagStatus.Scav) ? Color.yellow : Color.red;
+                    var botMarker = _mapView.AddPlayerMarker(person, "bots");
+                    botMarker.Color = (person.Fraction == ETagStatus.Scav) ? (Color.yellow + Color.red)/2 : Color.red;
                     person.OnIPlayerDeadOrUnspawn += (bot) => _otherPlayers.Remove(bot);
                     _otherPlayers[person] = botMarker;
                 }

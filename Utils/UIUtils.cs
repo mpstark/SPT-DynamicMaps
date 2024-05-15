@@ -28,7 +28,7 @@ namespace InGameMap.Utils
 
         public static RectTransform GetRectTransform(this Component component)
         {
-            return component.transform as RectTransform;
+            return component.gameObject.transform as RectTransform;
         }
 
         public static Tween TweenColor(this Image image, Color to, float duration)
