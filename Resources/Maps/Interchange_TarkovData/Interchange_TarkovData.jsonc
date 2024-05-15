@@ -2,34 +2,52 @@
     "DisplayName": "Interchange (TarkovData)",
     "MapInternalNames": [ "Interchange" ],
     "CoordinateRotation": 180,
-    "Bounds": [
-        {"x": 530, "y": -439},
-        {"x": -364, "y": 452}
-    ],
+    "Bounds": {
+        "Min": {"x": -364, "y": -439},
+        "Max": {"x": 530, "y": 452}
+    },
     "DefaultLevel": 0,
     "Layers": {
         "Ground Floor": {
             "Level": 0,
             "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_0.png",
-            "Bounds": [
-                {"x": 530, "y": -439, "z": -1000},
-                {"x": -364, "y": 452, "z": 25}
+            "ImageBounds": {
+                "Min": {"x": -364, "y": -439},
+                "Max": {"x": 530, "y": 452}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -364, "y": -439, "z": -100},
+                    "Max": {"x": 530, "y": 452, "z": 25}
+                }
             ]
         },
         "2nd Floor": {
             "Level": 1,
             "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_1.png",
-            "Bounds": [
-                {"x": 530, "y": -439, "z": 25},
-                {"x": -364, "y": 452, "z": 34}
+            "ImageBounds": {
+                "Min": {"x": -364, "y": -439},
+                "Max": {"x": 530, "y": 452}
+            },
+            "GameBounds": [
+                {   // mall
+                    "Min": {"x": -222, "y": -327, "z": 25},
+                    "Max": {"x": 120, "y": 218, "z": 34}
+                }
             ]
         },
         "3rd Floor": {
             "Level": 2,
             "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_2.png",
-            "Bounds": [
-                {"x": 530, "y": -439, "z": 34},
-                {"x": -364, "y": 452, "z": 1000}
+            "ImageBounds": {
+                "Min": {"x": -364, "y": -439},
+                "Max": {"x": 530, "y": 452}
+            },
+            "GameBounds": [
+                {   // mall
+                    "Min": {"x": -222, "y": -327, "z": 34},
+                    "Max": {"x": 120, "y": 218, "z": 100}
+                }
             ]
         }
     },

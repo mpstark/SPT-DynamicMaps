@@ -54,12 +54,15 @@ namespace InGameMap.UI.Components
             OnPositionChanged = null;
         }
 
-        public void Move(Vector3 newPosition)
+        public void Move(Vector3 newPosition, bool callback = true)
         {
             RectTransform.anchoredPosition = newPosition; // vector3 to vector2 discards z
             Position = newPosition;
 
-            OnPositionChanged?.Invoke(this);
+            if (callback)
+            {
+                OnPositionChanged?.Invoke(this);
+            }
         }
 
         public void Rotate(float degreesRotation)
@@ -67,9 +70,9 @@ namespace InGameMap.UI.Components
             RectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
         }
 
-        public void MoveAndRotate(Vector3 newPosition, float rotation)
+        public void MoveAndRotate(Vector3 newPosition, float rotation, bool callback = true)
         {
-            Move(newPosition);
+            Move(newPosition, callback);
             Rotate(rotation);
         }
 

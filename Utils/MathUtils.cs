@@ -64,6 +64,11 @@ namespace InGameMap.Utils
             return sum / count;
         }
 
+        public static Vector2 GetMidpoint(Vector2 minBound, Vector2 maxBound)
+        {
+            return (minBound + maxBound) / 2;
+        }
+
         public static Vector3 UnityPositionToMapPosition(Vector3 unityPosition)
         {
             return new Vector3(unityPosition.x, unityPosition.z, unityPosition.y);

@@ -152,12 +152,12 @@ namespace InGameMap.UI.Components
             CoordinateRotation = mapDef.CoordinateRotation;
 
             // set width and height for top level
-            var size = MathUtils.GetBoundingRectangle(mapDef.Bounds);
+            var size = mapDef.Bounds.Max - mapDef.Bounds.Min;
             var rotatedSize = MathUtils.GetRotatedRectangle(size, CoordinateRotation);
             RectTransform.sizeDelta = rotatedSize;
 
             // set offset
-            var offset = MathUtils.GetMidpoint(mapDef.Bounds);
+            var offset = MathUtils.GetMidpoint(mapDef.Bounds.Min, mapDef.Bounds.Max);
             RectTransform.anchoredPosition = offset;
 
             // rotate all of the map content
@@ -319,9 +319,11 @@ namespace InGameMap.UI.Components
 
         private MapLayer FindMatchingLayerByCoordinate(Vector3 coordinate)
         {
-            // TODO: what if there are multiple matching?
-            // probably want to "select" the smaller bounds one in that case
-            return _layers.FirstOrDefault(l => l.IsCoordinateInLayer(coordinate));
+            // if multiple matching, use the one with the lowest bound volume
+            // this might be expensive to compute with lots of layers and bounds
+            return _layers.Where(l => l.IsCoordinateInLayer(coordinate))
+                          .OrderBy(l => l.GetMatchingBoundVolume(coordinate))
+                          .FirstOrDefault();
         }
     }
 }

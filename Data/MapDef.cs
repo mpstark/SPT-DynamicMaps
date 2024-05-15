@@ -6,6 +6,18 @@ using UnityEngine;
 
 namespace InGameMap.Data
 {
+    public class BoundingRectangle
+    {
+        public Vector2 Min { get; set; }
+        public Vector2 Max { get; set; }
+    }
+
+    public class BoundingRectangularSolid
+    {
+        public Vector3 Min { get; set; }
+        public Vector3 Max { get; set; }
+    }
+
     public class MapLayerDef
     {
         [JsonRequired]
@@ -14,9 +26,11 @@ namespace InGameMap.Data
         [JsonRequired]
         public string ImagePath { get; set; }
 
-        // 3d points, z is heights -- this is different than how unity does it
         [JsonRequired]
-        public List<Vector3> Bounds { get; set; } = new List<Vector3>();
+        public BoundingRectangle ImageBounds { get; set; }
+
+        [JsonRequired]
+        public List<BoundingRectangularSolid> GameBounds { get; set; }
     }
 
     public class MapMarkerDef
@@ -37,7 +51,7 @@ namespace InGameMap.Data
         public string DisplayName { get; set; }
 
         [JsonRequired]
-        public List<Vector2> Bounds { get; set; } = new List<Vector2>();
+        public BoundingRectangle Bounds { get; set; }
 
         [JsonRequired]
         public Dictionary<string, MapLayerDef> Layers { get; set; } = new Dictionary<string, MapLayerDef>();

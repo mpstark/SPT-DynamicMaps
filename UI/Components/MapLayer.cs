@@ -1,4 +1,3 @@
-using System.Linq;
 using InGameMap.Data;
 using InGameMap.Utils;
 using UnityEngine;
@@ -33,16 +32,13 @@ namespace InGameMap.UI.Components
             var rectTransform = go.GetRectTransform();
             var layer = go.AddComponent<MapLayer>();
 
-            // convert 3d bounds to 2d ones
-            var bounds2d = def.Bounds.Select(p => new Vector2(p.x, p.y));
-
             // set layer size
-            var size = MathUtils.GetBoundingRectangle(bounds2d);
+            var size = def.ImageBounds.Max - def.ImageBounds.Min;
             var rotatedSize = MathUtils.GetRotatedRectangle(size, degreesRotation);
             rectTransform.sizeDelta = rotatedSize;
 
             // set layer offset
-            var offset = MathUtils.GetMidpoint(bounds2d);
+            var offset = MathUtils.GetMidpoint(def.ImageBounds.Min, def.ImageBounds.Max);
             rectTransform.anchoredPosition = offset;
 
             // set rotation to combat when we rotate the whole map content
@@ -64,28 +60,38 @@ namespace InGameMap.UI.Components
             OnLayerDisplayChanged = null;
         }
 
-        public bool IsCoordinateInLayer(Vector3 coords)
+        public bool IsCoordinateInLayer(Vector3 coordinate)
         {
-            // TODO: there is probably a better way to do this
-            var minX = float.MaxValue;
-            var maxX = float.MinValue;
-            var minY = float.MaxValue;
-            var maxY = float.MinValue;
-            var minZ = float.MaxValue;
-            var maxZ = float.MinValue;
-            foreach (var bound in _def.Bounds)
+            foreach (var gameBound in _def.GameBounds)
             {
-                minX = Mathf.Min(minX, bound.x);
-                maxX = Mathf.Max(maxX, bound.x);
-                minY = Mathf.Min(minY, bound.y);
-                maxY = Mathf.Max(maxY, bound.y);
-                minZ = Mathf.Min(minZ, bound.z);
-                maxZ = Mathf.Max(maxZ, bound.z);
+                if (coordinate.x > gameBound.Min.x && coordinate.x < gameBound.Max.x
+                 && coordinate.y > gameBound.Min.y && coordinate.y < gameBound.Max.y
+                 && coordinate.z > gameBound.Min.z && coordinate.z < gameBound.Max.z)
+                {
+                    return true;
+                }
             }
 
-            return coords.x > minX && coords.x < maxX
-                && coords.y > minY && coords.y < maxY
-                && coords.z > minZ && coords.z < maxZ;
+            return false;
+        }
+
+        public float GetMatchingBoundVolume(Vector3 coordinate)
+        {
+            // a bit scuffed formatting
+            // this assumes that a layer wouldn't have multiple overlapping game bounds
+            foreach (var gameBound in _def.GameBounds)
+            {
+                if (coordinate.x > gameBound.Min.x && coordinate.x < gameBound.Max.x
+                 && coordinate.y > gameBound.Min.y && coordinate.y < gameBound.Max.y
+                 && coordinate.z > gameBound.Min.z && coordinate.z < gameBound.Max.z)
+                {
+                    return (gameBound.Max.x - gameBound.Min.x) *
+                           (gameBound.Max.y - gameBound.Min.y) *
+                           (gameBound.Max.z - gameBound.Min.z);
+                }
+            }
+
+            return float.MinValue;
         }
 
         public void OnTopLevelSelected(int newLevel)

@@ -1,0 +1,139 @@
+{
+    "DisplayName": "Customs (TarkovData)",
+    "MapInternalNames": [ "bigmap" ],
+    "CoordinateRotation": 180,
+    "Bounds": {
+        "Min": {"x": -372, "y": -307},
+        "Max": {"x": 698, "y": 237}
+    },
+    "DefaultLevel": 0,
+    "Layers": {
+        "Underground": {
+            "Level": -1,
+            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_-1.png",
+            "ImageBounds": {
+                "Min": {"x": -372, "y": -307},
+                "Max": {"x": 698, "y": 237}
+            },
+            "GameBounds": [
+                {   // zb-1011
+                    "Min": {"x": 620, "y": -137, "z": -100},
+                    "Max": {"x": 635, "y": -125, "z": 0.5}
+                },
+                {   // zb-1012
+                    "Min": {"x": 458, "y": -122, "z": -100},
+                    "Max": {"x": 473, "y": -110, "z": 0.5}
+                },
+                {   // old gas
+                    "Min": {"x": 308, "y": -184, "z": -100},
+                    "Max": {"x": 314, "y": -173, "z": 0.5}
+                },
+                {   // switch basement
+                    "Min": {"x": 323, "y": -88, "z": -100},
+                    "Max": {"x": 349, "y": -32, "z": 0.5}
+                },
+                {   // zb-013
+                    "Min": {"x": 193, "y": -158, "z": -100},
+                    "Max": {"x": 219, "y": -137, "z": 0.5}
+                }
+            ]
+        },
+        "Ground Floor": {
+            "Level": 0,
+            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_0.png",
+            "ImageBounds": {
+                "Min": {"x": -372, "y": -307},
+                "Max": {"x": 698, "y": 237}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -372, "y": -307, "z": -100},
+                    "Max": {"x": 698, "y": 237, "z": 100}
+                }
+            ]
+        },
+        "2nd Floor": {
+            "Level": 1,
+            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_1.png",
+            "ImageBounds": {
+                "Min": {"x": -372, "y": -307},
+                "Max": {"x": 698, "y": 237}
+            },
+            "GameBounds": [
+                {   // dorms
+                    "Min": {"x": 165, "y": 125, "z": 2.7},
+                    "Max": {"x": 243, "y": 190, "z": 6.5}
+                },
+                {   // mechanic
+                    "Min": {"x": 72, "y": -170, "z": 2.7},
+                    "Max": {"x": 116, "y": -83, "z": 6.5}
+                },
+                {   // switch 2nd
+                    "Min": {"x": 341, "y": -84, "z": 2.7},
+                    "Max": {"x": 356, "y": -30, "z": 6.5}
+                },
+                {   // switch 2nd
+                    "Min": {"x": 321, "y": -59, "z": 2.7},
+                    "Max": {"x": 334, "y": -52, "z": 6.5}
+                },
+                {   // scav checkpoint
+                    "Min": {"x": 577, "y": -1, "z": 2.7},
+                    "Max": {"x": 589, "y": 10, "z": 6.5}
+                },
+                {   // dead scav warehouse
+                    "Min": {"x": 532, "y": -134, "z": 2.7},
+                    "Max": {"x": 580, "y": -104, "z": 100}
+                },
+                {   // pump 2nd
+                    "Min": {"x": 599, "y": -139, "z": 2.7},
+                    "Max": {"x": 625, "y": -120, "z": 100}
+                },
+                {   // big red 2nd
+                    "Min": {"x": -223, "y": -131, "z": 5.7},
+                    "Max": {"x": -199, "y": -90, "z": 100}
+                },
+                {   // skeleton
+                    "Min": {"x": 169, "y": -160, "z": 5.7},
+                    "Max": {"x": 239, "y": 3, "z": 100}
+                },
+                {   // switch sniper
+                    "Min": {"x": 316, "y": -95, "z": 5.7},
+                    "Max": {"x": 336, "y": -56, "z": 100}
+                },
+                {   // USEC 2nd
+                    "Min": {"x": 556, "y": -92, "z": 5.7},
+                    "Max": {"x": 584, "y": -46, "z": 100}
+                },
+                {   // construction 2nd
+                    "Min": {"x": 65, "y": -22, "z": 5.7},
+                    "Max": {"x": 93, "y": 0, "z": 100}
+                },
+                {   // chemical warehouse sniper scav
+                    "Min": {"x": 450, "y": -90, "z": 14},
+                    "Max": {"x": 497, "y": -44, "z": 15}
+                }
+            ]
+        },
+        "3rd Floor": {
+            "Level": 2,
+            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_2.png",
+            "ImageBounds": {
+                "Min": {"x": -372, "y": -307},
+                "Max": {"x": 698, "y": 237}
+            },
+            "GameBounds": [
+                {   // dorms
+                    "Min": {"x": 165, "y": 125, "z": 5.7},
+                    "Max": {"x": 234, "y": 190, "z": 1000}
+                }
+            ]
+        }
+    },
+    "StaticMarkers": {
+        "ZB-013 Power Switch": {
+            "ImagePath": "Markers/switch.png",
+            "Position": {"x": 352.22, "y": -40.79, "z": -1},
+            "Category": "Switch"
+        }
+    }
+}
