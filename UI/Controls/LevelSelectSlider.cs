@@ -12,6 +12,9 @@ namespace InGameMap.UI.Controls
 {
     public class LevelSelectSlider : MonoBehaviour
     {
+        private static float _levelTextSize = 15f;
+        private static Vector2 _levelTextOffset = new Vector2(10f, 0f);
+
         public event Action<int> OnLevelSelectedBySlider;
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
@@ -64,11 +67,14 @@ namespace InGameMap.UI.Controls
             var slidingArea = gameObject.transform.Find("Scrollbar/Sliding Area/Handle").gameObject;
             var layerTextGO = UIUtils.CreateUIGameObject(slidingArea, "SlidingLayerText");
             _text = layerTextGO.AddComponent<TextMeshProUGUI>();
-            _text.fontSize = 14;
+            _text.fontSize = _levelTextSize;
             _text.alignment = TextAlignmentOptions.Left;
             _text.GetRectTransform().offsetMin = Vector2.zero;
             _text.GetRectTransform().offsetMax = Vector2.zero;
-            _text.GetRectTransform().anchoredPosition = new Vector2(10, 0);
+            _text.GetRectTransform().anchoredPosition = _levelTextOffset;
+            _text.outlineColor = new Color32(0, 0, 0, 255); // black
+            _text.outlineWidth = 0.15f;
+            _text.fontStyle = FontStyles.Bold;
 
             // setup the scrollbar component
             var actualScrollbarGO = gameObject.transform.Find("Scrollbar").gameObject;

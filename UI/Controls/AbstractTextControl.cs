@@ -18,9 +18,9 @@ namespace InGameMap.UI.Controls
             textControl.Text.autoSizeTextContainer = true;
             textControl.Text.fontSize = fontSize;
             textControl.Text.alignment = TextAlignmentOptions.Left;
-            textControl.Text.outlineColor = new Color32(0, 0, 0, 255);
+            textControl.Text.outlineColor = new Color32(0, 0, 0, 255); // black
             textControl.Text.outlineWidth = 0.15f;
-            textControl.Text.fontStyle = FontStyles.Bold; // for some reason this refreshes the outline and applies the outline
+            textControl.Text.fontStyle = FontStyles.Bold;
 
             return textControl;
         }

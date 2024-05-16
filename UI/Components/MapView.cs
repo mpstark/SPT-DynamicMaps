@@ -156,10 +156,6 @@ namespace InGameMap.UI.Components
             var rotatedSize = MathUtils.GetRotatedRectangle(size, CoordinateRotation);
             RectTransform.sizeDelta = rotatedSize;
 
-            // set offset
-            var offset = MathUtils.GetMidpoint(mapDef.Bounds.Min, mapDef.Bounds.Max);
-            RectTransform.anchoredPosition = offset;
-
             // rotate all of the map content
             RectTransform.localRotation = Quaternion.Euler(0, 0, CoordinateRotation);
 
@@ -266,8 +262,10 @@ namespace InGameMap.UI.Components
             // this will set everything up for initial zoom
             SetMapZoom(ZoomMin, 0);
 
-            // shift map by the offset to center it in the scroll mask
-            ShiftMap(parentTransform.anchoredPosition * ZoomCurrent, 0);
+            // shift map to center it
+            // FIXME: this doesn't center in the parent
+            var midpoint = MathUtils.GetMidpoint(CurrentMapDef.Bounds.Min, CurrentMapDef.Bounds.Max);
+            RectTransform.anchoredPosition = midpoint * ZoomCurrent;
         }
 
         public void SetMapZoom(float zoomNew, float tweenTime)

@@ -96,7 +96,7 @@ namespace InGameMap.UI.Components
             marker.Label.enableAutoSizing = true;
             marker.Label.outlineColor = new Color32(0, 0, 0, 255);
             marker.Label.outlineWidth = 0.15f;
-            marker.Label.fontStyle = FontStyles.Bold; // for some reason this refreshes the outline and applies the outline
+            marker.Label.fontStyle = FontStyles.Bold;
             marker.Label.text = marker.Text;
 
             return marker;

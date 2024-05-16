@@ -6,7 +6,6 @@ using InGameMap.Data;
 using InGameMap.Utils;
 using InGameMap.UI.Controls;
 using InGameMap.UI.Components;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +19,16 @@ namespace InGameMap.UI
         private static float _scrollZoomScaler = 1.75f;
 
         private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
-        private static Vector2 _mapSelectDropdownPosition = new Vector2(-780, -50);
-        private static Vector2 _mapSelectDropdownSize = new Vector2(360, 31);
+        private static Vector2 _mapSelectDropdownPosition = new Vector2(-780f, -50f);
+        private static Vector2 _mapSelectDropdownSize = new Vector2(360f, 31f);
+        private static Vector2 _maskSizeModifierInRaid = new Vector2(0, -42f);
+        private static Vector2 _maskPositionInRaid = new Vector2(0, -20f);
+        private static Vector2 _maskSizeModifierOutOfRaid = new Vector2(0, -70f);
+        private static Vector2 _maskPositionOutOfRaid = new Vector2(0, -5f);
+        private static float _positionTextFontSize = 15f;
+        private static Vector2 _textAnchor = new Vector2(0f, 1f);
+        private static Vector2 _cursorPositionTextOffset = new Vector2(15f, -52f);
+        private static Vector2 _playerPositionTextOffset = new Vector2(15f, -68f);
 
         public RectTransform RectTransform => gameObject.GetRectTransform();
         private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
@@ -77,8 +84,9 @@ namespace InGameMap.UI
             // set up mask; size will be set later in Raid/NoRaid
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
             scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
-            scrollMaskGO.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 80f);
             _scrollMask = scrollMaskGO.AddComponent<Mask>();
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
 
             // set up scroll rect
             scrollRectGO.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
@@ -103,16 +111,15 @@ namespace InGameMap.UI
             _mapSelectDropdown.OnMapSelected += ChangeMap;
 
             // texts
-            _cursorPositionText = CursorPositionText.Create(gameObject, _mapView.RectTransform, 14);
-            _cursorPositionText.RectTransform.anchorMin = new Vector2(0f, 1f);
-            _cursorPositionText.RectTransform.anchorMax = new Vector2(0f, 1f);
-            _cursorPositionText.RectTransform.anchoredPosition = new Vector2(15, -50);
+            _cursorPositionText = CursorPositionText.Create(gameObject, _mapView.RectTransform, _positionTextFontSize);
+            _cursorPositionText.RectTransform.anchorMin = _textAnchor;
+            _cursorPositionText.RectTransform.anchorMax = _textAnchor;
+            _cursorPositionText.RectTransform.anchoredPosition = _cursorPositionTextOffset;
 
-            _playerPositionText = PlayerPositionText.Create(gameObject, 14);
-            _playerPositionText.RectTransform.anchorMin = new Vector2(0f, 1f);
-            _playerPositionText.RectTransform.anchorMax = new Vector2(0f, 1f);
-            _playerPositionText.RectTransform.anchoredPosition = new Vector2(15, -64);
-
+            _playerPositionText = PlayerPositionText.Create(gameObject, _positionTextFontSize);
+            _playerPositionText.RectTransform.anchorMin = _textAnchor;
+            _playerPositionText.RectTransform.anchorMax = _textAnchor;
+            _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
         }
 
         private void ChangeMap(MapDef mapDef)
@@ -133,8 +140,8 @@ namespace InGameMap.UI
         private void ShowInRaid()
         {
             // adjust mask
-            _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -22);
-            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 40f);
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
 
             // filter dropdown to only maps containing the internal map name
             // this forces the load of the first of those
@@ -162,7 +169,9 @@ namespace InGameMap.UI
                     }
 
                     var botMarker = _mapView.AddPlayerMarker(person, "bots");
-                    botMarker.Color = (person.Fraction == ETagStatus.Scav) ? (Color.yellow + Color.red)/2 : Color.red;
+                    botMarker.Color = (person.Fraction == ETagStatus.Scav)
+                                    ? Color.Lerp(Color.yellow, Color.red, 0.5f)
+                                    : Color.red;
                     person.OnIPlayerDeadOrUnspawn += (bot) => _otherPlayers.Remove(bot);
                     _otherPlayers[person] = botMarker;
                 }
@@ -183,8 +192,8 @@ namespace InGameMap.UI
         private void ShowOutOfRaid()
         {
             // adjust mask
-            _scrollMask.GetRectTransform().anchoredPosition = new Vector2(0, -5);
-            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta - new Vector2(0, 70f);
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
 
             // clear filter on dropdown
             _mapSelectDropdown.ClearFilter();

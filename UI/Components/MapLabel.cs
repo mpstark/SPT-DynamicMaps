@@ -50,7 +50,7 @@ namespace InGameMap.UI.Components
             label.Label.alignment = TextAlignmentOptions.Center;
             label.Label.outlineColor = new Color32(0, 0, 0, 255);
             label.Label.outlineWidth = 0.15f;
-            label.Label.fontStyle = FontStyles.Bold; // for some reason this refreshes the outline and applies the outline
+            label.Label.fontStyle = FontStyles.Bold;
             label.Label.text = label.Text;
 
             return label;
