@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace InGameMap.UI.Controls
 {
-    public class CursorPositionText : TextControl
+    public class CursorPositionText : AbstractTextControl
     {
         private RectTransform _mapViewTransform;
 

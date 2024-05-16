@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace InGameMap.UI.Controls
 {
-    public class PlayerPositionText : TextControl
+    public class PlayerPositionText : AbstractTextControl
     {
         public static PlayerPositionText Create(GameObject parent, float fontSize)
         {

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace InGameMap.UI.Controls
 {
-    public abstract class TextControl : MonoBehaviour
+    public abstract class AbstractTextControl : MonoBehaviour
     {
         public TextMeshProUGUI Text { get; protected set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
-        public static T Create<T>(GameObject parent, string name, float fontSize) where T : TextControl
+        public static T Create<T>(GameObject parent, string name, float fontSize) where T : AbstractTextControl
         {
             var go = UIUtils.CreateUIGameObject(parent, name);
 
