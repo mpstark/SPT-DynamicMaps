@@ -77,6 +77,10 @@ namespace InGameMap.UI.Components
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
 
+            // var outline = imageGO.AddComponent<Outline>();
+            // outline.effectColor = Color.black;
+            // outline.effectDistance = Vector2.one;
+
             // label
             var labelGO = UIUtils.CreateUIGameObject(go, "label");
             labelGO.AddComponent<CanvasRenderer>();

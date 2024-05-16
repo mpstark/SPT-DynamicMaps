@@ -55,5 +55,25 @@ namespace InGameMap.UI.Components
 
             return label;
         }
+
+        public void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTop)
+        {
+            Label.color = GetLayerAdjustedLabelColor(isLayerDisplayed, isLayerOnTop);
+        }
+
+        private Color GetLayerAdjustedLabelColor(bool isLayerDisplayed, bool isLayerOnTop)
+        {
+            var alpha = 1f;
+            if (!isLayerDisplayed)
+            {
+                alpha = 0.0f;
+            }
+            else if (!isLayerOnTop)
+            {
+                alpha = 0.25f;
+            }
+
+            return new Color(Label.color.r, Label.color.g, Label.color.b, alpha);
+        }
     }
 }

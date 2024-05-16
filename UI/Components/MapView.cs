@@ -90,21 +90,6 @@ namespace InGameMap.UI.Components
             return marker;
         }
 
-        public void UpdateMarkerLayerStatus(MapMarker marker)
-        {
-            var layer = FindMatchingLayerByCoordinate(marker.Position);
-            marker.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
-        }
-
-        public void UpdateMarkersLayer()
-        {
-            // TODO: revisit
-            foreach (var marker in _markers)
-            {
-                UpdateMarkerLayerStatus(marker);
-            }
-        }
-
         public void ChangeMarkerCategoryStatus(string category, bool status)
         {
             foreach (var marker in _markers)
@@ -134,11 +119,7 @@ namespace InGameMap.UI.Components
         {
             var label = MapLabel.Create(MapLabelsContainer, labelDef, -CoordinateRotation, 1/ZoomCurrent);
 
-            // FIXME: labels should be able to be placed in layers like markers
-            // hook marker position changed event up, so that when markers change position, they get notified
-            // about layer status
-            // marker.OnPositionChanged += UpdateMarkerLayerStatus;
-            // UpdateMarkerLayerStatus(marker);  // call immediately
+            UpdateLabelLayerStatus(label);
 
             _labels.Add(label);
         }
@@ -259,7 +240,7 @@ namespace InGameMap.UI.Components
 
             SelectedLevel = level;
 
-            UpdateMarkersLayer();
+            UpdateLayerStatus();
 
             OnLevelSelected?.Invoke(level);
         }
@@ -360,5 +341,32 @@ namespace InGameMap.UI.Components
                           .OrderBy(l => l.GetMatchingBoundVolume(coordinate))
                           .FirstOrDefault();
         }
+
+        private void UpdateMarkerLayerStatus(MapMarker marker)
+        {
+            var layer = FindMatchingLayerByCoordinate(marker.Position);
+            marker.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
+        }
+
+        private void UpdateLabelLayerStatus(MapLabel label)
+        {
+            var layer = FindMatchingLayerByCoordinate(label.Position);
+            label.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
+        }
+
+        private void UpdateLayerStatus()
+        {
+            // TODO: maybe add interface or something
+            foreach (var marker in _markers)
+            {
+                UpdateMarkerLayerStatus(marker);
+            }
+
+            foreach (var label in _labels)
+            {
+                UpdateLabelLayerStatus(label);
+            }
+        }
+
     }
 }
