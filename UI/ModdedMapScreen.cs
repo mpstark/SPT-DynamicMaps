@@ -30,10 +30,10 @@ namespace InGameMap.UI
         private Mask _scrollMask;
         private MapView _mapView;
 
-        private TextMeshProUGUI _playerPositionText;
-        private TextMeshProUGUI _cursorPositionText;
         private LevelSelectSlider _levelSelectSlider;
         private MapSelectDropdown _mapSelectDropdown;
+        private CursorPositionText _cursorPositionText;
+        private PlayerPositionText _playerPositionText;
 
         // TODO: remove this and put it somewhere else
         private PlayerMapMarker _playerMarker;
@@ -54,13 +54,6 @@ namespace InGameMap.UI
                     var playerPosition = _playerMarker.RectTransform.anchoredPosition;
                     _mapView.ShiftMapToCoordinate(playerPosition, _positionTweenTime);
                 }
-            }
-
-            if (_cursorPositionText != null)
-            {
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
-                _cursorPositionText.text = $"Cursor: {mouseRelative.x:F} {mouseRelative.y:F}";
             }
         }
 
@@ -95,9 +88,6 @@ namespace InGameMap.UI
             _scrollRect.viewport = _scrollMask.GetRectTransform();
             _scrollRect.content = _mapView.RectTransform;
 
-            // TODO: make own components
-            CreatePositionTexts();
-
             // create map controls
 
             // level select slider
@@ -111,25 +101,18 @@ namespace InGameMap.UI
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
             _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, RectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
             _mapSelectDropdown.OnMapSelected += ChangeMap;
-        }
 
-        private void CreatePositionTexts()
-        {
-            var cursorPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "CursorPositionText");
-            _cursorPositionText = cursorPositionTextGO.AddComponent<TextMeshProUGUI>();
-            _cursorPositionText.fontSize = 14;
-            _cursorPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
-            _cursorPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
-            _cursorPositionText.GetRectTransform().anchoredPosition = new Vector2(15, -50);
-            _cursorPositionText.alignment = TextAlignmentOptions.Left;
+            // texts
+            _cursorPositionText = CursorPositionText.Create(gameObject, _mapView.RectTransform, 14);
+            _cursorPositionText.RectTransform.anchorMin = new Vector2(0f, 1f);
+            _cursorPositionText.RectTransform.anchorMax = new Vector2(0f, 1f);
+            _cursorPositionText.RectTransform.anchoredPosition = new Vector2(15, -50);
 
-            var playerPositionTextGO = UIUtils.CreateUIGameObject(gameObject, "PlayerPositionText");
-            _playerPositionText = playerPositionTextGO.AddComponent<TextMeshProUGUI>();
-            _playerPositionText.fontSize = 14;
-            _playerPositionText.GetRectTransform().anchorMin = new Vector2(0f, 1f);
-            _playerPositionText.GetRectTransform().anchorMax = new Vector2(0f, 1f);
-            _playerPositionText.GetRectTransform().anchoredPosition = new Vector2(15, -64);
-            _playerPositionText.alignment = TextAlignmentOptions.Left;
+            _playerPositionText = PlayerPositionText.Create(gameObject, 14);
+            _playerPositionText.RectTransform.anchorMin = new Vector2(0f, 1f);
+            _playerPositionText.RectTransform.anchorMax = new Vector2(0f, 1f);
+            _playerPositionText.RectTransform.anchoredPosition = new Vector2(15, -64);
+
         }
 
         private void ChangeMap(MapDef mapDef)
@@ -186,16 +169,15 @@ namespace InGameMap.UI
             }
 
             // select layers to show
-            var mapPosition = MathUtils.TransformToMapPosition(player.CameraPosition);
+            var mapPosition = MathUtils.UnityPositionToMapPosition(player.Position);
             _mapView.SelectLevelByCoords(mapPosition);
 
             // shift map to player position, Vector3 to Vector2 discards z
             // TODO: this is annoying, but need something like it
             // _mapView.ShiftMapToCoordinate(mapPosition, 0);
 
-            // show and update text
+            // show player position text
             _playerPositionText.gameObject.SetActive(true);
-            _playerPositionText.text = $"Player: {mapPosition.x:F} {mapPosition.y:F} {mapPosition.z:F}";
         }
 
         private void ShowOutOfRaid()
