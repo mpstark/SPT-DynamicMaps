@@ -129,10 +129,124 @@
             ]
         }
     },
-    "Labels": [
+    "Labels": [  // all of these labels are from Tarkov.dev map data under MIT license
+        {
+            "Text": "Big Red",
+            "Position": {"x": -215, "y": -119, "z": 0},
+            "FontSize": 16
+        },
         {
             "Text": "Dorms",
             "Position": {"x": 200, "y": 150, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "New Gas",
+            "Position": {"x": 404, "y": 31, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Old Gas",
+            "Position": {"x": 331, "y": -173, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Fortress",
+            "Position": {"x": 201, "y": -127, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Crackhouse",
+            "Position": {"x": 83, "y": -153, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Streamer House",
+            "Position": {"x": 567, "y": -67, "z": 0},
+        },
+        {
+            "Text": "Main Bridge",
+            "Position": {"x": -69, "y": 7, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 6
+        },
+        {
+            "Text": "Sniper Hill",
+            "Position": {"x": 110, "y": 85, "z": 0},
+        },
+        {
+            "Text": "Storage",
+            "Position": {"x": -288, "y": -134, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Trailer Park",
+            "Position": {"x": -211, "y": -219, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Junk Bridge",
+            "Position": {"x": -66, "y": 46, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Repair Shop",
+            "Position": {"x": 106, "y": -90, "z": 0},
+        },
+        {
+            "Text": "Sniper Ridge",
+            "Position": {"x": 491, "y": 63, "z": 0},
+            "DegreesRotation": 5
+        },
+        {
+            "Text": "Old Construction",
+            "Position": {"x": 75, "y": -9, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Skeleton",
+            "Position": {"x": 200, "y": -13, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": -9
+        },
+        {
+            "Text": "Warehouse 3",
+            "Position": {"x": 390, "y": -94, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Depot",
+            "Position": {"x": 472, "y": -67, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Warehouse 7",
+            "Position": {"x": 555, "y": -118, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Military Checkpoint",
+            "Position": {"x": 572, "y": 0, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Bus Station",
+            "Position": {"x": 238, "y": 53, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Warehouse 4",
+            "Position": {"x": 333, "y": -67, "z": 1},
+            "FontSize": 16
+        },
+        {
+            "Text": "Powerline Tower",
+            "Position": {"x": 497, "y": 110, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Warehouse 17",
+            "Position": {"x": 46, "y": -59, "z": 0},
             "FontSize": 16
         }
     ],

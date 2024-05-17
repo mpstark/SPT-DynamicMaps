@@ -66,7 +66,7 @@ namespace InGameMap.UI
             var scrollRectGO = UIUtils.CreateUIGameObject(gameObject, "Scroll");
             var scrollMaskGO = UIUtils.CreateUIGameObject(scrollRectGO, "ScrollMask");
 
-            _mapView = MapView.Create(scrollMaskGO, "MapContent");
+            _mapView = MapView.Create(scrollMaskGO, "MapView");
 
             // set up mask; size will be set later in Raid/NoRaid
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();

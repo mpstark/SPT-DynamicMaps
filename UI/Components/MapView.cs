@@ -54,9 +54,13 @@ namespace InGameMap.UI.Components
 
         private void Awake()
         {
-            MapLayerContainer = UIUtils.CreateUIGameObject(gameObject, "MapLayers");
-            MapLabelsContainer = UIUtils.CreateUIGameObject(gameObject, "MapLabels");
-            MapMarkerContainer = UIUtils.CreateUIGameObject(gameObject, "MapMarkers");
+            MapLayerContainer = UIUtils.CreateUIGameObject(gameObject, "Layers");
+            MapMarkerContainer = UIUtils.CreateUIGameObject(gameObject, "Markers");
+            MapLabelsContainer = UIUtils.CreateUIGameObject(gameObject, "Labels");
+
+            // for some reason these don't follow creation order in some cases
+            MapLayerContainer.transform.SetAsFirstSibling();
+            MapMarkerContainer.transform.SetAsLastSibling();
         }
 
         public void AddMapMarker(MapMarker marker)
@@ -288,14 +292,10 @@ namespace InGameMap.UI.Components
 
             // inverse scale all map markers and labels
             // FIXME: does this generate large amounts of garbage?
-            foreach (var marker in _markers)
+            var things = _markers.Cast<MonoBehaviour>().Concat(_labels);
+            foreach (var thing in things)
             {
-                marker.RectTransform.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
-            }
-
-            foreach (var label in _labels)
-            {
-                label.RectTransform.DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
+                thing.GetRectTransform().DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
             }
         }
 

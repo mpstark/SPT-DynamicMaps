@@ -59,7 +59,7 @@ namespace InGameMap.UI.Components
             var rectTransform = go.GetRectTransform();
             rectTransform.anchoredPosition = def.Position;
             rectTransform.localScale = scale * Vector2.one;
-            rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+            rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation - def.DegreesRotation);
 
             var label = go.AddComponent<MapLabel>();
             label.Text = def.Text;

@@ -54,9 +54,8 @@ namespace InGameMap.Data
         [JsonRequired]
         public Vector3 Position { get; set; }
 
-        [JsonRequired]
-        public float FontSize { get; set; }
-
+        public float FontSize { get; set; } = 14f;
+        public float DegreesRotation { get; set; } = 0f;
         public Color Color { get; set; } = Color.white;
         public string Category { get; set; } = "None";
     }
