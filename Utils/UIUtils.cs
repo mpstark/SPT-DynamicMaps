@@ -1,4 +1,6 @@
+using System;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,6 +46,34 @@ namespace InGameMap.Utils
             go.ResetRectTransform();
 
             return go;
+        }
+
+        /// <summary>
+        /// Annoyingly, sometimes setting the outline fails with an exception, particularly if stack originates in
+        /// Unity C++ -- not sure why this happens, so just catch and try again in each thing that wants a outline
+        /// </summary>
+        public static bool TrySetTMPOutline(TextMeshProUGUI text)
+        {
+            if (text == null)
+            {
+                Plugin.Log.LogWarning($"TrySetTMPOutline: text cannot be null");
+                return false;
+            }
+
+            try
+            {
+                text.outlineColor = new Color32(0, 0, 0, 255);
+                text.outlineWidth = 0.15f;
+                text.fontStyle = FontStyles.Bold;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning($"Failed at setting outline: {e.Message}");
+                Plugin.Log.LogWarning($"{e.StackTrace}");
+            }
+
+            return false;
         }
     }
 }

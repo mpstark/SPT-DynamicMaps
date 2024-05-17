@@ -9,11 +9,9 @@ namespace InGameMap.UI.Components
 {
     public class MapMarker : MonoBehaviour
     {
-        // public static float _labelMargin = -5f;
-        private static float _labelSizeXMultiplier = 3f;
-        private static float _labelSizeYMultiplier = 2f;
+        private static Vector2 _labelSizeMultiplier = new Vector2(2.5f, 2f);
         private static float _markerMinFontSize = 8f;
-        private static float _markerMaxFontSize = 14f;
+        private static float _markerMaxFontSize = 12f;
 
         public event Action<MapMarker> OnPositionChanged;
 
@@ -43,6 +41,7 @@ namespace InGameMap.UI.Components
 
         private Color _color = Color.white;
         private float _initialRotation;
+        private bool _hasSetOutline = false;
 
         public static MapMarker Create(GameObject parent, MapMarkerDef def, Vector2 size, float degreesRotation, float scale)
         {
@@ -62,6 +61,7 @@ namespace InGameMap.UI.Components
             rectTransform.sizeDelta = size;
             rectTransform.localScale = scale * Vector2.one;
             rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
+            rectTransform.pivot = pivot;
 
             var marker = go.AddComponent<T>();
             marker.Text = text;
@@ -73,7 +73,7 @@ namespace InGameMap.UI.Components
             var imageGO = UIUtils.CreateUIGameObject(go, "image");
             imageGO.AddComponent<CanvasRenderer>();
             imageGO.GetRectTransform().sizeDelta = size;
-            imageGO.GetRectTransform().pivot = pivot;
+            imageGO.GetRectTransform().pivot = new Vector2(0.5f, 0.5f);
             marker.Image = imageGO.AddComponent<Image>();
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
@@ -88,19 +88,28 @@ namespace InGameMap.UI.Components
             labelGO.GetRectTransform().anchorMin = new Vector2(0.5f, 0f);
             labelGO.GetRectTransform().anchorMax = new Vector2(0.5f, 0f);
             labelGO.GetRectTransform().pivot = new Vector2(0.5f, 1f);
-            labelGO.GetRectTransform().sizeDelta = new Vector2(size.x * _labelSizeXMultiplier, size.y * _labelSizeYMultiplier);
+            labelGO.GetRectTransform().sizeDelta = size * _labelSizeMultiplier;
             marker.Label = labelGO.AddComponent<TextMeshProUGUI>();
             marker.Label.fontSizeMin = _markerMinFontSize;
             marker.Label.fontSizeMax = _markerMaxFontSize;
             marker.Label.alignment = TextAlignmentOptions.Top;
             marker.Label.enableWordWrapping = true;
             marker.Label.enableAutoSizing = true;
-            marker.Label.outlineColor = new Color32(0, 0, 0, 255);
-            marker.Label.outlineWidth = 0.15f;
-            marker.Label.fontStyle = FontStyles.Bold;
             marker.Label.text = marker.Text;
 
+            marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
+
             return marker;
+        }
+
+        protected virtual void OnEnable()
+        {
+            if (_hasSetOutline || Label == null)
+            {
+                return;
+            }
+
+            _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
         }
 
         protected virtual void OnDestroy()

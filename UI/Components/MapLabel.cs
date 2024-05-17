@@ -14,6 +14,8 @@ namespace InGameMap.UI.Components
         public TextMeshProUGUI Label { get; protected set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
+        private bool _hasSetOutline = false;
+
         public Color Color
         {
             get
@@ -48,12 +50,21 @@ namespace InGameMap.UI.Components
             label.Label.autoSizeTextContainer = true;
             label.Label.fontSize = def.FontSize;
             label.Label.alignment = TextAlignmentOptions.Center;
-            label.Label.outlineColor = new Color32(0, 0, 0, 255);
-            label.Label.outlineWidth = 0.15f;
-            label.Label.fontStyle = FontStyles.Bold;
             label.Label.text = label.Text;
 
+            label._hasSetOutline = UIUtils.TrySetTMPOutline(label.Label);
+
             return label;
+        }
+
+        private void OnEnable()
+        {
+            if (_hasSetOutline || Label == null)
+            {
+                return;
+            }
+
+            _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
         }
 
         public void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTop)

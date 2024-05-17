@@ -42,6 +42,7 @@ namespace InGameMap.UI.Controls
         private TextMeshProUGUI _text;
         private Scrollbar _scrollbar;
         private List<int> _levels = new List<int>();
+        private bool _hasSetOutline = false;
 
         public static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position)
         {
@@ -72,9 +73,8 @@ namespace InGameMap.UI.Controls
             _text.GetRectTransform().offsetMin = Vector2.zero;
             _text.GetRectTransform().offsetMax = Vector2.zero;
             _text.GetRectTransform().anchoredPosition = _levelTextOffset;
-            _text.outlineColor = new Color32(0, 0, 0, 255); // black
-            _text.outlineWidth = 0.15f;
-            _text.fontStyle = FontStyles.Bold;
+
+            _hasSetOutline = UIUtils.TrySetTMPOutline(_text);
 
             // setup the scrollbar component
             var actualScrollbarGO = gameObject.transform.Find("Scrollbar").gameObject;
@@ -94,6 +94,17 @@ namespace InGameMap.UI.Controls
 
             // initially hide until map loaded
             gameObject.SetActive(false);
+
+        }
+
+        private void OnEnable()
+        {
+            if (_hasSetOutline || _text == null)
+            {
+                return;
+            }
+
+            _hasSetOutline = UIUtils.TrySetTMPOutline(_text);
         }
 
         private void OnDestroy()

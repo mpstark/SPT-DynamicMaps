@@ -70,7 +70,8 @@
             "Text": "Sealed Letter",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -18.83, "y": 21.66, "z": 0},
-            "Category": "Switch"
+            "Category": "Switch",
+            "Pivot": {"x": 1, "y": 0.5}
         }
     ]
 }

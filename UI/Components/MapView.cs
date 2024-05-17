@@ -46,6 +46,8 @@ namespace InGameMap.UI.Components
         public static MapView Create(GameObject parent, string name)
         {
             var go = UIUtils.CreateUIGameObject(parent, name);
+            go.AddComponent<Canvas>();
+
             var view = go.AddComponent<MapView>();
             return view;
         }
