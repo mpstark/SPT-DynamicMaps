@@ -112,6 +112,7 @@ namespace InGameMap.UI
             // add dynamic marker providers
             _dynamicMarkerProviders.Add(new PlayerMarkerProvider());
             _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
+            _dynamicMarkerProviders.Add(new ExtractMarkerProvider());
         }
 
         private void Update()

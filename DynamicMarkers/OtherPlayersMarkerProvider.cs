@@ -70,19 +70,15 @@ namespace InGameMap.DynamicMarkers
             foreach (var player in _playerMarkers.Keys.ToList())
             {
                 TryRemoveMarker(player);
+                TryAddMarker(player);
             }
         }
 
         private void TryAddMarker(IPlayer player)
         {
-            if (_lastMapView == null)
+            if (_lastMapView == null || _playerMarkers.ContainsKey(player))
             {
                 return;
-            }
-
-            if (_playerMarkers.ContainsKey(player))
-            {
-                TryRemoveMarker(player);
             }
 
             // set category and color

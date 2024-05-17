@@ -36,8 +36,7 @@ namespace InGameMap.DynamicMarkers
 
         public void OnMapChanged(MapView map, MapDef mapDef)
         {
-            // map will clear all markers
-            _playerMarker = null;
+            TryRemoveMarker();
             TryAddMarker(map);
         }
 
@@ -45,7 +44,7 @@ namespace InGameMap.DynamicMarkers
         {
             if (_playerMarker != null)
             {
-                TryRemoveMarker();
+                return;
             }
 
             var player = GameUtils.GetMainPlayer();

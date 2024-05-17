@@ -10,8 +10,8 @@ namespace InGameMap.UI.Components
     public class MapMarker : MonoBehaviour
     {
         private static Vector2 _labelSizeMultiplier = new Vector2(2.5f, 2f);
-        private static float _markerMinFontSize = 8f;
-        private static float _markerMaxFontSize = 12f;
+        private static float _markerMinFontSize = 9f;
+        private static float _markerMaxFontSize = 13f;
 
         public event Action<MapMarker> OnPositionChanged;
 

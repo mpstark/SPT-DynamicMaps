@@ -66,7 +66,7 @@
         }
     },
     "StaticMarkers": [
-         {
+        {
             "Text": "Sealed Letter",
             "ImagePath": "Markers/switch.png",
             "Position": {"x": -18.83, "y": 21.66, "z": 0},
