@@ -68,8 +68,8 @@ namespace InGameMap.UI.Components
 
             // hook marker position changed event up, so that when markers change position, they get notified
             // about layer status
-            marker.OnPositionChanged += UpdateMarkerLayerStatus;
-            UpdateMarkerLayerStatus(marker);  // call immediately
+            marker.OnPositionChanged += UpdateLayerBound;
+            UpdateLayerBound(marker);  // call immediately;
 
             marker.ContainingMapView = this;
 
@@ -113,6 +113,7 @@ namespace InGameMap.UI.Components
             }
 
             _markers.Remove(marker);
+            marker.OnPositionChanged -= UpdateLayerBound;
             marker.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
             GameObject.Destroy(marker.gameObject);
         }
@@ -121,7 +122,7 @@ namespace InGameMap.UI.Components
         {
             var label = MapLabel.Create(MapLabelsContainer, labelDef, -CoordinateRotation, 1f/ZoomCurrent);
 
-            UpdateLabelLayerStatus(label);
+            UpdateLayerBound(label);
 
             _labels.Add(label);
         }
@@ -342,31 +343,19 @@ namespace InGameMap.UI.Components
                           .FirstOrDefault();
         }
 
-        private void UpdateMarkerLayerStatus(MapMarker marker)
+        private void UpdateLayerBound(ILayerBound bound)
         {
-            var layer = FindMatchingLayerByCoordinate(marker.Position);
-            marker.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
-        }
-
-        private void UpdateLabelLayerStatus(MapLabel label)
-        {
-            var layer = FindMatchingLayerByCoordinate(label.Position);
-            label.OnContainingLayerChanged(layer.IsDisplayed, layer.IsOnTopLevel);
+            var layer = FindMatchingLayerByCoordinate(bound.Position);
+            bound.HandleNewLayerStatus(layer.Status);
         }
 
         private void UpdateLayerStatus()
         {
-            // TODO: maybe add interface or something
-            foreach (var marker in _markers)
+            var theBound = _markers.Cast<ILayerBound>().Concat(_labels);
+            foreach (var bound in theBound)
             {
-                UpdateMarkerLayerStatus(marker);
-            }
-
-            foreach (var label in _labels)
-            {
-                UpdateLabelLayerStatus(label);
+                UpdateLayerBound(bound);
             }
         }
-
     }
 }

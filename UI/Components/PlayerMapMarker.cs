@@ -2,7 +2,6 @@ using System;
 using EFT;
 using InGameMap.Utils;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
@@ -52,6 +51,13 @@ namespace InGameMap.UI.Components
             return marker;
         }
 
+        public PlayerMapMarker()
+        {
+            ImageAlphaLayerStatus[LayerStatus.Hidden] = 0.25f;
+            ImageAlphaLayerStatus[LayerStatus.Underneath] = 0.25f;
+            ImageAlphaLayerStatus[LayerStatus.OnTop] = 1f;
+        }
+
         private void Update()
         {
             if (Player == null)
@@ -89,14 +95,6 @@ namespace InGameMap.UI.Components
             }
 
             OnDeathOrDespawn?.Invoke(this);
-        }
-
-        protected override Color GetLayerAdjustedImageColor(bool isLayerDisplayed, bool isLayerOnTop)
-        {
-            var alpha = (!isLayerDisplayed || !isLayerOnTop)
-                        ? 0.25f
-                        : 1.0f;
-            return new Color(Image.color.r, Image.color.g, Image.color.b, alpha);
         }
     }
 }

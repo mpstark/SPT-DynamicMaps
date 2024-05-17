@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InGameMap.Data;
 using InGameMap.Utils;
 using TMPro;
@@ -5,17 +6,30 @@ using UnityEngine;
 
 namespace InGameMap.UI.Components
 {
-    public class MapLabel : MonoBehaviour
+    public class MapLabel : MonoBehaviour, ILayerBound
     {
         public string Text { get; protected set; }
         public string Category { get; protected set; }
-        public Vector3 Position { get; protected set;}
 
         public TextMeshProUGUI Label { get; protected set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
-        private bool _hasSetOutline = false;
+        private Vector3 _position;
+        public Vector3 Position
+        {
+            get
+            {
+                return _position;
+            }
 
+            set
+            {
+                gameObject.GetRectTransform().anchoredPosition = value;
+                _position = value;
+            }
+        }
+
+        private Color _color = Color.white;
         public Color Color
         {
             get
@@ -29,7 +43,14 @@ namespace InGameMap.UI.Components
             }
         }
 
-        private Color _color = Color.white;
+        public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
+            {
+                {LayerStatus.Hidden, 0.0f},
+                {LayerStatus.Underneath, 0.25f},
+                {LayerStatus.OnTop, 1f},
+            };
+
+        private bool _hasSetOutline = false;
 
         public static MapLabel Create(GameObject parent, MapLabelDef def, float degreesRotation, float scale)
         {
@@ -67,24 +88,9 @@ namespace InGameMap.UI.Components
             _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
         }
 
-        public void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTop)
+        public void HandleNewLayerStatus(LayerStatus status)
         {
-            Label.color = GetLayerAdjustedColor(isLayerDisplayed, isLayerOnTop);
-        }
-
-        private Color GetLayerAdjustedColor(bool isLayerDisplayed, bool isLayerOnTop)
-        {
-            var alpha = 1f;
-            if (!isLayerDisplayed)
-            {
-                alpha = 0.0f;
-            }
-            else if (!isLayerOnTop)
-            {
-                alpha = 0.25f;
-            }
-
-            return new Color(Label.color.r, Label.color.g, Label.color.b, alpha);
+            Label.color = new Color(Label.color.r, Label.color.g, Label.color.b, LabelAlphaLayerStatus[status]);
         }
     }
 }

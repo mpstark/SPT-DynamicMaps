@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using InGameMap.Data;
 using InGameMap.Utils;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
-    public class MapMarker : MonoBehaviour
+    public class MapMarker : MonoBehaviour, ILayerBound
     {
         private static Vector2 _labelSizeMultiplier = new Vector2(2.5f, 2f);
         private static float _markerMinFontSize = 9f;
@@ -24,13 +25,29 @@ namespace InGameMap.UI.Components
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         public bool IsDynamic { get; protected set; } = false;
-        public Vector3 Position { get; protected set;}
+
+        private Vector3 _position;
+        public Vector3 Position
+        {
+            get
+            {
+                return _position;
+            }
+
+            set
+            {
+                Move(value);
+            }
+        }
+
+        private Color _color = Color.white;
         public Color Color
         {
             get
             {
                 return _color;
             }
+
             set
             {
                 _color = value;
@@ -39,7 +56,19 @@ namespace InGameMap.UI.Components
             }
         }
 
-        private Color _color = Color.white;
+        public Dictionary<LayerStatus, float> ImageAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
+            {
+                {LayerStatus.Hidden, 0.0f},
+                {LayerStatus.Underneath, 0.25f},
+                {LayerStatus.OnTop, 1f},
+            };
+        public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
+            {
+                {LayerStatus.Hidden, 0.0f},
+                {LayerStatus.Underneath, 0.0f},
+                {LayerStatus.OnTop, 1f},
+            };
+
         private float _initialRotation;
         private bool _hasSetOutline = false;
 
@@ -120,7 +149,7 @@ namespace InGameMap.UI.Components
         public void Move(Vector3 newPosition, bool callback = true)
         {
             RectTransform.anchoredPosition = newPosition; // vector3 to vector2 discards z
-            Position = newPosition;
+            _position = newPosition;
 
             if (callback)
             {
@@ -139,33 +168,10 @@ namespace InGameMap.UI.Components
             SetRotation(rotation);
         }
 
-        protected virtual Color GetLayerAdjustedLabelColor(bool isLayerDisplayed, bool isLayerOnTop)
+        public void HandleNewLayerStatus(LayerStatus status)
         {
-            var alpha = (!isLayerDisplayed || !isLayerOnTop)
-                        ? 0.0f
-                        : 1.0f;
-            return new Color(Label.color.r, Label.color.g, Label.color.b, alpha);
-        }
-
-        protected virtual Color GetLayerAdjustedImageColor(bool isLayerDisplayed, bool isLayerOnTop)
-        {
-            var alpha = 1f;
-            if (!isLayerDisplayed)
-            {
-                alpha = 0.0f;
-            }
-            else if (!isLayerOnTop)
-            {
-                alpha = 0.25f;
-            }
-
-            return new Color(Image.color.r, Image.color.g, Image.color.b, alpha);
-        }
-
-        public void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTop)
-        {
-            Image.color = GetLayerAdjustedImageColor(isLayerDisplayed, isLayerOnTop);
-            Label.color = GetLayerAdjustedLabelColor(isLayerDisplayed, isLayerOnTop);
+            Label.color = new Color(Label.color.r, Label.color.g, Label.color.b, LabelAlphaLayerStatus[status]);
+            Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, ImageAlphaLayerStatus[status]);
         }
     }
 }

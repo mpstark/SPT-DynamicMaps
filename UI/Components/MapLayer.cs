@@ -5,21 +5,30 @@ using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
+    public enum LayerStatus
+    {
+        Hidden,
+        Underneath,
+        OnTop,
+    }
+
+    public interface ILayerBound
+    {
+        Vector3 Position { get; set; }
+        void HandleNewLayerStatus(LayerStatus status);
+    }
+
     public class MapLayer : MonoBehaviour
     {
         private static float _fadeMultiplierPerLayer = 0.5f;
         private static float _defaultLevelFallbackAlpha = 0.1f;
-
-        public delegate void LayerDisplayChangeHandler(bool isDisplayed, bool isOnTopLevel);
-        public event LayerDisplayChangeHandler OnLayerDisplayChanged;
 
         public string Name { get; private set; }
         public Image Image { get; private set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         public int Level => _def.Level;
-        public bool IsDisplayed { get; private set; }
-        public bool IsOnTopLevel { get; private set; }
+        public LayerStatus Status { get; private set; }
         public bool IsOnDefaultLevel { get; set; }
 
         private MapLayerDef _def = new MapLayerDef();
@@ -55,11 +64,6 @@ namespace InGameMap.UI.Components
             layer.Image.type = Image.Type.Simple;
 
             return layer;
-        }
-
-        private void OnDestroy()
-        {
-            OnLayerDisplayChanged = null;
         }
 
         public bool IsCoordinateInLayer(Vector3 coordinate)
@@ -98,25 +102,34 @@ namespace InGameMap.UI.Components
 
         public void OnTopLevelSelected(int newLevel)
         {
-            var levelDelta = newLevel - Level;
-            IsOnTopLevel = Level == newLevel;
-            IsDisplayed = Level <= newLevel;
-
-            // hide if not on the level or below
-            gameObject.SetActive(IsDisplayed || IsOnDefaultLevel);
-
-            // change alpha for default level if not only displayed because of it
-            var a = 1f;
-            if (Level > newLevel && IsOnDefaultLevel)
+            Status = LayerStatus.Hidden;
+            if (Level == newLevel)
             {
-                a = _defaultLevelFallbackAlpha;
+                Status = LayerStatus.OnTop;
+            }
+            else if (Level < newLevel)
+            {
+                Status = LayerStatus.Underneath;
             }
 
-            // fade if level is lower than the new level according to difference in level
+            var isActive = true;
+            var levelDelta = newLevel - Level;
             var c = Mathf.Clamp01(Mathf.Pow(_fadeMultiplierPerLayer, levelDelta));
-            Image.color = new Color(c, c, c, a);
+            var a = 1f;
 
-            OnLayerDisplayChanged?.Invoke(IsDisplayed, IsOnTopLevel);
+            if (Status == LayerStatus.Hidden)
+            {
+                isActive = false;
+
+                if (IsOnDefaultLevel)
+                {
+                    a = _defaultLevelFallbackAlpha;
+                    isActive = true;
+                }
+            }
+
+            gameObject.SetActive(isActive);
+            Image.color = new Color(c, c, c, a);
         }
     }
 }
