@@ -133,6 +133,19 @@ namespace InGameMap.UI
             }
         }
 
+        private void OnDisable()
+        {
+            // close isn't called when hidden
+            if (GameUtils.IsInRaid())
+            {
+                OnHideInRaid();
+            }
+            else
+            {
+                OnHideOutOfRaid();
+            }
+        }
+
         internal void Show()
         {
             // make sure that the BSG map is disabled
@@ -156,17 +169,9 @@ namespace InGameMap.UI
 
         internal void Close()
         {
+            // not called when hidden
             _parentTransform.gameObject.SetActive(false);
             gameObject.SetActive(false);
-
-            if (GameUtils.IsInRaid())
-            {
-                OnHideInRaid();
-            }
-            else
-            {
-                OnHideOutOfRaid();
-            }
         }
 
         internal void OnRaidEnd()

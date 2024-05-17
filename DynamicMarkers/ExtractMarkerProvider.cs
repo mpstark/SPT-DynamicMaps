@@ -23,12 +23,26 @@ namespace InGameMap.DynamicMarkers
             foreach (var exfil in exfils)
             {
                 TryAddMarker(map, exfil);
+
+                // update color based on exfil status
+                UpdateExfilStatus(exfil, exfil.Status);
+
+                // subscribe to status changes while map is shown
+                exfil.OnStatusChanged += UpdateExfilStatus;
+                Plugin.Log.LogInfo($"Subscribed to {exfil.Settings.Name.Localized()}");
             }
         }
 
         public void OnHideInRaid(MapView map)
         {
-            // do nothing
+            Plugin.Log.LogInfo($"OnHideInRaid");
+
+            // unsubscribe from updates while map is hidden
+            foreach (var exfil in _extractMarkers.Keys)
+            {
+                exfil.OnStatusChanged -= UpdateExfilStatus;
+                Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.Localized()}");
+            }
         }
 
         public void OnRaidEnd(MapView map)
@@ -58,6 +72,31 @@ namespace InGameMap.DynamicMarkers
             }
         }
 
+        private void UpdateExfilStatus(ExfiltrationPoint exfil, EExfiltrationStatus status)
+        {
+            if (!_extractMarkers.ContainsKey(exfil))
+            {
+                return;
+            }
+
+            var marker = _extractMarkers[exfil];
+            switch (exfil.Status)
+            {
+                case EExfiltrationStatus.NotPresent:
+                    marker.Color = Color.red;
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to red");
+                    break;
+                case EExfiltrationStatus.UncompleteRequirements:
+                    marker.Color = Color.yellow;
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to yellow");
+                    return;
+                default:
+                    marker.Color = Color.green;
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to green");
+                    break;
+            }
+        }
+
         private void TryAddMarker(MapView map, ExfiltrationPoint exfil)
         {
             if (_extractMarkers.ContainsKey(exfil))
@@ -74,13 +113,6 @@ namespace InGameMap.DynamicMarkers
             };
 
             var marker = map.AddMapMarker(markerDef);
-            marker.Color = Color.green;
-
-            if (exfil.Status == EExfiltrationStatus.UncompleteRequirements)
-            {
-                marker.Color = Color.yellow;
-            }
-
             _extractMarkers[exfil] = marker;
         }
 
@@ -90,6 +122,9 @@ namespace InGameMap.DynamicMarkers
             {
                 return;
             }
+
+            exfil.OnStatusChanged -= UpdateExfilStatus;
+            Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.Localized()}");
 
             _extractMarkers[exfil].ContainingMapView.RemoveMapMarker(_extractMarkers[exfil]);
             _extractMarkers.Remove(exfil);
