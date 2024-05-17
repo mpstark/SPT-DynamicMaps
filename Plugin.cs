@@ -27,6 +27,8 @@ namespace InGameMap
 
             // patches
             new MapScreenShowPatch().Enable();
+            // new GameWorldOnGameStartedPatch().Enable();
+            new GameWorldOnDestroyPatch().Enable();
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace InGameMap
                 return;
             }
 
-            Map = ModdedMapScreen.AttachTo(screen.gameObject);
+            Map = ModdedMapScreen.Create(screen.gameObject);
         }
     }
 }

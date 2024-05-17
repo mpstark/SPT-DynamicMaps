@@ -19,6 +19,7 @@ namespace InGameMap.UI.Components
 
         public string Text { get; protected set; }
         public string Category { get; protected set; }
+        public MapView ContainingMapView { get; set; }
 
         public Image Image { get; protected set; }
         public TextMeshProUGUI Label { get; protected set; }

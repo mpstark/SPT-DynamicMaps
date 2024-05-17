@@ -54,6 +54,11 @@ namespace InGameMap.UI.Components
 
         private void Update()
         {
+            if (Player == null)
+            {
+                return;
+            }
+
             // throttle callback, since that leads to a layer search which might be expensive
             _callbackTime += Time.deltaTime;
             var callback = _callbackTime >= _maxCallbackTime;

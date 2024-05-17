@@ -58,10 +58,10 @@ namespace InGameMap.UI.Components
 
         public void OnContainingLayerChanged(bool isLayerDisplayed, bool isLayerOnTop)
         {
-            Label.color = GetLayerAdjustedLabelColor(isLayerDisplayed, isLayerOnTop);
+            Label.color = GetLayerAdjustedColor(isLayerDisplayed, isLayerOnTop);
         }
 
-        private Color GetLayerAdjustedLabelColor(bool isLayerDisplayed, bool isLayerOnTop)
+        private Color GetLayerAdjustedColor(bool isLayerDisplayed, bool isLayerOnTop)
         {
             var alpha = 1f;
             if (!isLayerDisplayed)

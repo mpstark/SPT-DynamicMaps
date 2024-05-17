@@ -13,7 +13,7 @@ namespace InGameMap.UI.Controls
 
         private void Update()
         {
-            var player = GameUtils.GetPlayer();
+            var player = GameUtils.GetMainPlayer();
             if (player == null)
             {
                 return;

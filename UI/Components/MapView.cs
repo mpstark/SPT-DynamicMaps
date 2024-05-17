@@ -69,23 +69,23 @@ namespace InGameMap.UI.Components
             marker.OnPositionChanged += UpdateMarkerLayerStatus;
             UpdateMarkerLayerStatus(marker);  // call immediately
 
+            marker.ContainingMapView = this;
+
             _markers.Add(marker);
         }
 
         public MapMarker AddMapMarker(MapMarkerDef markerDef)
         {
-            var marker = MapMarker.Create(MapMarkerContainer, markerDef, _markerSize, -CoordinateRotation, 1/ZoomCurrent);
+            var marker = MapMarker.Create(MapMarkerContainer, markerDef, _markerSize, -CoordinateRotation, 1f/ZoomCurrent);
             AddMapMarker(marker);
-
             return marker;
         }
 
         public PlayerMapMarker AddPlayerMarker(IPlayer player, string category)
         {
             var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png", category,
-                                                _markerSize, -CoordinateRotation, 1/ZoomCurrent);
+                                                _markerSize, -CoordinateRotation, 1f/ZoomCurrent);
             marker.OnDeathOrDespawn += RemoveMapMarker;
-
             AddMapMarker(marker);
             return marker;
         }
@@ -117,7 +117,7 @@ namespace InGameMap.UI.Components
 
         public void AddMapLabel(MapLabelDef labelDef)
         {
-            var label = MapLabel.Create(MapLabelsContainer, labelDef, -CoordinateRotation, 1/ZoomCurrent);
+            var label = MapLabel.Create(MapLabelsContainer, labelDef, -CoordinateRotation, 1f/ZoomCurrent);
 
             UpdateLabelLayerStatus(label);
 

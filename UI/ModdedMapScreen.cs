@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Comfort.Common;
-using EFT;
 using EFT.UI;
 using InGameMap.Data;
-using InGameMap.Utils;
-using InGameMap.UI.Controls;
+using InGameMap.DynamicMarkers;
 using InGameMap.UI.Components;
+using InGameMap.UI.Controls;
+using InGameMap.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,52 +25,39 @@ namespace InGameMap.UI
         private static Vector2 _maskPositionInRaid = new Vector2(0, -20f);
         private static Vector2 _maskSizeModifierOutOfRaid = new Vector2(0, -70f);
         private static Vector2 _maskPositionOutOfRaid = new Vector2(0, -5f);
-        private static float _positionTextFontSize = 15f;
         private static Vector2 _textAnchor = new Vector2(0f, 1f);
         private static Vector2 _cursorPositionTextOffset = new Vector2(15f, -52f);
         private static Vector2 _playerPositionTextOffset = new Vector2(15f, -68f);
+        private static float _positionTextFontSize = 15f;
 
         public RectTransform RectTransform => gameObject.GetRectTransform();
         private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
 
+        private bool _lastShownInRaid = false;
+
+        // map and transport mechanism
         private ScrollRect _scrollRect;
         private Mask _scrollMask;
         private MapView _mapView;
 
+        // map controls
         private LevelSelectSlider _levelSelectSlider;
         private MapSelectDropdown _mapSelectDropdown;
         private CursorPositionText _cursorPositionText;
         private PlayerPositionText _playerPositionText;
 
-        // TODO: remove this and put it somewhere else
-        private PlayerMapMarker _playerMarker;
-        private Dictionary<IPlayer, PlayerMapMarker> _otherPlayers = new Dictionary<IPlayer, PlayerMapMarker>();
+        // dynamic map marker providers
+        private List<IDynamicMarkerProvider> _dynamicMarkerProviders = new List<IDynamicMarkerProvider>();
 
-        private void Update()
+        internal static ModdedMapScreen Create(GameObject parent)
         {
-            var scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (scroll != 0f)
-            {
-                OnScroll(scroll);
-            }
+            var go = UIUtils.CreateUIGameObject(parent, "ModdedMapBlock");
 
-            if (Input.GetKeyDown(KeyCode.Semicolon))
-            {
-                if (_playerMarker != null)
-                {
-                    var playerPosition = _playerMarker.RectTransform.anchoredPosition;
-                    _mapView.ShiftMapToCoordinate(playerPosition, _positionTweenTime);
-                }
-            }
-        }
+            // set width and height based on parent
+            var rect = parent.GetRectTransform().rect;
+            go.GetRectTransform().sizeDelta = new Vector2(rect.width, rect.height);
 
-        private void OnScroll(float scrollAmount)
-        {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
-
-            var zoomDelta = scrollAmount * _mapView.ZoomCurrent * _scrollZoomScaler;
-            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative);
+            return go.AddComponent<ModdedMapScreen>();
         }
 
         private void Awake()
@@ -120,6 +107,170 @@ namespace InGameMap.UI
             _playerPositionText.RectTransform.anchorMin = _textAnchor;
             _playerPositionText.RectTransform.anchorMax = _textAnchor;
             _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
+            _playerPositionText.gameObject.SetActive(false);
+
+            // add dynamic marker providers
+            _dynamicMarkerProviders.Add(new PlayerMarkerProvider());
+            _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
+        }
+
+        private void Update()
+        {
+            var scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll != 0f)
+            {
+                OnScroll(scroll);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Semicolon))
+            {
+                var player = GameUtils.GetMainPlayer();
+                if (player != null)
+                {
+                    _mapView.ShiftMapToCoordinate(player.Position, _positionTweenTime);
+                }
+            }
+        }
+
+        internal void Show()
+        {
+            // make sure that the BSG map is disabled
+            transform.parent.Find("MapBlock").gameObject.SetActive(false);
+            transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(true);
+            gameObject.SetActive(true);
+
+            // populate map select dropdown
+            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
+
+            if (GameUtils.IsInRaid())
+            {
+                OnShowInRaid();
+            }
+            else
+            {
+                OnShowOutOfRaid();
+            }
+        }
+
+        internal void Close()
+        {
+            _parentTransform.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+
+            if (GameUtils.IsInRaid())
+            {
+                OnHideInRaid();
+            }
+            else
+            {
+                OnHideOutOfRaid();
+            }
+        }
+
+        internal void OnRaidEnd()
+        {
+            Plugin.Log.LogInfo($"OnRaidEnd");
+
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnRaidEnd(_mapView);
+            }
+        }
+
+        private void OnShowInRaid()
+        {
+            if (!_lastShownInRaid)
+            {
+                // ony do the first time that is shown in raid until shown out of raid
+                _lastShownInRaid = true;
+
+                // adjust mask
+                _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
+                _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
+
+                // show player position text
+                _playerPositionText.gameObject.SetActive(true);
+            }
+
+            var mapInternalName = GameUtils.GetCurrentMapInternalName();
+            if (mapInternalName.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            // filter dropdown to only maps containing the internal map name
+            // this forces the load of the first of those
+            _mapSelectDropdown.FilterByInternalMapName(mapInternalName);
+
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnShowInRaid(_mapView, mapInternalName);
+            }
+
+            // rest of this function needs player
+            var player = GameUtils.GetMainPlayer();
+            if (player == null)
+            {
+                return;
+            }
+
+            // select layers to show
+            _mapView.SelectLevelByCoords(MathUtils.UnityPositionToMapPosition(player.Position));
+
+            // shift map to player position, Vector3 to Vector2 discards z
+            // TODO: this is annoying, but need something like it
+            // _mapView.ShiftMapToCoordinate(mapPosition, 0);
+        }
+
+        private void OnHideInRaid()
+        {
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnHideInRaid(_mapView);
+            }
+        }
+
+        private void OnShowOutOfRaid()
+        {
+            if (_lastShownInRaid)
+            {
+                // only do if adjusting from viewing in raid
+
+                // adjust mask
+                _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
+                _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
+
+                // clear filter on dropdown
+                _mapSelectDropdown.ClearFilter();
+
+                // hide player position text
+                _playerPositionText.gameObject.SetActive(false);
+
+                _lastShownInRaid = false;
+            }
+
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnShowOutOfRaid(_mapView);
+            }
+        }
+
+        private void OnHideOutOfRaid()
+        {
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnHideOutOfRaid(_mapView);
+            }
+        }
+
+        private void OnScroll(float scrollAmount)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
+
+            var zoomDelta = scrollAmount * _mapView.ZoomCurrent * _scrollZoomScaler;
+            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative);
         }
 
         private void ChangeMap(MapDef mapDef)
@@ -135,121 +286,11 @@ namespace InGameMap.UI
 
             _mapSelectDropdown.OnLoadMap(mapDef);
             _levelSelectSlider.OnLoadMap(mapDef, _mapView.SelectedLevel);
-        }
 
-        private void ShowInRaid()
-        {
-            // adjust mask
-            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
-            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
-
-            // filter dropdown to only maps containing the internal map name
-            // this forces the load of the first of those
-            _mapSelectDropdown.FilterByInternalMapName(GameUtils.GetCurrentMap());
-
-            // TODO: this should be in another place
-            // create player marker if one doesn't already exist
-            var player = GameUtils.GetPlayer();
-            if (_playerMarker == null)
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                _playerMarker = _mapView.AddPlayerMarker(player, "player");
-                _playerMarker.Color = Color.green;
+                dynamicProvider.OnMapChanged(_mapView, mapDef);
             }
-
-            // TODO: remove this
-            // test bot markers
-            var gameWorld = Singleton<GameWorld>.Instance;
-            if (gameWorld.AllAlivePlayersList.Count > 1)
-            {
-                foreach (var person in gameWorld.AllAlivePlayersList)
-                {
-                    if (person.IsYourPlayer || _otherPlayers.ContainsKey(person))
-                    {
-                        continue;
-                    }
-
-                    var botMarker = _mapView.AddPlayerMarker(person, "bots");
-                    botMarker.Color = (person.Fraction == ETagStatus.Scav)
-                                    ? Color.Lerp(Color.yellow, Color.red, 0.5f)
-                                    : Color.red;
-                    person.OnIPlayerDeadOrUnspawn += (bot) => _otherPlayers.Remove(bot);
-                    _otherPlayers[person] = botMarker;
-                }
-            }
-
-            // select layers to show
-            var mapPosition = MathUtils.UnityPositionToMapPosition(player.Position);
-            _mapView.SelectLevelByCoords(mapPosition);
-
-            // shift map to player position, Vector3 to Vector2 discards z
-            // TODO: this is annoying, but need something like it
-            // _mapView.ShiftMapToCoordinate(mapPosition, 0);
-
-            // show player position text
-            _playerPositionText.gameObject.SetActive(true);
-        }
-
-        private void ShowOutOfRaid()
-        {
-            // adjust mask
-            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
-            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
-
-            // clear filter on dropdown
-            _mapSelectDropdown.ClearFilter();
-
-            // hide player position text
-            _playerPositionText.gameObject.SetActive(false);
-
-            // TODO: remove this
-            if (_playerMarker != null)
-            {
-                _mapView.RemoveMapMarker(_playerMarker);
-            }
-            foreach (var botMarker in _otherPlayers.Values)
-            {
-                _mapView.RemoveMapMarker(botMarker);
-            }
-            _otherPlayers.Clear();
-        }
-
-        internal void Show()
-        {
-            // make sure that the BSG map is disabled
-            transform.parent.Find("MapBlock").gameObject.SetActive(false);
-            transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
-            transform.parent.gameObject.SetActive(true);
-            gameObject.SetActive(true);
-
-            // populate map select dropdown
-            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
-
-            // check if raid
-            var game = Singleton<AbstractGame>.Instance;
-            if (game != null && game.InRaid)
-            {
-                ShowInRaid();
-                return;
-            }
-
-            ShowOutOfRaid();
-        }
-
-        internal void Close()
-        {
-            _parentTransform.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-        }
-
-        internal static ModdedMapScreen AttachTo(GameObject parent)
-        {
-            var go = UIUtils.CreateUIGameObject(parent, "ModdedMapBlock");
-
-            // set width and height based on parent
-            var rect = parent.GetRectTransform().rect;
-            go.GetRectTransform().sizeDelta = new Vector2(rect.width, rect.height);
-
-            return go.AddComponent<ModdedMapScreen>();
         }
     }
 }
