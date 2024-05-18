@@ -18,7 +18,7 @@
             "GameBounds": [
                 {
                     "Min": {"x": -364, "y": -439, "z": -100},
-                    "Max": {"x": 530, "y": 452, "z": 25}
+                    "Max": {"x": 530, "y": 452, "z": 100}
                 }
             ]
         },
@@ -129,6 +129,206 @@
             "Position": { "x": -47.73, "y": 44.055, "z": 22.97 },
             "Category": "PMCExtract-OutOfRaid",
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 120.522446, "y": 264.0845, "z": 23.11745 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -315.70105, "y": 273.830017, "z": 23.2414722 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -75.42049, "y": -350.62204, "z": 23.284 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -169.2236, "y": -263.7742, "z": 23.3294353 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 44.14279, "y": 249.9005, "z": 23.2839966 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 253.9284, "y": 87.3542252, "z": 23.2839966 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 410.39032, "y": -375.860138, "z": 20.9703865 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 281.905, "y": 18.3905926, "z": 23.10414 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 97.20081, "y": 218.936737, "z": 23.1074467 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Power Substation Utility Cabin",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -223.115845, "y": -271.3501, "z": 22.55412 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5d49886f77455f9731921"
+        },
+        {
+            "Text": "ULTRA Medical Storage",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 67.55801, "y": 40.891, "z": 37.60174 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5e42c71586f7747f245e1343"
+        },
+        {
+            "Text": "Kiba Arms Inner Grate",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -9.887001, "y": -33.76517, "z": 28.241 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5addaffe86f77470b455f900"
+        },
+        {
+            "Text": "Kiba Arms Outer Door",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -9.444001, "y": -33.709, "z": 28.241 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5d7d286f77450166e0a89"
+        },
+        {
+            "Text": "Object #11SR Saferoom",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -51.9328041, "y": 45.8337746, "z": 22.35359 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5e42c81886f7742a01529f57"
+        },
+        {
+            "Text": "Object #21WS",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 140.195663, "y": 263.315277, "z": 25.2079964 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5e42c83786f7742a021fdf3c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -53.2254944, "y": -70.3720856, "z": 29.0856476 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "NecrusPharm Pharmacy",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 68.53804, "y": -255.424225, "z": 22.4947357 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5d64486f774079b080af8"
+        },
+        {
+            "Text": "Emercom Medical Unit",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 24.136982, "y": -112.8551, "z": 28.4790325 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5db3786f7743568421cce"
+        },
+        {
+            "Text": "Emercom Medical Unit",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 34.14116, "y": -108.287651, "z": 28.4790325 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5db3786f7743568421cce"
+        },
+        {
+            "Text": "Emercom Medical Unit",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 6.732233, "y": -107.304314, "z": 28.4790344 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5db3786f7743568421cce"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -158.200043, "y": 57.2228241, "z": 23.2835026 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -90.1167145, "y": 114.827461, "z": 23.29 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "OLI Logistics Office",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 83.1990051, "y": 115.673004, "z": 28.1199989 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5cfbd86f7742c825d6104"
+        },
+        {
+            "Text": "OLI Outlet Utility Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -102.823967, "y": 80.48102, "z": 28.12 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5d20586f77449be26d877"
+        },
+        {
+            "Text": "OLI Admin Office",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 85.18402, "y": 104.638214, "z": 28.1199989 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5ad5ccd186f774446d5706e9"
         }
     ]
 }

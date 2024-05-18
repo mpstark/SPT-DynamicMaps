@@ -359,6 +359,12 @@ namespace InGameMap.UI.Components
         private void UpdateLayerBound(ILayerBound bound)
         {
             var layer = FindMatchingLayerByCoordinate(bound.Position);
+            if (layer == null)
+            {
+                Plugin.Log.LogWarning($"No valid layer found for position: {bound.Position}! Check Game Bounds!");
+                return;
+            }
+
             bound.HandleNewLayerStatus(layer.Status);
         }
 

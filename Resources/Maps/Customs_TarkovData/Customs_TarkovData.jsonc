@@ -162,7 +162,7 @@
         },
         {
             "Text": "Streamer House",
-            "Position": {"x": 567, "y": -67, "z": 0},
+            "Position": {"x": 567, "y": -67, "z": 0}
         },
         {
             "Text": "Main Bridge",
@@ -172,7 +172,7 @@
         },
         {
             "Text": "Sniper Hill",
-            "Position": {"x": 110, "y": 85, "z": 0},
+            "Position": {"x": 110, "y": 85, "z": 0}
         },
         {
             "Text": "Storage",
@@ -191,7 +191,7 @@
         },
         {
             "Text": "Repair Shop",
-            "Position": {"x": 106, "y": -90, "z": 0},
+            "Position": {"x": 106, "y": -90, "z": 0}
         },
         {
             "Text": "Sniper Ridge",
@@ -666,7 +666,7 @@
         },
         {
             "Text": "Orange Tanker Truck",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/car_door.png",
             "Position": { "x": 101.818916, "y": -5.54527664, "z": 3.44780731 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

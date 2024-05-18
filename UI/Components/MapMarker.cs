@@ -14,7 +14,7 @@ namespace InGameMap.UI.Components
         private static float _markerMinFontSize = 9f;
         private static float _markerMaxFontSize = 13f;
 
-        public event Action<MapMarker> OnPositionChanged;
+        public event Action<ILayerBound> OnPositionChanged;
 
         public string Text { get; protected set; }
         public string Category { get; protected set; }
