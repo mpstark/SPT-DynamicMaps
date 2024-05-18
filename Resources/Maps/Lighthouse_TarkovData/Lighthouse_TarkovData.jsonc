@@ -2,31 +2,222 @@
     "DisplayName": "Lighthouse (TarkovData)",
     "Author": "Shebuka",
     "AuthorLink": "https://github.com/TarkovTracker/tarkovdata/",
-    "MapInternalNames": [ "" ],
-    "CoordinateRotation": 90,
+    "MapInternalNames": [ "Lighthouse" ],
+    "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -66.5, "y": -64.5},
-        "Max": {"x": 79, "y": 67.4}
+        "Min": {"x": -545, "y": -998},
+        "Max": {"x": 515, "y": 725}
     },
     "DefaultLevel": 0,
     "Layers": {
-        "Tunnels": {
-            "Level": -1,
-            "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
+        "Ground Floor": {
+            "Level": 0,
+            "ImagePath": "Maps/Lighthouse_TarkovData/Layers/lighthouse_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -545, "y": -998},
+                "Max": {"x": 515, "y": 725}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -100},
-                    "Max": {"x": 79, "y": 67.4, "z": -1}
+                    "Min": {"x": -545, "y": -998, "z": -100},
+                    "Max": {"x": 515, "y": 725, "z": 100}
                 }
             ]
-        },
+        }
     },
     "Labels": [
     ],
     "StaticMarkers": [
+        {
+            "Text": "Side Tunnel (Co-Op)",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -68.3, "y": 318.11, "z": 6.83 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Southern Road Landslide",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -281.3, "y": 420.8, "z": 11.86 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Hideout Under the Landing Stage",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 133.068, "y": 286.842, "z": -0.467 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Scav Hideout at the Grotto",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 180.66, "y": -485.94, "z": 1.18 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Industrial Zone Gates",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -152.56, "y": -794.1, "z": 12.25 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Road to Military Base V-Ex",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -328.951263, "y": -784.3581, "z": 16.73 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Mountain Pass",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -172.35, "y": -6.39, "z": 41.89 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Path to Shoreline",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -364.4, "y": -121.4, "z": 28.758 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Northern Checkpoint",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 111.943, "y": -991.981, "z": 11.86 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Southern Road",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -295.8, "y": 420.6, "z": 11.86 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Armored Train",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 6.27001953, "y": -873.78, "z": 14.1133 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        // {
+        //     "Text": "OuterSwitcher",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": 445.3035, "y": 457.5599, "z": 33.391 },
+        //     "Category": "Switch"
+        // },
+        // {
+        //     "Text": "InnerSwitcher",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": 444.6317, "y": 457.6145, "z": 33.391 },
+        //     "Category": "Switch"
+        // },
+        // {
+        //     "Text": "railing_door 1",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": 445.426117, "y": 458.187561, "z": 32.1270027 },
+        //     "Category": "Switch"
+        // },
+        {
+            "Text": "Convenience Store Storage Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -58.5892944, "y": -292.9962, "z": 6.55390024 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61a64428a8c6aa1b795f0ba1"
+        },
+        {
+            "Text": "Shared Bedroom",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 328.6411, "y": 487.244019, "z": 6.041643 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62987dfc402c7f69bf010923"
+        },
+        {
+            "Text": "Conference Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 333.8, "y": 519.1168, "z": 6.0705 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62987cb98081af308d7558c8"
+        },
+        {
+            "Text": "Merin Trunk",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 91.1099854, "y": -130.918991, "z": 8.382999 },
+            "Category": "Locked",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61aa5b518f5e7a39b41416e2"
+        },
+        {
+            "Text": "Radar Station Commandant Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 355.204, "y": 549.386963, "z": 16.545002 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62987c658081af308d7558c6"
+        },
+        {
+            "Text": "Hillside House",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -147.043427, "y": -243.326172, "z": 12.66918 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61a6444b8c141d68246e2d2f"
+        },
+        {
+            "Text": "Operating Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 32.899, "y": -636.186, "z": 5.93999767 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62987da96188c076bc0d8c51"
+        },
+        {
+            "Text": "Water Treatment Plant Storage Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -120.901962, "y": -736.4641, "z": 5.938982 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62987e26a77ec735f90a2995"
+        },
+        {
+            "Text": "Rogue USEC Barrack",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -176.519043, "y": -654.164063, "z": 5.939995 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "62a9cb937377a65d7b070cef"
+        },
+        {
+            "Text": "Police Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": 83.79875, "y": -553.2562, "z": 6.61099958 },
+            "Category": "Locked",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61aa5aed32a4743c3453d319"
+        },
+        {
+            "Text": "Rogue USEC Workshop",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -168.6745, "y": -497.287079, "z": 5.798998 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61aa81fcb225ac1ead7957c3"
+        },
+        {
+            "Text": "Rogue USEC Stash",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 47.3759, "y": -553.3956, "z": 5.67344 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "61a64492ba05ef10d62adcc1"
+        }
     ]
 }

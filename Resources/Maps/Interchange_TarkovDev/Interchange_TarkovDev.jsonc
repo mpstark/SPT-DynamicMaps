@@ -118,8 +118,8 @@
             "Text": "Scav Camp (Co-Op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 284.442, "y": -27.493, "z": 21.94955 },
-            "Category": "PMCExtract-OutOfRaid",
-            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
         },
         {
             "Text": "Hole in the Fence",
@@ -134,78 +134,6 @@
             "Position": { "x": -47.73, "y": 44.055, "z": 22.97 },
             "Category": "PMCExtract-OutOfRaid",
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 120.522446, "y": 264.0845, "z": 23.11745 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -315.70105, "y": 273.830017, "z": 23.2414722 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -75.42049, "y": -350.62204, "z": 23.284 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -169.2236, "y": -263.7742, "z": 23.3294353 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 44.14279, "y": 249.9005, "z": 23.2839966 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 253.9284, "y": 87.3542252, "z": 23.2839966 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 410.39032, "y": -375.860138, "z": 20.9703865 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 281.905, "y": 18.3905926, "z": 23.10414 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": 97.20081, "y": 218.936737, "z": 23.1074467 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
         },
         {
             "Text": "Power Substation Utility Cabin",
@@ -256,14 +184,6 @@
             "ExtraInfo": "5e42c83786f7742a021fdf3c"
         },
         {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -53.2254944, "y": -70.3720856, "z": 29.0856476 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
             "Text": "NecrusPharm Pharmacy",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": 68.53804, "y": -255.424225, "z": 22.4947357 },
@@ -294,22 +214,6 @@
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "ExtraInfo": "5ad5db3786f7743568421cce"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -158.200043, "y": 57.2228241, "z": 23.2835026 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
-        },
-        {
-            "Text": "Car",
-            "ImagePath": "Markers/car_door.png",
-            "Position": { "x": -90.1167145, "y": 114.827461, "z": 23.29 },
-            "Category": "LockedDoor",
-            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
         },
         {
             "Text": "OLI Logistics Office",

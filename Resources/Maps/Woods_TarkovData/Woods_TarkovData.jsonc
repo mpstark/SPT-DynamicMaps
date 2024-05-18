@@ -2,31 +2,167 @@
     "DisplayName": "Woods (TarkovData)",
     "Author": "Shebuka",
     "AuthorLink": "https://github.com/TarkovTracker/tarkovdata/",
-    "MapInternalNames": [ "" ],
-    "CoordinateRotation": 90,
+    "MapInternalNames": [ "Woods" ],
+    "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -66.5, "y": -64.5},
-        "Max": {"x": 79, "y": 67.4}
+        "Min": {"x": -695, "y": -945},
+        "Max": {"x": 650, "y": 470}
     },
     "DefaultLevel": 0,
     "Layers": {
-        "Tunnels": {
-            "Level": -1,
-            "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
+        "Ground Level": {
+            "Level": 0,
+            "ImagePath": "Maps/Woods_TarkovData/Layers/woods_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -695, "y": -945},
+                "Max": {"x": 650, "y": 470}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -100},
-                    "Max": {"x": 79, "y": 67.4, "z": -1}
+                    "Min": {"x": -695, "y": -945, "z": -100},
+                    "Max": {"x": 650, "y": 470, "z": 100}
                 }
             ]
-        },
+        }
     },
     "Labels": [
     ],
     "StaticMarkers": [
+        {
+            "Text": "Factory Gate (Co-Op)",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -363.8, "y": 365.53, "z": 1.43 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Scav Bridge",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 91.19565, "y": -855.499634, "z": 19.8512688 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Dead Man's Place",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 195.550049, "y": 259.210022, "z": -20.72 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Boat",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 176.640015, "y": 215.859985, "z": -20.72 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Scav House",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 413.47998, "y": 240.5, "z": -12.875 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Scav Bunker",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 220.426651, "y": -705.7956, "z": 20.538269 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Mountain Stash",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -206.59436, "y": -215.9796, "z": 31.47127 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Eastern Rocks",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -509.364319, "y": -35.3295975, "z": 23.9912682 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "Old Railway Depot",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -517.93, "y": 149.19, "z": 10.67 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Category": "ScavExtract-OutOfRaid"
+        },
+        {
+            "Text": "RUAF Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -134.26001, "y": 419.8, "z": -2.37 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "ZB-016",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -389.159973, "y": 11.0449905, "z": 4.147001 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "ZB-014",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 447.659973, "y": 57.46, "z": -13.46346 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "UN Roadblock",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -527.8743, "y": 288.2304, "z": 1.68126917 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "Bridge V-Ex",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -484.5639, "y": -506.413239, "z": 15.5812693 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "Outskirts",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 347.315643, "y": 347.0304, "z": -9.148731 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "Northern UN Roadblock",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -561.1143, "y": -58.7096, "z": 9.321269 },
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
+            "Category": "PMCExtract-OutOfRaid"
+        },
+        {
+            "Text": "Yotota Car",
+            "ImagePath": "Markers/car_door.png",
+            "Position": { "x": -0.1508789, "y": -61.946167, "z": -0.680201769 },
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "591ae8f986f77406f854be45"
+        },
+        {
+            "Text": "ZB-014",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 448.623047, "y": 65.5839844, "z": -13.269 },
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "591afe0186f77431bd616a11"
+        },
+        // {
+        //     "Text": "Shtrman's Stash",
+        //     "ImagePath": "Markers/locked_door.png",
+        //     "Position": { "x": 25.1087952, "y": -29.55574, "z": -1.47199988 },
+        //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+        //     "Category": "LockedDoor",
+        //     "ExtraInfo": "5d08d21286f774736e7c94c3"
+        // }
     ]
 }

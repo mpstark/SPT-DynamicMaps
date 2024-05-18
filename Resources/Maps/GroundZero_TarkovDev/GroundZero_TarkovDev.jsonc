@@ -2,31 +2,132 @@
     "DisplayName": "Ground Zero (TarkovDev)",
     "Author": "Tarkov.dev",
     "AuthorLink": "https://tarkov.dev",
-    "MapInternalNames": [ "" ],
-    "CoordinateRotation": 90,
+    "MapInternalNames": [ "Sandbox" ],
+    "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -66.5, "y": -64.5},
-        "Max": {"x": 79, "y": 67.4}
+        "Min": {"x": -99, "y": -124},
+        "Max": {"x": 249, "y": 364}
     },
     "DefaultLevel": 0,
     "Layers": {
-        "Tunnels": {
+        "Garage": {
             "Level": -1,
-            "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
+            "ImagePath": "Maps/GroundZero_TarkovDev/Layers/ground_zero_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -99, "y": -124},
+                "Max": {"x": 249, "y": 364}
             },
             "GameBounds": [
-                {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -100},
-                    "Max": {"x": 79, "y": 67.4, "z": -1}
+                {   // garage
+                    "Min": {"x": 43, "y": -100, "z": -100},
+                    "Max": {"x": 117, "y": 190, "z": 21}
+                },
+                {   // underpass
+                    "Min": {"x": 117, "y": 49, "z": -100},
+                    "Max": {"x": 143, "y": 80, "z": 21}
                 }
             ]
         },
+        "Ground Floor": {
+            "Level": 0,
+            "ImagePath": "Maps/GroundZero_TarkovDev/Layers/ground_zero_layer_0.png",
+            "ImageBounds": {
+                "Min": {"x": -99, "y": -124},
+                "Max": {"x": 249, "y": 364}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -99, "y": -124, "z": -100},
+                    "Max": {"x": 249, "y": 364, "z": 100}
+                }
+            ]
+        },
+        "2nd Floor": {
+            "Level": 1,
+            "ImagePath": "Maps/GroundZero_TarkovDev/Layers/ground_zero_layer_1.png",
+            "ImageBounds": {
+                "Min": {"x": -99, "y": -124},
+                "Max": {"x": 249, "y": 364}
+            },
+            "GameBounds": [
+                {   // rest of 2nd floor
+                    "Min": {"x": -99, "y": -124, "z": 28},
+                    "Max": {"x": 249, "y": 364, "z": 32.3}
+                },
+                {   // m showroom
+                    "Min": {"x": 91, "y": 216, "z": 26},
+                    "Max": {"x": 98, "y": 228, "z": 31}
+                }
+            ]
+        },
+        "3rd Floor": {
+            "Level": 2,
+            "ImagePath": "Maps/GroundZero_TarkovDev/Layers/ground_zero_layer_2.png",
+            "ImageBounds": {
+                "Min": {"x": -99, "y": -124},
+                "Max": {"x": 249, "y": 364}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -99, "y": -124, "z": 32.3},
+                    "Max": {"x": 249, "y": 364, "z": 100}
+                }
+            ]
+        }
     },
     "Labels": [
     ],
     "StaticMarkers": [
+        {
+            "Text": "Scav Checkpoint (Co-op)",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 26.1550121, "y": -82.52659, "z": 24.5091858 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Police Cordon V-Ex",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -19.5134068, "y": 114.942139, "z": 23.7110023 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Emercom Checkpoint",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 151.625, "y": -97.45658, "z": 24.662056 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Nakatani Basement Stairs",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -16.1249924, "y": 335.063416, "z": 14.7620564 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Mira Ave",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 218.225, "y": -38.5065842, "z": 17.9920559 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Underground Parking Utility Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 107.056, "y": 50.6362534, "z": 13.499 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0},
+            "ExtraInfo": "658199972dc4e60f6d556a2f"
+        },
+        {
+            "Text": "TerraGroup Science Offices",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -17.975647, "y": 58.5532341, "z": 30.7062054 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0},
+            "ExtraInfo": "658199aa38c79576a2569e13"
+        }
     ]
 }

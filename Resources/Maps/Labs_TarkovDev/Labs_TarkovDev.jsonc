@@ -2,28 +2,56 @@
     "DisplayName": "Labs (TarkovDev)",
     "Author": "Tarkov.dev",
     "AuthorLink": "https://tarkov.dev",
-    "MapInternalNames": [ "" ],
-    "CoordinateRotation": 90,
+    "MapInternalNames": [ "laboratory" ],
+    "CoordinateRotation": 270,
     "Bounds": {
-        "Min": {"x": -66.5, "y": -64.5},
-        "Max": {"x": 79, "y": 67.4}
+        "Min": {"x": -287, "y": -477},
+        "Max": {"x": -91, "y": -193}
     },
     "DefaultLevel": 0,
     "Layers": {
-        "Tunnels": {
+        "Technical": {
             "Level": -1,
-            "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
+            "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -287, "y": -477},
+                "Max": {"x": -91, "y": -193}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -100},
-                    "Max": {"x": 79, "y": 67.4, "z": -1}
+                    "Min": {"x": -287, "y": -477, "z": -100},
+                    "Max": {"x": -91, "y": -193, "z": -0.9}
                 }
             ]
         },
+        "First Level": {
+            "Level": 0,
+            "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_0.png",
+            "ImageBounds": {
+                "Min": {"x": -287, "y": -477},
+                "Max": {"x": -91, "y": -193}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -287, "y": -477, "z": -0.9},
+                    "Max": {"x": -91, "y": -193, "z": 3}
+                }
+            ]
+        },
+        "Second Level": {
+            "Level": 1,
+            "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_1.png",
+            "ImageBounds": {
+                "Min": {"x": -287, "y": -477},
+                "Max": {"x": -91, "y": -193}
+            },
+            "GameBounds": [
+                {
+                    "Min": {"x": -271, "y": -422, "z": -3},
+                    "Max": {"x": -101, "y": -270, "z": 100}
+                }
+            ]
+        }
     },
     "Labels": [
     ],
