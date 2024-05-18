@@ -1,6 +1,12 @@
-Default map data used is from TarkovTracker/tarkovData: https://github.com/TarkovTracker/tarkovdata/
-Online maps using this data are here: https://tarkov.dev/maps/
-Additional map data gotten from Tarkov.dev
+Default map data used is from:
+  - TarkovTracker/tarkovData: https://github.com/TarkovTracker/tarkovdata/
+  - TarkovDev: https://github.com/the-hideout/tarkov-dev
+
+Interactive web maps using this data are here: https://tarkov.dev/maps/
+
+All marker data was datamined by this program, but additional info about those markers
+gotten from the above sources.
+
 
 Tarkov.dev License
 ---
