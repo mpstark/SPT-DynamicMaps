@@ -28,12 +28,20 @@ namespace InGameMap.UI.Controls
 
             set
             {
-                if (_selectedLevel == value)
+                if (_selectedLevel == value && !_levels.Contains(value))
                 {
                     return;
                 }
 
-                _scrollbar.value = _levels.IndexOf(value) / (_levels.Count - 1f);
+                if (_levels.Count == 1)
+                {
+                    _scrollbar.value = 0.5f;
+                }
+                else
+                {
+                    _scrollbar.value = _levels.IndexOf(value) / (_levels.Count - 1f);
+                }
+
                 _text.text = $"Level {value}";
                 _selectedLevel = value;
             }
@@ -114,6 +122,12 @@ namespace InGameMap.UI.Controls
 
         private void OnScrollbarChanged(float newValue)
         {
+            if (_levels.Count == 1)
+            {
+                _scrollbar.value = 0.5f;
+                return;
+            }
+
             var levelIndex = Mathf.RoundToInt(newValue * (_levels.Count - 1));
             var level = _levels[levelIndex];
             if (_selectedLevel != int.MinValue && _selectedLevel != level)
@@ -150,6 +164,12 @@ namespace InGameMap.UI.Controls
 
             _scrollbar.numberOfSteps = _levels.Count();
             SelectedLevel = initialLevel;
+
+            if (_levels.Count() == 1)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
 
             gameObject.SetActive(true);
         }
