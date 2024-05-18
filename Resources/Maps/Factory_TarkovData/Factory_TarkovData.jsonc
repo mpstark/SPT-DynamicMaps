@@ -65,13 +65,144 @@
             ]
         }
     },
+    "Labels": [
+        {
+            "Text": "Office Building",
+            "Position": {"x": 21, "y": 39, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Med Tent",
+            "Position": {"x": -18, "y": -28, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Silos",
+            "Position": {"x": 4.5, "y": 10.5, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Heli Crash",
+            "Position": {"x": 30, "y": -8.5, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Scav Bunker",
+            "Position": {"x": -20.5, "y": 23, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Blue Containers",
+            "Position": {"x": -18, "y": 50, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Glass Hall",
+            "Position": {"x": 70.7, "y": -20, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Boilers",
+            "Position": {"x": 58, "y": 6.3, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Forklifts",
+            "Position": {"x": 66, "y": -42, "z": 0},
+            "FontSize": 14
+        },
+
+    ],
     "StaticMarkers": [
         {
-            "Text": "Sealed Letter",
-            "ImagePath": "Markers/switch.png",
-            "Position": {"x": -18.83, "y": 21.66, "z": 0},
-            "Category": "Switch",
-            "Pivot": {"x": 1, "y": 0.5}
+            "Text": "Camera Bunker Door",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -14.5749989, "y": 40.36, "z": -2.086 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Office Window",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 17.8332214, "y": 39.8851128, "z": 8.730333 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Cellars",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 77.529, "y": -28.891, "z": -4.657 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Gate 3",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 58.709, "y": 64.112, "z": 0.84 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Gate 0",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -63.7400055, "y": 55.902, "z": 1.749 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Med Tent Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -18.4857769, "y": -60.1718826, "z": 1.16133332 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Locked Office",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 29.2459984, "y": 36.52492, "z": 9.155067 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
+        },
+        {
+            "Text": "Pumping Station",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 43.1875839, "y": -14.1608534, "z": 1.01413012 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "57a349b2245977762b199ec7",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
+        },
+        {
+            "Text": "Gate 0",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -53.754, "y": 58.93033, "z": 2.33300042 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
+        },
+        {
+            "Text": "Cellars",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 66.42518, "y": -29.8983536, "z": -1.53579187 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
+        },
+        {
+            "Text": "Pumping Station",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 40.9448547, "y": -6.261415, "z": 0.9631303 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "593858c486f774253a24cb52",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
+        },
+        {
+            "Text": "Med Tent",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -20.3113289, "y": -49.138, "z": 1.27600038 },
+            "Category": "LockedDoor",
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         }
     ]
 }

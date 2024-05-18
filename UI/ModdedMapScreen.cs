@@ -132,9 +132,11 @@ namespace InGameMap.UI
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftAlt))
             {
-                GameUtils.DumpExtracts();
+                DumpUtils.DumpExtracts();
+                DumpUtils.DumpSwitches();
+                DumpUtils.DumpLocks();
             }
         }
 
@@ -202,6 +204,9 @@ namespace InGameMap.UI
 
                 // show player position text
                 _playerPositionText.gameObject.SetActive(true);
+
+                // toggle out of raid only things, like extracts, since we're dynamically adding those
+                _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", false);
             }
 
             var mapInternalName = GameUtils.GetCurrentMapInternalName();
@@ -259,6 +264,9 @@ namespace InGameMap.UI
                 _playerPositionText.gameObject.SetActive(false);
 
                 _lastShownInRaid = false;
+
+                // toggle out of raid only things, like extracts, since we're dynamically adding those
+                _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", true);
             }
 
             foreach (var dynamicProvider in _dynamicMarkerProviders)
@@ -302,6 +310,9 @@ namespace InGameMap.UI
             {
                 dynamicProvider.OnMapChanged(_mapView, mapDef);
             }
+
+            // toggle out of raid only things, like extracts, since we're dynamically adding those
+            _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", !GameUtils.IsInRaid());
         }
     }
 }

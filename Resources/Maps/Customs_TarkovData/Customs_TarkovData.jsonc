@@ -253,9 +253,448 @@
     "StaticMarkers": [
         {
             "Text": "ZB-013 Switch",
-            "ImagePath": "Markers/switch.png",
-            "Position": {"x": 352.22, "y": -40.79, "z": -1},
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": 352.230316, "y": -40.8052826, "z": 2.61458874 },
             "Category": "Switch"
+        },
+        {
+            "Text": "Military Base CP",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 643.3982, "y": 126.869247, "z": 2.400003 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Passage Between Rocks",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 539.394, "y": 200.3388, "z": 11.8200016 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Railroad to Military Base",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 489.058228, "y": 221.391266, "z": 3.950006 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Old Road Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 181.769958, "y": 214.01001, "z": 1.4999938 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Sniper Roadblock",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 15.3699341, "y": 127.94, "z": 0.139977932 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Railroad to Port",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -142.550232, "y": 46.9100037, "z": -0.629980564 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Crossroads",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -331.090271, "y": -85.24008, "z": 2.19002676 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Trailer Park Workers' Shack",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -248.540222, "y": -232.9901, "z": 2.550012 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Railroad to Tarkov",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -166.020264, "y": -218.380112, "z": 2.42000723 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Warehouse 17",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 45.9998779, "y": -78.43004, "z": 3.61000967 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Factory Shacks",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 205.5899, "y": 3.31001282, "z": 3.719995 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Warehouse 4",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 341.569946, "y": -25.84999, "z": 3.550012 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Old Gas Station Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 301.639923, "y": -197.940048, "z": 3.469995 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Factory Far Corner",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 654.53, "y": -160.49, "z": 3.19999838 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Administration Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 671.13, "y": -54.6699753, "z": 3.19999838 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "Scav Checkpoint",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 652.24, "y": -27.1200027, "z": 1.00499988 },
+            "Category": "ScavExtract-OutOfRaid",
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
+        },
+        {
+            "Text": "ZB-013",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 200.9755, "y": -153.086456, "z": -1.1484108 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Dorms V-Ex",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 181.08, "y": 213.25, "z": -0.71 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "ZB-1011",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 621.4368, "y": -127.700775, "z": -2.65 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Crossroads",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -335.120239, "y": -73.98008, "z": -3.97000742 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Old Gas Station",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 309.499634, "y": -174.320175, "z": -2.182013 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Trailer Park",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -313.720276, "y": -233.2801, "z": -1.72000742 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "RUAF Roadblock",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -14.5001221, "y": -138.450043, "z": 1.92000723 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Smuggler's Boat",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -43.11017, "y": 119.40004, "z": -14.2250118 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "ZB-1012",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": 459.427826, "y": -111.042969, "z": -2.31699228 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Tarcone Director's Office",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -205.499237, "y": -109.994392, "z": 8.110943 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780d0532459777a5108b9a2"
+        },
+        {
+            "Text": "Portable Cabin",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -251.320953, "y": -221.941071, "z": 3.85700083 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780d07a2459777de4559324"
+        },
+        {
+            "Text": "Trailer Park Portable Cabin",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -194.560135, "y": -207.398911, "z": 2.34600019 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5913611c86f77479e0084092"
+        },
+        {
+            "Text": "Factory Shortcut",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 356.052551, "y": -14.5693512, "z": 2.34000182 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Unknown Cabin",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 370.014923, "y": -50.08902, "z": 2.15399933 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "593962ca86f774068014d9af"
+        },
+        {
+            "Text": "Factory Shortcut",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 356.957367, "y": -8.079105, "z": 2.14515162 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Dorm 114",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 233.549591, "y": 159.682587, "z": 0.889000237 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "59387a4986f77401cc236e62"
+        },
+        {
+            "Text": "Dorm 206",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 230.641281, "y": 138.671631, "z": 3.86939716 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5938603e86f77435642354f4"
+        },
+        {
+            "Text": "Dorm 105",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 227.877258, "y": 135.61264, "z": 0.8901995 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "591382d986f774465a6413a7"
+        },
+        {
+            "Text": "Dorm 110",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 231.0886, "y": 159.435349, "z": 0.910999358 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "59136e1e86f774432f15d133"
+        },
+        {
+            "Text": "Dorm 104",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 230.101257, "y": 134.913879, "z": 0.8860002 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "591383f186f7744a4c5edcf3"
+        },
+        {
+            "Text": "Dorm Guard Desk",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 225.517273, "y": 138.366241, "z": 0.8858002 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "59136a4486f774447a1ed172"
+        },
+        {
+            "Text": "Dorm 204",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 173.379211, "y": 150.356216, "z": 3.83760285 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "59148c8a86f774197930e983"
+        },
+        {
+            "Text": "Dorm 108",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 177.473969, "y": 178.489075, "z": 0.8406372 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5914578086f774123569ffa4"
+        },
+        {
+            "Text": "Dorm 314 Marked Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 180.671432, "y": 183.722443, "z": 6.84058475 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cf7f2459777de4559322"
+        },
+        {
+            "Text": "Dorm 218",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 190.192383, "y": 175.3542, "z": 3.84178257 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cf9e2459777df90dcb73"
+        },
+        {
+            "Text": "Dorm 118",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 194.794083, "y": 174.546783, "z": 0.830601 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5672c92d4bdc2d180f8b4567"
+        },
+        {
+            "Text": "Dorm 220",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 193.957886, "y": 174.821625, "z": 3.831203 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cfa52459777dfb276eb1"
+        },
+        {
+            "Text": "Dorm 308",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 177.4756, "y": 178.488113, "z": 6.850606 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cf722459777a5108b9a1"
+        },
+        {
+            "Text": "Dorm 315",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 179.284683, "y": 174.810455, "z": 6.830814 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cf692459777de4559321"
+        },
+        {
+            "Text": "Dorm 214",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 178.105484, "y": 183.746643, "z": 3.83598375 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cf942459777df90dcb72"
+        },
+        {
+            "Text": "Dorm 203",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 176.041077, "y": 150.26828, "z": 3.83258247 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5938504186f7740991483f30"
+        },
+        {
+            "Text": "Dorm 103",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 175.734467, "y": 149.366577, "z": 0.820169449 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5938994586f774523a425196"
+        },
+        {
+            "Text": "Dorm 306",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 174.544632, "y": 157.45575, "z": 6.828404 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780cda02459777b272ede61"
+        },
+        {
+            "Text": "Dorm 303",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 176.039612, "y": 150.268463, "z": 6.82898426 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "593aa4be86f77457f56379f8"
+        },
+        {
+            "Text": "Gas Station Storage Room",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 415.416443, "y": 35.6602058, "z": 2.18918633 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5913877a86f774432f15d444"
+        },
+        {
+            "Text": "Gas Station Office",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 415.779572, "y": 38.5554962, "z": 2.17909455 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5780d0652459777df90dcb74"
+        },
+        {
+            "Text": "USEC Stash",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 562.780945, "y": -58.9465332, "z": 2.216738 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5da743f586f7744014504f72"
+        },
+        {
+            "Text": "USEC Stash",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 568.747131, "y": -50.85814, "z": 2.193743 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5da743f586f7744014504f72"
+        },
+        {
+            "Text": "Orange Tanker Truck",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 101.818916, "y": -5.54527664, "z": 3.44780731 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5937ee6486f77408994ba448"
+        },
+        {
+            "Text": "Military Checkpoint",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 577.6575, "y": 4.049543, "z": 0.8078748 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5913915886f774123603c392"
+        },
+        {
+            "Text": "ZB-013",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 198.927917, "y": -146.172791, "z": -1.779768 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+        },
+        {
+            "Text": "Portable Bunkhouse",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": 202.664337, "y": 11.72344, "z": 4.73085976 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5938144586f77473c2087145"
         }
     ]
 }

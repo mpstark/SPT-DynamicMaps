@@ -35,16 +35,18 @@ namespace InGameMap.Data
 
     public class MapMarkerDef
     {
+        public string Text { get; set; } = "";
+
         [JsonRequired]
         public string ImagePath { get; set; }
 
         [JsonRequired]
         public Vector3 Position { get; set; }
 
-        public string Text { get; set; } = "";
         public string Category { get; set; } = "None";
         public Color Color { get; set; } = Color.white;
         public Vector2 Pivot { get; set; } = new Vector2(0.5f, 0.5f);
+        public string ExtraInfo { get; set; } = "";
     }
 
     public class MapLabelDef

@@ -109,6 +109,19 @@ namespace InGameMap.UI.Components
             }
         }
 
+        public void ChangeMarkerPartialCategoryStatus(string partial, bool status)
+        {
+            foreach (var marker in _markers)
+            {
+                if (!marker.Category.Contains(partial))
+                {
+                    continue;
+                }
+
+                marker.gameObject.SetActive(status);
+            }
+        }
+
         public void RemoveMapMarker(MapMarker marker)
         {
             if (!_markers.Contains(marker))

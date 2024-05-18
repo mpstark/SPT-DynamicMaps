@@ -53,29 +53,41 @@
     },
     "StaticMarkers": [
         {
-            "Text": "Mall Main Power Switch",
-            "ImagePath": "Markers/switch.png",
-            "Position": {"x": -201.16, "y": -357.81, "z": 10},
+            "Text": "Main Power Switch",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -201.108, "y": -357.8291, "z": 23.1857 },
             "Category": "Switch"
         },
-        // {
-        //     "Text": "Saferoom Exfil Switch",
-        //     "ImagePath": "Markers/switch.png",
-        //     "Position": {"x": -50.65, "y": 45.67, "z": 10},
-        //     "Category": "Switch"
-        // },
-        // {
-        //     "Text": "Object 14 Container Switch",
-        //     "ImagePath": "Markers/switch.png",
-        //     "Position": {"x": -47.77, "y": 42.67, "z": 10},
-        //     "Category": "Switch"
-        // },
-        // {
-        //     "Text": "Non-Kiba Alarms Switch",
-        //     "ImagePath": "Markers/switch.png",
-        //     "Position": {"x": -46.60, "y": -55.21, "z": 35},
-        //     "Category": "Switch"
-        // },
+        {
+            "Text": "Saferoom Urinal Switch",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -51.547, "y": -125.440712, "z": 36.86 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "2nd Floor Alarm Console",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -46.555, "y": -55.202, "z": 37.347 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "1st Floor Alarm Console",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -67.1342545, "y": 53.7422676, "z": 27.9506 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Inside Saferoom Exfil Switch",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -50.6210022, "y": 45.617, "z": 22.632 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Object 14 Container Switch",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -47.698, "y": 42.6198, "z": 22.891 },
+            "Category": "Switch"
+        },
         {
             "Text": "Emercom Checkpoint",
             "ImagePath": "Markers/exit.png",
