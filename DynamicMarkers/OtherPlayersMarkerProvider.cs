@@ -97,8 +97,7 @@ namespace InGameMap.DynamicMarkers
             }
 
             // try adding marker
-            var marker = _lastMapView.AddPlayerMarker(player, category);
-            marker.Color = color;
+            var marker = _lastMapView.AddPlayerMarker(player, category, color);
             player.OnIPlayerDeadOrUnspawn += TryRemoveMarker;
 
             _playerMarkers[player] = marker;

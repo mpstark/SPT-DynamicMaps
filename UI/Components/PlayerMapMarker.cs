@@ -39,11 +39,11 @@ namespace InGameMap.UI.Components
 
         private float _callbackTime = _maxCallbackTime;  // make sure to start with a callback
 
-        public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, string category,
+        public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, Color color, string category,
                                              Vector2 size, float degreesRotation, float scale)
         {
             var name = $"{player.Profile.Nickname}";
-            var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, Vector3.zero,
+            var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, color, Vector3.zero,
                                                  size, _pivot, degreesRotation, scale);
             marker.IsDynamic = true;
             marker.Player = player;

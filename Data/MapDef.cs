@@ -43,6 +43,7 @@ namespace InGameMap.Data
 
         public string Text { get; set; } = "";
         public string Category { get; set; } = "None";
+        public Color Color { get; set; } = Color.white;
         public Vector2 Pivot { get; set; } = new Vector2(0.5f, 0.5f);
     }
 

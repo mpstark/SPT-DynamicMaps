@@ -131,6 +131,11 @@ namespace InGameMap.UI
                     _mapView.ShiftMapToCoordinate(player.Position, _positionTweenTime);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                GameUtils.DumpExtracts();
+            }
         }
 
         private void OnDisable()

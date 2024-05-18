@@ -56,13 +56,13 @@ namespace InGameMap.UI.Components
             }
         }
 
-        public Dictionary<LayerStatus, float> ImageAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
+        public Dictionary<LayerStatus, float> ImageAlphaLayerStatus { get; protected set; } = new Dictionary<LayerStatus, float>
             {
                 {LayerStatus.Hidden, 0.0f},
                 {LayerStatus.Underneath, 0.25f},
                 {LayerStatus.OnTop, 1f},
             };
-        public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
+        public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; protected set; } = new Dictionary<LayerStatus, float>
             {
                 {LayerStatus.Hidden, 0.0f},
                 {LayerStatus.Underneath, 0.0f},
@@ -74,12 +74,12 @@ namespace InGameMap.UI.Components
 
         public static MapMarker Create(GameObject parent, MapMarkerDef def, Vector2 size, float degreesRotation, float scale)
         {
-            var mapMarker = Create<MapMarker>(parent, def.Text, def.Category, def.ImagePath, def.Position, size,
+            var mapMarker = Create<MapMarker>(parent, def.Text, def.Category, def.ImagePath, def.Color, def.Position, size,
                                               def.Pivot, degreesRotation, scale);
             return mapMarker;
         }
 
-        public static T Create<T>(GameObject parent, string text, string category, string imageRelativePath,
+        public static T Create<T>(GameObject parent, string text, string category, string imageRelativePath, Color color,
                                   Vector3 position, Vector2 size, Vector2 pivot, float degreesRotation, float scale)
                             where T : MapMarker
         {
@@ -127,6 +127,8 @@ namespace InGameMap.UI.Components
             marker.Label.text = marker.Text;
 
             marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
+
+            marker.Color = color;
 
             return marker;
         }

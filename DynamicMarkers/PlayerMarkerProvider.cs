@@ -54,8 +54,7 @@ namespace InGameMap.DynamicMarkers
             }
 
             // try adding the marker
-            _playerMarker = map.AddPlayerMarker(player, "player");
-            _playerMarker.Color = Color.green;
+            _playerMarker = map.AddPlayerMarker(player, "player", Color.green);
         }
 
         private void TryRemoveMarker()
