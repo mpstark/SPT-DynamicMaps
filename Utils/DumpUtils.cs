@@ -90,6 +90,7 @@ namespace InGameMap.Utils
         {
             var objects = GameObject.FindObjectsOfType<WorldInteractiveObject>();
             var dump = new List<MapMarkerDef>();
+            var i = 1;
 
             foreach (var @object in objects)
             {
@@ -98,13 +99,11 @@ namespace InGameMap.Utils
                     continue;
                 }
 
-                bool isDoor = @object.TypeKey.Contains("door");
-
                 var dumped = new MapMarkerDef
                 {
-                    Text = @object.name,
-                    Category = isDoor ? "LockedDoor" : "Locked",
-                    ImagePath = isDoor ? "Markers/locked_door.png" : "Markers/lock.png",
+                    Text = $"door {i++}",
+                    Category = "LockedDoor",
+                    ImagePath = "Markers/locked_door.png",
                     Position = MathUtils.TransformToMapPosition(@object.transform),
                     ExtraInfo = @object.KeyId,
                     Color = Color.yellow
