@@ -1,5 +1,7 @@
 {
-    "DisplayName": "Customs (TarkovData)",
+    "DisplayName": "Customs (TarkovDev)",
+    "Author": "Tarkov.dev",
+    "AuthorLink": "https://tarkov.dev",
     "MapInternalNames": [ "bigmap" ],
     "CoordinateRotation": 180,
     "Bounds": {
@@ -10,7 +12,7 @@
     "Layers": {
         "Underground": {
             "Level": -1,
-            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_-1.png",
+            "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_-1.png",
             "ImageBounds": {
                 "Min": {"x": -372, "y": -307},
                 "Max": {"x": 698, "y": 237}
@@ -40,7 +42,7 @@
         },
         "Ground Floor": {
             "Level": 0,
-            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_0.png",
+            "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_0.png",
             "ImageBounds": {
                 "Min": {"x": -372, "y": -307},
                 "Max": {"x": 698, "y": 237}
@@ -54,7 +56,7 @@
         },
         "2nd Floor": {
             "Level": 1,
-            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_1.png",
+            "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_1.png",
             "ImageBounds": {
                 "Min": {"x": -372, "y": -307},
                 "Max": {"x": 698, "y": 237}
@@ -116,7 +118,7 @@
         },
         "3rd Floor": {
             "Level": 2,
-            "ImagePath": "Maps/Customs_TarkovData/Layers/customs_level_2.png",
+            "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_2.png",
             "ImageBounds": {
                 "Min": {"x": -372, "y": -307},
                 "Max": {"x": 698, "y": 237}

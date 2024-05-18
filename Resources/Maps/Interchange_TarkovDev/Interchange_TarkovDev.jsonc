@@ -1,5 +1,7 @@
 {
-    "DisplayName": "Interchange (TarkovData)",
+    "DisplayName": "Interchange (TarkovDev)",
+    "Author": "Tarkov.dev",
+    "AuthorLink": "https://tarkov.dev",
     "MapInternalNames": [ "Interchange" ],
     "CoordinateRotation": 180,
     "Bounds": {
@@ -10,7 +12,7 @@
     "Layers": {
         "Ground Floor": {
             "Level": 0,
-            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_0.png",
+            "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_0.png",
             "ImageBounds": {
                 "Min": {"x": -364, "y": -439},
                 "Max": {"x": 530, "y": 452}
@@ -24,7 +26,7 @@
         },
         "2nd Floor": {
             "Level": 1,
-            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_1.png",
+            "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_1.png",
             "ImageBounds": {
                 "Min": {"x": -364, "y": -439},
                 "Max": {"x": 530, "y": 452}
@@ -38,7 +40,7 @@
         },
         "3rd Floor": {
             "Level": 2,
-            "ImagePath": "Maps/Interchange_TarkovData/Layers/interchange_layer_2.png",
+            "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_2.png",
             "ImageBounds": {
                 "Min": {"x": -364, "y": -439},
                 "Max": {"x": 530, "y": 452}
@@ -51,6 +53,9 @@
             ]
         }
     },
+    "Labels": [
+        // TODO: add labels!
+    ],
     "StaticMarkers": [
         {
             "Text": "Main Power Switch",

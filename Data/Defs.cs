@@ -80,6 +80,9 @@ namespace InGameMap.Data
         public List<MapMarkerDef> StaticMarkers { get; set; } = new List<MapMarkerDef>();
         public int DefaultLevel { get; set; } = 0;
 
+        public string Author { get; set; }
+        public string AuthorLink { get; set; }
+
         public static MapDef LoadFromPath(string absolutePath)
         {
             try

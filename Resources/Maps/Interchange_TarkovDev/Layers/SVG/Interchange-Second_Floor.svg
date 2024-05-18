@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" id="svg235" version="1.1" viewBox="0 0 977.09998 977.09998">
+  <style id="style_common">
+    .trees { fill:#144043 }
+    .cement { fill:#c6c2c2 }
+    .land { fill:#1f5054 }
+    .rock { fill:#dcd5b6 }
+    .water { fill:#4a6b96 }
+    .wood { fill:#593700 }
+    .tarmac { fill:#768089 }
+    .gravel { fill:#946d3e }
+    .building { fill:#1a2632 }
+    .floor { fill:#70777f }
+    .locked { fill:#37414c }
+    .map_border { fill:none;stroke:#000;stroke-width:2 }
+    .fence { fill:none;stroke:#c4e3c3;stroke-width:1 }
+    .road_tarmac { fill:none;stroke:#888 }
+    .road_gravel { fill:none;stroke:#946d3e }
+    .road_small { stroke-width:5 }
+    .road_medium { stroke-width:8 }
+    .road_large { stroke-width:12 }
+    .railroad { fill:none;stroke:#914833;stroke-dasharray:6;stroke-width:3 }
+    .powerline { fill:none;stroke:#ffce00;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:6,6 }
+    .danger { fill:red;fill-opacity:.4;stroke:red;stroke-dasharray:4,2;stroke-width:2 }
+    .task { fill:#000 }
+    .stairs { fill:#FFD700 }
+    .shadow { filter:drop-shadow(0 0 2px #000) }
+  </style>
+  <style id="style_interchange">
+    .structure{ fill:#4b4b4b }
+  </style>
+  <defs id="defs1">
+    <linearGradient id="rampDown_l2r">
+      <stop id="stop200" offset="0" style="stop-color:#777777;stop-opacity:0;"/>
+      <stop id="stop199" offset="1" style="stop-color:#000000;stop-opacity:0.5;"/>
+    </linearGradient>
+    <linearGradient id="rampDown_r2l">
+      <stop id="stop84" offset="0" style="stop-color:#000000;stop-opacity:0.5;"/>
+      <stop id="stop85" offset="1" style="stop-color:#777777;stop-opacity:0;"/>
+    </linearGradient>
+    <linearGradient id="rampUp_l2r">
+      <stop id="stop168" offset="0" style="stop-color:#ffffff;stop-opacity:0;"/>
+      <stop id="stop169" offset="1" style="stop-color:#ffffff;stop-opacity:0.5;"/>
+    </linearGradient>
+    <linearGradient id="rampUp_r2l">
+      <stop id="stop176" offset="0" style="stop-color:#ffffff;stop-opacity:0.5;"/>
+      <stop id="stop175" offset="1" style="stop-color:#ffffff;stop-opacity:0;"/>
+    </linearGradient>
+    <linearGradient xlink:href="#rampDown_l2r" id="linearGradient199" x1="559.72021" x2="580.3277" y1="616.02795" y2="616.02795" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_l2r" id="linearGradient204" x1="615.41016" x2="636.92401" y1="475.4502" y2="475.4502" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_l2r" id="linearGradient208" x1="559.91833" x2="580.39166" y1="335.18094" y2="335.18094" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_l2r" id="linearGradient244" x1="654.29987" x2="666.34497" y1="622.46558" y2="622.46558" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient178" x1="534.58289" x2="551.11755" y1="475.25916" y2="475.25916" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient183" x1="562.59283" x2="578.76257" y1="648.22321" y2="648.22321" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient185" x1="689.42633" x2="716.38831" y1="638.20557" y2="638.20557" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient190" x1="653.56561" x2="665.01868" y1="326.37051" y2="326.37051" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient192" x1="563.65216" x2="577.10272" y1="216.61259" y2="216.61259" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient194" x1="547.94702" x2="578.65472" y1="313.95453" y2="313.95453" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient202" x1="675.54742" x2="697.62073" y1="475.55551" y2="475.55551" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient206" x1="575.14801" x2="596.96887" y1="475.6763" y2="475.6763" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient240" x1="887.88232" x2="887.88232" y1="481.81339" y2="469.19424" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampDown_r2l" id="linearGradient84" x1="655.97345" x2="655.97345" y1="565.0498" y2="554.98608" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient169" x1="674.61407" x2="687.49237" y1="475.59064" y2="475.59064" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient175" x1="574.55939" x2="586.74683" y1="475.59064" y2="475.59064" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient229" x1="566.33783" x2="574.46753" y1="216.59996" y2="216.59996" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient231" x1="547.76813" x2="566.72144" y1="314.01965" y2="314.01965" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient233" x1="534.90833" x2="545.61707" y1="475.27277" y2="475.27277" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient235" x1="563.2301" x2="574.45557" y1="648.18005" y2="648.18005" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient237" x1="652.07996" x2="652.07996" y1="570.19727" y2="552.70618" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_l2r" id="linearGradient239" x1="688.47986" x2="705.50806" y1="638.04413" y2="638.04413" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient173" x1="624.84644" x2="637.6651" y1="475.40985" y2="475.40985" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient180" x1="569.98462" x2="582.73511" y1="615.86151" y2="615.86151" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient187" x1="569.39502" x2="583.13763" y1="335.23236" y2="335.23236" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient219" x1="887.76825" x2="887.76825" y1="481.87787" y2="469.13779" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient221" x1="882.4549" x2="882.4549" y1="298.95959" y2="261.57394" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient223" x1="848.27881" x2="886.75024" y1="182.32352" y2="182.32352" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient225" x1="882.44916" x2="882.44916" y1="650.49103" y2="691.24506" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient227" x1="848.47076" x2="886.86646" y1="767.81689" y2="767.81689" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient242" x1="660.83087" x2="668.61353" y1="326.46893" y2="326.46893" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#rampUp_r2l" id="linearGradient246" x1="660.5708" x2="669.35779" y1="622.61993" y2="622.61993" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  
+  
+  <g id="Second_Floor" data-name="Second Floor">
+    <g id="Structure-2" class="structure shadow" data-name="Structure">
+      <path d="M478.391 150.707v136.225h-7.941v272.691h8.001v134.16l245.835.01-.453-133.83h55.112V449.782h16.527v-53.269h-17.089V286.785h-54.232V150.707Zm101.016 190.75h8.169l5.72 5.748v8.211l-5.72 5.749h-8.169l-5.721-5.749v-8.211zm.457 73.049h7.368l2.522 2.522h28.601l2.815 2.791v7.215l-2.878 2.876h-28.653l-2.589 2.588h-7.232l-2.587-2.588h-28.387l-2.961-2.961v-7.13l2.793-2.791h28.646zm-81.455 2.522h30.392l2.815 2.791v7.215l-2.878 2.876H498.58l-2.961-2.961v-7.13zm80.918 68.909h8.152l5.706 5.741v8.202l-5.706 5.744h-8.152l-5.707-5.744v-8.202z"/>
+    </g>
+    <g id="Floor-2" class="cement" data-name="Floor">
+      <path d="M472.049 288.252v270.324h127.979v-.96H660.3v-6.669h-23.032v-254.34h23.033v-7.21h-60.193v-1.145z"/>
+    </g>
+    <g id="Enclosed_Spaces-2" class="building" data-name="Enclosed Spaces">
+      <path d="M590.315 437.982v41.026l10.292 10.179h21.313v11.945h-21.313l-9.434 9.331h-16.296l-7.719-7.634h-24.297v33.9h56.744v13.475h37.571v-83.953h-14.591v-28.269z"/>
+      <path d="M495.451 489.342v47.582h31.759v-47.582z"/>
+      <path d="m503.735 438.051-8.354 9.416v27.258h47.928v12.921h23.503l9.39-9.148v-40.447z"/>
+      <path d="M523.58 548.17v10.345h65.631V548.17Z"/>
+      <path d="M471.959 474.044v84.349l19.852-.029v-7.659l-9.265-5.224v-71.437z"/>
+      <path d="M600.013 296.802v12.535h-57.792v34.64h24.73l7.719-8.208h16.296l9.434 9.331h21.616v12.885H600.4l-10.292 10.18v40.806h32.426v-28.418h14.69v-83.751z"/>
+      <path d="M495.47 310.104v47.666h31.681v-47.666z"/>
+      <path d="M543.197 359.27v12.902h-47.715v27.48l8.165 9.159h72.488v-40.212l-9.357-9.329z"/>
+      <path d="M523.41 288.419v10.209h65.87v-10.209z"/>
+      <path d="M472.068 288.672v84.208h10.539v-71.437l8.973-5.291v-7.48z"/>
+    </g>
+    <g id="Ramps-2" class="road_tarmac road_small" transform="translate(.294605 .974665) scale(.888648)">
+      <path d="M558.473 335.185h23.139" style="stroke:url(#linearGradient208)"/>
+      <path d="M598.056 475.547h-24.22" style="stroke:url(#linearGradient206)"/>
+      <path d="M613.831 475.454h24.313" style="stroke:url(#linearGradient204)"/>
+      <path d="M698.707 475.56h-24.605" style="stroke:url(#linearGradient202)"/>
+      <path d="M558.541 615.899h22.873" style="stroke:url(#linearGradient199)"/>
+    </g>
+  </g>
+</svg>
