@@ -56,5 +56,238 @@
     "Labels": [
     ],
     "StaticMarkers": [
+        {
+            "Text": "Cargo Elevator",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -112.152, "y": -408.64, "z": 5.376 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Main Elevator",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -282.304016, "y": -334.896, "z": -3.631999 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Ventilation Shaft",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -144.866, "y": -399.385, "z": -2.424 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Medical Block Elevator",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -112.423, "y": -343.986, "z": -3.10999966 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Sewage Conduit",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -123.711, "y": -255.3735, "z": -3.6609993 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Parking Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -231.73, "y": -434.816376, "z": 0.77356863 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "Hangar Gate",
+            "ImagePath": "Markers/exit.png",
+            "Position": { "x": -170.66, "y": -240.77, "z": 2.08 },
+            "Category": "PMCExtract-OutOfRaid",
+            "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
+        },
+        {
+            "Text": "power",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -124.758, "y": -313.806, "z": -2.31599617 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "call_button",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -281.022, "y": -335.477, "z": -2.83799934 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "call_button",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -114.112, "y": -343.2, "z": -2.84599972 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "call_button (1)",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -114.037, "y": -406.427979, "z": 5.31399727 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "floor_button (1)",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -112.378006, "y": -406.806, "z": 5.353998 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Power",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -271.439, "y": -366.10498, "z": -2.380001 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "floor_button",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -282.361, "y": -335.86, "z": -2.91199875 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Console_trigger",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -243.443, "y": -382.513, "z": 5.076 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Pump_button",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -136.76, "y": -254.510513, "z": -2.825999 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Power",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -121.007996, "y": -353.548, "z": -2.83698225 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "floor_button",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -112.802, "y": -342.762, "z": -2.84599972 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "Disable_alarm_trigger",
+            "ImagePath": "Markers/lever.png",
+            "Position": { "x": -220.756, "y": -381.263, "z": 5.249 },
+            "Category": "Switch"
+        },
+        {
+            "Text": "door 1",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -165.246277, "y": -349.197, "z": 5.131374 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
+        },
+        {
+            "Text": "door 2",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -165.242874, "y": -338.086, "z": 5.135374 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
+        },
+        {
+            "Text": "door 3",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -181.966461, "y": -318.226044, "z": 1.37873685 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1e2d1f86f77431e9280bee"
+        },
+        {
+            "Text": "door 4",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -179.862, "y": -310.3296, "z": 1.37899876 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1e2d1f86f77431e9280bee"
+        },
+        {
+            "Text": "door 5",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -123.229095, "y": -406.524384, "z": 1.03631592 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0c5f86f7744bb2683cf0"
+        },
+        {
+            "Text": "door 6",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -135.89798, "y": -346.9675, "z": 5.185806 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
+        },
+        {
+            "Text": "door 7",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -138.6131, "y": -346.966125, "z": 5.25222349 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
+        },
+        {
+            "Text": "door 8",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -130.268463, "y": -339.944275, "z": 5.15560675 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5efde6b4f5448336730dbd61"
+        },
+        {
+            "Text": "door 9",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -212.695, "y": -376.538, "z": 5.145301 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0d6d86f7744bb2683e1f"
+        },
+        {
+            "Text": "door 10",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -132.893, "y": -348.72, "z": 1.43501759 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0f4986f7744bb01837fa"
+        },
+        {
+            "Text": "door 11",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -128.794, "y": -349.91507, "z": 1.43701744 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0f4986f7744bb01837fa"
+        },
+        {
+            "Text": "door 12",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -261.993, "y": -317.240021, "z": 5.147805 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1e495a86f7743109743dfb"
+        },
+        {
+            "Text": "door 13",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -257.222015, "y": -322.925018, "z": 5.24803066 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1d0efb86f7744baf2e7b7b"
+        },
+        {
+            "Text": "door 14",
+            "ImagePath": "Markers/locked_door.png",
+            "Position": { "x": -250.839066, "y": -326.758667, "z": 5.097125 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "ExtraInfo": "5c1f79a086f7746ed066fb8f"
+        }
     ]
 }
