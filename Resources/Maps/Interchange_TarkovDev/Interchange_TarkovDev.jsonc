@@ -119,7 +119,7 @@
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 284.442, "y": -27.493, "z": 21.94955 },
             "Category": "ScavExtract-OutOfRaid",
-            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 },
+            "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Hole in the Fence",

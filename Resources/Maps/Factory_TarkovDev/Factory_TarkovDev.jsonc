@@ -112,8 +112,7 @@
             "Text": "Forklifts",
             "Position": {"x": 66, "y": -42, "z": 0},
             "FontSize": 14
-        },
-
+        }
     ],
     "StaticMarkers": [
         {

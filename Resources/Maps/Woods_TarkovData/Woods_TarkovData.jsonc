@@ -155,7 +155,7 @@
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "Category": "LockedDoor",
             "ExtraInfo": "591afe0186f77431bd616a11"
-        },
+        }
         // {
         //     "Text": "Shtrman's Stash",
         //     "ImagePath": "Markers/locked_door.png",
