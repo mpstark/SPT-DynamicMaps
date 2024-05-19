@@ -284,8 +284,9 @@ namespace InGameMap.UI.Components
 
             // shift map to center it
             // FIXME: this doesn't center in the parent
+            RectTransform.anchoredPosition = Vector2.zero;
             var midpoint = MathUtils.GetMidpoint(CurrentMapDef.Bounds.Min, CurrentMapDef.Bounds.Max);
-            RectTransform.anchoredPosition = midpoint * ZoomCurrent;
+            ShiftMapToCoordinate(midpoint, 0);
         }
 
         public void SetMapZoom(float zoomNew, float tweenTime)
