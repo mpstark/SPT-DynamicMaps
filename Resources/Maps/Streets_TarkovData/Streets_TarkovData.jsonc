@@ -5,8 +5,8 @@
     "MapInternalNames": [ "TarkovStreets" ],
     "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -280, "y": -317},
-        "Max": {"x": 323, "y": 549}
+        "Min": {"x": -279, "y": -299},
+        "Max": {"x": 324, "y": 533}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": -1,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": -100},
-                    "Max": {"x": 323, "y": 549, "z": -6}
+                    "Min": {"x": -279, "y": -299, "z": -100},
+                    "Max": {"x": 324, "y": 533, "z": -6}
                 }
             ]
         },
@@ -28,13 +28,13 @@
             "Level": 0,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": -6},
-                    "Max": {"x": 323, "y": 549, "z": 10}
+                    "Min": {"x": -279, "y": -299, "z": -6},
+                    "Max": {"x": 324, "y": 533, "z": 10}
                 }
             ]
         },
@@ -42,13 +42,13 @@
             "Level": 1,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_1.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": 10},
-                    "Max": {"x": 323, "y": 549, "z": 15}
+                    "Min": {"x": -279, "y": -299, "z": 10},
+                    "Max": {"x": 324, "y": 533, "z": 15}
                 }
             ]
         },
@@ -56,13 +56,13 @@
             "Level": 2,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_2.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": 15},
-                    "Max": {"x": 323, "y": 549, "z": 20}
+                    "Min": {"x": -279, "y": -299, "z": 15},
+                    "Max": {"x": 324, "y": 533, "z": 20}
                 }
             ]
         },
@@ -70,13 +70,13 @@
             "Level": 3,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_3.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": 20},
-                    "Max": {"x": 323, "y": 549, "z": 25}
+                    "Min": {"x": -279, "y": -299, "z": 20},
+                    "Max": {"x": 324, "y": 533, "z": 25}
                 }
             ]
         },
@@ -84,18 +84,256 @@
             "Level": 4,
             "ImagePath": "Maps/Streets_TarkovData/Layers/streets_layer_4.png",
             "ImageBounds": {
-                "Min": {"x": -280, "y": -317},
-                "Max": {"x": 323, "y": 549}
+                "Min": {"x": -279, "y": -299},
+                "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -280, "y": -317, "z": 25},
-                    "Max": {"x": 323, "y": 549, "z": 100}
+                    "Min": {"x": -279, "y": -299, "z": 25},
+                    "Max": {"x": 324, "y": 533, "z": 100}
                 }
             ]
         }
     },
     "Labels": [
+        {
+            "Text": "Primorsky Ave.",
+            "Position": {"x": 9, "y": 308, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -90
+        },
+        {
+            "Text": "Primorsky Ave.",
+            "Position": {"x": 9, "y": 104, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -90
+        },
+        {
+            "Text": "Primorsky Ave.",
+            "Position": {"x": 9, "y": -80, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -90
+        },
+        {
+            "Text": "Kilmov St.",
+            "Position": {"x": 125, "y": 10, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Kilmov St.",
+            "Position": {"x": -104, "y": 28, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 10
+        },
+        {
+            "Text": "Nikitskaya St.",
+            "Position": {"x": -125, "y": 210, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Verhnyaya St.",
+            "Position": {"x": -112, "y": 361, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Malevecha St.",
+            "Position": {"x": -200, "y": 290, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -64
+        },
+        {
+            "Text": "Chekannaya St.",
+            "Position": {"x": 111, "y": 251, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Nizhnyaya St.",
+            "Position": {"x": -101, "y": 441, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Razvedchikov St.",
+            "Position": {"x": 174, "y": 430, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -30
+        },
+        {
+            "Text": "Zmejskij Alley",
+            "Position": {"x": 140, "y": 150, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -68
+        },
+        {
+            "Text": "Kamchatskaya St.",
+            "Position": {"x": 232, "y": 100, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": -90
+        },
+        {
+            "Text": "Kilmov Shopping Mall",
+            "Position": {"x": -128, "y": -35, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Beluga",
+            "Position": {"x": -45, "y": -52, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Cardinal Apartments",
+            "Position": {"x": 99, "y": -71, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Construction",
+            "Position": {"x": 230, "y": 295, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Lexos",
+            "Position": {"x": 66, "y": 305, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Sparja Grocery",
+            "Position": {"x": 140, "y": 300, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Cinema",
+            "Position": {"x": -175, "y": 400, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Shestyorochka",
+            "Position": {"x": -218, "y": 135, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Pinewood Hotel",
+            "Position": {"x": -35, "y": 64, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Teppakot / Koener",
+            "Position": {"x": 65, "y": 398, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Concordia",
+            "Position": {"x": 140, "y": 362, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Cardinal Bank",
+            "Position": {"x": 89, "y": -20, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "LERM Expo",
+            "Position": {"x": 239, "y": -60, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Sparja Express",
+            "Position": {"x": -64, "y": 166, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Burger Spot",
+            "Position": {"x": -30, "y": 138, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Post Office",
+            "Position": {"x": 42, "y": 97, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Pharmacy 1",
+            "Position": {"x": 42, "y": 160, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Office",
+            "Position": {"x": -173, "y": 226, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Corner Restaurant",
+            "Position": {"x": -197, "y": 340, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Pharmacy 2",
+            "Position": {"x": -43, "y": 335, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Pharmacy 3",
+            "Position": {"x": 90, "y": -227, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Tarbank",
+            "Position": {"x": 67, "y": 230, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "School",
+            "Position": {"x": 211, "y": 129, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Vet Clinic",
+            "Position": {"x": 222, "y": 173, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Hive",
+            "Position": {"x": -212, "y": 300, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Family Market",
+            "Position": {"x": -223, "y": 279, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Marked Hotel",
+            "Position": {"x": -200, "y": 248, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "South Hotel",
+            "Position": {"x": -175, "y": 297, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Abandoned Factory",
+            "Position": {"x": -119, "y": 287, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Diner",
+            "Position": {"x": -80, "y": 235, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Primorskij 49",
+            "Position": {"x": -13, "y": 244, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Prestigio Cage",
+            "Position": {"x": 39, "y": 230, "z": 0},
+            "FontSize": 10
+        },
+        {
+            "Text": "Bilbo Coffee",
+            "Position": {"x": -70, "y": 343, "z": 0},
+            "FontSize": 10
+        },
     ],
     "StaticMarkers": [
         {
