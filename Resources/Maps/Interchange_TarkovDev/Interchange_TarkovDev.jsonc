@@ -5,8 +5,8 @@
     "MapInternalNames": [ "Interchange" ],
     "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -364, "y": -439},
-        "Max": {"x": 530, "y": 452}
+        "Min": {"x": -364, "y": -443},
+        "Max": {"x": 534, "y": 452}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": 0,
             "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -364, "y": -439},
-                "Max": {"x": 530, "y": 452}
+                "Min": {"x": -364, "y": -443},
+                "Max": {"x": 534, "y": 452}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -364, "y": -439, "z": -100},
-                    "Max": {"x": 530, "y": 452, "z": 100}
+                    "Min": {"x": -364, "y": -443, "z": -100},
+                    "Max": {"x": 534, "y": 452, "z": 100}
                 }
             ]
         },
@@ -28,8 +28,8 @@
             "Level": 1,
             "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_1.png",
             "ImageBounds": {
-                "Min": {"x": -364, "y": -439},
-                "Max": {"x": 530, "y": 452}
+                "Min": {"x": -364, "y": -443},
+                "Max": {"x": 534, "y": 452}
             },
             "GameBounds": [
                 {   // mall
@@ -42,12 +42,12 @@
             "Level": 2,
             "ImagePath": "Maps/Interchange_TarkovDev/Layers/interchange_layer_2.png",
             "ImageBounds": {
-                "Min": {"x": -364, "y": -439},
-                "Max": {"x": 530, "y": 452}
+                "Min": {"x": -364, "y": -443},
+                "Max": {"x": 534, "y": 452}
             },
             "GameBounds": [
                 {   // mall
-                    "Min": {"x": -222, "y": -327, "z": 34},
+                    "Min": {"x": -222, "y": -443, "z": 34},
                     "Max": {"x": 120, "y": 218, "z": 100}
                 }
             ]
