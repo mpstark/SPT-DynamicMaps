@@ -5,8 +5,8 @@
     "MapInternalNames": [ "Woods" ],
     "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -695, "y": -945},
-        "Max": {"x": 650, "y": 470}
+        "Min": {"x": -692, "y": -915},
+        "Max": {"x": 647, "y": 443}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": 0,
             "ImagePath": "Maps/Woods_TarkovData/Layers/woods_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -695, "y": -945},
-                "Max": {"x": 650, "y": 470}
+                "Min": {"x": -692, "y": -915},
+                "Max": {"x": 647, "y": 443}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -695, "y": -945, "z": -100},
-                    "Max": {"x": 650, "y": 470, "z": 100}
+                    "Min": {"x": -692, "y": -915, "z": -100},
+                    "Max": {"x": 647, "y": 443, "z": 100}
                 }
             ]
         }
@@ -88,7 +88,7 @@
         },
         {
             "Text": "Bus Stop",
-            "Position": {"x": -234, "y": 380, "z": 0},
+            "Position": {"x": -234, "y": 368, "z": 0},
             "FontSize": 12
         },
         {
