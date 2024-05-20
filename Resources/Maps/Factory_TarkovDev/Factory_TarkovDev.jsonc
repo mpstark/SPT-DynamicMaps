@@ -119,42 +119,48 @@
             "Text": "Camera Bunker Door",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -14.5749989, "y": 40.36, "z": -2.086 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Office Window",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 17.8332214, "y": 39.8851128, "z": 8.730333 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Cellars",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 77.529, "y": -28.891, "z": -4.657 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Gate 3",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 58.709, "y": 64.112, "z": 0.84 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Gate 0",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -63.7400055, "y": 55.902, "z": 1.749 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Med Tent Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -18.4857769, "y": -60.1718826, "z": 1.16133332 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {

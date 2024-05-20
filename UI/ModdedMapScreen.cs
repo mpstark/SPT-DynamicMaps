@@ -117,6 +117,7 @@ namespace InGameMap.UI
 
         private void Update()
         {
+            // because we have a scroll rect, it seems to eat OnScroll via IScrollHandler
             var scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0f)
             {
@@ -128,7 +129,7 @@ namespace InGameMap.UI
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
                 {
-                    _mapView.ShiftMapToCoordinate(player.Position, _positionTweenTime);
+                    _mapView.ShiftMapToCoordinate(MathUtils.UnityPositionToMapPosition(player.Position), _positionTweenTime);
                 }
             }
 
@@ -205,8 +206,8 @@ namespace InGameMap.UI
                 // show player position text
                 _playerPositionText.gameObject.SetActive(true);
 
-                // toggle out of raid only things, like extracts, since we're dynamically adding those
-                _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", false);
+                var dotSpawner = GameUtils.GetMainPlayer().gameObject.GetOrAddComponent<PlayerDotSpawner>();
+                dotSpawner.MapView = _mapView;
             }
 
             var mapInternalName = GameUtils.GetCurrentMapInternalName();
@@ -264,9 +265,6 @@ namespace InGameMap.UI
                 _playerPositionText.gameObject.SetActive(false);
 
                 _lastShownInRaid = false;
-
-                // toggle out of raid only things, like extracts, since we're dynamically adding those
-                _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", true);
             }
 
             foreach (var dynamicProvider in _dynamicMarkerProviders)
@@ -310,9 +308,6 @@ namespace InGameMap.UI
             {
                 dynamicProvider.OnMapChanged(_mapView, mapDef);
             }
-
-            // toggle out of raid only things, like extracts, since we're dynamically adding those
-            _mapView.ChangeMarkerPartialCategoryStatus("OutOfRaid", !GameUtils.IsInRaid());
         }
     }
 }

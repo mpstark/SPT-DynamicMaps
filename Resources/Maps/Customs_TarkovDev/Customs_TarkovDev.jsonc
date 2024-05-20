@@ -5,8 +5,8 @@
     "MapInternalNames": [ "bigmap" ],
     "CoordinateRotation": 180,
     "Bounds": {
-        "Min": {"x": -372, "y": -307},
-        "Max": {"x": 698, "y": 237}
+        "Min": {"x": -372, "y": -306},
+        "Max": {"x": 698, "y": 235}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,8 +14,8 @@
             "Level": -1,
             "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_-1.png",
             "ImageBounds": {
-                "Min": {"x": -372, "y": -307},
-                "Max": {"x": 698, "y": 237}
+                "Min": {"x": -372, "y": -306},
+                "Max": {"x": 698, "y": 235}
             },
             "GameBounds": [
                 {   // zb-1011
@@ -44,13 +44,13 @@
             "Level": 0,
             "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_0.png",
             "ImageBounds": {
-                "Min": {"x": -372, "y": -307},
-                "Max": {"x": 698, "y": 237}
+                "Min": {"x": -372, "y": -306},
+                "Max": {"x": 698, "y": 235}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -372, "y": -307, "z": -100},
-                    "Max": {"x": 698, "y": 237, "z": 100}
+                    "Min": {"x": -372, "y": -306, "z": -100},
+                    "Max": {"x": 698, "y": 235, "z": 100}
                 }
             ]
         },
@@ -58,8 +58,8 @@
             "Level": 1,
             "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_1.png",
             "ImageBounds": {
-                "Min": {"x": -372, "y": -307},
-                "Max": {"x": 698, "y": 237}
+                "Min": {"x": -372, "y": -306},
+                "Max": {"x": 698, "y": 235}
             },
             "GameBounds": [
                 {   // dorms
@@ -120,8 +120,8 @@
             "Level": 2,
             "ImagePath": "Maps/Customs_TarkovDev/Layers/customs_level_2.png",
             "ImageBounds": {
-                "Min": {"x": -372, "y": -307},
-                "Max": {"x": 698, "y": 237}
+                "Min": {"x": -372, "y": -306},
+                "Max": {"x": 698, "y": 235}
             },
             "GameBounds": [
                 {   // dorms
@@ -263,175 +263,200 @@
             "Text": "Military Base CP",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 643.3982, "y": 126.869247, "z": 2.400003 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Passage Between Rocks",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 539.394, "y": 200.3388, "z": 11.8200016 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Railroad to Military Base",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 489.058228, "y": 221.391266, "z": 3.950006 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Old Road Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 181.769958, "y": 214.01001, "z": 1.4999938 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Sniper Roadblock",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 15.3699341, "y": 127.94, "z": 0.139977932 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Railroad to Port",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -142.550232, "y": 46.9100037, "z": -0.629980564 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Crossroads",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -331.090271, "y": -85.24008, "z": 2.19002676 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Trailer Park Workers' Shack",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -248.540222, "y": -232.9901, "z": 2.550012 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Railroad to Tarkov",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -166.020264, "y": -218.380112, "z": 2.42000723 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Warehouse 17",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 45.9998779, "y": -78.43004, "z": 3.61000967 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Factory Shacks",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 205.5899, "y": 3.31001282, "z": 3.719995 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Warehouse 4",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 341.569946, "y": -25.84999, "z": 3.550012 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Old Gas Station Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 301.639923, "y": -197.940048, "z": 3.469995 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Factory Far Corner",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 654.53, "y": -160.49, "z": 3.19999838 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Administration Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 671.13, "y": -54.6699753, "z": 3.19999838 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Scav Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 652.24, "y": -27.1200027, "z": 1.00499988 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "ZB-013",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 200.9755, "y": -153.086456, "z": -1.1484108 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Dorms V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 181.08, "y": 213.25, "z": -0.71 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "ZB-1011",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 621.4368, "y": -127.700775, "z": -2.65 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Crossroads",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -335.120239, "y": -73.98008, "z": -3.97000742 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Old Gas Station",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 309.499634, "y": -174.320175, "z": -2.182013 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Trailer Park",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -313.720276, "y": -233.2801, "z": -1.72000742 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "RUAF Roadblock",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -14.5001221, "y": -138.450043, "z": 1.92000723 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Smuggler's Boat",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -43.11017, "y": 119.40004, "z": -14.2250118 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "ZB-1012",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 459.427826, "y": -111.042969, "z": -2.31699228 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {

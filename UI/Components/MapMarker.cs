@@ -4,11 +4,12 @@ using InGameMap.Data;
 using InGameMap.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
-    public class MapMarker : MonoBehaviour, ILayerBound
+    public class MapMarker : MonoBehaviour, ILayerBound, IPointerEnterHandler, IPointerExitHandler
     {
         private static Vector2 _labelSizeMultiplier = new Vector2(2.5f, 2f);
         private static float _markerMinFontSize = 9f;
@@ -25,6 +26,7 @@ namespace InGameMap.UI.Components
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
         public bool IsDynamic { get; protected set; } = false;
+        public bool ShowInRaid { get; protected set; } = true;
 
         private Vector3 _position;
         public Vector3 Position
@@ -61,12 +63,14 @@ namespace InGameMap.UI.Components
                 {LayerStatus.Hidden, 0.0f},
                 {LayerStatus.Underneath, 0.25f},
                 {LayerStatus.OnTop, 1f},
+                {LayerStatus.FullReveal, 1f},
             };
         public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; protected set; } = new Dictionary<LayerStatus, float>
             {
                 {LayerStatus.Hidden, 0.0f},
                 {LayerStatus.Underneath, 0.0f},
-                {LayerStatus.OnTop, 1f},
+                {LayerStatus.OnTop, 0.0f},
+                {LayerStatus.FullReveal, 1f},
             };
 
         private float _initialRotation;
@@ -75,15 +79,21 @@ namespace InGameMap.UI.Components
         public static MapMarker Create(GameObject parent, MapMarkerDef def, Vector2 size, float degreesRotation, float scale)
         {
             var mapMarker = Create<MapMarker>(parent, def.Text, def.Category, def.ImagePath, def.Color, def.Position, size,
-                                              def.Pivot, degreesRotation, scale);
+                                              def.Pivot, degreesRotation, scale, def.ShowInRaid);
             return mapMarker;
         }
 
         public static T Create<T>(GameObject parent, string text, string category, string imageRelativePath, Color color,
-                                  Vector3 position, Vector2 size, Vector2 pivot, float degreesRotation, float scale)
+                                  Vector3 position, Vector2 size, Vector2 pivot, float degreesRotation, float scale,
+                                  bool showInRaid = true)
                             where T : MapMarker
         {
             var go = UIUtils.CreateUIGameObject(parent, $"MapMarker {text}");
+
+            // this is to receive mouse events
+            var fakeImage = go.AddComponent<Image>();
+            fakeImage.color = Color.clear;
+            fakeImage.raycastTarget = true;
 
             var rectTransform = go.GetRectTransform();
             rectTransform.anchoredPosition = position;
@@ -97,6 +107,7 @@ namespace InGameMap.UI.Components
             marker.Category = category;
             marker.Position = position;
             marker._initialRotation = degreesRotation;
+            marker.ShowInRaid = showInRaid;
 
             // image
             var imageGO = UIUtils.CreateUIGameObject(go, "image");
@@ -104,6 +115,7 @@ namespace InGameMap.UI.Components
             imageGO.GetRectTransform().sizeDelta = size;
             imageGO.GetRectTransform().pivot = new Vector2(0.5f, 0.5f);
             marker.Image = imageGO.AddComponent<Image>();
+            marker.Image.raycastTarget = false;
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
 
@@ -129,6 +141,8 @@ namespace InGameMap.UI.Components
             marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
 
             marker.Color = color;
+
+            marker.Label.gameObject.SetActive(false);
 
             return marker;
         }
@@ -172,8 +186,31 @@ namespace InGameMap.UI.Components
 
         public void HandleNewLayerStatus(LayerStatus status)
         {
-            Label.color = new Color(Label.color.r, Label.color.g, Label.color.b, LabelAlphaLayerStatus[status]);
-            Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, ImageAlphaLayerStatus[status]);
+            if (!ShowInRaid && GameUtils.IsInRaid())
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
+            var imageAlpha = ImageAlphaLayerStatus[status];
+            var labelAlpha = LabelAlphaLayerStatus[status];
+
+            Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, imageAlpha);
+            Label.color = new Color(Label.color.r, Label.color.g, Label.color.b, labelAlpha);
+
+            Image.gameObject.SetActive(imageAlpha > 0f);
+            Label.gameObject.SetActive(labelAlpha > 0f);
+            gameObject.SetActive(labelAlpha > 0f || imageAlpha > 0f);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            HandleNewLayerStatus(LayerStatus.FullReveal);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnPositionChanged?.Invoke(this);
         }
     }
 }

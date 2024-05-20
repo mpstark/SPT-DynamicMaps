@@ -43,6 +43,7 @@ namespace InGameMap.Data
         [JsonRequired]
         public Vector3 Position { get; set; }
 
+        public bool ShowInRaid { get; set; } = true;
         public string Category { get; set; } = "None";
         public Color Color { get; set; } = Color.white;
         public Vector2 Pivot { get; set; } = new Vector2(0.5f, 0.5f);

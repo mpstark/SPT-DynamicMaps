@@ -6,6 +6,7 @@ using EFT;
 using InGameMap.Data;
 using InGameMap.Utils;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InGameMap.UI.Components
 {
@@ -47,6 +48,7 @@ namespace InGameMap.UI.Components
         {
             var go = UIUtils.CreateUIGameObject(parent, name);
             go.AddComponent<Canvas>();
+            go.AddComponent<GraphicRaycaster>();
 
             var view = go.AddComponent<MapView>();
             return view;

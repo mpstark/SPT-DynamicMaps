@@ -60,49 +60,56 @@
             "Text": "Cargo Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -112.152, "y": -408.64, "z": 5.376 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Main Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -282.304016, "y": -334.896, "z": -3.631999 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Ventilation Shaft",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -144.866, "y": -399.385, "z": -2.424 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Medical Block Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -112.423, "y": -343.986, "z": -3.10999966 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Sewage Conduit",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -123.711, "y": -255.3735, "z": -3.6609993 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Parking Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -231.73, "y": -434.816376, "z": 0.77356863 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Hangar Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -170.66, "y": -240.77, "z": 2.08 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {

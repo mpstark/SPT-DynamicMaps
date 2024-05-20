@@ -82,35 +82,40 @@
             "Text": "Scav Checkpoint (Co-op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 26.1550121, "y": -82.52659, "z": 24.5091858 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Police Cordon V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -19.5134068, "y": 114.942139, "z": 23.7110023 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Emercom Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 151.625, "y": -97.45658, "z": 24.662056 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Nakatani Basement Stairs",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -16.1249924, "y": 335.063416, "z": 14.7620564 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Mira Ave",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 218.225, "y": -38.5065842, "z": 17.9920559 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {

@@ -56,6 +56,12 @@ namespace InGameMap.UI.Components
             ImageAlphaLayerStatus[LayerStatus.Hidden] = 0.25f;
             ImageAlphaLayerStatus[LayerStatus.Underneath] = 0.25f;
             ImageAlphaLayerStatus[LayerStatus.OnTop] = 1f;
+            ImageAlphaLayerStatus[LayerStatus.FullReveal] = 1f;
+
+            LabelAlphaLayerStatus[LayerStatus.Hidden] = 0.0f;
+            LabelAlphaLayerStatus[LayerStatus.Underneath] = 0.0f;
+            LabelAlphaLayerStatus[LayerStatus.OnTop] = 0.0f;
+            LabelAlphaLayerStatus[LayerStatus.FullReveal] = 1.00f;
         }
 
         private void Update()

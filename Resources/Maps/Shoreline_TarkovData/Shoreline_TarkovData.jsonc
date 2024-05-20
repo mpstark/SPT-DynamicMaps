@@ -78,91 +78,104 @@
             "Text": "Lighthouse",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -458.1507, "y": 567.2876, "z": -54.289978 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Ruined Road",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 368.559326, "y": 334.897644, "z": -61.12998 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Old Bunker",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -388.99, "y": -383.73, "z": -2.66 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "East Wing Gym Entrance",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -296.9457, "y": -101.476379, "z": -6.629977 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Admin Basement",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -258.3117, "y": -149.782379, "z": -7.70797729 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Smuggler's Path (Co-op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -730.79, "y": -255.47, "z": -26.0 },
-            "Category": "ScavExtract-OutOfRaid",
+            "Category": "ScavExtract",
+            "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
         {
             "Text": "Road to North V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -542.9488, "y": -381.020721, "z": -16.9900017 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Road to Customs",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -861.65, "y": -0.36, "z": -41.7699776 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Railway Bridge",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -1026.47, "y": 299.85, "z": -60.79 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Tunnel",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 376.36, "y": 319.25, "z": -55.9399757 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Path to Lighthouse",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 448.9, "y": -254.6, "z": -44.7 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Pier Boat",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -336.8407, "y": 568.4276, "z": -66.11997 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
             "Text": "Climber's Trail",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -204.5, "y": -359.71, "z": -10.74 },
-            "Category": "PMCExtract-OutOfRaid",
+            "Category": "PMCExtract",
+            "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {

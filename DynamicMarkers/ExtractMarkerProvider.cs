@@ -115,7 +115,13 @@ namespace InGameMap.DynamicMarkers
             var marker = map.AddMapMarker(markerDef);
             marker.ImageAlphaLayerStatus[LayerStatus.Hidden] = 0.25f;
             marker.ImageAlphaLayerStatus[LayerStatus.Underneath] = 0.50f;
-            marker.ImageAlphaLayerStatus[LayerStatus.OnTop] = 1.00f;
+            marker.ImageAlphaLayerStatus[LayerStatus.OnTop] = 1.0f;
+            marker.ImageAlphaLayerStatus[LayerStatus.FullReveal] = 1.0f;
+
+            marker.LabelAlphaLayerStatus[LayerStatus.Hidden] = 0.0f;
+            marker.LabelAlphaLayerStatus[LayerStatus.Underneath] = 0.0f;
+            marker.LabelAlphaLayerStatus[LayerStatus.OnTop] = 1.00f;
+            marker.LabelAlphaLayerStatus[LayerStatus.FullReveal] = 1.00f;
 
             _extractMarkers[exfil] = marker;
         }

@@ -10,6 +10,7 @@ namespace InGameMap.UI.Components
         Hidden,
         Underneath,
         OnTop,
+        FullReveal
     }
 
     public interface ILayerBound
@@ -60,6 +61,7 @@ namespace InGameMap.UI.Components
 
             // load image
             layer.Image = go.AddComponent<Image>();
+            layer.Image.raycastTarget = false;
             layer.Image.sprite = TextureUtils.GetOrLoadCachedSprite(def.ImagePath);
             layer.Image.type = Image.Type.Simple;
 

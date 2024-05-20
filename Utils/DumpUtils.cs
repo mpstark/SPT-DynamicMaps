@@ -25,7 +25,8 @@ namespace InGameMap.Utils
             {
                 var dumped = new MapMarkerDef
                 {
-                    Category = "ScavExtract-OutOfRaid",
+                    Category = "ScavExtract",
+                    ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
                     Text = scavExfil.Settings.Name.Localized(),
                     Position = MathUtils.TransformToMapPosition(scavExfil.transform),
@@ -39,7 +40,8 @@ namespace InGameMap.Utils
             {
                 var dumped = new MapMarkerDef
                 {
-                    Category = "PMCExtract-OutOfRaid",
+                    Category = "PMCExtract",
+                    ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
                     Text = pmcExfil.Settings.Name.Localized(),
                     Position = MathUtils.TransformToMapPosition(pmcExfil.transform),

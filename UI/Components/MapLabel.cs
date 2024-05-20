@@ -48,6 +48,7 @@ namespace InGameMap.UI.Components
                 {LayerStatus.Hidden, 0.0f},
                 {LayerStatus.Underneath, 0.25f},
                 {LayerStatus.OnTop, 1f},
+                {LayerStatus.FullReveal, 1f},
             };
 
         private bool _hasSetOutline = false;
