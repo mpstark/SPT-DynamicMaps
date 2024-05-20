@@ -6,7 +6,7 @@
     "CoordinateRotation": 180,
     "Bounds": {
         "Min": {"x": -1060, "y": -415},
-        "Max": {"x": 508, "y": 618}
+        "Max": {"x": 508, "y": 622}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -15,7 +15,7 @@
             "ImagePath": "Maps/Shoreline_TarkovData/Layers/shoreline_layer_-1.png",
             "ImageBounds": {
                 "Min": {"x": -1060, "y": -415},
-                "Max": {"x": 508, "y": 618}
+                "Max": {"x": 508, "y": 622}
             },
             "GameBounds": [
                 {   // west wing
@@ -33,12 +33,12 @@
             "ImagePath": "Maps/Shoreline_TarkovData/Layers/shoreline_layer_0.png",
             "ImageBounds": {
                 "Min": {"x": -1060, "y": -415},
-                "Max": {"x": 508, "y": 618}
+                "Max": {"x": 508, "y": 622}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -1060, "y": -415, "z": -100},
-                    "Max": {"x": 508, "y": 618, "z": 100}
+                    "Max": {"x": 508, "y": 622, "z": 100}
                 }
             ]
         },
@@ -47,7 +47,7 @@
             "ImagePath": "Maps/Shoreline_TarkovData/Layers/shoreline_layer_1.png",
             "ImageBounds": {
                 "Min": {"x": -1060, "y": -415},
-                "Max": {"x": 508, "y": 618}
+                "Max": {"x": 508, "y": 622}
             },
             "GameBounds": [
                 {
@@ -61,7 +61,7 @@
             "ImagePath": "Maps/Shoreline_TarkovData/Layers/shoreline_layer_2.png",
             "ImageBounds": {
                 "Min": {"x": -1060, "y": -415},
-                "Max": {"x": 508, "y": 618}
+                "Max": {"x": 508, "y": 622}
             },
             "GameBounds": [
                 {
