@@ -5,8 +5,8 @@
     "MapInternalNames": [ "factory4_day", "factory4_night" ],
     "CoordinateRotation": 90,
     "Bounds": {
-        "Min": {"x": -66.5, "y": -64.5},
-        "Max": {"x": 79, "y": 67.4}
+        "Min": {"x": -65, "y": -64.5},
+        "Max": {"x": 77.5, "y": 67.2}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": -1,
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -65, "y": -64.5},
+                "Max": {"x": 77.5, "y": 67.2}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -100},
-                    "Max": {"x": 79, "y": 67.4, "z": -1}
+                    "Min": {"x": -65, "y": -64.5, "z": -100},
+                    "Max": {"x": 77.5, "y": 67.2, "z": -1}
                 }
             ]
         },
@@ -28,13 +28,13 @@
             "Level": 0,
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -65, "y": -64.5},
+                "Max": {"x": 77.5, "y": 67.2}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": -1},
-                    "Max": {"x": 79, "y": 67.4, "z": 3}
+                    "Min": {"x": -65, "y": -64.5, "z": -1},
+                    "Max": {"x": 77.5, "y": 67.2, "z": 3}
                 }
             ]
         },
@@ -42,13 +42,13 @@
             "Level": 1,
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_1.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -65, "y": -64.5},
+                "Max": {"x": 77.5, "y": 67.2}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": 3},
-                    "Max": {"x": 79, "y": 67.4, "z": 6}
+                    "Min": {"x": -65, "y": -64.5, "z": 3},
+                    "Max": {"x": 77.5, "y": 67.2, "z": 6}
                 }
             ]
         },
@@ -56,13 +56,13 @@
             "Level": 2,
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_2.png",
             "ImageBounds": {
-                "Min": {"x": -66.5, "y": -64.5},
-                "Max": {"x": 79, "y": 67.4}
+                "Min": {"x": -65, "y": -64.5},
+                "Max": {"x": 77.5, "y": 67.2}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -66.5, "y": -64.5, "z": 6},
-                    "Max": {"x": 79, "y": 67.4, "z": 100}
+                    "Min": {"x": -65, "y": -64.5, "z": 6},
+                    "Max": {"x": 77.5, "y": 67.2, "z": 100}
                 }
             ]
         }
@@ -75,7 +75,7 @@
         },
         {
             "Text": "Med Tent",
-            "Position": {"x": -18, "y": -28, "z": 0},
+            "Position": {"x": -17.5, "y": -28, "z": 0},
             "FontSize": 14
         },
         {
@@ -100,7 +100,7 @@
         },
         {
             "Text": "Glass Hall",
-            "Position": {"x": 70.7, "y": -20, "z": 0},
+            "Position": {"x": 69.3, "y": -20, "z": 0},
             "FontSize": 14
         },
         {
