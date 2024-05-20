@@ -1,12 +1,12 @@
 {
-    "DisplayName": "Labs (TarkovDev) - NOT LINED UP",
+    "DisplayName": "Labs (TarkovDev) - INACCURATE/NOT TO SCALE",
     "Author": "Tarkov.dev",
     "AuthorLink": "https://tarkov.dev",
     "MapInternalNames": [ "laboratory" ],
     "CoordinateRotation": 270,
     "Bounds": {
-        "Min": {"x": -287, "y": -477},
-        "Max": {"x": -91, "y": -193}
+        "Min": {"x": -287.75, "y": -446},
+        "Max": {"x": -91, "y": -225}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": -1,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -287, "y": -477},
-                "Max": {"x": -91, "y": -193}
+                "Min": {"x": -287.75, "y": -446},
+                "Max": {"x": -91, "y": -225}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -287, "y": -477, "z": -100},
-                    "Max": {"x": -91, "y": -193, "z": -0.9}
+                    "Min": {"x": -287.75, "y": -446, "z": -100},
+                    "Max": {"x": -91, "y": -225, "z": -0.9}
                 }
             ]
         },
@@ -28,13 +28,13 @@
             "Level": 0,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -287, "y": -477},
-                "Max": {"x": -91, "y": -193}
+                "Min": {"x": -287.75, "y": -446},
+                "Max": {"x": -91, "y": -225}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -287, "y": -477, "z": -0.9},
-                    "Max": {"x": -91, "y": -193, "z": 3}
+                    "Min": {"x": -287.75, "y": -446, "z": -0.9},
+                    "Max": {"x": -91, "y": -225, "z": 3}
                 }
             ]
         },
@@ -42,8 +42,8 @@
             "Level": 1,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_1.png",
             "ImageBounds": {
-                "Min": {"x": -287, "y": -477},
-                "Max": {"x": -91, "y": -193}
+                "Min": {"x": -287.75, "y": -446},
+                "Max": {"x": -91, "y": -225}
             },
             "GameBounds": [
                 {
@@ -60,7 +60,7 @@
             "Text": "Cargo Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -112.152, "y": -408.64, "z": 5.376 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -68,7 +68,7 @@
             "Text": "Main Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -282.304016, "y": -334.896, "z": -3.631999 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -76,7 +76,7 @@
             "Text": "Ventilation Shaft",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -144.866, "y": -399.385, "z": -2.424 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -84,7 +84,7 @@
             "Text": "Medical Block Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -112.423, "y": -343.986, "z": -3.10999966 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -92,7 +92,7 @@
             "Text": "Sewage Conduit",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -123.711, "y": -255.3735, "z": -3.6609993 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -100,7 +100,7 @@
             "Text": "Parking Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -231.73, "y": -434.816376, "z": 0.77356863 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -108,7 +108,7 @@
             "Text": "Hangar Gate",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -170.66, "y": -240.77, "z": 2.08 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },

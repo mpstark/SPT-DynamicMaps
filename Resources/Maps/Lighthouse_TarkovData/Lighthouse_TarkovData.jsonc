@@ -26,13 +26,123 @@
         }
     },
     "Labels": [
+        {
+            "Text": "Train Yard",
+            "Position": {"x": -30, "y": -882, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Drug Lab",
+            "Position": {"x": -120, "y": -841, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Water Treatment",
+            "Position": {"x": -65, "y": -600, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Plant 1",
+            "Position": {"x": 40, "y": -618, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Plant 2",
+            "Position": {"x": -98, "y": -742, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Plant 3",
+            "Position": {"x": -189, "y": -665, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Pipes",
+            "Position": {"x": -182, "y": -552, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Gunner Nest",
+            "Position": {"x": 18, "y": -453, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Island",
+            "Position": {"x": -177, "y": -356, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Cabins",
+            "Position": {"x": -278, "y": -323, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Cottages",
+            "Position": {"x": -162, "y": -225, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Convenience",
+            "Position": {"x": -55, "y": -288, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Red Brick",
+            "Position": {"x": -75, "y": -284, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Hillside",
+            "Position": {"x": -147, "y": -247, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Boathouses",
+            "Position": {"x": 125, "y": -153, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Dead Tree",
+            "Position": {"x": 62, "y": -60, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Construction",
+            "Position": {"x": 0, "y": -188, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Pikes Peak Resort",
+            "Position": {"x": -107, "y": -53, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Grand Chalet",
+            "Position": {"x": -133, "y": 100, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Tennis Court",
+            "Position": {"x": -70, "y": 129, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Lightkeeper Island",
+            "Position": {"x": 382, "y": 496, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Crash Site",
+            "Position": {"x": -125, "y": 296, "z": 0},
+            "FontSize": 16
+        }
     ],
     "StaticMarkers": [
         {
             "Text": "Side Tunnel (Co-Op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -68.3, "y": 318.11, "z": 6.83 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -40,7 +150,7 @@
             "Text": "Southern Road Landslide",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -281.3, "y": 420.8, "z": 11.86 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -48,7 +158,7 @@
             "Text": "Hideout Under the Landing Stage",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 133.068, "y": 286.842, "z": -0.467 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -56,7 +166,7 @@
             "Text": "Scav Hideout at the Grotto",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 180.66, "y": -485.94, "z": 1.18 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -64,7 +174,7 @@
             "Text": "Industrial Zone Gates",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -152.56, "y": -794.1, "z": 12.25 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -72,7 +182,7 @@
             "Text": "Road to Military Base V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -328.951263, "y": -784.3581, "z": 16.73 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -80,7 +190,7 @@
             "Text": "Mountain Pass",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -172.35, "y": -6.39, "z": 41.89 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -88,7 +198,7 @@
             "Text": "Path to Shoreline",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -364.4, "y": -121.4, "z": 28.758 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -96,7 +206,7 @@
             "Text": "Northern Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 111.943, "y": -991.981, "z": 11.86 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -104,7 +214,7 @@
             "Text": "Southern Road",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -295.8, "y": 420.6, "z": 11.86 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -112,7 +222,7 @@
             "Text": "Armored Train",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 6.27001953, "y": -873.78, "z": 14.1133 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },

@@ -73,6 +73,28 @@ namespace InGameMap.UI.Components
                 {LayerStatus.FullReveal, 1f},
             };
 
+        // TODO: this seems... not great?
+        public Dictionary<string, Dictionary<LayerStatus, float>> CategoryImageAlphaLayerStatus { get; protected set; }
+            = new Dictionary<string, Dictionary<LayerStatus, float>>
+            {
+                {"Extract", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.25f},
+                    {LayerStatus.Underneath, 0.50f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }}
+            };
+        public Dictionary<string, Dictionary<LayerStatus, float>> CategoryLabelAlphaLayerStatus { get; protected set; }
+            = new Dictionary<string, Dictionary<LayerStatus, float>>
+            {
+                {"Extract", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.0f},
+                    {LayerStatus.Underneath, 0.0f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }}
+            };
+
         private float _initialRotation;
         private bool _hasSetOutline = false;
 
@@ -194,6 +216,15 @@ namespace InGameMap.UI.Components
 
             var imageAlpha = ImageAlphaLayerStatus[status];
             var labelAlpha = LabelAlphaLayerStatus[status];
+
+            if (CategoryImageAlphaLayerStatus.ContainsKey(Category))
+            {
+                imageAlpha = CategoryImageAlphaLayerStatus[Category][status];
+            }
+            if (CategoryLabelAlphaLayerStatus.ContainsKey(Category))
+            {
+                labelAlpha = CategoryLabelAlphaLayerStatus[Category][status];
+            }
 
             Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, imageAlpha);
             Label.color = new Color(Label.color.r, Label.color.g, Label.color.b, labelAlpha);

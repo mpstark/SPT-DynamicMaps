@@ -76,13 +76,78 @@
         }
     },
     "Labels": [
+        {
+            "Text": "TerraGroup",
+            "Position": {"x": -50, "y": 0, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Skyside",
+            "Position": {"x": 150, "y": 1, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Fusion",
+            "Position": {"x": 141, "y": 142, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Empire",
+            "Position": {"x": 14, "y": 201, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Capital Insight",
+            "Position": {"x": 115, "y": 285, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Nakatani",
+            "Position": {"x": 2, "y": 324, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Elemental Global",
+            "Position": {"x": 80, "y": -118, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Oasis",
+            "Position": {"x": 115, "y": 104, "z": 22},
+            "FontSize": 16
+        },
+        {
+            "Text": "ASAP Winery",
+            "Position": {"x": 115, "y": 30, "z": 22},
+            "FontSize": 12
+        },
+        {
+            "Text": "Tarbank",
+            "Position": {"x": 43, "y": 150, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "GAGRIN Hotel",
+            "Position": {"x": 58, "y": 234, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "M Showroom",
+            "Position": {"x": 97, "y": 223, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Science Offices",
+            "Position": {"x": -13, "y": 48, "z": 29},
+            "FontSize": 12
+        }
     ],
     "StaticMarkers": [
         {
             "Text": "Scav Checkpoint (Co-op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 26.1550121, "y": -82.52659, "z": 24.5091858 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -90,7 +155,7 @@
             "Text": "Police Cordon V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -19.5134068, "y": 114.942139, "z": 23.7110023 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -98,7 +163,7 @@
             "Text": "Emercom Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 151.625, "y": -97.45658, "z": 24.662056 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -106,7 +171,7 @@
             "Text": "Nakatani Basement Stairs",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -16.1249924, "y": 335.063416, "z": 14.7620564 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -114,7 +179,7 @@
             "Text": "Mira Ave",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 218.225, "y": -38.5065842, "z": 17.9920559 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": {"r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },

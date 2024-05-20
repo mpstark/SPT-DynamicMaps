@@ -102,7 +102,7 @@
             "Text": "Basement Descent",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 74.769, "y": 49.22, "z": -0.701999664 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -110,7 +110,7 @@
             "Text": "Entrance to Catacombs",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -249.008026, "y": 243.797, "z": 2.566 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -118,7 +118,7 @@
             "Text": "Ventilation Shaft",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -124.127106, "y": 425.738983, "z": 3.114 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -126,7 +126,7 @@
             "Text": "Sewer Manhole",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 276.113, "y": 345.389984, "z": 5.356 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -134,7 +134,7 @@
             "Text": "Near Kamchatskaya Arch",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 259.57, "y": 48.72, "z": -3.929 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -142,7 +142,7 @@
             "Text": "Cardinal Apartment Complex Parking",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 97.8999939, "y": -160.07, "z": 0.130000114 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -150,7 +150,7 @@
             "Text": "Klimov Shopping Mall Exfil",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -162.652008, "y": -7.08499146, "z": 2.645 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -158,7 +158,7 @@
             "Text": "Pinewood Basement (Co-Op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -113.71, "y": 65.633, "z": -2.935 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -166,7 +166,7 @@
             "Text": "Courtyard",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -148.947, "y": 500.151978, "z": 1.78600025 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -174,7 +174,7 @@
             "Text": "Primorsky Ave Taxi V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -2.191315, "y": 461.232971, "z": 3.2 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -182,7 +182,7 @@
             "Text": "Stylobate Building Elevator",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -44.7435, "y": -72.6544, "z": 11.04 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -190,7 +190,7 @@
             "Text": "Crash Site",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 312.74, "y": 405.96, "z": 6.8 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -198,7 +198,7 @@
             "Text": "Sewer River",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -264.267, "y": 223.92, "z": -1.535 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -206,7 +206,7 @@
             "Text": "Damaged House",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -248.971, "y": 344.275, "z": 7.195 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -214,7 +214,7 @@
             "Text": "Collapsed Crane",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 216.3, "y": 272.3, "z": 3.44 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -222,7 +222,7 @@
             "Text": "Scav Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 211.3356, "y": 82.307, "z": -8.1624 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -230,7 +230,7 @@
             "Text": "Klimov Street",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -263.41, "y": 43.19, "z": 2.9 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -238,7 +238,7 @@
             "Text": "Expo Checkpoint",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 213.12, "y": -104.96, "z": 0.09 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },

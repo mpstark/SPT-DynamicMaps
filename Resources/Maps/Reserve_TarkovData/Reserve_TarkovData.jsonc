@@ -40,13 +40,170 @@
         }
     },
     "Labels": [
+        {
+            "Text": "K Buildings",
+            "Position": {"x": 31, "y": -104, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "White Queen",
+            "Position": {"x": -25, "y": 180, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "White Pawn",
+            "Position": {"x": -104, "y": 93, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Black Bishop",
+            "Position": {"x": -140, "y": -14.5, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "White Bishop",
+            "Position": {"x": -67, "y": -30, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "White King",
+            "Position": {"x": -49.5, "y": 15.5, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Black Knight",
+            "Position": {"x": 14.5, "y": -10.8, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "White Knight",
+            "Position": {"x": 82.2, "y": -30.2, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "White Rook",
+            "Position": {"x": 149, "y": -124, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Train Station",
+            "Position": {"x": 161, "y": -149, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Black Pawn",
+            "Position": {"x": -165, "y": 57, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Barracks",
+            "Position": {"x": 165, "y": -215, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "E1 Bunkers",
+            "Position": {"x": -220, "y": -13, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "E2 Bunkers",
+            "Position": {"x": 173, "y": -3, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "д - Warehouse Bunkers",
+            "Position": {"x": 82, "y": -170, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Garage",
+            "Position": {"x": 98.5, "y": 29.5, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Mechanic",
+            "Position": {"x": 55.5, "y": 60.6, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Gas Station",
+            "Position": {"x": 29.7, "y": 29.5, "z": 0},
+            "FontSize": 14,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Shipping Yard",
+            "Position": {"x": -31, "y": -150, "z": 0},
+            "FontSize": 16,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K1",
+            "Position": {"x": 8, "y": -76, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K2",
+            "Position": {"x": 65.5, "y": -92, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K3",
+            "Position": {"x": 2, "y": -96.5, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K4",
+            "Position": {"x": 60, "y": -112, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K5",
+            "Position": {"x": -4, "y": -118, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "K6",
+            "Position": {"x": 54, "y": -133, "z": 0},
+            "FontSize": 12,
+            "DegreesRotation": 14.5
+        },
+        {
+            "Text": "Dome",
+            "Position": {"x": -8.5, "y": 175, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Tarmac",
+            "Position": {"x": -120, "y": 37, "z": 0},
+            "FontSize": 16
+        }
     ],
     "StaticMarkers": [
         {
             "Text": "Scav Lands (Co-Op)",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -124.67, "y": -144.92, "z": -3.28 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -54,7 +211,7 @@
             "Text": "Hole in the Wall by the Mountains",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -261.41, "y": 47.95, "z": -6.033997 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -62,7 +219,7 @@
             "Text": "Heating Pipe",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -37.08, "y": -184.0, "z": -5.15 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -70,7 +227,7 @@
             "Text": "Depot Hermetic Door",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 123.59, "y": -121.12, "z": -10.27 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -78,7 +235,7 @@
             "Text": "Checkpoint Fence",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 66.76, "y": 138.26, "z": -4.43 },
-            "Category": "ScavExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 1.0, "g": 0.460784316, "b": 0.007843138, "a": 1.0 }
         },
@@ -86,7 +243,7 @@
             "Text": "D-2",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -121.479065, "y": 172.24913, "z": -17.0010071 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -94,7 +251,7 @@
             "Text": "Bunker Hermetic Door",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 62.3918457, "y": -194.269928, "z": -5.257 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -102,7 +259,7 @@
             "Text": "Cliff Descent",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -12.8, "y": 206.78, "z": 20.93 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -110,7 +267,7 @@
             "Text": "Sewer Manhole",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 40.18, "y": 76.45, "z": -5.12 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
@@ -118,7 +275,7 @@
             "Text": "Armored Train",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 144.986, "y": -147.352, "z": -3.92 },
-            "Category": "PMCExtract",
+            "Category": "Extract",
             "ShowInRaid": false,
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
