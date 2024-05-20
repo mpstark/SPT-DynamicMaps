@@ -46,7 +46,7 @@ namespace InGameMap.UI.Components
         public Dictionary<LayerStatus, float> LabelAlphaLayerStatus { get; set; } = new Dictionary<LayerStatus, float>
             {
                 {LayerStatus.Hidden, 0.0f},
-                {LayerStatus.Underneath, 0.25f},
+                {LayerStatus.Underneath, 0.0f},
                 {LayerStatus.OnTop, 1f},
                 {LayerStatus.FullReveal, 1f},
             };

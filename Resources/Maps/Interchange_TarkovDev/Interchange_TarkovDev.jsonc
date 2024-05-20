@@ -54,7 +54,391 @@
         }
     },
     "Labels": [
-        // TODO: add labels!
+        {
+            "Text": "Power Station",
+            "Position": {"x": -186.4, "y": -318.7, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Go Kart",
+            "Position": {"x": 155, "y": -253, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Four Camp",
+            "Position": {"x": 158, "y": -78.5, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Cargo Containers",
+            "Position": {"x": 68.2, "y": 312.9, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Wall Break",
+            "Position": {"x": -260.2, "y": 123.8, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Ramps",
+            "Position": {"x": -175.5, "y": 145.1, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "OLI Tower",
+            "Position": {"x": 202.3, "y": 219.4, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "IDEA Tower",
+            "Position": {"x": 46.5, "y": -358.5, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Scav Camp",
+            "Position": {"x": 263.2, "y": -11.1, "z": 0},
+            "FontSize": 14
+        },
+        {
+            "Text": "Highway Construction",
+            "Position": {"x": 373.5, "y": -391.2, "z": 0},
+            "FontSize": 16
+        },
+        {
+            "Text": "Garage A",
+            "Position": {"x": 33, "y": -222, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Garage B",
+            "Position": {"x": 47, "y": -112, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Garage C",
+            "Position": {"x": 0, "y": 47, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "Garage D",
+            "Position": {"x": 28, "y": 138, "z": 0},
+            "FontSize": 12
+        },
+        {
+            "Text": "IDEA",
+            "Position": {"x": -34, "y": -235, "z": 26},
+            "FontSize": 14
+        },
+        {
+            "Text": "Goshan",
+            "Position": {"x": -115, "y": -45, "z": 26},
+            "FontSize": 14
+        },
+        {
+            "Text": "OLI",
+            "Position": {"x": -28, "y": 140, "z": 26},
+            "FontSize": 14
+        },
+        {
+            "Text": "Nortex",
+            "Position": {"x": 87, "y": -165, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "TRend",
+            "Position": {"x": 60, "y": -152, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Mode7",
+            "Position": {"x": 69.5, "y": -134, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "TTS",
+            "Position": {"x": 19, "y": -129, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Book Store",
+            "Position": {"x": -38, "y": -129, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Dino Clothes",
+            "Position": {"x": 91, "y": -119, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "EMERCOM",
+            "Position": {"x": 18, "y": -103, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Kostin",
+            "Position": {"x": -28, "y": -103, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Bizarro",
+            "Position": {"x": -65, "y": -103, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Spiel",
+            "Position": {"x": 92, "y": -87, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Voyage",
+            "Position": {"x": -18, "y": -87, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Viking",
+            "Position": {"x": 57, "y": -66, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Mantis",
+            "Position": {"x": 13, "y": -66, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "German",
+            "Position": {"x": -18, "y": -72, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "The National",
+            "Position": {"x": 57, "y": -32, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Brutal",
+            "Position": {"x": 13, "y": -32, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Kiba",
+            "Position": {"x": -18, "y": -25, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Pretty Lights",
+            "Position": {"x": -34, "y": -20, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Telespot",
+            "Position": {"x": 92, "y": -18, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Revis",
+            "Position": {"x": 62, "y": -12, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "ADIK",
+            "Position": {"x": 19, "y": -6, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Generic",
+            "Position": {"x": -28, "y": 0.5, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Top Brand",
+            "Position": {"x": 92, "y": 15, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Sports",
+            "Position": {"x": 61, "y": 15, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Yushka",
+            "Position": {"x": 70, "y": 32, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Rasmussen",
+            "Position": {"x": 19.5, "y": 26, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Avokado",
+            "Position": {"x": -37, "y": 26, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Boots 4 Life",
+            "Position": {"x": 91, "y": 55, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Texho",
+            "Position": {"x": 61, "y": 50, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Dom",
+            "Position": {"x": 6, "y": 49, "z": 26},
+            "FontSize": 10
+        },
+        {
+            "Text": "Father & Sons",
+            "Position": {"x": 38, "y": -170, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Tarkovstar",
+            "Position": {"x": 69, "y": -150, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Eastland",
+            "Position": {"x": 26, "y": -149, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Arena",
+            "Position": {"x": 71, "y": -130, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "ТАРЗДРАВ",
+            "Position": {"x": 54, "y": -128, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "МЕБЕЛЬ МК",
+            "Position": {"x": 20, "y": -128, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Intourist",
+            "Position": {"x": 69, "y": -116, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Burger Spot",
+            "Position": {"x": -27, "y": -103, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "FCK",
+            "Position": {"x": 70, "y": -94, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "McDaniels",
+            "Position": {"x": 70, "y": -87, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Tarducks",
+            "Position": {"x": 64, "y": -69, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Coffee Joy",
+            "Position": {"x": 43, "y": -69, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Jacob & Jacob",
+            "Position": {"x": 15, "y": -74, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "ПУШКИН",
+            "Position": {"x": -34, "y": -79, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Sushi Huyushi",
+            "Position": {"x": 64, "y": -34, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Underway",
+            "Position": {"x": -17, "y": -32, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Burger House",
+            "Position": {"x": 67, "y": -23.5, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Philly Cute",
+            "Position": {"x": -34, "y": -24, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Shiccos",
+            "Position": {"x": 67, "y": -16, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "УЗЕЙ ИСТОРИИ",
+            "Position": {"x": 17, "y": 0, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Papillon",
+            "Position": {"x": 92, "y": 17, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "ЗАКРЫТО НА РЕМОНТ",
+            "Position": {"x": 58, "y": 13, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "НА-СВЯЗИ",
+            "Position": {"x": 70, "y": 27, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "СКОРО ОТКРЫТИЕ",
+            "Position": {"x": 54, "y": 24, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Figaro",
+            "Position": {"x": 19, "y": 26, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "АПТЕКА",
+            "Position": {"x": 71, "y": 47, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "SARA",
+            "Position": {"x": 53, "y": 47, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Urban Clothes",
+            "Position": {"x": 26, "y": 46, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "TECHLIGHT",
+            "Position": {"x": 91, "y": 54, "z": 35},
+            "FontSize": 10
+        },
+        {
+            "Text": "Fashion Store",
+            "Position": {"x": 39, "y": 67, "z": 35},
+            "FontSize": 10
+        }
     ],
     "StaticMarkers": [
         {
