@@ -6,7 +6,7 @@
     "CoordinateRotation": 180,
     "Bounds": {
         "Min": {"x": -545, "y": -998},
-        "Max": {"x": 515, "y": 725}
+        "Max": {"x": 512, "y": 721}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -15,12 +15,12 @@
             "ImagePath": "Maps/Lighthouse_TarkovData/Layers/lighthouse_layer_0.png",
             "ImageBounds": {
                 "Min": {"x": -545, "y": -998},
-                "Max": {"x": 515, "y": 725}
+                "Max": {"x": 512, "y": 721}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -545, "y": -998, "z": -100},
-                    "Max": {"x": 515, "y": 725, "z": 100}
+                    "Max": {"x": 512, "y": 721, "z": 100}
                 }
             ]
         }
