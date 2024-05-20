@@ -1,12 +1,12 @@
 {
-    "DisplayName": "Labs (TarkovDev) - INACCURATE/NOT TO SCALE",
+    "DisplayName": "Labs (TarkovDev)",
     "Author": "Tarkov.dev",
     "AuthorLink": "https://tarkov.dev",
     "MapInternalNames": [ "laboratory" ],
     "CoordinateRotation": 270,
     "Bounds": {
-        "Min": {"x": -287.75, "y": -446},
-        "Max": {"x": -91, "y": -225}
+        "Min": {"x": -292, "y": -441},
+        "Max": {"x": -96, "y": -223}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -14,13 +14,13 @@
             "Level": -1,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_-1.png",
             "ImageBounds": {
-                "Min": {"x": -287.75, "y": -446},
-                "Max": {"x": -91, "y": -225}
+                "Min": {"x": -292, "y": -441},
+                "Max": {"x": -96, "y": -223}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -287.75, "y": -446, "z": -100},
-                    "Max": {"x": -91, "y": -225, "z": -0.9}
+                    "Min": {"x": -292, "y": -441, "z": -100},
+                    "Max": {"x": -96, "y": -223, "z": -0.9}
                 }
             ]
         },
@@ -28,13 +28,13 @@
             "Level": 0,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_0.png",
             "ImageBounds": {
-                "Min": {"x": -287.75, "y": -446},
-                "Max": {"x": -91, "y": -225}
+                "Min": {"x": -292, "y": -441},
+                "Max": {"x": -96, "y": -223}
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -287.75, "y": -446, "z": -0.9},
-                    "Max": {"x": -91, "y": -225, "z": 3}
+                    "Min": {"x": -292, "y": -441, "z": -0.9},
+                    "Max": {"x": -96, "y": -223, "z": 3}
                 }
             ]
         },
@@ -42,8 +42,8 @@
             "Level": 1,
             "ImagePath": "Maps/Labs_TarkovDev/Layers/labs_layer_1.png",
             "ImageBounds": {
-                "Min": {"x": -287.75, "y": -446},
-                "Max": {"x": -91, "y": -225}
+                "Min": {"x": -292, "y": -441},
+                "Max": {"x": -96, "y": -223}
             },
             "GameBounds": [
                 {
@@ -185,7 +185,7 @@
             "Category": "Switch"
         },
         {
-            "Text": "door 1",
+            "Text": "TerraGroup Manager's Office",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -165.246277, "y": -349.197, "z": 5.131374 },
             "Category": "LockedDoor",
@@ -193,7 +193,7 @@
             "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
         },
         {
-            "Text": "door 2",
+            "Text": "TerraGroup Manager's Office",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -165.242874, "y": -338.086, "z": 5.135374 },
             "Category": "LockedDoor",
@@ -201,7 +201,7 @@
             "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
         },
         {
-            "Text": "door 3",
+            "Text": "Weapon Testing Area",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -181.966461, "y": -318.226044, "z": 1.37873685 },
             "Category": "LockedDoor",
@@ -209,7 +209,7 @@
             "ExtraInfo": "5c1e2d1f86f77431e9280bee"
         },
         {
-            "Text": "door 4",
+            "Text": "Weapon Testing Area",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -179.862, "y": -310.3296, "z": 1.37899876 },
             "Category": "LockedDoor",
@@ -217,7 +217,7 @@
             "ExtraInfo": "5c1e2d1f86f77431e9280bee"
         },
         {
-            "Text": "door 5",
+            "Text": "Infirmary (Blue)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -123.229095, "y": -406.524384, "z": 1.03631592 },
             "Category": "LockedDoor",
@@ -225,7 +225,7 @@
             "ExtraInfo": "5c1d0c5f86f7744bb2683cf0"
         },
         {
-            "Text": "door 6",
+            "Text": "Sterile Lab (Green)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -135.89798, "y": -346.9675, "z": 5.185806 },
             "Category": "LockedDoor",
@@ -233,7 +233,7 @@
             "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
         },
         {
-            "Text": "door 7",
+            "Text": "Sterile Lab (Green)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -138.6131, "y": -346.966125, "z": 5.25222349 },
             "Category": "LockedDoor",
@@ -241,7 +241,7 @@
             "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
         },
         {
-            "Text": "door 8",
+            "Text": "Card with a Blue Marking",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -130.268463, "y": -339.944275, "z": 5.15560675 },
             "Category": "LockedDoor",
@@ -249,7 +249,7 @@
             "ExtraInfo": "5efde6b4f5448336730dbd61"
         },
         {
-            "Text": "door 9",
+            "Text": "Security #2 (Yellow)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -212.695, "y": -376.538, "z": 5.145301 },
             "Category": "LockedDoor",
@@ -257,7 +257,7 @@
             "ExtraInfo": "5c1d0d6d86f7744bb2683e1f"
         },
         {
-            "Text": "door 10",
+            "Text": "Test Room (Black)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -132.893, "y": -348.72, "z": 1.43501759 },
             "Category": "LockedDoor",
@@ -265,7 +265,7 @@
             "ExtraInfo": "5c1d0f4986f7744bb01837fa"
         },
         {
-            "Text": "door 11",
+            "Text": "Test Room (Black)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -128.794, "y": -349.91507, "z": 1.43701744 },
             "Category": "LockedDoor",
@@ -273,7 +273,7 @@
             "ExtraInfo": "5c1d0f4986f7744bb01837fa"
         },
         {
-            "Text": "door 12",
+            "Text": "Security Office (Violet)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -261.993, "y": -317.240021, "z": 5.147805 },
             "Category": "LockedDoor",
@@ -281,7 +281,7 @@
             "ExtraInfo": "5c1e495a86f7743109743dfb"
         },
         {
-            "Text": "door 13",
+            "Text": "Security Office (Red)",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -257.222015, "y": -322.925018, "z": 5.24803066 },
             "Category": "LockedDoor",
@@ -289,7 +289,7 @@
             "ExtraInfo": "5c1d0efb86f7744baf2e7b7b"
         },
         {
-            "Text": "door 14",
+            "Text": "Arsenal Storage",
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -250.839066, "y": -326.758667, "z": 5.097125 },
             "Category": "LockedDoor",
