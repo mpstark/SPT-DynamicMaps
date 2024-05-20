@@ -32,38 +32,24 @@ namespace InGameMap.Utils
             // END CC BY-SA 4.0 Deed License
         }
 
-        public static Vector2 GetMidpoint(IEnumerable<Vector2> points)
-        {
-            var sum = Vector2.zero;
-            var count = 0;
-
-            foreach (var point in points)
-            {
-                sum += point;
-                count++;
-            }
-
-            return sum / count;
-        }
-
         public static Vector2 GetMidpoint(Vector2 minBound, Vector2 maxBound)
         {
             return (minBound + maxBound) / 2;
         }
 
-        public static Vector3 UnityPositionToMapPosition(Vector3 unityPosition)
+        public static Vector3 ConvertToMapPosition(Vector3 unityPosition)
         {
             return new Vector3(unityPosition.x, unityPosition.z, unityPosition.y);
         }
 
-        public static Vector3 TransformToMapPosition(Transform transform)
+        public static Vector3 ConvertToMapPosition(Transform transform)
         {
-            return UnityPositionToMapPosition(transform.position);
+            return ConvertToMapPosition(transform.position);
         }
 
-        public static float TransformToMapRotation(Transform transform)
+        public static float ConvertToMapRotation(Transform transform)
         {
-            return -transform.rotation.eulerAngles.y;  // TODO: figure out why negative
+            return -transform.rotation.eulerAngles.y;
         }
     }
 }

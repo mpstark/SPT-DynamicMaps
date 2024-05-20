@@ -97,6 +97,7 @@ namespace InGameMap.UI.Components
 
         private float _initialRotation;
         private bool _hasSetOutline = false;
+        private bool _isInFullReveal = false;
 
         public static MapMarker Create(GameObject parent, MapMarkerDef def, Vector2 size, float degreesRotation, float scale)
         {
@@ -214,6 +215,11 @@ namespace InGameMap.UI.Components
                 return;
             }
 
+            if (_isInFullReveal)
+            {
+                status = LayerStatus.FullReveal;
+            }
+
             var imageAlpha = ImageAlphaLayerStatus[status];
             var labelAlpha = LabelAlphaLayerStatus[status];
 
@@ -236,11 +242,13 @@ namespace InGameMap.UI.Components
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            _isInFullReveal = true;
             HandleNewLayerStatus(LayerStatus.FullReveal);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            _isInFullReveal = false;
             OnPositionChanged?.Invoke(this);
         }
     }

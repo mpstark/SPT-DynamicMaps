@@ -29,7 +29,7 @@ namespace InGameMap.Utils
                     ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
                     Text = scavExfil.Settings.Name.Localized(),
-                    Position = MathUtils.TransformToMapPosition(scavExfil.transform),
+                    Position = MathUtils.ConvertToMapPosition(scavExfil.transform),
                     Color = Color.Lerp(Color.yellow, Color.red, 0.5f)
                 };
 
@@ -44,7 +44,7 @@ namespace InGameMap.Utils
                     ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
                     Text = pmcExfil.Settings.Name.Localized(),
-                    Position = MathUtils.TransformToMapPosition(pmcExfil.transform),
+                    Position = MathUtils.ConvertToMapPosition(pmcExfil.transform),
                     Color = Color.green
                 };
 
@@ -75,7 +75,7 @@ namespace InGameMap.Utils
                     Category = "Switch",
                     ImagePath = "Markers/lever.png",
                     Text = @switch.name,
-                    Position = MathUtils.TransformToMapPosition(@switch.transform)
+                    Position = MathUtils.ConvertToMapPosition(@switch.transform)
                 };
 
                 dump.Add(dumped);
@@ -106,7 +106,7 @@ namespace InGameMap.Utils
                     Text = $"door {i++}",
                     Category = "LockedDoor",
                     ImagePath = "Markers/locked_door.png",
-                    Position = MathUtils.TransformToMapPosition(@object.transform),
+                    Position = MathUtils.ConvertToMapPosition(@object.transform),
                     ExtraInfo = @object.KeyId,
                     Color = Color.yellow
                 };

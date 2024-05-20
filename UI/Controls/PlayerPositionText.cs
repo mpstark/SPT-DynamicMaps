@@ -19,7 +19,7 @@ namespace InGameMap.UI.Controls
                 return;
             }
 
-            var mapPosition = MathUtils.UnityPositionToMapPosition(player.Position);
+            var mapPosition = MathUtils.ConvertToMapPosition(player.Position);
             Text.text = $"Player: {mapPosition.x:F} {mapPosition.y:F} {mapPosition.z:F}";
         }
     }

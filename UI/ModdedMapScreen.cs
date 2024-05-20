@@ -129,7 +129,7 @@ namespace InGameMap.UI
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
                 {
-                    _mapView.ShiftMapToCoordinate(MathUtils.UnityPositionToMapPosition(player.Position), _positionTweenTime);
+                    _mapView.ShiftMapToCoordinate(MathUtils.ConvertToMapPosition(player.Position), _positionTweenTime);
                 }
             }
 
@@ -233,7 +233,7 @@ namespace InGameMap.UI
             }
 
             // select layers to show
-            _mapView.SelectLevelByCoords(MathUtils.UnityPositionToMapPosition(player.Position));
+            _mapView.SelectLevelByCoords(MathUtils.ConvertToMapPosition(player.Position));
 
             // shift map to player position, Vector3 to Vector2 discards z
             // TODO: this is annoying, but need something like it

@@ -33,7 +33,7 @@ namespace InGameMap
             var markerDef = new MapMarkerDef
             {
                 ImagePath = "Markers/dot.png",
-                Position = MathUtils.UnityPositionToMapPosition(GameUtils.GetMainPlayer().Position)
+                Position = MathUtils.ConvertToMapPosition(GameUtils.GetMainPlayer().Position)
             };
 
             MapView.AddMapMarker(markerDef);

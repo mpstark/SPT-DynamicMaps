@@ -109,7 +109,7 @@ namespace InGameMap.DynamicMarkers
                 Category = "Extract",
                 ImagePath = "Markers/exit.png",
                 Text = exfil.Settings.Name.Localized(),
-                Position = MathUtils.TransformToMapPosition(exfil.transform)
+                Position = MathUtils.ConvertToMapPosition(exfil.transform)
             };
 
             var marker = map.AddMapMarker(markerDef);

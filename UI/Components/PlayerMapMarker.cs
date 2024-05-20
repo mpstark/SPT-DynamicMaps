@@ -79,8 +79,7 @@ namespace InGameMap.UI.Components
                 _callbackTime = 0f;
             }
 
-            MoveAndRotate(MathUtils.UnityPositionToMapPosition(Player.Position),
-                          -Player.Rotation.x, callback); // TODO: I'm unsure why negative rotation here
+            MoveAndRotate(MathUtils.ConvertToMapPosition(Player.Position), -Player.Rotation.x, callback);
         }
 
         protected override void OnDestroy()
