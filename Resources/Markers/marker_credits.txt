@@ -21,6 +21,9 @@ https://game-icons.net/1x1/delapouite/key-lock.html
 Door icon by Delapouite under CC BY 3.0
 https://game-icons.net/1x1/delapouite/door.html
 
+Position marker icon by Delapouite under CC BY 3.0
+https://game-icons.net/1x1/delapouite/position-marker.html
+
 Above images were changed with the below changes
   - Scaled down to 60x60 images
   - Black outline added

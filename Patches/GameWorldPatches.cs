@@ -2,22 +2,23 @@ using System.Reflection;
 using Aki.Reflection.Patching;
 using EFT;
 using HarmonyLib;
+using InGameMap.Utils;
 
 namespace InGameMap.Patches
 {
-    // internal class GameWorldOnGameStartedPatch : ModulePatch
-    // {
-    //     protected override MethodBase GetTargetMethod()
-    //     {
-    //         return AccessTools.Method(typeof(GameWorld), nameof(GameWorld.OnGameStarted));
-    //     }
+    internal class GameWorldOnGameStartedPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(GameWorld), nameof(GameWorld.OnGameStarted));
+        }
 
-    //     [PatchPostfix]
-    //     public static void PatchPostfix(GameWorld __instance)
-    //     {
-    //         Plugin.Instance.Map?.OnRaidStart(__instance.MainPlayer.Location);
-    //     }
-    // }
+        [PatchPostfix]
+        public static void PatchPostfix(GameWorld __instance)
+        {
+            QuestUtils.OnGameStarted(__instance);
+        }
+    }
 
     internal class GameWorldOnDestroyPatch : ModulePatch
     {
@@ -30,7 +31,7 @@ namespace InGameMap.Patches
         public static void PatchPostfix()
         {
             Plugin.Instance.Map?.OnRaidEnd();
+            QuestUtils.OnGameEnded();
         }
     }
 }
-

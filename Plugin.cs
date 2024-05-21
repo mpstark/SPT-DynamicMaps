@@ -27,7 +27,7 @@ namespace InGameMap
 
             // patches
             new MapScreenShowPatch().Enable();
-            // new GameWorldOnGameStartedPatch().Enable();
+            new GameWorldOnGameStartedPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
         }
 

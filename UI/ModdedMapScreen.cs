@@ -114,6 +114,7 @@ namespace InGameMap.UI
             _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
             _dynamicMarkerProviders.Add(new ExtractMarkerProvider());
             _dynamicMarkerProviders.Add(new LockedDoorMarkerMutator());
+            _dynamicMarkerProviders.Add(new QuestMarkerProvider());
         }
 
         private void Update()

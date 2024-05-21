@@ -11,6 +11,40 @@ namespace InGameMap.UI.Components
 {
     public class MapMarker : MonoBehaviour, ILayerBound, IPointerEnterHandler, IPointerExitHandler
     {
+        // TODO: this seems... not great?
+        public static Dictionary<string, Dictionary<LayerStatus, float>> CategoryImageAlphaLayerStatus { get; protected set; }
+            = new Dictionary<string, Dictionary<LayerStatus, float>>
+            {
+                {"Extract", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.25f},
+                    {LayerStatus.Underneath, 0.50f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }},
+                {"Quest", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.25f},
+                    {LayerStatus.Underneath, 0.50f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }}
+            };
+        public static Dictionary<string, Dictionary<LayerStatus, float>> CategoryLabelAlphaLayerStatus { get; protected set; }
+            = new Dictionary<string, Dictionary<LayerStatus, float>>
+            {
+                {"Extract", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.0f},
+                    {LayerStatus.Underneath, 0.0f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }},
+                {"Quest", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.0f},
+                    {LayerStatus.Underneath, 0.0f},
+                    {LayerStatus.OnTop, 1.0f},
+                    {LayerStatus.FullReveal, 1.0f},
+                }},
+            };
+
         private static Vector2 _labelSizeMultiplier = new Vector2(2.5f, 2f);
         private static float _markerMinFontSize = 9f;
         private static float _markerMaxFontSize = 13f;
@@ -72,28 +106,6 @@ namespace InGameMap.UI.Components
                 {LayerStatus.Underneath, 0.0f},
                 {LayerStatus.OnTop, 0.0f},
                 {LayerStatus.FullReveal, 1f},
-            };
-
-        // TODO: this seems... not great?
-        public Dictionary<string, Dictionary<LayerStatus, float>> CategoryImageAlphaLayerStatus { get; protected set; }
-            = new Dictionary<string, Dictionary<LayerStatus, float>>
-            {
-                {"Extract", new Dictionary<LayerStatus, float> {
-                    {LayerStatus.Hidden, 0.25f},
-                    {LayerStatus.Underneath, 0.50f},
-                    {LayerStatus.OnTop, 1.0f},
-                    {LayerStatus.FullReveal, 1.0f},
-                }}
-            };
-        public Dictionary<string, Dictionary<LayerStatus, float>> CategoryLabelAlphaLayerStatus { get; protected set; }
-            = new Dictionary<string, Dictionary<LayerStatus, float>>
-            {
-                {"Extract", new Dictionary<LayerStatus, float> {
-                    {LayerStatus.Hidden, 0.0f},
-                    {LayerStatus.Underneath, 0.0f},
-                    {LayerStatus.OnTop, 1.0f},
-                    {LayerStatus.FullReveal, 1.0f},
-                }}
             };
 
         private float _initialRotation;

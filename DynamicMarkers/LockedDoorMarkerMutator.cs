@@ -25,6 +25,7 @@ namespace InGameMap.DynamicMarkers
                     continue;
                 }
 
+                // TODO: GetAllItems is a BSG extension method under GClass
                 var hasKey = player.Inventory.Equipment.GetAllItems()
                     .FirstOrDefault(i => i.TemplateId == marker.AssociatedItemId) != null;
 
@@ -50,6 +51,7 @@ namespace InGameMap.DynamicMarkers
                     continue;
                 }
 
+                // TODO: GetAllItems is a BSG extension method under GClass
                 var keyInStash = profile.Inventory.Stash.GetAllItems()
                     .FirstOrDefault(i => i.TemplateId == marker.AssociatedItemId) != null;
                 var keyInEquipment = profile.Inventory.Equipment.GetAllItems()

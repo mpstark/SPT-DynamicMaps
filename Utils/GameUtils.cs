@@ -54,6 +54,11 @@ namespace InGameMap.Utils
 
         public static string BSGLocalized(this string id)
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return "";
+            }
+
             // TODO: use reflection to get rid of this gclass reference
             return id.Localized();
         }
