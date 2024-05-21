@@ -165,7 +165,7 @@
         },
         {
             "Text": "Locked Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 29.2459984, "y": 36.52492, "z": 9.155067 },
             "Category": "LockedDoor",
             "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
@@ -173,7 +173,7 @@
         },
         {
             "Text": "Pumping Station",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 43.1875839, "y": -14.1608534, "z": 1.01413012 },
             "Category": "LockedDoor",
             "AssociatedItemId": "57a349b2245977762b199ec7",
@@ -181,7 +181,7 @@
         },
         {
             "Text": "Gate 0",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -53.754, "y": 58.93033, "z": 2.33300042 },
             "Category": "LockedDoor",
             "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
@@ -189,7 +189,7 @@
         },
         {
             "Text": "Cellars",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 66.42518, "y": -29.8983536, "z": -1.53579187 },
             "Category": "LockedDoor",
             "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
@@ -197,7 +197,7 @@
         },
         {
             "Text": "Pumping Station",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 40.9448547, "y": -6.261415, "z": 0.9631303 },
             "Category": "LockedDoor",
             "AssociatedItemId": "593858c486f774253a24cb52",
@@ -205,7 +205,7 @@
         },
         {
             "Text": "Med Tent",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -20.3113289, "y": -49.138, "z": 1.27600038 },
             "Category": "LockedDoor",
             "AssociatedItemId": "5448ba0b4bdc2d02308b456c",

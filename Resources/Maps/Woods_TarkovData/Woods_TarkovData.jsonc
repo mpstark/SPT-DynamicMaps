@@ -239,7 +239,7 @@
         },
         {
             "Text": "ZB-014",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 448.623047, "y": 65.5839844, "z": -13.269 },
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "Category": "LockedDoor",
@@ -247,7 +247,7 @@
         }
         // {
         //     "Text": "Shtrman's Stash",
-        //     "ImagePath": "Markers/locked_door.png",
+        //     "ImagePath": "Markers/door_with_lock.png",
         //     "Position": { "x": 25.1087952, "y": -29.55574, "z": -1.47199988 },
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
         //     "Category": "LockedDoor",

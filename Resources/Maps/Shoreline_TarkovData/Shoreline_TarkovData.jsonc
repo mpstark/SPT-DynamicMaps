@@ -280,7 +280,7 @@
         },
         {
             "Text": "HEP Station Storage Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -220.38063, "y": 185.880585, "z": -33.858 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -288,7 +288,7 @@
         },
         {
             "Text": "HEP Station Storage Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -220.703171, "y": 193.687332, "z": -33.8470345 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -304,7 +304,7 @@
         },
         {
             "Text": "Cottage Back Door",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 102.532318, "y": 102.731339, "z": -47.2590027 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -312,7 +312,7 @@
         },
         {
             "Text": "West Wing Room 203",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -229.608261, "y": -92.90662, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -320,7 +320,7 @@
         },
         {
             "Text": "West Wing Room 216",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -179.379257, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -328,7 +328,7 @@
         },
         {
             "Text": "West Wing Room 306",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -216.905258, "y": -92.90662, "z": 3.03088379 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -336,7 +336,7 @@
         },
         {
             "Text": "West Wing Room 220",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -166.686264, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -344,7 +344,7 @@
         },
         {
             "Text": "East Wing Room 206",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -285.857239, "y": -92.88861, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -352,7 +352,7 @@
         },
         {
             "Text": "East Wing Room 205",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -281.692261, "y": -92.88861, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -360,7 +360,7 @@
         },
         {
             "Text": "East Wing Room 313",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -313.835754, "y": -84.47537, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -368,7 +368,7 @@
         },
         {
             "Text": "Utility Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -142.583267, "y": -79.9176, "z": 3.05788422 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -376,7 +376,7 @@
         },
         {
             "Text": "West Wing Room 218",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -173.983749, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -384,7 +384,7 @@
         },
         {
             "Text": "East Wing Room 328",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -357.303284, "y": -79.9165955, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -392,7 +392,7 @@
         },
         {
             "Text": "East Wing Room 226",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -351.9118, "y": -84.47537, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -400,7 +400,7 @@
         },
         {
             "Text": "East Wing Office 107",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -333.767029, "y": -79.95798, "z": -2.70200348 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -408,7 +408,7 @@
         },
         {
             "Text": "West Wing Room 205",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -221.073288, "y": -92.90662, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -416,7 +416,7 @@
         },
         {
             "Text": "East Wing Room 222",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -343.3838, "y": -84.47537, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -424,7 +424,7 @@
         },
         {
             "Text": "West Wing Room 112",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -189.173019, "y": -85.4490051, "z": -2.69580078 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -432,7 +432,7 @@
         },
         {
             "Text": "West Wing Room 104",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -157.433029, "y": -85.4490051, "z": -2.69580078 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -440,7 +440,7 @@
         },
         {
             "Text": "West Wing Room 219",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -170.853256, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -448,7 +448,7 @@
         },
         {
             "Text": "East Wing Room 308",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -294.3863, "y": -92.88861, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -456,7 +456,7 @@
         },
         {
             "Text": "East Wing Room 310",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -303.411255, "y": -81.46161, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -464,7 +464,7 @@
         },
         {
             "Text": "West Wing Room 301",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -229.202621, "y": -100.151733, "z": 3.03088379 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -472,7 +472,7 @@
         },
         {
             "Text": "West Wing Room 222",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -161.293747, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -480,7 +480,7 @@
         },
         {
             "Text": "Utility Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -142.583267, "y": -79.9176, "z": 0.164085388 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -488,7 +488,7 @@
         },
         {
             "Text": "East Wing Room 306",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -285.857239, "y": -92.88861, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -496,7 +496,7 @@
         },
         {
             "Text": "Utility Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -360.193237, "y": -79.8936157, "z": 3.04288483 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -504,7 +504,7 @@
         },
         {
             "Text": "East Wing Room 316",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -323.389282, "y": -80.8936157, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -512,7 +512,7 @@
         },
         {
             "Text": "East Wing Room 314",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -317.992737, "y": -84.47537, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -520,7 +520,7 @@
         },
         {
             "Text": "East Wing Sanitar's Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -323.547, "y": -79.961, "z": -2.70200348 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -528,7 +528,7 @@
         },
         {
             "Text": "West Wing Room 223",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -165.451767, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

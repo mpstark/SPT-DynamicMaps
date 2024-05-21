@@ -246,7 +246,7 @@
         // },
         {
             "Text": "Convenience Store Storage Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -58.5892944, "y": -292.9962, "z": 6.55390024 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -254,7 +254,7 @@
         },
         {
             "Text": "Shared Bedroom",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 328.6411, "y": 487.244019, "z": 6.041643 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -262,7 +262,7 @@
         },
         {
             "Text": "Conference Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 333.8, "y": 519.1168, "z": 6.0705 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -278,7 +278,7 @@
         },
         {
             "Text": "Radar Station Commandant Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 355.204, "y": 549.386963, "z": 16.545002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -286,7 +286,7 @@
         },
         {
             "Text": "Hillside House",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -147.043427, "y": -243.326172, "z": 12.66918 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -294,7 +294,7 @@
         },
         {
             "Text": "Operating Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 32.899, "y": -636.186, "z": 5.93999767 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -302,7 +302,7 @@
         },
         {
             "Text": "Water Treatment Plant Storage Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -120.901962, "y": -736.4641, "z": 5.938982 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -310,7 +310,7 @@
         },
         {
             "Text": "Rogue USEC Barrack",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -176.519043, "y": -654.164063, "z": 5.939995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -326,7 +326,7 @@
         },
         {
             "Text": "Rogue USEC Workshop",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -168.6745, "y": -497.287079, "z": 5.798998 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -334,7 +334,7 @@
         },
         {
             "Text": "Rogue USEC Stash",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 47.3759, "y": -553.3956, "z": 5.67344 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

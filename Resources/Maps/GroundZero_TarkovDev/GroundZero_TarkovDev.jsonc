@@ -185,7 +185,7 @@
         },
         {
             "Text": "Underground Parking Utility Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 107.056, "y": 50.6362534, "z": 13.499 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0},
@@ -193,7 +193,7 @@
         },
         {
             "Text": "TerraGroup Science Offices",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -17.975647, "y": 58.5532341, "z": 30.7062054 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0},

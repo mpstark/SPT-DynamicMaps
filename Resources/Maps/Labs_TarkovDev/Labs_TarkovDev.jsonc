@@ -186,7 +186,7 @@
         },
         {
             "Text": "TerraGroup Manager's Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -165.246277, "y": -349.197, "z": 5.131374 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -194,7 +194,7 @@
         },
         {
             "Text": "TerraGroup Manager's Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -165.242874, "y": -338.086, "z": 5.135374 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -202,7 +202,7 @@
         },
         {
             "Text": "Weapon Testing Area",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -181.966461, "y": -318.226044, "z": 1.37873685 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -210,7 +210,7 @@
         },
         {
             "Text": "Weapon Testing Area",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -179.862, "y": -310.3296, "z": 1.37899876 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -218,7 +218,7 @@
         },
         {
             "Text": "Infirmary (Blue)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -123.229095, "y": -406.524384, "z": 1.03631592 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -226,7 +226,7 @@
         },
         {
             "Text": "Sterile Lab (Green)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -135.89798, "y": -346.9675, "z": 5.185806 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -234,7 +234,7 @@
         },
         {
             "Text": "Sterile Lab (Green)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -138.6131, "y": -346.966125, "z": 5.25222349 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -242,7 +242,7 @@
         },
         {
             "Text": "Card with a Blue Marking",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -130.268463, "y": -339.944275, "z": 5.15560675 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -250,7 +250,7 @@
         },
         {
             "Text": "Security #2 (Yellow)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -212.695, "y": -376.538, "z": 5.145301 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -258,7 +258,7 @@
         },
         {
             "Text": "Test Room (Black)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -132.893, "y": -348.72, "z": 1.43501759 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -266,7 +266,7 @@
         },
         {
             "Text": "Test Room (Black)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -128.794, "y": -349.91507, "z": 1.43701744 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -274,7 +274,7 @@
         },
         {
             "Text": "Security Office (Violet)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -261.993, "y": -317.240021, "z": 5.147805 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -282,7 +282,7 @@
         },
         {
             "Text": "Security Office (Red)",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -257.222015, "y": -322.925018, "z": 5.24803066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -290,7 +290,7 @@
         },
         {
             "Text": "Arsenal Storage",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -250.839066, "y": -326.758667, "z": 5.097125 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

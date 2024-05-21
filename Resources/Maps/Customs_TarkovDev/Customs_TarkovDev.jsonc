@@ -461,7 +461,7 @@
         },
         {
             "Text": "Tarcone Director's Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -205.499237, "y": -109.994392, "z": 8.110943 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -469,7 +469,7 @@
         },
         {
             "Text": "Portable Cabin",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -251.320953, "y": -221.941071, "z": 3.85700083 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -477,7 +477,7 @@
         },
         {
             "Text": "Trailer Park Portable Cabin",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -194.560135, "y": -207.398911, "z": 2.34600019 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -485,7 +485,7 @@
         },
         {
             "Text": "Factory Shortcut",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 356.052551, "y": -14.5693512, "z": 2.34000182 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -493,7 +493,7 @@
         },
         {
             "Text": "Unknown Cabin",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 370.014923, "y": -50.08902, "z": 2.15399933 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -501,7 +501,7 @@
         },
         {
             "Text": "Factory Shortcut",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 356.957367, "y": -8.079105, "z": 2.14515162 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -509,7 +509,7 @@
         },
         {
             "Text": "Dorm 114",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 233.549591, "y": 159.682587, "z": 0.889000237 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -517,7 +517,7 @@
         },
         {
             "Text": "Dorm 206",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 230.641281, "y": 138.671631, "z": 3.86939716 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -525,7 +525,7 @@
         },
         {
             "Text": "Dorm 105",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 227.877258, "y": 135.61264, "z": 0.8901995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -533,7 +533,7 @@
         },
         {
             "Text": "Dorm 110",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 231.0886, "y": 159.435349, "z": 0.910999358 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -541,7 +541,7 @@
         },
         {
             "Text": "Dorm 104",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 230.101257, "y": 134.913879, "z": 0.8860002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -549,7 +549,7 @@
         },
         {
             "Text": "Dorm Guard Desk",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 225.517273, "y": 138.366241, "z": 0.8858002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -557,7 +557,7 @@
         },
         {
             "Text": "Dorm 204",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 173.379211, "y": 150.356216, "z": 3.83760285 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -565,7 +565,7 @@
         },
         {
             "Text": "Dorm 108",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 177.473969, "y": 178.489075, "z": 0.8406372 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -573,7 +573,7 @@
         },
         {
             "Text": "Dorm 314 Marked Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 180.671432, "y": 183.722443, "z": 6.84058475 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -581,7 +581,7 @@
         },
         {
             "Text": "Dorm 218",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 190.192383, "y": 175.3542, "z": 3.84178257 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -589,7 +589,7 @@
         },
         {
             "Text": "Dorm 118",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 194.794083, "y": 174.546783, "z": 0.830601 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -597,7 +597,7 @@
         },
         {
             "Text": "Dorm 220",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 193.957886, "y": 174.821625, "z": 3.831203 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -605,7 +605,7 @@
         },
         {
             "Text": "Dorm 308",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 177.4756, "y": 178.488113, "z": 6.850606 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -613,7 +613,7 @@
         },
         {
             "Text": "Dorm 315",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 179.284683, "y": 174.810455, "z": 6.830814 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -621,7 +621,7 @@
         },
         {
             "Text": "Dorm 214",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 178.105484, "y": 183.746643, "z": 3.83598375 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -629,7 +629,7 @@
         },
         {
             "Text": "Dorm 203",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 176.041077, "y": 150.26828, "z": 3.83258247 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -637,7 +637,7 @@
         },
         {
             "Text": "Dorm 103",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 175.734467, "y": 149.366577, "z": 0.820169449 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -645,7 +645,7 @@
         },
         {
             "Text": "Dorm 306",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 174.544632, "y": 157.45575, "z": 6.828404 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -653,7 +653,7 @@
         },
         {
             "Text": "Dorm 303",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 176.039612, "y": 150.268463, "z": 6.82898426 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -661,7 +661,7 @@
         },
         {
             "Text": "Gas Station Storage Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 415.416443, "y": 35.6602058, "z": 2.18918633 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -669,7 +669,7 @@
         },
         {
             "Text": "Gas Station Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 415.779572, "y": 38.5554962, "z": 2.17909455 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -677,7 +677,7 @@
         },
         {
             "Text": "USEC Stash",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 562.780945, "y": -58.9465332, "z": 2.216738 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -685,7 +685,7 @@
         },
         {
             "Text": "USEC Stash",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 568.747131, "y": -50.85814, "z": 2.193743 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -701,7 +701,7 @@
         },
         {
             "Text": "Military Checkpoint",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 577.6575, "y": 4.049543, "z": 0.8078748 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -709,7 +709,7 @@
         },
         {
             "Text": "ZB-013",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 198.927917, "y": -146.172791, "z": -1.779768 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -717,7 +717,7 @@
         },
         {
             "Text": "Portable Bunkhouse",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 202.664337, "y": 11.72344, "z": 4.73085976 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

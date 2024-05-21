@@ -527,7 +527,7 @@
         },
         {
             "Text": "Power Substation Utility Cabin",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -223.115845, "y": -271.3501, "z": 22.55412 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -535,7 +535,7 @@
         },
         {
             "Text": "ULTRA Medical Storage",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 67.55801, "y": 40.891, "z": 37.60174 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -543,7 +543,7 @@
         },
         {
             "Text": "Kiba Arms Inner Grate",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -9.887001, "y": -33.76517, "z": 28.241 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -551,7 +551,7 @@
         },
         {
             "Text": "Kiba Arms Outer Door",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -9.444001, "y": -33.709, "z": 28.241 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -559,7 +559,7 @@
         },
         {
             "Text": "Object #11SR Saferoom",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -51.9328041, "y": 45.8337746, "z": 22.35359 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -567,7 +567,7 @@
         },
         {
             "Text": "Object #21WS",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 140.195663, "y": 263.315277, "z": 25.2079964 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -575,7 +575,7 @@
         },
         {
             "Text": "NecrusPharm Pharmacy",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 68.53804, "y": -255.424225, "z": 22.4947357 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -583,7 +583,7 @@
         },
         {
             "Text": "Emercom Medical Unit",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 24.136982, "y": -112.8551, "z": 28.4790325 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -591,7 +591,7 @@
         },
         {
             "Text": "Emercom Medical Unit",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 34.14116, "y": -108.287651, "z": 28.4790325 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -599,7 +599,7 @@
         },
         {
             "Text": "Emercom Medical Unit",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 6.732233, "y": -107.304314, "z": 28.4790344 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -607,7 +607,7 @@
         },
         {
             "Text": "OLI Logistics Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 83.1990051, "y": 115.673004, "z": 28.1199989 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -615,7 +615,7 @@
         },
         {
             "Text": "OLI Outlet Utility Room",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": -102.823967, "y": 80.48102, "z": 28.12 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
@@ -623,7 +623,7 @@
         },
         {
             "Text": "OLI Admin Office",
-            "ImagePath": "Markers/locked_door.png",
+            "ImagePath": "Markers/door_with_lock.png",
             "Position": { "x": 85.18402, "y": 104.638214, "z": 28.1199989 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },

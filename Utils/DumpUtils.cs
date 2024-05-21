@@ -105,7 +105,7 @@ namespace InGameMap.Utils
                 {
                     Text = $"door {i++}",
                     Category = "LockedDoor",
-                    ImagePath = "Markers/locked_door.png",
+                    ImagePath = "Markers/door_with_lock.png",
                     Position = MathUtils.ConvertToMapPosition(locked.transform),
                     AssociatedItemId = locked.KeyId,
                     Color = Color.yellow

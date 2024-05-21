@@ -11,7 +11,7 @@ namespace InGameMap.DynamicMarkers
     {
         // FIXME: move to configuration somehow
         private static string doorWithKeyPath = Path.Combine(Plugin.Path, "Markers/door_with_key.png");
-        private static string doorWithLockPath = Path.Combine(Plugin.Path, "Markers/locked_door.png");
+        private static string doorWithLockPath = Path.Combine(Plugin.Path, "Markers/door_with_lock.png");
 
         public void OnShowInRaid(MapView map, string mapInternalName)
         {
