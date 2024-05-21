@@ -24,16 +24,6 @@ namespace InGameMap.DynamicMarkers
             TryRemoveMarker();
         }
 
-        public void OnShowOutOfRaid(MapView map)
-        {
-            // do nothing
-        }
-
-        public void OnHideOutOfRaid(MapView map)
-        {
-            // do nothing
-        }
-
         public void OnMapChanged(MapView map, MapDef mapDef)
         {
             TryRemoveMarker();

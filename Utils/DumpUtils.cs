@@ -94,9 +94,9 @@ namespace InGameMap.Utils
             var dump = new List<MapMarkerDef>();
             var i = 1;
 
-            foreach (var @object in objects)
+            foreach (var locked in objects)
             {
-                if (string.IsNullOrEmpty(@object.KeyId))
+                if (string.IsNullOrEmpty(locked.KeyId) || !locked.Operatable)
                 {
                     continue;
                 }
@@ -106,8 +106,8 @@ namespace InGameMap.Utils
                     Text = $"door {i++}",
                     Category = "LockedDoor",
                     ImagePath = "Markers/locked_door.png",
-                    Position = MathUtils.ConvertToMapPosition(@object.transform),
-                    ExtraInfo = @object.KeyId,
+                    Position = MathUtils.ConvertToMapPosition(locked.transform),
+                    AssociatedItemId = locked.KeyId,
                     Color = Color.yellow
                 };
 

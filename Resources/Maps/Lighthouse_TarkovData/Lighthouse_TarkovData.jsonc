@@ -250,7 +250,7 @@
             "Position": { "x": -58.5892944, "y": -292.9962, "z": 6.55390024 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61a64428a8c6aa1b795f0ba1"
+            "AssociatedItemId": "61a64428a8c6aa1b795f0ba1"
         },
         {
             "Text": "Shared Bedroom",
@@ -258,7 +258,7 @@
             "Position": { "x": 328.6411, "y": 487.244019, "z": 6.041643 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62987dfc402c7f69bf010923"
+            "AssociatedItemId": "62987dfc402c7f69bf010923"
         },
         {
             "Text": "Conference Room",
@@ -266,7 +266,7 @@
             "Position": { "x": 333.8, "y": 519.1168, "z": 6.0705 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62987cb98081af308d7558c8"
+            "AssociatedItemId": "62987cb98081af308d7558c8"
         },
         {
             "Text": "Merin Trunk",
@@ -274,7 +274,7 @@
             "Position": { "x": 91.1099854, "y": -130.918991, "z": 8.382999 },
             "Category": "Locked",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5b518f5e7a39b41416e2"
+            "AssociatedItemId": "61aa5b518f5e7a39b41416e2"
         },
         {
             "Text": "Radar Station Commandant Room",
@@ -282,7 +282,7 @@
             "Position": { "x": 355.204, "y": 549.386963, "z": 16.545002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62987c658081af308d7558c6"
+            "AssociatedItemId": "62987c658081af308d7558c6"
         },
         {
             "Text": "Hillside House",
@@ -290,7 +290,7 @@
             "Position": { "x": -147.043427, "y": -243.326172, "z": 12.66918 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61a6444b8c141d68246e2d2f"
+            "AssociatedItemId": "61a6444b8c141d68246e2d2f"
         },
         {
             "Text": "Operating Room",
@@ -298,7 +298,7 @@
             "Position": { "x": 32.899, "y": -636.186, "z": 5.93999767 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62987da96188c076bc0d8c51"
+            "AssociatedItemId": "62987da96188c076bc0d8c51"
         },
         {
             "Text": "Water Treatment Plant Storage Room",
@@ -306,7 +306,7 @@
             "Position": { "x": -120.901962, "y": -736.4641, "z": 5.938982 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62987e26a77ec735f90a2995"
+            "AssociatedItemId": "62987e26a77ec735f90a2995"
         },
         {
             "Text": "Rogue USEC Barrack",
@@ -314,7 +314,7 @@
             "Position": { "x": -176.519043, "y": -654.164063, "z": 5.939995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "62a9cb937377a65d7b070cef"
+            "AssociatedItemId": "62a9cb937377a65d7b070cef"
         },
         {
             "Text": "Police Car",
@@ -322,7 +322,7 @@
             "Position": { "x": 83.79875, "y": -553.2562, "z": 6.61099958 },
             "Category": "Locked",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5aed32a4743c3453d319"
+            "AssociatedItemId": "61aa5aed32a4743c3453d319"
         },
         {
             "Text": "Rogue USEC Workshop",
@@ -330,7 +330,7 @@
             "Position": { "x": -168.6745, "y": -497.287079, "z": 5.798998 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa81fcb225ac1ead7957c3"
+            "AssociatedItemId": "61aa81fcb225ac1ead7957c3"
         },
         {
             "Text": "Rogue USEC Stash",
@@ -338,7 +338,7 @@
             "Position": { "x": 47.3759, "y": -553.3956, "z": 5.67344 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61a64492ba05ef10d62adcc1"
+            "AssociatedItemId": "61a64492ba05ef10d62adcc1"
         }
     ]
 }

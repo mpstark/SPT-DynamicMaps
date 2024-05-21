@@ -25,6 +25,7 @@ namespace InGameMap.UI.Components
         public TextMeshProUGUI Label { get; protected set; }
         public RectTransform RectTransform => gameObject.transform as RectTransform;
 
+        public string AssociatedItemId { get; protected set; } = "";
         public bool IsDynamic { get; protected set; } = false;
         public bool ShowInRaid { get; protected set; } = true;
 
@@ -103,6 +104,8 @@ namespace InGameMap.UI.Components
         {
             var mapMarker = Create<MapMarker>(parent, def.Text, def.Category, def.ImagePath, def.Color, def.Position, size,
                                               def.Pivot, degreesRotation, scale, def.ShowInRaid);
+            mapMarker.AssociatedItemId = def.AssociatedItemId;
+
             return mapMarker;
         }
 

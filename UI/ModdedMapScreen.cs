@@ -113,6 +113,7 @@ namespace InGameMap.UI
             _dynamicMarkerProviders.Add(new PlayerMarkerProvider());
             _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
             _dynamicMarkerProviders.Add(new ExtractMarkerProvider());
+            _dynamicMarkerProviders.Add(new LockedDoorMarkerMutator());
         }
 
         private void Update()
@@ -147,10 +148,6 @@ namespace InGameMap.UI
             if (GameUtils.IsInRaid())
             {
                 OnHideInRaid();
-            }
-            else
-            {
-                OnHideOutOfRaid();
             }
         }
 
@@ -206,7 +203,7 @@ namespace InGameMap.UI
                 // show player position text
                 _playerPositionText.gameObject.SetActive(true);
 
-                // GetOrAddComponent is a BSG extension method under gclass reference
+                // GetOrAddComponent is a BSG extension method under GClass reference
                 // var dotSpawner = GameUtils.GetMainPlayer().gameObject.GetOrAddComponent<PlayerDotSpawner>();
                 // dotSpawner.MapView = _mapView;
             }
@@ -266,19 +263,6 @@ namespace InGameMap.UI
                 _playerPositionText.gameObject.SetActive(false);
 
                 _lastShownInRaid = false;
-            }
-
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
-            {
-                dynamicProvider.OnShowOutOfRaid(_mapView);
-            }
-        }
-
-        private void OnHideOutOfRaid()
-        {
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
-            {
-                dynamicProvider.OnHideOutOfRaid(_mapView);
             }
         }
 

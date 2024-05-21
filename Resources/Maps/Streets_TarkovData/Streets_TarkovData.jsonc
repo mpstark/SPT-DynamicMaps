@@ -486,7 +486,7 @@
             "Position": { "x": -250.476974, "y": 131.546, "z": 3.98400116 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "6582dc4b6ba9e979af6b79f4"
+            "AssociatedItemId": "6582dc4b6ba9e979af6b79f4"
         },
         {
             "Text": "door 2",
@@ -494,7 +494,7 @@
             "Position": { "x": -67.00622, "y": 59.3249474, "z": 6.024556 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39f08cd6db0635c197600"
+            "AssociatedItemId": "63a39f08cd6db0635c197600"
         },
         {
             "Text": "door 3",
@@ -502,7 +502,7 @@
             "Position": { "x": -208.164185, "y": 295.5338, "z": 4.28889942 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "6582dbf0b8d7830efc45016f"
+            "AssociatedItemId": "6582dbf0b8d7830efc45016f"
         },
         {
             "Text": "door 4",
@@ -510,7 +510,7 @@
             "Position": { "x": -133.4689, "y": 272.9284, "z": 9.712829 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a3a93f8a56922e82001f5d"
+            "AssociatedItemId": "63a3a93f8a56922e82001f5d"
         },
         {
             "Text": "door 5",
@@ -518,7 +518,7 @@
             "Position": { "x": -168.1108, "y": 230.025009, "z": 7.11500072 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39667c9b3aa4b61683e98"
+            "AssociatedItemId": "63a39667c9b3aa4b61683e98"
         },
         {
             "Text": "door 6",
@@ -526,7 +526,7 @@
             "Position": { "x": -186.393311, "y": 229.271469, "z": 3.72240162 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a71ed21031ac76fe773c7f"
+            "AssociatedItemId": "63a71ed21031ac76fe773c7f"
         },
         {
             "Text": "door 7",
@@ -534,7 +534,7 @@
             "Position": { "x": -130.730026, "y": 391.625732, "z": 3.37588024 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "6398fd8ad3de3849057f5128"
+            "AssociatedItemId": "6398fd8ad3de3849057f5128"
         },
         {
             "Text": "door 9",
@@ -542,7 +542,7 @@
             "Position": { "x": -62.37935, "y": 460.344177, "z": 7.906067 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "6582dc5740562727a654ebb1"
+            "AssociatedItemId": "6582dc5740562727a654ebb1"
         },
         {
             "Text": "door 10",
@@ -550,7 +550,7 @@
             "Position": { "x": 131.168167, "y": 227.64386, "z": 10.5814857 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39f6e64283b5e9c56b289"
+            "AssociatedItemId": "63a39f6e64283b5e9c56b289"
         },
         {
             "Text": "door 11",
@@ -558,7 +558,7 @@
             "Position": { "x": 126.369164, "y": 227.644852, "z": 10.5938711 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39f6e64283b5e9c56b289"
+            "AssociatedItemId": "63a39f6e64283b5e9c56b289"
         },
         {
             "Text": "door 12",
@@ -566,7 +566,7 @@
             "Position": { "x": 132.49292, "y": 225.1011, "z": 10.5825262 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39f6e64283b5e9c56b289"
+            "AssociatedItemId": "63a39f6e64283b5e9c56b289"
         },
         {
             "Text": "door 13",
@@ -574,7 +574,7 @@
             "Position": { "x": 108.3958, "y": 224.57489, "z": 7.45609 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39fd1c9b3aa4b61683efb"
+            "AssociatedItemId": "63a39fd1c9b3aa4b61683efb"
         },
         {
             "Text": "door 14",
@@ -582,7 +582,7 @@
             "Position": { "x": 107.048935, "y": 227.6278, "z": 7.51593971 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39fc0af870e651d58e6ae"
+            "AssociatedItemId": "63a39fc0af870e651d58e6ae"
         },
         {
             "Text": "door 15",
@@ -590,7 +590,7 @@
             "Position": { "x": 49.5526543, "y": 147.7725, "z": 12.7623 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39e1d234195315d4020bd"
+            "AssociatedItemId": "63a39e1d234195315d4020bd"
         },
         {
             "Text": "door 16",
@@ -598,7 +598,7 @@
             "Position": { "x": 45.3423576, "y": 151.024933, "z": 6.742015 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a71eb5b7f4570d3a29316b"
+            "AssociatedItemId": "63a71eb5b7f4570d3a29316b"
         },
         {
             "Text": "door 17",
@@ -606,7 +606,7 @@
             "Position": { "x": 66.95923, "y": 231.536, "z": 3.841999 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc2111779ad6ba200a139"
+            "AssociatedItemId": "64ccc2111779ad6ba200a139"
         },
         {
             "Text": "door 18",
@@ -614,7 +614,7 @@
             "Position": { "x": 68.86824, "y": 231.536, "z": 3.841999 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc2111779ad6ba200a139"
+            "AssociatedItemId": "64ccc2111779ad6ba200a139"
         },
         {
             "Text": "door 19",
@@ -622,7 +622,7 @@
             "Position": { "x": 104.26915, "y": 129.2099, "z": 4.99642372 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39dfe3901f439517cafba"
+            "AssociatedItemId": "63a39dfe3901f439517cafba"
         },
         {
             "Text": "door 20",
@@ -630,7 +630,7 @@
             "Position": { "x": 80.078, "y": 138.528, "z": 4.941001 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39e49cd6db0635c1975fc"
+            "AssociatedItemId": "63a39e49cd6db0635c1975fc"
         },
         {
             "Text": "door 21",
@@ -638,7 +638,7 @@
             "Position": { "x": 124.2521, "y": 143.391266, "z": 14.5957794 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39df18a56922e82001f25"
+            "AssociatedItemId": "63a39df18a56922e82001f25"
         },
         {
             "Text": "door 22",
@@ -646,7 +646,7 @@
             "Position": { "x": 186.18, "y": 227.438, "z": 0.849899948 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc25f95763a1ae376e447"
+            "AssociatedItemId": "64ccc25f95763a1ae376e447"
         },
         {
             "Text": "door 23",
@@ -654,7 +654,7 @@
             "Position": { "x": 177.724213, "y": 78.84773, "z": 6.821482 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64d4b23dc1b37504b41ac2b6"
+            "AssociatedItemId": "64d4b23dc1b37504b41ac2b6"
         },
         {
             "Text": "door 24",
@@ -662,7 +662,7 @@
             "Position": { "x": 207.952087, "y": 140.7129, "z": 1.39300013 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc268c41e91416064ebc7"
+            "AssociatedItemId": "64ccc268c41e91416064ebc7"
         },
         {
             "Text": "door 25",
@@ -670,7 +670,7 @@
             "Position": { "x": 184.997482, "y": 100.691429, "z": 2.82870531 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc246ff54fb38131acf29"
+            "AssociatedItemId": "64ccc246ff54fb38131acf29"
         },
         {
             "Text": "door 26",
@@ -678,7 +678,7 @@
             "Position": { "x": 165.190918, "y": 165.05, "z": 1.79457092 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "6582dbe43a2e5248357dbe9a"
+            "AssociatedItemId": "6582dbe43a2e5248357dbe9a"
         },
         {
             "Text": "door 27",
@@ -686,7 +686,7 @@
             "Position": { "x": 174.013977, "y": 163.48201, "z": 1.14044952 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5ba8018e9821b7368da9"
+            "AssociatedItemId": "61aa5ba8018e9821b7368da9"
         },
         {
             "Text": "door 29",
@@ -694,7 +694,7 @@
             "Position": { "x": 181.878983, "y": 312.128, "z": 6.85800028 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39cb1c9b3aa4b61683ee2"
+            "AssociatedItemId": "63a39cb1c9b3aa4b61683ee2"
         },
         {
             "Text": "door 30",
@@ -702,7 +702,7 @@
             "Position": { "x": 63.478, "y": 301.057, "z": 7.8760004 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a397d3af870e651d58e65b"
+            "AssociatedItemId": "63a397d3af870e651d58e65b"
         },
         {
             "Text": "door 31",
@@ -710,7 +710,7 @@
             "Position": { "x": 66.86121, "y": 310.662476, "z": 7.935705 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a399193901f439517cafb6"
+            "AssociatedItemId": "63a399193901f439517cafb6"
         },
         {
             "Text": "door 34",
@@ -718,7 +718,7 @@
             "Position": { "x": 83.1959839, "y": 296.521, "z": 3.72701359 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39fdf1e21260da44a0256"
+            "AssociatedItemId": "63a39fdf1e21260da44a0256"
         },
         {
             "Text": "door 35",
@@ -726,7 +726,7 @@
             "Position": { "x": 55.03196, "y": 332.649078, "z": 3.91900015 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ce572331dd890873175115"
+            "AssociatedItemId": "64ce572331dd890873175115"
         },
         {
             "Text": "door 36",
@@ -734,7 +734,7 @@
             "Position": { "x": 57.615963, "y": 334.707031, "z": 6.847 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39ce4cd6db0635c1975fa"
+            "AssociatedItemId": "63a39ce4cd6db0635c1975fa"
         },
         {
             "Text": "door 37",
@@ -742,7 +742,7 @@
             "Position": { "x": 217.9483, "y": 400.558655, "z": 10.3969755 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc1ec1779ad6ba200a137"
+            "AssociatedItemId": "64ccc1ec1779ad6ba200a137"
         },
         {
             "Text": "door 38",
@@ -750,7 +750,7 @@
             "Position": { "x": 227.979279, "y": 406.048645, "z": 10.3969755 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc1d4a0f13c24561edf27"
+            "AssociatedItemId": "64ccc1d4a0f13c24561edf27"
         },
         {
             "Text": "door 39",
@@ -758,7 +758,7 @@
             "Position": { "x": 224.331543, "y": 400.559357, "z": 10.4224167 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a71e781031ac76fe773c7d"
+            "AssociatedItemId": "63a71e781031ac76fe773c7d"
         },
         {
             "Text": "door 40",
@@ -766,7 +766,7 @@
             "Position": { "x": 274.591, "y": 383.685974, "z": 7.404751 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a71e86b7f4570d3a293169"
+            "AssociatedItemId": "63a71e86b7f4570d3a293169"
         },
         {
             "Text": "door 41",
@@ -774,7 +774,7 @@
             "Position": { "x": 268.47, "y": 387.507, "z": 7.4047513 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc1f4ff54fb38131acf27"
+            "AssociatedItemId": "64ccc1f4ff54fb38131acf27"
         },
         {
             "Text": "door 42",
@@ -782,7 +782,7 @@
             "Position": { "x": 272.6917, "y": 378.880249, "z": 7.46978951 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a71e922b25f7513905ca20"
+            "AssociatedItemId": "63a71e922b25f7513905ca20"
         },
         {
             "Text": "door 43",
@@ -790,7 +790,7 @@
             "Position": { "x": 211.010483, "y": 406.7196, "z": -0.205203056 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39c7964283b5e9c56b280"
+            "AssociatedItemId": "63a39c7964283b5e9c56b280"
         },
         {
             "Text": "door 44",
@@ -798,7 +798,7 @@
             "Position": { "x": 119.953995, "y": 290.827026, "z": 7.776001 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39c69af870e651d58e6aa"
+            "AssociatedItemId": "63a39c69af870e651d58e6aa"
         },
         {
             "Text": "door 47",
@@ -806,7 +806,7 @@
             "Position": { "x": 60.7049751, "y": -79.95239, "z": 1.29402184 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc24de61ea448b507d34d"
+            "AssociatedItemId": "64ccc24de61ea448b507d34d"
         },
         {
             "Text": "door 48",
@@ -814,7 +814,7 @@
             "Position": { "x": 46.6899338, "y": -59.4043961, "z": 1.31902039 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc206793ca11c8f450a38"
+            "AssociatedItemId": "64ccc206793ca11c8f450a38"
         },
         {
             "Text": "door 50",
@@ -822,7 +822,7 @@
             "Position": { "x": -19.6295967, "y": -64.19723, "z": 10.6449995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc1fe088064307e14a6f7"
+            "AssociatedItemId": "64ccc1fe088064307e14a6f7"
         },
         {
             "Text": "door 51",
@@ -830,7 +830,7 @@
             "Position": { "x": -27.806633, "y": -60.68901, "z": 10.6449995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "64ccc1fe088064307e14a6f7"
+            "AssociatedItemId": "64ccc1fe088064307e14a6f7"
         },
         {
             "Text": "door 55",
@@ -838,7 +838,7 @@
             "Position": { "x": -208.95, "y": 179.655991, "z": 4.057 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad7247386f7747487619dc3"
+            "AssociatedItemId": "5ad7247386f7747487619dc3"
         },
         {
             "Text": "door 56",
@@ -846,7 +846,7 @@
             "Position": { "x": -208.95, "y": 182.011, "z": 4.059 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad7247386f7747487619dc3"
+            "AssociatedItemId": "5ad7247386f7747487619dc3"
         },
         {
             "Text": "door 57",
@@ -854,7 +854,7 @@
             "Position": { "x": -77.5323944, "y": 53.20392, "z": 5.3959837 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5ba8018e9821b7368da9"
+            "AssociatedItemId": "61aa5ba8018e9821b7368da9"
         },
         {
             "Text": "door 58",
@@ -862,7 +862,7 @@
             "Position": { "x": -67.94231, "y": 53.4928131, "z": 5.31730938 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5ba8018e9821b7368da9"
+            "AssociatedItemId": "61aa5ba8018e9821b7368da9"
         },
         {
             "Text": "door 59",
@@ -870,7 +870,7 @@
             "Position": { "x": -49.45166, "y": 64.02192, "z": 5.273139 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "61aa5ba8018e9821b7368da9"
+            "AssociatedItemId": "61aa5ba8018e9821b7368da9"
         },
         {
             "Text": "door 60",
@@ -878,7 +878,7 @@
             "Position": { "x": -30.653595, "y": 468.8241, "z": 3.66407585 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad7247386f7747487619dc3"
+            "AssociatedItemId": "5ad7247386f7747487619dc3"
         },
         {
             "Text": "door 61",
@@ -886,7 +886,7 @@
             "Position": { "x": 78.59352, "y": 124.437378, "z": 1.328997 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39e6acd6db0635c1975fe"
+            "AssociatedItemId": "63a39e6acd6db0635c1975fe"
         },
         {
             "Text": "door 62",
@@ -894,7 +894,7 @@
             "Position": { "x": 76.57499, "y": 132.901367, "z": 4.36699724 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39e5b234195315d4020bf"
+            "AssociatedItemId": "63a39e5b234195315d4020bf"
         },
         {
             "Text": "door 63",
@@ -902,7 +902,7 @@
             "Position": { "x": 58.10759, "y": 337.684021, "z": 6.26939726 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "63a39ddda3a2b32b5f6e007a"
+            "AssociatedItemId": "63a39ddda3a2b32b5f6e007a"
         }
     ]
 }

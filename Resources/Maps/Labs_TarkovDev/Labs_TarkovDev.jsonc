@@ -190,7 +190,7 @@
             "Position": { "x": -165.246277, "y": -349.197, "z": 5.131374 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
+            "AssociatedItemId": "5c1e2a1e86f77431ea0ea84c"
         },
         {
             "Text": "TerraGroup Manager's Office",
@@ -198,7 +198,7 @@
             "Position": { "x": -165.242874, "y": -338.086, "z": 5.135374 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1e2a1e86f77431ea0ea84c"
+            "AssociatedItemId": "5c1e2a1e86f77431ea0ea84c"
         },
         {
             "Text": "Weapon Testing Area",
@@ -206,7 +206,7 @@
             "Position": { "x": -181.966461, "y": -318.226044, "z": 1.37873685 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1e2d1f86f77431e9280bee"
+            "AssociatedItemId": "5c1e2d1f86f77431e9280bee"
         },
         {
             "Text": "Weapon Testing Area",
@@ -214,7 +214,7 @@
             "Position": { "x": -179.862, "y": -310.3296, "z": 1.37899876 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1e2d1f86f77431e9280bee"
+            "AssociatedItemId": "5c1e2d1f86f77431e9280bee"
         },
         {
             "Text": "Infirmary (Blue)",
@@ -222,7 +222,7 @@
             "Position": { "x": -123.229095, "y": -406.524384, "z": 1.03631592 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0c5f86f7744bb2683cf0"
+            "AssociatedItemId": "5c1d0c5f86f7744bb2683cf0"
         },
         {
             "Text": "Sterile Lab (Green)",
@@ -230,7 +230,7 @@
             "Position": { "x": -135.89798, "y": -346.9675, "z": 5.185806 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
+            "AssociatedItemId": "5c1d0dc586f7744baf2e7b79"
         },
         {
             "Text": "Sterile Lab (Green)",
@@ -238,7 +238,7 @@
             "Position": { "x": -138.6131, "y": -346.966125, "z": 5.25222349 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0dc586f7744baf2e7b79"
+            "AssociatedItemId": "5c1d0dc586f7744baf2e7b79"
         },
         {
             "Text": "Card with a Blue Marking",
@@ -246,7 +246,7 @@
             "Position": { "x": -130.268463, "y": -339.944275, "z": 5.15560675 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5efde6b4f5448336730dbd61"
+            "AssociatedItemId": "5efde6b4f5448336730dbd61"
         },
         {
             "Text": "Security #2 (Yellow)",
@@ -254,7 +254,7 @@
             "Position": { "x": -212.695, "y": -376.538, "z": 5.145301 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0d6d86f7744bb2683e1f"
+            "AssociatedItemId": "5c1d0d6d86f7744bb2683e1f"
         },
         {
             "Text": "Test Room (Black)",
@@ -262,7 +262,7 @@
             "Position": { "x": -132.893, "y": -348.72, "z": 1.43501759 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0f4986f7744bb01837fa"
+            "AssociatedItemId": "5c1d0f4986f7744bb01837fa"
         },
         {
             "Text": "Test Room (Black)",
@@ -270,7 +270,7 @@
             "Position": { "x": -128.794, "y": -349.91507, "z": 1.43701744 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0f4986f7744bb01837fa"
+            "AssociatedItemId": "5c1d0f4986f7744bb01837fa"
         },
         {
             "Text": "Security Office (Violet)",
@@ -278,7 +278,7 @@
             "Position": { "x": -261.993, "y": -317.240021, "z": 5.147805 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1e495a86f7743109743dfb"
+            "AssociatedItemId": "5c1e495a86f7743109743dfb"
         },
         {
             "Text": "Security Office (Red)",
@@ -286,7 +286,7 @@
             "Position": { "x": -257.222015, "y": -322.925018, "z": 5.24803066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1d0efb86f7744baf2e7b7b"
+            "AssociatedItemId": "5c1d0efb86f7744baf2e7b7b"
         },
         {
             "Text": "Arsenal Storage",
@@ -294,7 +294,7 @@
             "Position": { "x": -250.839066, "y": -326.758667, "z": 5.097125 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5c1f79a086f7746ed066fb8f"
+            "AssociatedItemId": "5c1f79a086f7746ed066fb8f"
         }
     ]
 }

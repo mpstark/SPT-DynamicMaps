@@ -41,16 +41,6 @@ namespace InGameMap.DynamicMarkers
             gameWorld.OnPersonAdd -= TryAddMarker;
         }
 
-        public void OnShowOutOfRaid(MapView map)
-        {
-            // do nothing
-        }
-
-        public void OnHideOutOfRaid(MapView map)
-        {
-            // do nothing
-        }
-
         public void OnRaidEnd(MapView map)
         {
             _lastMapView = map;

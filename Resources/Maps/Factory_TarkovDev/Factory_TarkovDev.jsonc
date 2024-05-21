@@ -168,7 +168,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": 29.2459984, "y": 36.52492, "z": 9.155067 },
             "Category": "LockedDoor",
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         },
         {
@@ -176,7 +176,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": 43.1875839, "y": -14.1608534, "z": 1.01413012 },
             "Category": "LockedDoor",
-            "ExtraInfo": "57a349b2245977762b199ec7",
+            "AssociatedItemId": "57a349b2245977762b199ec7",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         },
         {
@@ -184,7 +184,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -53.754, "y": 58.93033, "z": 2.33300042 },
             "Category": "LockedDoor",
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         },
         {
@@ -192,7 +192,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": 66.42518, "y": -29.8983536, "z": -1.53579187 },
             "Category": "LockedDoor",
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         },
         {
@@ -200,7 +200,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": 40.9448547, "y": -6.261415, "z": 0.9631303 },
             "Category": "LockedDoor",
-            "ExtraInfo": "593858c486f774253a24cb52",
+            "AssociatedItemId": "593858c486f774253a24cb52",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         },
         {
@@ -208,7 +208,7 @@
             "ImagePath": "Markers/locked_door.png",
             "Position": { "x": -20.3113289, "y": -49.138, "z": 1.27600038 },
             "Category": "LockedDoor",
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c",
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c",
             "Color": { "r": 1, "g": 0.921569, "b": 0.015686275, "a": 1.0 }
         }
     ]

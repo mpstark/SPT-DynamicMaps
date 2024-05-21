@@ -465,7 +465,7 @@
             "Position": { "x": -205.499237, "y": -109.994392, "z": 8.110943 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780d0532459777a5108b9a2"
+            "AssociatedItemId": "5780d0532459777a5108b9a2"
         },
         {
             "Text": "Portable Cabin",
@@ -473,7 +473,7 @@
             "Position": { "x": -251.320953, "y": -221.941071, "z": 3.85700083 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780d07a2459777de4559324"
+            "AssociatedItemId": "5780d07a2459777de4559324"
         },
         {
             "Text": "Trailer Park Portable Cabin",
@@ -481,7 +481,7 @@
             "Position": { "x": -194.560135, "y": -207.398911, "z": 2.34600019 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5913611c86f77479e0084092"
+            "AssociatedItemId": "5913611c86f77479e0084092"
         },
         {
             "Text": "Factory Shortcut",
@@ -489,7 +489,7 @@
             "Position": { "x": 356.052551, "y": -14.5693512, "z": 2.34000182 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c"
         },
         {
             "Text": "Unknown Cabin",
@@ -497,7 +497,7 @@
             "Position": { "x": 370.014923, "y": -50.08902, "z": 2.15399933 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "593962ca86f774068014d9af"
+            "AssociatedItemId": "593962ca86f774068014d9af"
         },
         {
             "Text": "Factory Shortcut",
@@ -505,7 +505,7 @@
             "Position": { "x": 356.957367, "y": -8.079105, "z": 2.14515162 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c"
         },
         {
             "Text": "Dorm 114",
@@ -513,7 +513,7 @@
             "Position": { "x": 233.549591, "y": 159.682587, "z": 0.889000237 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "59387a4986f77401cc236e62"
+            "AssociatedItemId": "59387a4986f77401cc236e62"
         },
         {
             "Text": "Dorm 206",
@@ -521,7 +521,7 @@
             "Position": { "x": 230.641281, "y": 138.671631, "z": 3.86939716 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5938603e86f77435642354f4"
+            "AssociatedItemId": "5938603e86f77435642354f4"
         },
         {
             "Text": "Dorm 105",
@@ -529,7 +529,7 @@
             "Position": { "x": 227.877258, "y": 135.61264, "z": 0.8901995 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "591382d986f774465a6413a7"
+            "AssociatedItemId": "591382d986f774465a6413a7"
         },
         {
             "Text": "Dorm 110",
@@ -537,7 +537,7 @@
             "Position": { "x": 231.0886, "y": 159.435349, "z": 0.910999358 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "59136e1e86f774432f15d133"
+            "AssociatedItemId": "59136e1e86f774432f15d133"
         },
         {
             "Text": "Dorm 104",
@@ -545,7 +545,7 @@
             "Position": { "x": 230.101257, "y": 134.913879, "z": 0.8860002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "591383f186f7744a4c5edcf3"
+            "AssociatedItemId": "591383f186f7744a4c5edcf3"
         },
         {
             "Text": "Dorm Guard Desk",
@@ -553,7 +553,7 @@
             "Position": { "x": 225.517273, "y": 138.366241, "z": 0.8858002 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "59136a4486f774447a1ed172"
+            "AssociatedItemId": "59136a4486f774447a1ed172"
         },
         {
             "Text": "Dorm 204",
@@ -561,7 +561,7 @@
             "Position": { "x": 173.379211, "y": 150.356216, "z": 3.83760285 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "59148c8a86f774197930e983"
+            "AssociatedItemId": "59148c8a86f774197930e983"
         },
         {
             "Text": "Dorm 108",
@@ -569,7 +569,7 @@
             "Position": { "x": 177.473969, "y": 178.489075, "z": 0.8406372 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5914578086f774123569ffa4"
+            "AssociatedItemId": "5914578086f774123569ffa4"
         },
         {
             "Text": "Dorm 314 Marked Room",
@@ -577,7 +577,7 @@
             "Position": { "x": 180.671432, "y": 183.722443, "z": 6.84058475 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cf7f2459777de4559322"
+            "AssociatedItemId": "5780cf7f2459777de4559322"
         },
         {
             "Text": "Dorm 218",
@@ -585,7 +585,7 @@
             "Position": { "x": 190.192383, "y": 175.3542, "z": 3.84178257 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cf9e2459777df90dcb73"
+            "AssociatedItemId": "5780cf9e2459777df90dcb73"
         },
         {
             "Text": "Dorm 118",
@@ -593,7 +593,7 @@
             "Position": { "x": 194.794083, "y": 174.546783, "z": 0.830601 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5672c92d4bdc2d180f8b4567"
+            "AssociatedItemId": "5672c92d4bdc2d180f8b4567"
         },
         {
             "Text": "Dorm 220",
@@ -601,7 +601,7 @@
             "Position": { "x": 193.957886, "y": 174.821625, "z": 3.831203 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cfa52459777dfb276eb1"
+            "AssociatedItemId": "5780cfa52459777dfb276eb1"
         },
         {
             "Text": "Dorm 308",
@@ -609,7 +609,7 @@
             "Position": { "x": 177.4756, "y": 178.488113, "z": 6.850606 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cf722459777a5108b9a1"
+            "AssociatedItemId": "5780cf722459777a5108b9a1"
         },
         {
             "Text": "Dorm 315",
@@ -617,7 +617,7 @@
             "Position": { "x": 179.284683, "y": 174.810455, "z": 6.830814 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cf692459777de4559321"
+            "AssociatedItemId": "5780cf692459777de4559321"
         },
         {
             "Text": "Dorm 214",
@@ -625,7 +625,7 @@
             "Position": { "x": 178.105484, "y": 183.746643, "z": 3.83598375 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cf942459777df90dcb72"
+            "AssociatedItemId": "5780cf942459777df90dcb72"
         },
         {
             "Text": "Dorm 203",
@@ -633,7 +633,7 @@
             "Position": { "x": 176.041077, "y": 150.26828, "z": 3.83258247 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5938504186f7740991483f30"
+            "AssociatedItemId": "5938504186f7740991483f30"
         },
         {
             "Text": "Dorm 103",
@@ -641,7 +641,7 @@
             "Position": { "x": 175.734467, "y": 149.366577, "z": 0.820169449 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5938994586f774523a425196"
+            "AssociatedItemId": "5938994586f774523a425196"
         },
         {
             "Text": "Dorm 306",
@@ -649,7 +649,7 @@
             "Position": { "x": 174.544632, "y": 157.45575, "z": 6.828404 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780cda02459777b272ede61"
+            "AssociatedItemId": "5780cda02459777b272ede61"
         },
         {
             "Text": "Dorm 303",
@@ -657,7 +657,7 @@
             "Position": { "x": 176.039612, "y": 150.268463, "z": 6.82898426 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "593aa4be86f77457f56379f8"
+            "AssociatedItemId": "593aa4be86f77457f56379f8"
         },
         {
             "Text": "Gas Station Storage Room",
@@ -665,7 +665,7 @@
             "Position": { "x": 415.416443, "y": 35.6602058, "z": 2.18918633 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5913877a86f774432f15d444"
+            "AssociatedItemId": "5913877a86f774432f15d444"
         },
         {
             "Text": "Gas Station Office",
@@ -673,7 +673,7 @@
             "Position": { "x": 415.779572, "y": 38.5554962, "z": 2.17909455 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5780d0652459777df90dcb74"
+            "AssociatedItemId": "5780d0652459777df90dcb74"
         },
         {
             "Text": "USEC Stash",
@@ -681,7 +681,7 @@
             "Position": { "x": 562.780945, "y": -58.9465332, "z": 2.216738 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5da743f586f7744014504f72"
+            "AssociatedItemId": "5da743f586f7744014504f72"
         },
         {
             "Text": "USEC Stash",
@@ -689,7 +689,7 @@
             "Position": { "x": 568.747131, "y": -50.85814, "z": 2.193743 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5da743f586f7744014504f72"
+            "AssociatedItemId": "5da743f586f7744014504f72"
         },
         {
             "Text": "Orange Tanker Truck",
@@ -697,7 +697,7 @@
             "Position": { "x": 101.818916, "y": -5.54527664, "z": 3.44780731 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5937ee6486f77408994ba448"
+            "AssociatedItemId": "5937ee6486f77408994ba448"
         },
         {
             "Text": "Military Checkpoint",
@@ -705,7 +705,7 @@
             "Position": { "x": 577.6575, "y": 4.049543, "z": 0.8078748 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5913915886f774123603c392"
+            "AssociatedItemId": "5913915886f774123603c392"
         },
         {
             "Text": "ZB-013",
@@ -713,7 +713,7 @@
             "Position": { "x": 198.927917, "y": -146.172791, "z": -1.779768 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5448ba0b4bdc2d02308b456c"
+            "AssociatedItemId": "5448ba0b4bdc2d02308b456c"
         },
         {
             "Text": "Portable Bunkhouse",
@@ -721,7 +721,7 @@
             "Position": { "x": 202.664337, "y": 11.72344, "z": 4.73085976 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5938144586f77473c2087145"
+            "AssociatedItemId": "5938144586f77473c2087145"
         }
     ]
 }

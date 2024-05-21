@@ -235,7 +235,7 @@
             "Position": { "x": -0.1508789, "y": -61.946167, "z": -0.680201769 },
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "Category": "LockedDoor",
-            "ExtraInfo": "591ae8f986f77406f854be45"
+            "AssociatedItemId": "591ae8f986f77406f854be45"
         },
         {
             "Text": "ZB-014",
@@ -243,7 +243,7 @@
             "Position": { "x": 448.623047, "y": 65.5839844, "z": -13.269 },
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "Category": "LockedDoor",
-            "ExtraInfo": "591afe0186f77431bd616a11"
+            "AssociatedItemId": "591afe0186f77431bd616a11"
         }
         // {
         //     "Text": "Shtrman's Stash",
@@ -251,7 +251,7 @@
         //     "Position": { "x": 25.1087952, "y": -29.55574, "z": -1.47199988 },
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
         //     "Category": "LockedDoor",
-        //     "ExtraInfo": "5d08d21286f774736e7c94c3"
+        //     "AssociatedItemId": "5d08d21286f774736e7c94c3"
         // }
     ]
 }

@@ -98,6 +98,11 @@ namespace InGameMap.UI.Components
             return marker;
         }
 
+        public IEnumerable<MapMarker> GetMapMarkersByCategory(string category)
+        {
+            return _markers.Where(m => m.Category == category);
+        }
+
         public void ChangeMarkerCategoryStatus(string category, bool status)
         {
             foreach (var marker in _markers)

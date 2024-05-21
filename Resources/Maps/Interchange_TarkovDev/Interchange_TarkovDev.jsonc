@@ -531,7 +531,7 @@
             "Position": { "x": -223.115845, "y": -271.3501, "z": 22.55412 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5d49886f77455f9731921"
+            "AssociatedItemId": "5ad5d49886f77455f9731921"
         },
         {
             "Text": "ULTRA Medical Storage",
@@ -539,7 +539,7 @@
             "Position": { "x": 67.55801, "y": 40.891, "z": 37.60174 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5e42c71586f7747f245e1343"
+            "AssociatedItemId": "5e42c71586f7747f245e1343"
         },
         {
             "Text": "Kiba Arms Inner Grate",
@@ -547,7 +547,7 @@
             "Position": { "x": -9.887001, "y": -33.76517, "z": 28.241 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5addaffe86f77470b455f900"
+            "AssociatedItemId": "5addaffe86f77470b455f900"
         },
         {
             "Text": "Kiba Arms Outer Door",
@@ -555,7 +555,7 @@
             "Position": { "x": -9.444001, "y": -33.709, "z": 28.241 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5d7d286f77450166e0a89"
+            "AssociatedItemId": "5ad5d7d286f77450166e0a89"
         },
         {
             "Text": "Object #11SR Saferoom",
@@ -563,7 +563,7 @@
             "Position": { "x": -51.9328041, "y": 45.8337746, "z": 22.35359 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5e42c81886f7742a01529f57"
+            "AssociatedItemId": "5e42c81886f7742a01529f57"
         },
         {
             "Text": "Object #21WS",
@@ -571,7 +571,7 @@
             "Position": { "x": 140.195663, "y": 263.315277, "z": 25.2079964 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5e42c83786f7742a021fdf3c"
+            "AssociatedItemId": "5e42c83786f7742a021fdf3c"
         },
         {
             "Text": "NecrusPharm Pharmacy",
@@ -579,7 +579,7 @@
             "Position": { "x": 68.53804, "y": -255.424225, "z": 22.4947357 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5d64486f774079b080af8"
+            "AssociatedItemId": "5ad5d64486f774079b080af8"
         },
         {
             "Text": "Emercom Medical Unit",
@@ -587,7 +587,7 @@
             "Position": { "x": 24.136982, "y": -112.8551, "z": 28.4790325 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5db3786f7743568421cce"
+            "AssociatedItemId": "5ad5db3786f7743568421cce"
         },
         {
             "Text": "Emercom Medical Unit",
@@ -595,7 +595,7 @@
             "Position": { "x": 34.14116, "y": -108.287651, "z": 28.4790325 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5db3786f7743568421cce"
+            "AssociatedItemId": "5ad5db3786f7743568421cce"
         },
         {
             "Text": "Emercom Medical Unit",
@@ -603,7 +603,7 @@
             "Position": { "x": 6.732233, "y": -107.304314, "z": 28.4790344 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5db3786f7743568421cce"
+            "AssociatedItemId": "5ad5db3786f7743568421cce"
         },
         {
             "Text": "OLI Logistics Office",
@@ -611,7 +611,7 @@
             "Position": { "x": 83.1990051, "y": 115.673004, "z": 28.1199989 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5cfbd86f7742c825d6104"
+            "AssociatedItemId": "5ad5cfbd86f7742c825d6104"
         },
         {
             "Text": "OLI Outlet Utility Room",
@@ -619,7 +619,7 @@
             "Position": { "x": -102.823967, "y": 80.48102, "z": 28.12 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5d20586f77449be26d877"
+            "AssociatedItemId": "5ad5d20586f77449be26d877"
         },
         {
             "Text": "OLI Admin Office",
@@ -627,7 +627,7 @@
             "Position": { "x": 85.18402, "y": 104.638214, "z": 28.1199989 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5ad5ccd186f774446d5706e9"
+            "AssociatedItemId": "5ad5ccd186f774446d5706e9"
         }
     ]
 }

@@ -284,7 +284,7 @@
             "Position": { "x": -220.38063, "y": 185.880585, "z": -33.858 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5d8e15b686f774445103b190"
+            "AssociatedItemId": "5d8e15b686f774445103b190"
         },
         {
             "Text": "HEP Station Storage Room",
@@ -292,7 +292,7 @@
             "Position": { "x": -220.703171, "y": 193.687332, "z": -33.8470345 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5d8e15b686f774445103b190"
+            "AssociatedItemId": "5d8e15b686f774445103b190"
         },
         {
             "Text": "SMW Car",
@@ -300,7 +300,7 @@
             "Position": { "x": 157.352051, "y": 133.891, "z": -47.3859329 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eb38b86f774153b320eb0"
+            "AssociatedItemId": "5a0eb38b86f774153b320eb0"
         },
         {
             "Text": "Cottage Back Door",
@@ -308,7 +308,7 @@
             "Position": { "x": 102.532318, "y": 102.731339, "z": -47.2590027 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eb6ac86f7743124037a28"
+            "AssociatedItemId": "5a0eb6ac86f7743124037a28"
         },
         {
             "Text": "West Wing Room 203",
@@ -316,7 +316,7 @@
             "Position": { "x": -229.608261, "y": -92.90662, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a144dfd86f77445cb5a0982"
+            "AssociatedItemId": "5a144dfd86f77445cb5a0982"
         },
         {
             "Text": "West Wing Room 216",
@@ -324,7 +324,7 @@
             "Position": { "x": -179.379257, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ee30786f774023b6ee08f"
+            "AssociatedItemId": "5a0ee30786f774023b6ee08f"
         },
         {
             "Text": "West Wing Room 306",
@@ -332,7 +332,7 @@
             "Position": { "x": -216.905258, "y": -92.90662, "z": 3.03088379 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13f46386f7741dd7384b04"
+            "AssociatedItemId": "5a13f46386f7741dd7384b04"
         },
         {
             "Text": "West Wing Room 220",
@@ -340,7 +340,7 @@
             "Position": { "x": -166.686264, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ee34586f774023b6ee092"
+            "AssociatedItemId": "5a0ee34586f774023b6ee092"
         },
         {
             "Text": "East Wing Room 206",
@@ -348,7 +348,7 @@
             "Position": { "x": -285.857239, "y": -92.88861, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ee4b586f7743698200d22"
+            "AssociatedItemId": "5a0ee4b586f7743698200d22"
         },
         {
             "Text": "East Wing Room 205",
@@ -356,7 +356,7 @@
             "Position": { "x": -281.692261, "y": -92.88861, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a144bdb86f7741d374bbde0"
+            "AssociatedItemId": "5a144bdb86f7741d374bbde0"
         },
         {
             "Text": "East Wing Room 313",
@@ -364,7 +364,7 @@
             "Position": { "x": -313.835754, "y": -84.47537, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eecf686f7740350630097"
+            "AssociatedItemId": "5a0eecf686f7740350630097"
         },
         {
             "Text": "Utility Room",
@@ -372,7 +372,7 @@
             "Position": { "x": -142.583267, "y": -79.9176, "z": 3.05788422 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ea79b86f7741d4a35298e"
+            "AssociatedItemId": "5a0ea79b86f7741d4a35298e"
         },
         {
             "Text": "West Wing Room 218",
@@ -380,7 +380,7 @@
             "Position": { "x": -173.983749, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13eebd86f7746fd639aa93"
+            "AssociatedItemId": "5a13eebd86f7746fd639aa93"
         },
         {
             "Text": "East Wing Room 328",
@@ -388,7 +388,7 @@
             "Position": { "x": -357.303284, "y": -79.9165955, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eee1486f77402aa773226"
+            "AssociatedItemId": "5a0eee1486f77402aa773226"
         },
         {
             "Text": "East Wing Room 226",
@@ -396,7 +396,7 @@
             "Position": { "x": -351.9118, "y": -84.47537, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13f35286f77413ef1436b0"
+            "AssociatedItemId": "5a13f35286f77413ef1436b0"
         },
         {
             "Text": "East Wing Office 107",
@@ -404,7 +404,7 @@
             "Position": { "x": -333.767029, "y": -79.95798, "z": -2.70200348 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ea64786f7741707720468"
+            "AssociatedItemId": "5a0ea64786f7741707720468"
         },
         {
             "Text": "West Wing Room 205",
@@ -412,7 +412,7 @@
             "Position": { "x": -221.073288, "y": -92.90662, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ec6d286f7742c0b518fb5"
+            "AssociatedItemId": "5a0ec6d286f7742c0b518fb5"
         },
         {
             "Text": "East Wing Room 222",
@@ -420,7 +420,7 @@
             "Position": { "x": -343.3838, "y": -84.47537, "z": 0.134880066 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13f24186f77410e57c5626"
+            "AssociatedItemId": "5a13f24186f77410e57c5626"
         },
         {
             "Text": "West Wing Room 112",
@@ -428,7 +428,7 @@
             "Position": { "x": -189.173019, "y": -85.4490051, "z": -2.69580078 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0dc95c86f77452440fc675"
+            "AssociatedItemId": "5a0dc95c86f77452440fc675"
         },
         {
             "Text": "West Wing Room 104",
@@ -436,7 +436,7 @@
             "Position": { "x": -157.433029, "y": -85.4490051, "z": -2.69580078 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0dc45586f7742f6b0b73e3"
+            "AssociatedItemId": "5a0dc45586f7742f6b0b73e3"
         },
         {
             "Text": "West Wing Room 219",
@@ -444,7 +444,7 @@
             "Position": { "x": -170.853256, "y": -80.91263, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13ef0686f7746e5a411744"
+            "AssociatedItemId": "5a13ef0686f7746e5a411744"
         },
         {
             "Text": "East Wing Room 308",
@@ -452,7 +452,7 @@
             "Position": { "x": -294.3863, "y": -92.88861, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a145d7b86f7744cbb6f4a13"
+            "AssociatedItemId": "5a145d7b86f7744cbb6f4a13"
         },
         {
             "Text": "East Wing Room 310",
@@ -460,7 +460,7 @@
             "Position": { "x": -303.411255, "y": -81.46161, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eec9686f77402ac5c39f2"
+            "AssociatedItemId": "5a0eec9686f77402ac5c39f2"
         },
         {
             "Text": "West Wing Room 301",
@@ -468,7 +468,7 @@
             "Position": { "x": -229.202621, "y": -100.151733, "z": 3.03088379 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a13ef7e86f7741290491063"
+            "AssociatedItemId": "5a13ef7e86f7741290491063"
         },
         {
             "Text": "West Wing Room 222",
@@ -476,7 +476,7 @@
             "Position": { "x": -161.293747, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a1452ee86f7746f33111763"
+            "AssociatedItemId": "5a1452ee86f7746f33111763"
         },
         {
             "Text": "Utility Room",
@@ -484,7 +484,7 @@
             "Position": { "x": -142.583267, "y": -79.9176, "z": 0.164085388 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "a0ea79b86f7741d4a35298e"
+            "AssociatedItemId": "a0ea79b86f7741d4a35298e"
         },
         {
             "Text": "East Wing Room 306",
@@ -492,7 +492,7 @@
             "Position": { "x": -285.857239, "y": -92.88861, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a145d4786f7744cbb6f4a12"
+            "AssociatedItemId": "5a145d4786f7744cbb6f4a12"
         },
         {
             "Text": "Utility Room",
@@ -500,7 +500,7 @@
             "Position": { "x": -360.193237, "y": -79.8936157, "z": 3.04288483 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ea79b86f7741d4a35298e"
+            "AssociatedItemId": "5a0ea79b86f7741d4a35298e"
         },
         {
             "Text": "East Wing Room 316",
@@ -508,7 +508,7 @@
             "Position": { "x": -323.389282, "y": -80.8936157, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a145ebb86f77458f1796f05"
+            "AssociatedItemId": "5a145ebb86f77458f1796f05"
         },
         {
             "Text": "East Wing Room 314",
@@ -516,7 +516,7 @@
             "Position": { "x": -317.992737, "y": -84.47537, "z": 3.02988434 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0eed4386f77405112912aa"
+            "AssociatedItemId": "5a0eed4386f77405112912aa"
         },
         {
             "Text": "East Wing Sanitar's Office",
@@ -524,7 +524,7 @@
             "Position": { "x": -323.547, "y": -79.961, "z": -2.70200348 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5eff09cd30a7dc22fd1ddfed"
+            "AssociatedItemId": "5eff09cd30a7dc22fd1ddfed"
         },
         {
             "Text": "West Wing Room 223",
@@ -532,7 +532,7 @@
             "Position": { "x": -165.451767, "y": -84.50137, "z": 0.137084961 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "ExtraInfo": "5a0ee37f86f774023657a86f"
+            "AssociatedItemId": "5a0ee37f86f774023657a86f"
         }
         // {
         //     "Text": "safe 1",
@@ -540,7 +540,7 @@
         //     "Position": { "x": -266.10675, "y": -147.65097, "z": -0.3202896 },
         //     "Category": "Locked",
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-        //     "ExtraInfo": "5a0f08bc86f77478f33b84c2"
+        //     "AssociatedItemId": "5a0f08bc86f77478f33b84c2"
         // },
         // {
         //     "Text": "West Wing Room 321 Safe",
@@ -548,7 +548,7 @@
         //     "Position": { "x": -165.664047, "y": -89.05765, "z": 2.53099823 },
         //     "Category": "Locked",
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-        //     "ExtraInfo": "5a0eff2986f7741fd654e684"
+        //     "AssociatedItemId": "5a0eff2986f7741fd654e684"
         // },
         // {
         //     "Text": "Cottage Safe",
@@ -556,7 +556,7 @@
         //     "Position": { "x": 93.71925, "y": 111.979019, "z": -45.01355 },
         //     "Category": "Locked",
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-        //     "ExtraInfo": "5a0f068686f7745b0d4ea242"
+        //     "AssociatedItemId": "5a0f068686f7745b0d4ea242"
         // },
         // {
         //     "Text": "safe 4",
@@ -564,7 +564,7 @@
         //     "Position": { "x": -242.451981, "y": -153.367249, "z": -0.3202896 },
         //     "Category": "Locked",
         //     "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-        //     "ExtraInfo": "5a0f0f5886f7741c4e32a472"
+        //     "AssociatedItemId": "5a0f0f5886f7741c4e32a472"
         // }
     ]
 }
