@@ -14,11 +14,6 @@ namespace InGameMap.DynamicMarkers
             TryAddMarker(map);
         }
 
-        public void OnHideInRaid(MapView map)
-        {
-            // do nothing
-        }
-
         public void OnRaidEnd(MapView map)
         {
             TryRemoveMarker();
@@ -56,6 +51,21 @@ namespace InGameMap.DynamicMarkers
 
             _playerMarker.ContainingMapView.RemoveMapMarker(_playerMarker);
             _playerMarker = null;
+        }
+
+        public void OnHideInRaid(MapView map)
+        {
+            // do nothing
+        }
+
+        public void OnShowOutOfRaid(MapView map)
+        {
+            // do nothing
+        }
+
+        public void OnHideOutOfRaid(MapView map)
+        {
+            // do nothing
         }
     }
 }

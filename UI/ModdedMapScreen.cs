@@ -149,6 +149,10 @@ namespace InGameMap.UI
             {
                 OnHideInRaid();
             }
+            else
+            {
+                OnHideOutOfRaid();
+            }
         }
 
         internal void Show()
@@ -263,6 +267,19 @@ namespace InGameMap.UI
                 _playerPositionText.gameObject.SetActive(false);
 
                 _lastShownInRaid = false;
+            }
+
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnShowOutOfRaid(_mapView);
+            }
+        }
+
+        private void OnHideOutOfRaid()
+        {
+            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            {
+                dynamicProvider.OnHideOutOfRaid(_mapView);
             }
         }
 

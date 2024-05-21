@@ -104,5 +104,15 @@ namespace InGameMap.DynamicMarkers
             _playerMarkers[player].ContainingMapView.RemoveMapMarker(_playerMarkers[player]);
             _playerMarkers.Remove(player);
         }
+
+        public void OnShowOutOfRaid(MapView map)
+        {
+            // do nothing
+        }
+
+        public void OnHideOutOfRaid(MapView map)
+        {
+            // do nothing
+        }
     }
 }

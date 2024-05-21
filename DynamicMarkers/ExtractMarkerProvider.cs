@@ -119,5 +119,15 @@ namespace InGameMap.DynamicMarkers
             _extractMarkers[exfil].ContainingMapView.RemoveMapMarker(_extractMarkers[exfil]);
             _extractMarkers.Remove(exfil);
         }
+
+        public void OnShowOutOfRaid(MapView map)
+        {
+            // do nothing
+        }
+
+        public void OnHideOutOfRaid(MapView map)
+        {
+            // do nothing
+        }
     }
 }
