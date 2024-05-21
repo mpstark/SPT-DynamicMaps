@@ -85,7 +85,7 @@ namespace InGameMap.DynamicMarkers
             var category = "scav";
             var color = Color.Lerp(Color.red, Color.yellow, 0.5f);
             var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
-            if (!mainPlayerGroupId.IsNullOrEmpty() && player.GroupId == mainPlayerGroupId)
+            if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
             {
                 color = Color.blue;
                 category = "allied-player";

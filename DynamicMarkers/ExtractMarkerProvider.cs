@@ -29,7 +29,7 @@ namespace InGameMap.DynamicMarkers
 
                 // subscribe to status changes while map is shown
                 exfil.OnStatusChanged += UpdateExfilStatus;
-                Plugin.Log.LogInfo($"Subscribed to {exfil.Settings.Name.Localized()}");
+                Plugin.Log.LogInfo($"Subscribed to {exfil.Settings.Name.BSGLocalized()}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace InGameMap.DynamicMarkers
             foreach (var exfil in _extractMarkers.Keys)
             {
                 exfil.OnStatusChanged -= UpdateExfilStatus;
-                Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.Localized()}");
+                Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.BSGLocalized()}");
             }
         }
 
@@ -84,15 +84,15 @@ namespace InGameMap.DynamicMarkers
             {
                 case EExfiltrationStatus.NotPresent:
                     marker.Color = Color.red;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to red");
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to red");
                     break;
                 case EExfiltrationStatus.UncompleteRequirements:
                     marker.Color = Color.yellow;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to yellow");
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to yellow");
                     return;
                 default:
                     marker.Color = Color.green;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.Localized()} to green");
+                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to green");
                     break;
             }
         }
@@ -108,7 +108,7 @@ namespace InGameMap.DynamicMarkers
             {
                 Category = "Extract",
                 ImagePath = "Markers/exit.png",
-                Text = exfil.Settings.Name.Localized(),
+                Text = exfil.Settings.Name.BSGLocalized(),
                 Position = MathUtils.ConvertToMapPosition(exfil.transform)
             };
 
@@ -124,7 +124,7 @@ namespace InGameMap.DynamicMarkers
             }
 
             exfil.OnStatusChanged -= UpdateExfilStatus;
-            Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.Localized()}");
+            Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.BSGLocalized()}");
 
             _extractMarkers[exfil].ContainingMapView.RemoveMapMarker(_extractMarkers[exfil]);
             _extractMarkers.Remove(exfil);

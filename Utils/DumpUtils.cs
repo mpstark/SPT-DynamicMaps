@@ -28,7 +28,7 @@ namespace InGameMap.Utils
                     Category = "Extract",
                     ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
-                    Text = scavExfil.Settings.Name.Localized(),
+                    Text = scavExfil.Settings.Name.BSGLocalized(),
                     Position = MathUtils.ConvertToMapPosition(scavExfil.transform),
                     Color = Color.Lerp(Color.yellow, Color.red, 0.5f)
                 };
@@ -43,7 +43,7 @@ namespace InGameMap.Utils
                     Category = "Extract",
                     ShowInRaid = false,
                     ImagePath = "Markers/exit.png",
-                    Text = pmcExfil.Settings.Name.Localized(),
+                    Text = pmcExfil.Settings.Name.BSGLocalized(),
                     Position = MathUtils.ConvertToMapPosition(pmcExfil.transform),
                     Color = Color.green
                 };
@@ -96,7 +96,7 @@ namespace InGameMap.Utils
 
             foreach (var @object in objects)
             {
-                if (@object.KeyId.IsNullOrEmpty())
+                if (string.IsNullOrEmpty(@object.KeyId))
                 {
                     continue;
                 }

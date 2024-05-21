@@ -100,7 +100,7 @@ namespace InGameMap.UI.Controls
         {
             return _mapDefs.Values.Where(m =>
                 {
-                    if (_nameFilter.IsNullOrEmpty())
+                    if (string.IsNullOrEmpty(_nameFilter))
                     {
                         return true;
                     }

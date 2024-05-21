@@ -22,5 +22,19 @@ namespace InGameMap.Utils
             var gameWorld = Singleton<GameWorld>.Instance;
             return gameWorld?.MainPlayer;
         }
+
+        public static bool IsScavRaid()
+        {
+            var game = Singleton<AbstractGame>.Instance;
+            var player = GetMainPlayer();
+            return (game != null) && game.InRaid
+                && (player != null) && player.Side == EPlayerSide.Savage;
+        }
+
+        public static string BSGLocalized(this string id)
+        {
+            // TODO: use reflection to get rid of this gclass reference
+            return id.Localized();
+        }
     }
 }

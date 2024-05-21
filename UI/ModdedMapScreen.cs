@@ -206,12 +206,13 @@ namespace InGameMap.UI
                 // show player position text
                 _playerPositionText.gameObject.SetActive(true);
 
-                var dotSpawner = GameUtils.GetMainPlayer().gameObject.GetOrAddComponent<PlayerDotSpawner>();
-                dotSpawner.MapView = _mapView;
+                // GetOrAddComponent is a BSG extension method under gclass reference
+                // var dotSpawner = GameUtils.GetMainPlayer().gameObject.GetOrAddComponent<PlayerDotSpawner>();
+                // dotSpawner.MapView = _mapView;
             }
 
             var mapInternalName = GameUtils.GetCurrentMapInternalName();
-            if (mapInternalName.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(mapInternalName))
             {
                 return;
             }
