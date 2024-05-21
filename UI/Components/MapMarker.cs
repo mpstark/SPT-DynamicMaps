@@ -246,6 +246,7 @@ namespace InGameMap.UI.Components
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isInFullReveal = true;
+            transform.SetAsLastSibling();
             HandleNewLayerStatus(LayerStatus.FullReveal);
         }
 
