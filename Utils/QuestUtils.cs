@@ -36,10 +36,17 @@ namespace InGameMap.Utils
 
         internal static void OnGameEnded()
         {
-            TriggersWithIds.Clear();
-            QuestItems.Clear();
-            TriggersWithIds = null;
-            QuestItems = null;
+            if (TriggersWithIds != null)
+            {
+                TriggersWithIds.Clear();
+                TriggersWithIds = null;
+            }
+
+            if (QuestItems != null)
+            {
+                QuestItems.Clear();
+                QuestItems = null;
+            }
         }
 
         public static IEnumerable<MapMarkerDef> GetMarkerDefsForCondition(Condition condition,
