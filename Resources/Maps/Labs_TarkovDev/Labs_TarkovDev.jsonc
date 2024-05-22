@@ -47,7 +47,7 @@
             },
             "GameBounds": [
                 {
-                    "Min": {"x": -271, "y": -422, "z": -3},
+                    "Min": {"x": -271, "y": -422, "z": 3},
                     "Max": {"x": -101, "y": -270, "z": 100}
                 }
             ]
@@ -113,73 +113,73 @@
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
-            "Text": "power",
+            "Text": "Medical Block Elevator Power",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -124.758, "y": -313.806, "z": -2.31599617 },
             "Category": "Switch"
         },
+        // {   // main elevator
+        //     "Text": "call_button",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -281.022, "y": -335.477, "z": -2.83799934 },
+        //     "Category": "Switch"
+        // },
+        // {   // medical block call button
+        //     "Text": "call_button",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -114.112, "y": -343.2, "z": -2.84599972 },
+        //     "Category": "Switch"
+        // },
+        // {   // cargo elevator
+        //     "Text": "call_button (1)",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -114.037, "y": -406.427979, "z": 5.31399727 },
+        //     "Category": "Switch"
+        // },
+        // {   // cargo elevator
+        //     "Text": "floor_button (1)",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -112.378006, "y": -406.806, "z": 5.353998 },
+        //     "Category": "Switch"
+        // },
         {
-            "Text": "call_button",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -281.022, "y": -335.477, "z": -2.83799934 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "call_button",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -114.112, "y": -343.2, "z": -2.84599972 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "call_button (1)",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -114.037, "y": -406.427979, "z": 5.31399727 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "floor_button (1)",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -112.378006, "y": -406.806, "z": 5.353998 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "Power",
+            "Text": "Main Elevator Power Button",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -271.439, "y": -366.10498, "z": -2.380001 },
             "Category": "Switch"
         },
+        // {   // main elevator
+        //     "Text": "floor_button",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -282.361, "y": -335.86, "z": -2.91199875 },
+        //     "Category": "Switch"
+        // },
         {
-            "Text": "floor_button",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -282.361, "y": -335.86, "z": -2.91199875 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "Console_trigger",
+            "Text": "Open Parking Gate",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -243.443, "y": -382.513, "z": 5.076 },
             "Category": "Switch"
         },
         {
-            "Text": "Pump_button",
+            "Text": "Water Level Switch",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -136.76, "y": -254.510513, "z": -2.825999 },
             "Category": "Switch"
         },
+        // {   // not sure, located in sterile lab?
+        //     "Text": "Power",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -121.007996, "y": -353.548, "z": -2.83698225 },
+        //     "Category": "Switch"
+        // },
+        // {   // medical block elevator
+        //     "Text": "floor_button",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": -112.802, "y": -342.762, "z": -2.84599972 },
+        //     "Category": "Switch"
+        // },
         {
-            "Text": "Power",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -121.007996, "y": -353.548, "z": -2.83698225 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "floor_button",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": -112.802, "y": -342.762, "z": -2.84599972 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "Disable_alarm_trigger",
+            "Text": "Disable Parking Gate Alarm",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -220.756, "y": -381.263, "z": 5.249 },
             "Category": "Switch"
