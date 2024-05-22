@@ -10,6 +10,9 @@ using UnityEngine;
 
 namespace InGameMap.Utils
 {
+    // NOTE: Most of this is adapted from work done for Prop's GTFO mod (https://github.com/dvize/GTFO)
+    // this likely does not count as a "substantial portion" of the software
+    // under MIT license (https://github.com/dvize/GTFO/blob/master/LICENSE.txt)
     public static class QuestUtils
     {
         // reflection
