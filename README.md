@@ -6,8 +6,6 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
 
 ![In raid with player marker](Screenshots/in_raid_map.png)
 
-![In raid short video](Screenshots/in_raid_video.mp4)
-
 ### Features
 
 - Map organized in stacked layers / levels
