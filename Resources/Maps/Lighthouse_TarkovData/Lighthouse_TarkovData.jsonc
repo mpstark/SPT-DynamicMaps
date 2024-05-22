@@ -272,7 +272,7 @@
             "Text": "Merin Trunk",
             "ImagePath": "Markers/car_door.png",
             "Position": { "x": 91.1099854, "y": -130.918991, "z": 8.382999 },
-            "Category": "Locked",
+            "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "AssociatedItemId": "61aa5b518f5e7a39b41416e2"
         },
@@ -320,7 +320,7 @@
             "Text": "Police Car",
             "ImagePath": "Markers/car_door.png",
             "Position": { "x": 83.79875, "y": -553.2562, "z": 6.61099958 },
-            "Category": "Locked",
+            "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "AssociatedItemId": "61aa5aed32a4743c3453d319"
         },
