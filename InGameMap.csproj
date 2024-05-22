@@ -121,10 +121,10 @@
     </ItemGroup>
 
     <!-- Copies the output and resources to tarkov game folder -->
-    <!-- <Copy
+    <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
       DestinationFolder="$(TarkovDir)BepInEx\plugins\InGameMap\%(RecursiveDir)"
-    /> -->
+    />
     <Copy
       SourceFiles="@(OutputDLL);@(Resources)"
       DestinationFolder="$(TarkovDebugDir)BepinEx\plugins\InGameMap\%(RecursiveDir)"
