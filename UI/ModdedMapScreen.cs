@@ -111,10 +111,12 @@ namespace InGameMap.UI
 
             // add dynamic marker providers
             _dynamicMarkerProviders.Add(new PlayerMarkerProvider());
-            _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
             _dynamicMarkerProviders.Add(new ExtractMarkerProvider());
             _dynamicMarkerProviders.Add(new LockedDoorMarkerMutator());
             _dynamicMarkerProviders.Add(new QuestMarkerProvider());
+
+            // TODO: add back with configuration options
+            // _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
         }
 
         private void Update()
