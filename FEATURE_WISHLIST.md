@@ -3,7 +3,7 @@
 ### Configuration
 
 - Configure defaults for dynamic markers
-- All the other configuration
+- Lots of other configuration
 
 ### Marker/Label Filtering
 
@@ -11,7 +11,9 @@
 
 ### Map Markers
 
-- Add lootable dynamic markers?
+- Add lootable/loose loot dynamic markers?
+- Add temporary marker (left click?)
+- Add player created markers (right click menu?)
 
 #### Tooltips
 
@@ -19,6 +21,7 @@
 - Quests: the condition's description
 - Bot debug markers: additional bot debug information
 - Extracts: if cannot use immediately, what the hint is to enable it
+- Switches/buttons: what the button does
 
 #### Better and Clearer Icons
 
@@ -38,3 +41,4 @@
 ### Overlay
 
 - Add an overlay map mode
+- Add option to select a marker and have an overlay UI pointing to the marker
