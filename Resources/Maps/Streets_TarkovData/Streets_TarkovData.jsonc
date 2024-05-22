@@ -19,8 +19,8 @@
             },
             "GameBounds": [
                 {   // Concordia underground
-                    "Min": {"x": 147, "y": 338, "z": -100},
-                    "Max": {"x": 277, "y": 416, "z": -6}
+                    "Min": {"x": 147, "y": 338, "z": -4},
+                    "Max": {"x": 277, "y": 416, "z": 0}
                 },
                 {   // Subway underground
                     "Min": {"x": -15, "y": -25, "z": -5},
@@ -50,77 +50,65 @@
                 "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
-                {   // west concordia
-                    "Min": {"x": 252, "y": 356, "z": 10},
-                    "Max": {"x": 287, "y": 405, "z": 15}
+                {   // concordia 2nd floor
+                    "Min": {"x": 128, "y": 339, "z": 6},
+                    "Max": {"x": 287, "y": 405, "z": 9}
                 },
-                {   // south concordia
-                    "Min": {"x": 196, "y": 356, "z": 10},
-                    "Max": {"x": 211, "y": 391, "z": 15}
-                },
-                {   // east concordia
-                    "Min": {"x": 128, "y": 339, "z": 10},
-                    "Max": {"x": 158, "y": 383, "z": 15}
-                },
-                {   // building south of concordia
-                    "Min": {"x": 128, "y": 335, "z": 10},
-                    "Max": {"x": 152, "y": 460, "z": 15}
+                {   // building south of concordia 2nd floor
+                    "Min": {"x": 128, "y": 335, "z": 6},
+                    "Max": {"x": 152, "y": 460, "z": 9}
                 },
                 {   // real estate agency office 2nd floor
-                    "Min": {"x": 128, "y": 335, "z": 10},
-                    "Max": {"x": -34, "y": 460, "z": 15}
+                    "Min": {"x": -68, "y": 449, "z": 6},
+                    "Max": {"x": -34, "y": 475, "z": 10}
                 },
                 {   // cinema 2nd floor
-                    "Min": {"x": -197, "y": 370, "z": 10},
-                    "Max": {"x": -120, "y": 432, "z": 15}
+                    "Min": {"x": -197, "y": 370, "z": 6},
+                    "Max": {"x": -120, "y": 432, "z": 12}
                 },
                 {   // courtyard building 2nd floor
-                    "Min": {"x": -169, "y": 480, "z": 10},
-                    "Max": {"x": -161, "y": 491, "z": 15}
+                    "Min": {"x": -175, "y": 477, "z": 6},
+                    "Max": {"x": -160, "y": 491, "z": 10}
                 },
                 {   // north of courtyard building 2nd floor
-                    "Min": {"x": -189, "y": 451, "z": 10},
-                    "Max": {"x": -171, "y": 473, "z": 15}
+                    "Min": {"x": -189, "y": 451, "z": 6},
+                    "Max": {"x": -171, "y": 473, "z": 10}
                 },
                 {   // construction 2nd floor
-                    "Min": {"x": 188, "y": 284, "z": 10},
-                    "Max": {"x": 218, "y": 314, "z": 15}
+                    "Min": {"x": 188, "y": 284, "z": 6},
+                    "Max": {"x": 218, "y": 314, "z": 10}
                 },
                 {   // Sparja grocery 2nd floor
-                    "Min": {"x": 107, "y": 283, "z": 10},
-                    "Max": {"x": 132, "y": 294, "z": 15}
+                    "Min": {"x": 107, "y": 283, "z": 6},
+                    "Max": {"x": 132, "y": 294, "z": 10}
                 },
-                {   // Lexos west 2nd floor
-                    "Min": {"x": 94, "y": 271, "z": 10},
-                    "Max": {"x": 106, "y": 318, "z": 15}
-                },
-                {   // Lexos east 2nd floor
-                    "Min": {"x": 46, "y": 267, "z": 10},
-                    "Max": {"x": 73, "y": 352, "z": 15}
+                {   // Lexos 2nd floor
+                    "Min": {"x": 46, "y": 257, "z": 5.5},
+                    "Max": {"x": 106, "y": 352, "z": 10}
                 },
                 {   // abandoned factory 2nd floor
-                    "Min": {"x": -156, "y": 265, "z": 10},
-                    "Max": {"x": -77, "y": 305, "z": 15}
+                    "Min": {"x": -156, "y": 265, "z": 3},
+                    "Max": {"x": -77, "y": 305, "z": 6}
                 },
                 {   // hotels 2nd floor
-                    "Min": {"x": -214, "y": 235, "z": 10},
-                    "Max": {"x": -163, "y": 307, "z": 15}
+                    "Min": {"x": -214, "y": 235, "z": 6},
+                    "Max": {"x": -163, "y": 307, "z": 10}
                 },
                 {   // financial office 2nd floor
-                    "Min": {"x": -190, "y": 217, "z": 10},
-                    "Max": {"x": -157, "y": 235, "z": 15}
+                    "Min": {"x": -190, "y": 217, "z": 5.5},
+                    "Max": {"x": -157, "y": 235, "z": 8}
                 },
                 {   // family market 2nd floor
-                    "Min": {"x": -234, "y": 271, "z": 10},
-                    "Max": {"x": -209, "y": 290, "z": 15}
+                    "Min": {"x": -234, "y": 271, "z": 4.5},
+                    "Max": {"x": -209, "y": 290, "z": 7}
                 },
                 {   // tarbank 2nd floor
-                    "Min": {"x": 31, "y": 198, "z": 10},
-                    "Max": {"x": 88, "y": 240, "z": 15}
+                    "Min": {"x": 31, "y": 198, "z": 6},
+                    "Max": {"x": 88, "y": 240, "z": 9}
                 },
                 {   // chekannaya apartments 2nd floor
-                    "Min": {"x": 91, "y": 205, "z": 10},
-                    "Max": {"x": 161, "y": 240, "z": 15}
+                    "Min": {"x": 91, "y": 205, "z": 6},
+                    "Max": {"x": 161, "y": 240, "z": 9}
                 },
                 {   // pharmacy 1 2nd floor
                     "Min": {"x": 32, "y": 144, "z": 5},
@@ -131,28 +119,32 @@
                     "Max": {"x": 59, "y": 140, "z": 6}
                 },
                 {   // archive building 2nd floor
-                    "Min": {"x": 74, "y": 122, "z": 10},
-                    "Max": {"x": 90, "y": 146, "z": 15}
+                    "Min": {"x": 74, "y": 122, "z": 3.5},
+                    "Max": {"x": 90, "y": 146, "z": 7}
                 },
                 {   // zmeisky apartment 2nd floor
-                    "Min": {"x": 99, "y": 118, "z": 10},
-                    "Max": {"x": 140, "y": 159, "z": 15}
+                    "Min": {"x": 99, "y": 118, "z": 3.5},
+                    "Max": {"x": 140, "y": 159, "z": 7}
                 },
                 {   // vet clinic 2nd floor
-                    "Min": {"x": 209, "y": 166, "z": 10},
-                    "Max": {"x": 235, "y": 183, "z": 15}
+                    "Min": {"x": 209, "y": 166, "z": 3},
+                    "Max": {"x": 235, "y": 183, "z": 6}
+                },
+                {   // x-ray building 2nd floor
+                    "Min": {"x": 180, "y": 91, "z": 1},
+                    "Max": {"x": 197, "y": 127, "z": 4}
                 },
                 {   // school 2nd floor
-                    "Min": {"x": 180, "y": 91, "z": 10},
-                    "Max": {"x": 224, "y": 160, "z": 15}
+                    "Min": {"x": 199, "y": 96, "z": 3},
+                    "Max": {"x": 224, "y": 160, "z": 6}
                 },
                 {   // rusted key door building 2nd floor
-                    "Min": {"x": 173, "y": 48, "z": 10},
-                    "Max": {"x": 199, "y": 85, "z": 15}
+                    "Min": {"x": 173, "y": 48, "z": -2},
+                    "Max": {"x": 199, "y": 85, "z": 1}
                 },
-                {   // near kamchatskaya arch 2nd floor
-                    "Min": {"x": 241, "y": 45, "z": 10},
-                    "Max": {"x": 253, "y": 62, "z": 15}
+                {   // CCCP building 2nd floor
+                    "Min": {"x": 241, "y": 45, "z": -2},
+                    "Max": {"x": 253, "y": 62, "z": 1}
                 },
                 {   // pinewood hotel complex 2nd floor
                     "Min": {"x": -125, "y": 45, "z": 4},
@@ -184,37 +176,41 @@
                 "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
+                {   // concordia 2nd floor
+                    "Min": {"x": 128, "y": 339, "z": 9},
+                    "Max": {"x": 287, "y": 405, "z": 12}
+                },
                 {   // cinema 3rd floor
-                    "Min": {"x": -179, "y": 377, "z": 15},
-                    "Max": {"x": -155, "y": 423, "z": 20}
+                    "Min": {"x": -179, "y": 377, "z": 12},
+                    "Max": {"x": -155, "y": 423, "z": 18}
                 },
                 {   // abandoned factory 3rd floor
-                    "Min": {"x": -156, "y": 265, "z": 15},
-                    "Max": {"x": -77, "y": 305, "z": 20}
+                    "Min": {"x": -156, "y": 265, "z": 6},
+                    "Max": {"x": -77, "y": 305, "z": 11}
                 },
                 {   // family market 3rd floor
-                    "Min": {"x": -234, "y": 271, "z": 15},
-                    "Max": {"x": -209, "y": 290, "z": 20}
+                    "Min": {"x": -234, "y": 271, "z": 7},
+                    "Max": {"x": -209, "y": 290, "z": 10}
                 },
                 {   // tarbank 3rd floor
-                    "Min": {"x": 31, "y": 198, "z": 15},
-                    "Max": {"x": 88, "y": 240, "z": 20}
+                    "Min": {"x": 31, "y": 198, "z": 9},
+                    "Max": {"x": 88, "y": 240, "z": 12}
                 },
-                {   // chekannaya apartments 2nd floor
-                    "Min": {"x": 91, "y": 205, "z": 15},
-                    "Max": {"x": 161, "y": 240, "z": 20}
+                {   // chekannaya apartments 3rd floor
+                    "Min": {"x": 91, "y": 205, "z": 9},
+                    "Max": {"x": 161, "y": 240, "z": 12}
                 },
                 {   // post office 3rd floor
                     "Min": {"x": 31, "y": 60, "z": 6},
                     "Max": {"x": 59, "y": 140, "z": 9}
                 },
                 {   // zmeisky apartment 3rd floor
-                    "Min": {"x": 99, "y": 118, "z": 15},
-                    "Max": {"x": 140, "y": 159, "z": 20}
+                    "Min": {"x": 99, "y": 118, "z": 7},
+                    "Max": {"x": 140, "y": 159, "z": 9}
                 },
                 {   // rusted key door building 3rd floor
-                    "Min": {"x": 173, "y": 48, "z": 15},
-                    "Max": {"x": 199, "y": 85, "z": 20}
+                    "Min": {"x": 173, "y": 48, "z": 1},
+                    "Max": {"x": 199, "y": 85, "z": 4}
                 },
                 {   // pinewood hotel complex 3rd floor
                     "Min": {"x": -125, "y": 45, "z": 6.5 },
@@ -243,28 +239,28 @@
             },
             "GameBounds": [
                 {   // abandoned factory 4th floor
-                    "Min": {"x": -140, "y": 263, "z": 20},
-                    "Max": {"x": -123, "y": 278, "z": 25}
+                    "Min": {"x": -140, "y": 263, "z": 11},
+                    "Max": {"x": -123, "y": 278, "z": 15}
                 },
                 {   // family market 4th floor
-                    "Min": {"x": -234, "y": 271, "z": 20},
-                    "Max": {"x": -209, "y": 290, "z": 25}
+                    "Min": {"x": -234, "y": 271, "z": 10},
+                    "Max": {"x": -209, "y": 290, "z": 14}
                 },
                 {   // tarbank 4th floor
-                    "Min": {"x": 31, "y": 198, "z": 20},
-                    "Max": {"x": 88, "y": 240, "z": 25}
+                    "Min": {"x": 31, "y": 198, "z": 12},
+                    "Max": {"x": 88, "y": 240, "z": 15}
                 },
                 {   // post office 4th floor + apartments
                     "Min": {"x": 31, "y": 60, "z": 9 },
                     "Max": {"x": 59, "y": 164, "z": 14 }
                 },
                 {   // zmeisky apartment 4th floor
-                    "Min": {"x": 99, "y": 118, "z": 20},
-                    "Max": {"x": 140, "y": 159, "z": 25}
+                    "Min": {"x": 99, "y": 118, "z": 9},
+                    "Max": {"x": 140, "y": 159, "z": 12}
                 },
                 {   // rusted key door building 4th floor
-                    "Min": {"x": 173, "y": 48, "z": 15},
-                    "Max": {"x": 199, "y": 85, "z": 20}
+                    "Min": {"x": 173, "y": 48, "z": 4},
+                    "Max": {"x": 199, "y": 85, "z": 8}
                 },
             ]
         },
@@ -277,12 +273,12 @@
             },
             "GameBounds": [
                 {   // zmeisky apartment 5th floor
-                    "Min": {"x": 99, "y": 118, "z": 25},
-                    "Max": {"x": 140, "y": 159, "z": 100}
+                    "Min": {"x": 99, "y": 118, "z": 12},
+                    "Max": {"x": 140, "y": 159, "z": 15}
                 },
-                {   // rooftop sniper perch 5th floor
-                    "Min": {"x": 170, "y": 81, "z": 25},
-                    "Max": {"x": 181, "y": 89, "z": 100}
+                {   // rusted key door building 5th floor
+                    "Min": {"x": 170, "y": 81, "z": 8},
+                    "Max": {"x": 181, "y": 89, "z": 12}
                 },
             ]
         }
