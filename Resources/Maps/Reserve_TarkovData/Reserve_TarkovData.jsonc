@@ -280,25 +280,25 @@
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 }
         },
         {
-            "Text": "reserve_electric_switcher_lever",
+            "Text": "Bunker Hermetic Door Power",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -60.7597275, "y": 78.22821, "z": -5.55217171 },
             "Category": "Switch"
         },
         {
-            "Text": "reserve_electric_switcher_lever",
+            "Text": "D-2 Power Switch",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -117.184174, "y": 22.6676826, "z": -12.954 },
             "Category": "Switch"
         },
+        // {    // near bunker hermetic door
+        //     "Text": "Reset",
+        //     "ImagePath": "Markers/lever.png",
+        //     "Position": { "x": 65.71171, "y": -190.604248, "z": -6.683 },
+        //     "Category": "Switch"
+        // },
         {
-            "Text": "Reset",
-            "ImagePath": "Markers/lever.png",
-            "Position": { "x": 65.71171, "y": -190.604248, "z": -6.683 },
-            "Category": "Switch"
-        },
-        {
-            "Text": "Node_GatesButton",
+            "Text": "D-2 Open Switch",
             "ImagePath": "Markers/lever.png",
             "Position": { "x": -117.449867, "y": 168.546936, "z": -16.9842987 },
             "Category": "Switch"
