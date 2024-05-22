@@ -42,3 +42,11 @@
 
 - Add an overlay map mode
 - Add option to select a marker and have an overlay UI pointing to the marker
+
+### Immersion and Difficulty
+
+- Tarkov is an immersive game and mod should support players that want to preserve that
+- Add additional options that support that:
+  - Only show player position if compass equipped
+  - Only reveal locked doors that the character has interacted with
+  - Only allow map usage if player has map equipped
