@@ -197,7 +197,7 @@
         {
             "Text": "Sparja Grocery",
             "Position": {"x": 140, "y": 300, "z": 0},
-            "FontSize": 16
+            "FontSize": 14
         },
         {
             "Text": "Cinema",
@@ -221,8 +221,8 @@
         },
         {
             "Text": "Concordia",
-            "Position": {"x": 140, "y": 362, "z": 0},
-            "FontSize": 14
+            "Position": {"x": 207, "y": 363, "z": 0},
+            "FontSize": 18
         },
         {
             "Text": "Cardinal Bank",
