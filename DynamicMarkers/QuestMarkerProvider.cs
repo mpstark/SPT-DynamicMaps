@@ -54,7 +54,7 @@ namespace InGameMap
                 {
                     var markerDefs = QuestUtils.GetMarkerDefsForCondition(condition,
                         quest.Template.NameLocaleKey.BSGLocalized(),
-                        quest.Template.DescriptionKey.BSGLocalized());
+                        condition.id.BSGLocalized());
 
                     foreach (var markerDef in markerDefs)
                     {

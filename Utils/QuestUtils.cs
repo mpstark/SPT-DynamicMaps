@@ -100,7 +100,7 @@ namespace InGameMap.Utils
         }
 
         private static IEnumerable<MapMarkerDef> GetMarkerDefsForConditionCounter(ConditionCounterCreator creator,
-            string questName, string questDescription)
+            string questName, string conditionDescription)
         {
             var counter = _conditionCounterTemplateField.GetValue(creator);
             var conditions = _templateConditionsConditionsField.GetValue(counter);
@@ -112,7 +112,7 @@ namespace InGameMap.Utils
                 {
                     case ConditionVisitPlace place:
                     {
-                        foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(place.target, questName, questDescription))
+                        foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(place.target, questName, conditionDescription))
                         {
                             yield return marker;
                         }
@@ -122,7 +122,7 @@ namespace InGameMap.Utils
                     {
                         foreach (var zoneId in zone.zoneIds)
                         {
-                            foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(zoneId, questName, questDescription))
+                            foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(zoneId, questName, conditionDescription))
                             {
                                 yield return marker;
                             }
@@ -137,7 +137,7 @@ namespace InGameMap.Utils
             }
         }
 
-        private static IEnumerable<MapMarkerDef> GetMarkerDefsForZoneId<T>(string zoneId, string questName, string questDescription)
+        private static IEnumerable<MapMarkerDef> GetMarkerDefsForZoneId<T>(string zoneId, string questName, string conditionDescription)
             where T : TriggerWithId
         {
             if (TriggersWithIds == null)
@@ -161,7 +161,7 @@ namespace InGameMap.Utils
         }
 
         private static IEnumerable<MapMarkerDef> GetMarkerDefsForQuestItems(IEnumerable<string> questItemIds,
-            string questName, string questDescription)
+            string questName, string conditionDescription)
         {
             if (QuestItems == null)
             {
