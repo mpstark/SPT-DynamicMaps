@@ -52,7 +52,7 @@
             "GameBounds": [
                 {   // concordia 2nd floor
                     "Min": {"x": 128, "y": 339, "z": 6},
-                    "Max": {"x": 287, "y": 405, "z": 9}
+                    "Max": {"x": 287, "y": 416, "z": 9}
                 },
                 {   // building south of concordia 2nd floor
                     "Min": {"x": 128, "y": 335, "z": 6},
@@ -176,9 +176,9 @@
                 "Max": {"x": 324, "y": 533}
             },
             "GameBounds": [
-                {   // concordia 2nd floor
+                {   // concordia 3rd floor
                     "Min": {"x": 128, "y": 339, "z": 9},
-                    "Max": {"x": 287, "y": 405, "z": 12}
+                    "Max": {"x": 287, "y": 416, "z": 12}
                 },
                 {   // cinema 3rd floor
                     "Min": {"x": -179, "y": 377, "z": 12},
