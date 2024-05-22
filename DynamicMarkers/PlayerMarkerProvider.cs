@@ -21,6 +21,12 @@ namespace InGameMap.DynamicMarkers
 
         public void OnMapChanged(MapView map, MapDef mapDef)
         {
+            if (!GameUtils.IsInRaid())
+            {
+                TryRemoveMarker();
+                return;
+            }
+
             TryRemoveMarker();
             TryAddMarker(map);
         }
