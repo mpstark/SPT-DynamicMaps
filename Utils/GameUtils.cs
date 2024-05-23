@@ -23,11 +23,8 @@ namespace DynamicMaps.Utils
 
         public static bool IsInRaid()
         {
-            return Singleton<IBotGame>.Instantiated;
-
-            // this does not work under older versions of FIKA
-            // var game = Singleton<AbstractGame>.Instance;
-            // return (game != null) && game.InRaid;
+            var game = Singleton<AbstractGame>.Instance;
+            return (game != null) && game.InRaid || Singleton<IBotGame>.Instantiated;
         }
 
         public static string GetCurrentMapInternalName()
