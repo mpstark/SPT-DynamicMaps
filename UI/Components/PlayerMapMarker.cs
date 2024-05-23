@@ -43,7 +43,8 @@ namespace DynamicMaps.UI.Components
                                              Vector2 size, float degreesRotation, float scale)
         {
             var name = $"{player.Profile.Nickname}";
-            var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, color, player.Position,
+            var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, color,
+                                                 MathUtils.ConvertToMapPosition(player.Position),
                                                  size, _pivot, degreesRotation, scale);
             marker.IsDynamic = true;
             marker.Player = player;

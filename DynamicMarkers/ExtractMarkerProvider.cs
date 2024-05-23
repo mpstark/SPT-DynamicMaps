@@ -29,19 +29,15 @@ namespace DynamicMaps.DynamicMarkers
 
                 // subscribe to status changes while map is shown
                 exfil.OnStatusChanged += UpdateExfilStatus;
-                Plugin.Log.LogInfo($"Subscribed to {exfil.Settings.Name.BSGLocalized()}");
             }
         }
 
         public void OnHideInRaid(MapView map)
         {
-            Plugin.Log.LogInfo($"OnHideInRaid");
-
             // unsubscribe from updates while map is hidden
             foreach (var exfil in _extractMarkers.Keys)
             {
                 exfil.OnStatusChanged -= UpdateExfilStatus;
-                Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.BSGLocalized()}");
             }
         }
 
@@ -74,15 +70,12 @@ namespace DynamicMaps.DynamicMarkers
             {
                 case EExfiltrationStatus.NotPresent:
                     marker.Color = Color.red;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to red");
                     break;
                 case EExfiltrationStatus.UncompleteRequirements:
                     marker.Color = Color.yellow;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to yellow");
                     return;
                 default:
                     marker.Color = Color.green;
-                    Plugin.Log.LogInfo($"Changed {exfil.Settings.Name.BSGLocalized()} to green");
                     break;
             }
         }
@@ -114,7 +107,6 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             exfil.OnStatusChanged -= UpdateExfilStatus;
-            Plugin.Log.LogInfo($"Unsubscribed from {exfil.Settings.Name.BSGLocalized()}");
 
             _extractMarkers[exfil].ContainingMapView.RemoveMapMarker(_extractMarkers[exfil]);
             _extractMarkers.Remove(exfil);

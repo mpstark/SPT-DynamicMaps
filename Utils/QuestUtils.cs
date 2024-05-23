@@ -57,6 +57,8 @@ namespace DynamicMaps.Utils
         {
             if (TriggersWithIds == null || QuestItems == null)
             {
+                Plugin.Log.LogWarning($"TriggersWithIds null: {TriggersWithIds == null} or QuestItems null: {QuestItems == null}");
+                Plugin.Log.LogWarning($"On condition: {conditionDescription}");
                 yield break;
             }
 
@@ -152,6 +154,7 @@ namespace DynamicMaps.Utils
         {
             if (TriggersWithIds == null)
             {
+                Plugin.Log.LogWarning($"TriggersWithIds is null, cannot search for quest zone for {questName} and {conditionDescription}");
                 yield break;
             }
 
@@ -175,6 +178,7 @@ namespace DynamicMaps.Utils
         {
             if (QuestItems == null)
             {
+                Plugin.Log.LogWarning($"QuestItems is null, cannot search for quest items for {questName} and {conditionDescription}");
                 yield break;
             }
 
@@ -201,18 +205,26 @@ namespace DynamicMaps.Utils
             // TODO: Template.Conditions is a GClass reference
             if (quest?.Template?.Conditions == null)
             {
+                Plugin.Log.LogWarning($"GetIncompleteQuestConditions: Template.Conditions has null, skipping quest");
                 yield break;
             }
 
             // TODO: conditions is a GClass reference
             if (!quest.Template.Conditions.TryGetValue(EQuestStatus.AvailableForFinish, out var conditions) || conditions == null)
             {
+                Plugin.Log.LogWarning($"Quest {quest.Template.NameLocaleKey.BSGLocalized()} doesn't have conditions marked AvailableForFinish, skipping it");
                 yield break;
             }
 
             foreach (var condition in conditions)
             {
-                if (condition == null || quest.CompletedConditions.Contains(condition.id))
+                if (condition == null)
+                {
+                    Plugin.Log.LogWarning($"Quest {quest.Template.NameLocaleKey.BSGLocalized()} has null condition, skipping it");
+                    continue;
+                }
+
+                if (quest.CompletedConditions.Contains(condition.id))
                 {
                     continue;
                 }
@@ -229,7 +241,13 @@ namespace DynamicMaps.Utils
 
             foreach (var quest in questsList)
             {
-                if (quest?.Template?.Conditions == null || quest.Status != EQuestStatus.Started)
+                if (quest?.Template?.Conditions == null)
+                {
+                    Plugin.Log.LogWarning($"quest?.Template?.Conditions == null, skipping quest with id: {quest.Id}");
+                    continue;
+                }
+
+                if (quest.Status != EQuestStatus.Started)
                 {
                     continue;
                 }
@@ -243,6 +261,5 @@ namespace DynamicMaps.Utils
         {
             return triggerWithIds.OfType<T>().Where(t => t.Id == zoneId);
         }
-
     }
 }

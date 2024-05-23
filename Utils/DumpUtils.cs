@@ -13,8 +13,6 @@ namespace DynamicMaps.Utils
     {
         public static void DumpExtracts()
         {
-            Plugin.Log.LogInfo("Trying to dump extracts");
-
             var gameWorld = Singleton<GameWorld>.Instance;
             var scavExfils = gameWorld.ExfiltrationController.ScavExfiltrationPoints;
             var pmcExfils = gameWorld.ExfiltrationController.ExfiltrationPoints;

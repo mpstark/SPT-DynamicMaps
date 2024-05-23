@@ -8,6 +8,7 @@ using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace DynamicMaps.UI
 {
@@ -190,11 +191,18 @@ namespace DynamicMaps.UI
 
         internal void OnRaidEnd()
         {
-            Plugin.Log.LogInfo($"OnRaidEnd");
-
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnRaidEnd(_mapView);
+                try
+                {
+                    dynamicProvider.OnRaidEnd(_mapView);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in OnRaidEnd");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
         }
 
@@ -229,7 +237,16 @@ namespace DynamicMaps.UI
 
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnShowInRaid(_mapView, mapInternalName);
+                try
+                {
+                    dynamicProvider.OnShowInRaid(_mapView, mapInternalName);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in OnShowInRaid");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
 
             // rest of this function needs player
@@ -251,7 +268,16 @@ namespace DynamicMaps.UI
         {
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnHideInRaid(_mapView);
+                try
+                {
+                    dynamicProvider.OnHideInRaid(_mapView);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in OnHideInRaid");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
         }
 
@@ -276,7 +302,16 @@ namespace DynamicMaps.UI
 
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnShowOutOfRaid(_mapView);
+                try
+                {
+                    dynamicProvider.OnShowOutOfRaid(_mapView);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in OnShowOutOfRaid");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
         }
 
@@ -284,7 +319,16 @@ namespace DynamicMaps.UI
         {
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnHideOutOfRaid(_mapView);
+                try
+                {
+                    dynamicProvider.OnHideOutOfRaid(_mapView);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in OnHideOutOfRaid");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
         }
 
@@ -328,7 +372,16 @@ namespace DynamicMaps.UI
 
             foreach (var dynamicProvider in _dynamicMarkerProviders)
             {
-                dynamicProvider.OnMapChanged(_mapView, mapDef);
+                try
+                {
+                    dynamicProvider.OnMapChanged(_mapView, mapDef);
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in ChangeMap");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
+                }
             }
         }
     }
