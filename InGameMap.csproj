@@ -117,24 +117,25 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <ItemGroup>
       <OutputDLL Include="$(ProjectDir)$(OutDir)$(TargetName).dll" />
+      <License Include="$(ProjectDir)LICENSE.txt" />
       <Resources Include="$(ProjectDir)Resources\**\*.*" />
     </ItemGroup>
 
     <!-- Copies the output and resources to tarkov game folder -->
     <Copy
-      SourceFiles="@(OutputDLL);@(Resources)"
+      SourceFiles="@(OutputDLL);@(Resources);@(License)"
       DestinationFolder="$(TarkovDir)BepInEx\plugins\InGameMap\%(RecursiveDir)"
     />
     <Copy
-      SourceFiles="@(OutputDLL);@(Resources)"
+      SourceFiles="@(OutputDLL);@(Resources);@(License)"
       DestinationFolder="$(TarkovDebugDir)BepinEx\plugins\InGameMap\%(RecursiveDir)"
     />
 
     <!-- Creates a release zip file -->
     <RemoveDir Directories="$(ProjectDir)release" />
     <Copy
-      SourceFiles="@(OutputDLL);@(Resources)"
-      DestinationFolder="$(ProjectDir)release\InGameMap\BepInEx\plugins\InGameMap"
+      SourceFiles="@(OutputDLL);@(Resources);@(License)"
+      DestinationFolder="$(ProjectDir)release\InGameMap\BepInEx\plugins\InGameMap\%(RecursiveDir)"
     />
     <ZipDirectory
       SourceDirectory="$(ProjectDir)release\InGameMap\"
