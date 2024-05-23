@@ -23,8 +23,11 @@ namespace DynamicMaps.Utils
 
         public static bool IsInRaid()
         {
-            var game = Singleton<AbstractGame>.Instance;
-            return (game != null) && game.InRaid;
+            return Singleton<IBotGame>.Instantiated;
+
+            // this does not work under older versions of FIKA
+            // var game = Singleton<AbstractGame>.Instance;
+            // return (game != null) && game.InRaid;
         }
 
         public static string GetCurrentMapInternalName()
@@ -46,10 +49,8 @@ namespace DynamicMaps.Utils
 
         public static bool IsScavRaid()
         {
-            var game = Singleton<AbstractGame>.Instance;
             var player = GetMainPlayer();
-            return (game != null) && game.InRaid
-                && (player != null) && player.Side == EPlayerSide.Savage;
+            return IsInRaid() && (player != null) && player.Side == EPlayerSide.Savage;
         }
 
         public static string BSGLocalized(this string id)

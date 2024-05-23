@@ -25,6 +25,7 @@
 
 #### Better and Clearer Icons
 
+- Add airdrop icon
 - Add button icon for interactable
 - Add console icon for interactable
 - Add keycard door icon, locked/with card
