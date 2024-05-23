@@ -126,7 +126,10 @@ namespace DynamicMaps.UI
             var scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0f)
             {
-                OnScroll(scroll);
+                if (!_mapSelectDropdown.isActiveAndEnabled || !_mapSelectDropdown.IsDropdownOpen())
+                {
+                    OnScroll(scroll);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Semicolon))

@@ -126,6 +126,11 @@ namespace DynamicMaps.UI.Controls
             _dropdown.UpdateValue(_selectableMapDefs.IndexOf(mapDef));
         }
 
+        public bool IsDropdownOpen()
+        {
+            return _dropdown.CurrentState;
+        }
+
         public void TryCloseDropdown()
         {
             _dropdown.Close();
