@@ -185,49 +185,56 @@
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -134.26001, "y": 419.8, "z": -2.37 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "ZB-016",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -389.159973, "y": 11.0449905, "z": 4.147001 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "ZB-014",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 447.659973, "y": 57.46, "z": -13.46346 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "UN Roadblock",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -527.8743, "y": 288.2304, "z": 1.68126917 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "Bridge V-Ex",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -484.5639, "y": -506.413239, "z": 15.5812693 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "Outskirts",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": 347.315643, "y": 347.0304, "z": -9.148731 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "Northern UN Roadblock",
             "ImagePath": "Markers/exit.png",
             "Position": { "x": -561.1143, "y": -58.7096, "z": 9.321269 },
             "Color": { "r": 0.0, "g": 1.0, "b": 0.0, "a": 1.0 },
-            "Category": "Extract"
+            "Category": "Extract",
+            "ShowInRaid": false
         },
         {
             "Text": "Yotota Car",
