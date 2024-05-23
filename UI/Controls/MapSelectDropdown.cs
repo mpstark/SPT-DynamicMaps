@@ -112,6 +112,12 @@ namespace DynamicMaps.UI.Controls
         public void FilterByInternalMapName(string internalMapName)
         {
             _nameFilter = internalMapName;
+            if (FilteredMapDefs().FirstOrDefault() == null)
+            {
+                _nameFilter = "";
+                Plugin.Log.LogWarning($"Cannot filter by {internalMapName}, no MapDefs match that map");
+            }
+
             ChangeAvailableMapDefs(FilteredMapDefs());
         }
 

@@ -24,7 +24,12 @@ namespace DynamicMaps.Utils
         public static bool IsInRaid()
         {
             var game = Singleton<AbstractGame>.Instance;
-            return ((game != null) && game.InRaid) || Singleton<IBotGame>.Instantiated;
+            var botGame = Singleton<IBotGame>.Instance;
+
+            return ((game != null) && game.InRaid)
+                || ((botGame != null) && botGame.Status != GameStatus.Stopped
+                                      && botGame.Status != GameStatus.Stopping
+                                      && botGame.Status != GameStatus.SoftStopping);
         }
 
         public static string GetCurrentMapInternalName()
