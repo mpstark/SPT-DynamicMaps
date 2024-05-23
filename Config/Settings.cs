@@ -9,23 +9,23 @@ namespace DynamicMaps.Config
         public static ConfigFile Config;
         public static List<ConfigEntryBase> ConfigEntries = new List<ConfigEntryBase>();
 
-        public const string GeneralTitle = "1. General";
-        public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
+        // public const string GeneralTitle = "1. General";
+        // public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
 
         public static void Init(ConfigFile Config)
         {
-            Settings.Config = Config;
+            // Settings.Config = Config;
 
-            ConfigEntries.Add(KeyboardShortcut = Config.Bind(
-                GeneralTitle,
-                "Keyboard Shortcut",
-                new KeyboardShortcut(UnityEngine.KeyCode.M),
-                new ConfigDescription(
-                    "The keyboard shortcut to open the map",
-                    null,
-                    new ConfigurationManagerAttributes { })));
+            // ConfigEntries.Add(KeyboardShortcut = Config.Bind(
+            //     GeneralTitle,
+            //     "Keyboard Shortcut",
+            //     new KeyboardShortcut(UnityEngine.KeyCode.M),
+            //     new ConfigDescription(
+            //         "The keyboard shortcut to open the map",
+            //         null,
+            //         new ConfigurationManagerAttributes { })));
 
-            RecalcOrder();
+            // RecalcOrder();
         }
 
         private static void RecalcOrder()

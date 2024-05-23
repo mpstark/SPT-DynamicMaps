@@ -20,7 +20,8 @@ namespace DynamicMaps
 
         internal void Awake()
         {
-            Settings.Init(Config);
+            // TODO: implement config
+            // Settings.Init(Config);
             // Config.SettingChanged += (x, y) => DynamicMaps?.ReadConfig();
 
             Instance = this;
