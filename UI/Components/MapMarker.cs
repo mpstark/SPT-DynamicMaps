@@ -16,17 +16,17 @@ namespace DynamicMaps.UI.Components
             = new Dictionary<string, Dictionary<LayerStatus, float>>
             {
                 {"Extract", new Dictionary<LayerStatus, float> {
-                    {LayerStatus.Hidden, 0.25f},
-                    {LayerStatus.Underneath, 0.50f},
+                    {LayerStatus.Hidden, 0.50f},
+                    {LayerStatus.Underneath, 0.75f},
                     {LayerStatus.OnTop, 1.0f},
                     {LayerStatus.FullReveal, 1.0f},
                 }},
                 {"Quest", new Dictionary<LayerStatus, float> {
-                    {LayerStatus.Hidden, 0.25f},
-                    {LayerStatus.Underneath, 0.50f},
+                    {LayerStatus.Hidden, 0.50f},
+                    {LayerStatus.Underneath, 0.75f},
                     {LayerStatus.OnTop, 1.0f},
                     {LayerStatus.FullReveal, 1.0f},
-                }}
+                }},
             };
         public static Dictionary<string, Dictionary<LayerStatus, float>> CategoryLabelAlphaLayerStatus { get; protected set; }
             = new Dictionary<string, Dictionary<LayerStatus, float>>

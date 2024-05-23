@@ -72,18 +72,18 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // set category and color
-            var category = "scav";
+            var category = "Scav";
             var color = Color.Lerp(Color.red, Color.yellow, 0.5f);
             var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
             if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
             {
                 color = Color.blue;
-                category = "allied-player";
+                category = "Allied Player";
             }
             else if (player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec)
             {
                 color = Color.red;
-                category = "enemy-player";
+                category = "Enemy Player";
             }
 
             // try adding marker

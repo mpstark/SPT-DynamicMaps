@@ -21,14 +21,12 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnMapChanged(MapView map, MapDef mapDef)
         {
-            if (!GameUtils.IsInRaid())
-            {
-                TryRemoveMarker();
-                return;
-            }
-
             TryRemoveMarker();
-            TryAddMarker(map);
+
+            if (GameUtils.IsInRaid())
+            {
+                TryAddMarker(map);
+            }
         }
 
         private void TryAddMarker(MapView map)
@@ -45,7 +43,7 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // try adding the marker
-            _playerMarker = map.AddPlayerMarker(player, "player", Color.green);
+            _playerMarker = map.AddPlayerMarker(player, "Player", Color.green);
         }
 
         private void TryRemoveMarker()
