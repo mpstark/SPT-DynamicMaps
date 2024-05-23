@@ -290,6 +290,21 @@ namespace DynamicMaps.UI
 
         private void OnScroll(float scrollAmount)
         {
+            // TODO: add config for this
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (scrollAmount > 0)
+                {
+                    _levelSelectSlider.ChangeLevelBy(1);
+                }
+                else
+                {
+                    _levelSelectSlider.ChangeLevelBy(-1);
+                }
+
+                return;
+            }
+
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
 

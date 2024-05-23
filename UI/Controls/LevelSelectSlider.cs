@@ -136,7 +136,7 @@ namespace DynamicMaps.UI.Controls
             }
         }
 
-        private void ChangeLevelBy(int delta)
+        public void ChangeLevelBy(int delta)
         {
             var newIndex = _levels.IndexOf(_selectedLevel) + delta;
             if (newIndex < 0 || newIndex >= _levels.Count)
