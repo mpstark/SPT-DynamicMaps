@@ -174,10 +174,12 @@ namespace DynamicMaps.UI
 
             if (GameUtils.IsInRaid())
             {
+                Plugin.Log.LogInfo("Showing map in raid");
                 OnShowInRaid();
             }
             else
             {
+                Plugin.Log.LogInfo("Showing map out-of-raid");
                 OnShowOutOfRaid();
             }
         }
