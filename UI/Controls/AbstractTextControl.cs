@@ -1,8 +1,8 @@
-using InGameMap.Utils;
+using DynamicMaps.Utils;
 using TMPro;
 using UnityEngine;
 
-namespace InGameMap.UI.Controls
+namespace DynamicMaps.UI.Controls
 {
     public abstract class AbstractTextControl : MonoBehaviour
     {

@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Comfort.Common;
 using EFT.UI;
-using InGameMap.Data;
-using InGameMap.DynamicMarkers;
-using InGameMap.UI.Components;
-using InGameMap.UI.Controls;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.DynamicMarkers;
+using DynamicMaps.UI.Components;
+using DynamicMaps.UI.Controls;
+using DynamicMaps.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGameMap.UI
+namespace DynamicMaps.UI
 {
     public class ModdedMapScreen : MonoBehaviour
     {

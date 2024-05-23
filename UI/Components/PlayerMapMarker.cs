@@ -1,9 +1,9 @@
 using System;
 using EFT;
-using InGameMap.Utils;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap.UI.Components
+namespace DynamicMaps.UI.Components
 {
     public class PlayerMapMarker : MapMarker
     {

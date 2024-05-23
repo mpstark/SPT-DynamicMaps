@@ -2,14 +2,14 @@
 using BepInEx;
 using BepInEx.Logging;
 using EFT.UI.Map;
-using InGameMap.Config;
-using InGameMap.Patches;
-using InGameMap.UI;
+using DynamicMaps.Config;
+using DynamicMaps.Patches;
+using DynamicMaps.UI;
 
-namespace InGameMap
+namespace DynamicMaps
 {
     // the version number here is generated on build and may have a warning if not yet built
-    [BepInPlugin("com.mpstark.InGameMap", "InGameMap", BuildInfo.Version)]
+    [BepInPlugin("com.mpstark.DynamicMaps", "DynamicMaps", BuildInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance;
@@ -21,7 +21,7 @@ namespace InGameMap
         internal void Awake()
         {
             Settings.Init(Config);
-            // Config.SettingChanged += (x, y) => InGameMap?.ReadConfig();
+            // Config.SettingChanged += (x, y) => DynamicMaps?.ReadConfig();
 
             Instance = this;
 

@@ -1,7 +1,7 @@
-using InGameMap.Data;
-using InGameMap.UI.Components;
+using DynamicMaps.Data;
+using DynamicMaps.UI.Components;
 
-namespace InGameMap.DynamicMarkers
+namespace DynamicMaps.DynamicMarkers
 {
     public interface IDynamicMarkerProvider
     {

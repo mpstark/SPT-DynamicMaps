@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using InGameMap.Data;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.Utils;
 using TMPro;
 using UnityEngine;
 
-namespace InGameMap.UI.Components
+namespace DynamicMaps.UI.Components
 {
     public class MapLabel : MonoBehaviour, ILayerBound
     {

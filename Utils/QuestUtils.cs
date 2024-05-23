@@ -5,10 +5,10 @@ using EFT;
 using EFT.Interactive;
 using EFT.Quests;
 using HarmonyLib;
-using InGameMap.Data;
+using DynamicMaps.Data;
 using UnityEngine;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     // NOTE: Most of this is adapted from work done for Prop's GTFO mod (https://github.com/dvize/GTFO)
     // this likely does not count as a "substantial portion" of the software

@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using InGameMap.Data;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace InGameMap.UI.Components
+namespace DynamicMaps.UI.Components
 {
     public class MapMarker : MonoBehaviour, ILayerBound, IPointerEnterHandler, IPointerExitHandler
     {

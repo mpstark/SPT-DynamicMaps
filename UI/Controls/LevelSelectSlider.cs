@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using EFT.UI;
-using InGameMap.Data;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGameMap.UI.Controls
+namespace DynamicMaps.UI.Controls
 {
     public class LevelSelectSlider : MonoBehaviour
     {

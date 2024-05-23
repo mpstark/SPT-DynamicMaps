@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InGameMap.UI.Controls
+namespace DynamicMaps.UI.Controls
 {
     public class CursorPositionText : AbstractTextControl
     {

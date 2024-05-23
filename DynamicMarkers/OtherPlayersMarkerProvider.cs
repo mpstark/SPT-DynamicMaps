@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
 using EFT;
-using InGameMap.Data;
-using InGameMap.UI.Components;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.UI.Components;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap.DynamicMarkers
+namespace DynamicMaps.DynamicMarkers
 {
     public class OtherPlayersMarkerProvider : IDynamicMarkerProvider
     {

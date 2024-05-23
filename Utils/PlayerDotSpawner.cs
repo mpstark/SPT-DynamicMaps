@@ -1,9 +1,9 @@
-using InGameMap.Data;
-using InGameMap.UI.Components;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.UI.Components;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap
+namespace DynamicMaps
 {
     public class PlayerDotSpawner : MonoBehaviour
     {

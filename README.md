@@ -34,7 +34,7 @@ There is no current configuration.
 
 ## Installation
 
-[Releases are here](https://github.com/mpstark/SPT-InGameMap/releases). Open zip file and drag `BepInEx` folder into root of your SPT-AKI install.
+[Releases are here](https://github.com/mpstark/SPT-DynamicMaps/releases). Open zip file and drag `BepInEx` folder into root of your SPT-AKI install.
 
 ## License
 

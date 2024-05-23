@@ -3,7 +3,7 @@ using Aki.Reflection.Patching;
 using EFT.UI.Map;
 using HarmonyLib;
 
-namespace InGameMap.Patches
+namespace DynamicMaps.Patches
 {
     internal class MapScreenShowPatch : ModulePatch
     {

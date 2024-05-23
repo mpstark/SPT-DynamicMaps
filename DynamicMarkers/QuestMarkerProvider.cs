@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using InGameMap.Data;
-using InGameMap.DynamicMarkers;
-using InGameMap.UI.Components;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.DynamicMarkers;
+using DynamicMaps.UI.Components;
+using DynamicMaps.Utils;
 
-namespace InGameMap
+namespace DynamicMaps
 {
     public class QuestMarkerProvider : IDynamicMarkerProvider
     {

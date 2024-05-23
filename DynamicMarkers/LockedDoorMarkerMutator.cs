@@ -1,11 +1,11 @@
 using System.IO;
 using System.Linq;
-using InGameMap.Data;
-using InGameMap.UI.Components;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.UI.Components;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap.DynamicMarkers
+namespace DynamicMaps.DynamicMarkers
 {
     public class LockedDoorMarkerMutator : IDynamicMarkerProvider
     {

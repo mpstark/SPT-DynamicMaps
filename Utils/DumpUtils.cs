@@ -3,11 +3,11 @@ using System.IO;
 using Comfort.Common;
 using EFT;
 using EFT.Interactive;
-using InGameMap.Data;
+using DynamicMaps.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     public static class DumpUtils
     {

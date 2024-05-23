@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     public static class MathUtils
     {

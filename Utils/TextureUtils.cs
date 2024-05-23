@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     public static class TextureUtils
     {

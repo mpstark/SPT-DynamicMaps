@@ -1,7 +1,7 @@
-using InGameMap.Utils;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap.UI.Controls
+namespace DynamicMaps.UI.Controls
 {
     public class PlayerPositionText : AbstractTextControl
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EFT.UI;
-using InGameMap.Data;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.Utils;
 using UnityEngine;
 
-namespace InGameMap.UI.Controls
+namespace DynamicMaps.UI.Controls
 {
     public class MapSelectDropdown : MonoBehaviour
     {

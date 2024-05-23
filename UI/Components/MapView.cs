@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using EFT;
-using InGameMap.Data;
-using InGameMap.Utils;
+using DynamicMaps.Data;
+using DynamicMaps.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGameMap.UI.Components
+namespace DynamicMaps.UI.Components
 {
     public class MapView : MonoBehaviour
     {

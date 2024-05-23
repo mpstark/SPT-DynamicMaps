@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace InGameMap.Data
+namespace DynamicMaps.Data
 {
     public class BoundingRectangle
     {

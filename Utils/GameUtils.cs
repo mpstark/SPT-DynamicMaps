@@ -6,7 +6,7 @@ using Comfort.Common;
 using EFT;
 using HarmonyLib;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     public static class GameUtils
     {

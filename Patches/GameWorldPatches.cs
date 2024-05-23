@@ -2,9 +2,9 @@ using System.Reflection;
 using Aki.Reflection.Patching;
 using EFT;
 using HarmonyLib;
-using InGameMap.Utils;
+using DynamicMaps.Utils;
 
-namespace InGameMap.Patches
+namespace DynamicMaps.Patches
 {
     internal class GameWorldOnGameStartedPatch : ModulePatch
     {

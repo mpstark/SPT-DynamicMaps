@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGameMap.Utils
+namespace DynamicMaps.Utils
 {
     public static class UIUtils
     {

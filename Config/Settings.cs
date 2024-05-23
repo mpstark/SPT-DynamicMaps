@@ -2,7 +2,7 @@
 using BepInEx.Configuration;
 
 // THIS IS HEAVILY BASED ON DRAKIAXYZ'S SPT-QuickMoveToContainer
-namespace InGameMap.Config
+namespace DynamicMaps.Config
 {
     internal class Settings
     {
