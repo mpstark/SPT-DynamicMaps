@@ -58,7 +58,6 @@ namespace DynamicMaps.Utils
             if (TriggersWithIds == null || QuestItems == null)
             {
                 Plugin.Log.LogWarning($"TriggersWithIds null: {TriggersWithIds == null} or QuestItems null: {QuestItems == null}");
-                Plugin.Log.LogWarning($"On condition: {conditionDescription}");
                 yield break;
             }
 
@@ -90,7 +89,7 @@ namespace DynamicMaps.Utils
                 }
                 case ConditionLaunchFlare location:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId<PlaceItemTrigger>(location.id, questName, conditionDescription))
+                    foreach (var marker in GetMarkerDefsForZoneId<PlaceItemTrigger>(location.zoneID, questName, conditionDescription))
                     {
                         yield return marker;
                     }

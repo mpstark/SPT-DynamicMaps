@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DynamicMaps.Data;
 using DynamicMaps.DynamicMarkers;
@@ -49,18 +50,28 @@ namespace DynamicMaps
 
             foreach (var quest in quests)
             {
-                var conditions = QuestUtils.GetIncompleteQuestConditions(quest);
-                foreach (var condition in conditions)
-                {
-                    var markerDefs = QuestUtils.GetMarkerDefsForCondition(condition,
-                        quest.Template.NameLocaleKey.BSGLocalized(),
-                        condition.id.BSGLocalized());
+                var questName = quest.Template.NameLocaleKey.BSGLocalized();
 
-                    foreach (var markerDef in markerDefs)
+                try
+                {
+                    var conditions = QuestUtils.GetIncompleteQuestConditions(quest);
+                    foreach (var condition in conditions)
                     {
-                        var marker = map.AddMapMarker(markerDef);
-                        _questMarkers.Add(marker);
+                        var conditionName = condition.id.BSGLocalized();
+
+                        var markerDefs = QuestUtils.GetMarkerDefsForCondition(condition, questName, conditionName);
+                        foreach (var markerDef in markerDefs)
+                        {
+                            var marker = map.AddMapMarker(markerDef);
+                            _questMarkers.Add(marker);
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Plugin.Log.LogError($"Caught exception trying to add conditions for quest with quest: {questName}");
+                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
+                    Plugin.Log.LogError($"  {e.StackTrace}");
                 }
             }
         }
