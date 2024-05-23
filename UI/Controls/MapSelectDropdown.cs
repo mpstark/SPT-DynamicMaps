@@ -125,5 +125,10 @@ namespace InGameMap.UI.Controls
         {
             _dropdown.UpdateValue(_selectableMapDefs.IndexOf(mapDef));
         }
+
+        public void TryCloseDropdown()
+        {
+            _dropdown.Close();
+        }
     }
 }

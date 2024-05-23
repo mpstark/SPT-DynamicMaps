@@ -147,6 +147,8 @@ namespace InGameMap.UI
 
         private void OnDisable()
         {
+            _mapSelectDropdown?.TryCloseDropdown();
+
             // close isn't called when hidden
             if (GameUtils.IsInRaid())
             {
