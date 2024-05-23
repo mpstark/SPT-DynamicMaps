@@ -18,6 +18,7 @@ namespace DynamicMaps
                 return;
             }
 
+            QuestUtils.TryCaptureQuestData();
             AddQuestObjectiveMarkers(map);
         }
 
@@ -40,6 +41,7 @@ namespace DynamicMaps
 
         public void OnRaidEnd(MapView map)
         {
+            QuestUtils.DiscardQuestData();
             RemoveAllMarkers();
         }
 

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Comfort.Common;
+using DynamicMaps.Data;
 using EFT;
 using EFT.Interactive;
 using EFT.Quests;
 using HarmonyLib;
-using DynamicMaps.Data;
 using UnityEngine;
 
 namespace DynamicMaps.Utils
@@ -27,17 +28,26 @@ namespace DynamicMaps.Utils
         public static List<TriggerWithId> TriggersWithIds;
         public static List<LootItem> QuestItems;
 
-        internal static void OnGameStarted(GameWorld gameWorld)
+        internal static void TryCaptureQuestData()
         {
-            TriggersWithIds = GameObject.FindObjectsOfType<TriggerWithId>().ToList();
-            QuestItems = Traverse.Create(gameWorld)
-                .Field("LootItems")
-                .Field("list_0")
-                .GetValue<List<LootItem>>()
-                .Where(i => i.Item.QuestItem).ToList();
+            var gameWorld = Singleton<GameWorld>.Instance;
+
+            if (TriggersWithIds == null)
+            {
+                TriggersWithIds = GameObject.FindObjectsOfType<TriggerWithId>().ToList();
+            }
+
+            if (QuestItems == null)
+            {
+                QuestItems = Traverse.Create(gameWorld)
+                    .Field("LootItems")
+                    .Field("list_0")
+                    .GetValue<List<LootItem>>()
+                    .Where(i => i.Item.QuestItem).ToList();
+            }
         }
 
-        internal static void OnGameEnded()
+        internal static void DiscardQuestData()
         {
             if (TriggersWithIds != null)
             {
@@ -65,7 +75,7 @@ namespace DynamicMaps.Utils
             {
                 case ConditionLeaveItemAtLocation location:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId<PlaceItemTrigger>(location.zoneId, questName, conditionDescription))
+                    foreach (var marker in GetMarkerDefsForZoneId(location.zoneId, questName, conditionDescription))
                     {
                         yield return marker;
                     }
@@ -73,7 +83,7 @@ namespace DynamicMaps.Utils
                 }
                 case ConditionPlaceBeacon beacon:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId<PlaceItemTrigger>(beacon.zoneId, questName, conditionDescription))
+                    foreach (var marker in GetMarkerDefsForZoneId(beacon.zoneId, questName, conditionDescription))
                     {
                         yield return marker;
                     }
@@ -89,7 +99,7 @@ namespace DynamicMaps.Utils
                 }
                 case ConditionLaunchFlare location:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId<PlaceItemTrigger>(location.zoneID, questName, conditionDescription))
+                    foreach (var marker in GetMarkerDefsForZoneId(location.zoneID, questName, conditionDescription))
                     {
                         yield return marker;
                     }
@@ -123,7 +133,7 @@ namespace DynamicMaps.Utils
                 {
                     case ConditionVisitPlace place:
                     {
-                        foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(place.target, questName, conditionDescription))
+                        foreach (var marker in GetMarkerDefsForZoneId(place.target, questName, conditionDescription))
                         {
                             yield return marker;
                         }
@@ -133,7 +143,7 @@ namespace DynamicMaps.Utils
                     {
                         foreach (var zoneId in zone.zoneIds)
                         {
-                            foreach (var marker in GetMarkerDefsForZoneId<ExperienceTrigger>(zoneId, questName, conditionDescription))
+                            foreach (var marker in GetMarkerDefsForZoneId(zoneId, questName, conditionDescription))
                             {
                                 yield return marker;
                             }
@@ -148,8 +158,7 @@ namespace DynamicMaps.Utils
             }
         }
 
-        private static IEnumerable<MapMarkerDef> GetMarkerDefsForZoneId<T>(string zoneId, string questName, string conditionDescription)
-            where T : TriggerWithId
+        private static IEnumerable<MapMarkerDef> GetMarkerDefsForZoneId(string zoneId, string questName, string conditionDescription)
         {
             if (TriggersWithIds == null)
             {
@@ -157,15 +166,38 @@ namespace DynamicMaps.Utils
                 yield break;
             }
 
-            var zones = TriggersWithIds.GetZoneTriggers<T>(zoneId);
+            var zones = TriggersWithIds.GetZoneTriggers(zoneId);
+            List<Vector3> oldPositions = new List<Vector3>();
             foreach (var zone in zones)
             {
+                // try to remove duplicate zones
+                var isDuplicate = false;
+                var position = MathUtils.ConvertToMapPosition(zone.transform.position);
+                foreach (var oldPosition in oldPositions)
+                {
+                    // approx equals is a BSG extension method under a GClass
+                    if (oldPosition.x.ApproxEquals(position.x)
+                     && oldPosition.y.ApproxEquals(position.y)
+                     && oldPosition.z.ApproxEquals(position.z))
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (isDuplicate)
+                {
+                    continue;
+                }
+
+                oldPositions.Add(position);
+
                 yield return new MapMarkerDef
                 {
                     Category = "Quest",
                     Color = Color.green,
                     ImagePath = "Markers/quest.png",
-                    Position = MathUtils.ConvertToMapPosition(zone.transform.position),
+                    Position = position,
                     Pivot = new Vector2(0.5f, 0f),
                     Text = questName
                 };
@@ -255,10 +287,9 @@ namespace DynamicMaps.Utils
             }
         }
 
-        private static IEnumerable<T> GetZoneTriggers<T>(this IEnumerable<TriggerWithId> triggerWithIds, string zoneId)
-            where T : TriggerWithId
+        private static IEnumerable<TriggerWithId> GetZoneTriggers(this IEnumerable<TriggerWithId> triggerWithIds, string zoneId)
         {
-            return triggerWithIds.OfType<T>().Where(t => t.Id == zoneId);
+            return triggerWithIds.Where(t => t.Id == zoneId);
         }
     }
 }
