@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DynamicMaps.Data;
 using DynamicMaps.DynamicMarkers;
@@ -48,33 +47,12 @@ namespace DynamicMaps
         private void AddQuestObjectiveMarkers(MapView map)
         {
             var player = GameUtils.GetMainPlayer();
-            var quests = QuestUtils.GetIncompleteQuests(player);
 
-            foreach (var quest in quests)
+            var markerDefs = QuestUtils.GetMarkerDefsForPlayer(player);
+            foreach (var markerDef in markerDefs)
             {
-                var questName = quest.Template.NameLocaleKey.BSGLocalized();
-
-                try
-                {
-                    var conditions = QuestUtils.GetIncompleteQuestConditions(quest);
-                    foreach (var condition in conditions)
-                    {
-                        var conditionName = condition.id.BSGLocalized();
-
-                        var markerDefs = QuestUtils.GetMarkerDefsForCondition(condition, questName, conditionName);
-                        foreach (var markerDef in markerDefs)
-                        {
-                            var marker = map.AddMapMarker(markerDef);
-                            _questMarkers.Add(marker);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Plugin.Log.LogError($"Caught exception trying to add conditions for quest with quest: {questName}");
-                    Plugin.Log.LogError($"  Exception given was: {e.Message}");
-                    Plugin.Log.LogError($"  {e.StackTrace}");
-                }
+                var marker = map.AddMapMarker(markerDef);
+                _questMarkers.Add(marker);
             }
         }
 

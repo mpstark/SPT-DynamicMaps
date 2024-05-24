@@ -62,8 +62,60 @@ namespace DynamicMaps.Utils
             }
         }
 
-        public static IEnumerable<MapMarkerDef> GetMarkerDefsForCondition(Condition condition,
-            string questName, string conditionDescription)
+        public static IEnumerable<MapMarkerDef> GetMarkerDefsForPlayer(Player player)
+        {
+            var markers = new List<MapMarkerDef>();
+
+            var quests = GetIncompleteQuests(player);
+            foreach (var quest in quests)
+            {
+                markers.AddRange(GetMarkerDefsForQuest(quest));
+            }
+
+            return markers;
+        }
+
+        internal static IEnumerable<MapMarkerDef> GetMarkerDefsForQuest(QuestDataClass quest)
+        {
+            var markers = new List<MapMarkerDef>();
+
+            var conditions = GetIncompleteQuestConditions(quest);
+            foreach (var condition in conditions)
+            {
+                var questName = quest.Template.NameLocaleKey.BSGLocalized();
+                var conditionDescription = condition.id.BSGLocalized();
+
+                var positions = GetPositionsForCondition(condition, questName, conditionDescription);
+                foreach (var position in positions)
+                {
+                    var isDuplicate = false;
+
+                    // check against previously created markers for duplicate position
+                    foreach (var marker in markers)
+                    {
+                        if (marker.Position.x.ApproxEquals(position.x)
+                         && marker.Position.y.ApproxEquals(position.y)
+                         && marker.Position.z.ApproxEquals(position.z))
+                        {
+                            isDuplicate = true;
+                            break;
+                        }
+                    }
+
+                    if (isDuplicate)
+                    {
+                        continue;
+                    }
+
+                    markers.Add(CreateQuestMapMarkerDef(position, questName, conditionDescription));
+                }
+            }
+
+            return markers;
+        }
+
+        internal static IEnumerable<Vector3> GetPositionsForCondition(Condition condition, string questName,
+                                                                    string conditionDescription)
         {
             if (TriggersWithIds == null || QuestItems == null)
             {
@@ -73,43 +125,67 @@ namespace DynamicMaps.Utils
 
             switch (condition)
             {
-                case ConditionLeaveItemAtLocation location:
+                case ConditionZone zoneCondition:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId(location.zoneId, questName, conditionDescription))
+                    foreach (var position in GetPositionsForZoneId(zoneCondition.zoneId, questName, conditionDescription))
                     {
-                        yield return marker;
+                        yield return position;
                     }
                     break;
                 }
-                case ConditionPlaceBeacon beacon:
+                case ConditionLaunchFlare flareCondition:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId(beacon.zoneId, questName, conditionDescription))
+                    foreach (var position in GetPositionsForZoneId(flareCondition.zoneID, questName, conditionDescription))
                     {
-                        yield return marker;
+                        yield return position;
                     }
                     break;
                 }
-                case ConditionFindItem findItem:
+                case ConditionVisitPlace place:
                 {
-                    foreach (var marker in GetMarkerDefsForQuestItems(findItem.target, questName, conditionDescription))
+                    foreach (var position in GetPositionsForZoneId(place.target, questName, conditionDescription))
                     {
-                        yield return marker;
+                        yield return position;
                     }
                     break;
                 }
-                case ConditionLaunchFlare location:
+                case ConditionInZone zone:
                 {
-                    foreach (var marker in GetMarkerDefsForZoneId(location.zoneID, questName, conditionDescription))
+                    foreach (var zoneId in zone.zoneIds)
                     {
-                        yield return marker;
+                        foreach (var position in GetPositionsForZoneId(zoneId, questName, conditionDescription))
+                        {
+                            yield return position;
+                        }
                     }
                     break;
                 }
-                case ConditionCounterCreator creator:
+                case ConditionFindItem findItemCondition:
                 {
-                    foreach (var marker in GetMarkerDefsForConditionCounter(creator, questName, conditionDescription))
+                    foreach (var position in GetPositionsForQuestItems(findItemCondition.target, questName, conditionDescription))
                     {
-                        yield return marker;
+                        yield return position;
+                    }
+                    break;
+                }
+                case ConditionExitName exitCondition:
+                {
+                    var exfils = Singleton<GameWorld>.Instance.ExfiltrationController.ExfiltrationPoints;
+                    var specifiedExit = exfils.FirstOrDefault(e => e.Settings.Name == exitCondition.exitName);
+
+                    if (specifiedExit != null)
+                    {
+                        yield return MathUtils.ConvertToMapPosition(specifiedExit.transform);
+                    }
+
+                    break;
+                }
+                case ConditionCounterCreator conditionCreator:
+                {
+                    // this will recurse back into this method
+                    foreach (var position in GetPositionsForConditionCreator(conditionCreator, questName, conditionDescription))
+                    {
+                        yield return position;
                     }
                     break;
                 }
@@ -120,45 +196,24 @@ namespace DynamicMaps.Utils
             }
         }
 
-        private static IEnumerable<MapMarkerDef> GetMarkerDefsForConditionCounter(ConditionCounterCreator creator,
-            string questName, string conditionDescription)
+        internal static IEnumerable<Vector3> GetPositionsForConditionCreator(ConditionCounterCreator conditionCreator,
+                                                                            string questName, string conditionDescription)
         {
-            var counter = _conditionCounterTemplateField.GetValue(creator);
+            var counter = _conditionCounterTemplateField.GetValue(conditionCreator);
             var conditions = _templateConditionsConditionsField.GetValue(counter);
             var conditionsList = _conditionListField.GetValue(conditions) as IList<Condition>;
 
-            foreach (var counterCondition in conditionsList)
+            foreach (var condition in conditionsList)
             {
-                switch (counterCondition)
+                foreach (var position in GetPositionsForCondition(condition, questName, conditionDescription))
                 {
-                    case ConditionVisitPlace place:
-                    {
-                        foreach (var marker in GetMarkerDefsForZoneId(place.target, questName, conditionDescription))
-                        {
-                            yield return marker;
-                        }
-                        break;
-                    }
-                    case ConditionInZone zone:
-                    {
-                        foreach (var zoneId in zone.zoneIds)
-                        {
-                            foreach (var marker in GetMarkerDefsForZoneId(zoneId, questName, conditionDescription))
-                            {
-                                yield return marker;
-                            }
-                        }
-                        break;
-                    }
-                    default:
-                    {
-                        break;
-                    }
+                    yield return position;
                 }
             }
         }
 
-        private static IEnumerable<MapMarkerDef> GetMarkerDefsForZoneId(string zoneId, string questName, string conditionDescription)
+        internal static IEnumerable<Vector3> GetPositionsForZoneId(string zoneId, string questName,
+                                                                  string conditionDescription)
         {
             if (TriggersWithIds == null)
             {
@@ -167,45 +222,14 @@ namespace DynamicMaps.Utils
             }
 
             var zones = TriggersWithIds.GetZoneTriggers(zoneId);
-            List<Vector3> oldPositions = new List<Vector3>();
             foreach (var zone in zones)
             {
-                // try to remove duplicate zones
-                var isDuplicate = false;
-                var position = MathUtils.ConvertToMapPosition(zone.transform.position);
-                foreach (var oldPosition in oldPositions)
-                {
-                    // approx equals is a BSG extension method under a GClass
-                    if (oldPosition.x.ApproxEquals(position.x)
-                     && oldPosition.y.ApproxEquals(position.y)
-                     && oldPosition.z.ApproxEquals(position.z))
-                    {
-                        isDuplicate = true;
-                        break;
-                    }
-                }
-
-                if (isDuplicate)
-                {
-                    continue;
-                }
-
-                oldPositions.Add(position);
-
-                yield return new MapMarkerDef
-                {
-                    Category = "Quest",
-                    Color = Color.green,
-                    ImagePath = "Markers/quest.png",
-                    Position = position,
-                    Pivot = new Vector2(0.5f, 0f),
-                    Text = questName
-                };
+                yield return MathUtils.ConvertToMapPosition(zone.transform.position);
             }
         }
 
-        private static IEnumerable<MapMarkerDef> GetMarkerDefsForQuestItems(IEnumerable<string> questItemIds,
-            string questName, string conditionDescription)
+        internal static IEnumerable<Vector3> GetPositionsForQuestItems(IEnumerable<string> questItemIds, string questName,
+                                                                      string conditionDescription)
         {
             if (QuestItems == null)
             {
@@ -218,32 +242,24 @@ namespace DynamicMaps.Utils
                 var questItems = QuestItems.Where(i => i.TemplateId == questItemId);
                 foreach (var item in questItems)
                 {
-                    yield return new MapMarkerDef
-                    {
-                        Category = "Quest",
-                        Color = Color.green,
-                        ImagePath = "Markers/quest.png",
-                        Position = MathUtils.ConvertToMapPosition(item.transform.position),
-                        Pivot = new Vector2(0.5f, 0f),
-                        Text = questName
-                    };
+                    yield return MathUtils.ConvertToMapPosition(item.transform.position);
                 }
             }
         }
 
-        public static IEnumerable<Condition> GetIncompleteQuestConditions(QuestDataClass quest)
+        internal static IEnumerable<Condition> GetIncompleteQuestConditions(QuestDataClass quest)
         {
             // TODO: Template.Conditions is a GClass reference
             if (quest?.Template?.Conditions == null)
             {
-                Plugin.Log.LogWarning($"GetIncompleteQuestConditions: Template.Conditions has null, skipping quest");
+                Plugin.Log.LogError($"GetIncompleteQuestConditions: quest.Template.Conditions is null, skipping quest");
                 yield break;
             }
 
             // TODO: conditions is a GClass reference
             if (!quest.Template.Conditions.TryGetValue(EQuestStatus.AvailableForFinish, out var conditions) || conditions == null)
             {
-                Plugin.Log.LogWarning($"Quest {quest.Template.NameLocaleKey.BSGLocalized()} doesn't have conditions marked AvailableForFinish, skipping it");
+                Plugin.Log.LogError($"Quest {quest.Template.NameLocaleKey.BSGLocalized()} doesn't have conditions marked AvailableForFinish, skipping it");
                 yield break;
             }
 
@@ -255,6 +271,7 @@ namespace DynamicMaps.Utils
                     continue;
                 }
 
+                // filter out completed conditions
                 if (quest.CompletedConditions.Contains(condition.id))
                 {
                     continue;
@@ -267,14 +284,37 @@ namespace DynamicMaps.Utils
         public static IEnumerable<QuestDataClass> GetIncompleteQuests(Player player)
         {
             var questController = _playerQuestControllerField.GetValue(player);
+            if (questController == null)
+            {
+                Plugin.Log.LogError($"Not able to get quests for player: {player.Id}, questController is null");
+                yield break;
+            }
+
             var quests = _questControllerQuestsProperty.GetValue(questController);
+            if (quests == null)
+            {
+                Plugin.Log.LogError($"Not able to get quests for player: {player.Id}, quests is null");
+                yield break;
+            }
+
             var questsList = _questsListField.GetValue(quests) as List<QuestDataClass>;
+            if (questsList == null)
+            {
+                Plugin.Log.LogError($"Not able to get quests for player: {player.Id}, questsList is null");
+                yield break;
+            }
 
             foreach (var quest in questsList)
             {
+                if (quest == null)
+                {
+                    Plugin.Log.LogError($"Skipping a null quest");
+                    continue;
+                }
+
                 if (quest?.Template?.Conditions == null)
                 {
-                    Plugin.Log.LogWarning($"quest?.Template?.Conditions == null, skipping quest with id: {quest.Id}");
+                    Plugin.Log.LogError($"quest?.Template?.Conditions == null, skipping quest with id: {quest.Id}");
                     continue;
                 }
 
@@ -290,6 +330,19 @@ namespace DynamicMaps.Utils
         private static IEnumerable<TriggerWithId> GetZoneTriggers(this IEnumerable<TriggerWithId> triggerWithIds, string zoneId)
         {
             return triggerWithIds.Where(t => t.Id == zoneId);
+        }
+
+        private static MapMarkerDef CreateQuestMapMarkerDef(Vector3 position, string questName, string conditionDescription)
+        {
+            return new MapMarkerDef
+            {
+                Category = "Quest",
+                Color = Color.green,
+                ImagePath = "Markers/quest.png",
+                Position = position,
+                Pivot = new Vector2(0.5f, 0f),
+                Text = questName
+            };
         }
     }
 }
