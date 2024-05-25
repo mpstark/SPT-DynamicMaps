@@ -62,8 +62,14 @@ namespace DynamicMaps.Utils
             }
         }
 
-        public static IEnumerable<MapMarkerDef> GetMarkerDefsForPlayer(Player player)
+        internal static IEnumerable<MapMarkerDef> GetMarkerDefsForPlayer(Player player)
         {
+            if (TriggersWithIds == null || QuestItems == null)
+            {
+                Plugin.Log.LogWarning($"TriggersWithIds null: {TriggersWithIds == null} or QuestItems null: {QuestItems == null}");
+                return null;
+            }
+
             var markers = new List<MapMarkerDef>();
 
             var quests = GetIncompleteQuests(player);
@@ -114,15 +120,9 @@ namespace DynamicMaps.Utils
             return markers;
         }
 
-        internal static IEnumerable<Vector3> GetPositionsForCondition(Condition condition, string questName,
+        private static IEnumerable<Vector3> GetPositionsForCondition(Condition condition, string questName,
                                                                     string conditionDescription)
         {
-            if (TriggersWithIds == null || QuestItems == null)
-            {
-                Plugin.Log.LogWarning($"TriggersWithIds null: {TriggersWithIds == null} or QuestItems null: {QuestItems == null}");
-                yield break;
-            }
-
             switch (condition)
             {
                 case ConditionZone zoneCondition:
@@ -196,7 +196,7 @@ namespace DynamicMaps.Utils
             }
         }
 
-        internal static IEnumerable<Vector3> GetPositionsForConditionCreator(ConditionCounterCreator conditionCreator,
+        private static IEnumerable<Vector3> GetPositionsForConditionCreator(ConditionCounterCreator conditionCreator,
                                                                             string questName, string conditionDescription)
         {
             var counter = _conditionCounterTemplateField.GetValue(conditionCreator);
@@ -212,34 +212,22 @@ namespace DynamicMaps.Utils
             }
         }
 
-        internal static IEnumerable<Vector3> GetPositionsForZoneId(string zoneId, string questName,
+        private static IEnumerable<Vector3> GetPositionsForZoneId(string zoneId, string questName,
                                                                   string conditionDescription)
         {
-            if (TriggersWithIds == null)
-            {
-                Plugin.Log.LogWarning($"TriggersWithIds is null, cannot search for quest zone for {questName} and {conditionDescription}");
-                yield break;
-            }
-
-            var zones = TriggersWithIds.GetZoneTriggers(zoneId);
+            var zones = TriggersWithIds?.GetZoneTriggers(zoneId);
             foreach (var zone in zones)
             {
                 yield return MathUtils.ConvertToMapPosition(zone.transform.position);
             }
         }
 
-        internal static IEnumerable<Vector3> GetPositionsForQuestItems(IEnumerable<string> questItemIds, string questName,
+        private static IEnumerable<Vector3> GetPositionsForQuestItems(IEnumerable<string> questItemIds, string questName,
                                                                       string conditionDescription)
         {
-            if (QuestItems == null)
-            {
-                Plugin.Log.LogWarning($"QuestItems is null, cannot search for quest items for {questName} and {conditionDescription}");
-                yield break;
-            }
-
             foreach (var questItemId in questItemIds)
             {
-                var questItems = QuestItems.Where(i => i.TemplateId == questItemId);
+                var questItems = QuestItems?.Where(i => i.TemplateId == questItemId);
                 foreach (var item in questItems)
                 {
                     yield return MathUtils.ConvertToMapPosition(item.transform.position);
@@ -281,7 +269,7 @@ namespace DynamicMaps.Utils
             }
         }
 
-        public static IEnumerable<QuestDataClass> GetIncompleteQuests(Player player)
+        internal static IEnumerable<QuestDataClass> GetIncompleteQuests(Player player)
         {
             var questController = _playerQuestControllerField.GetValue(player);
             if (questController == null)

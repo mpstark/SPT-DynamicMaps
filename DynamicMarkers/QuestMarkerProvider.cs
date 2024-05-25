@@ -17,7 +17,6 @@ namespace DynamicMaps
                 return;
             }
 
-            QuestUtils.TryCaptureQuestData();
             AddQuestObjectiveMarkers(map);
         }
 
@@ -46,6 +45,8 @@ namespace DynamicMaps
 
         private void AddQuestObjectiveMarkers(MapView map)
         {
+            QuestUtils.TryCaptureQuestData();
+
             var player = GameUtils.GetMainPlayer();
 
             var markerDefs = QuestUtils.GetMarkerDefsForPlayer(player);
