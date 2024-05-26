@@ -18,7 +18,21 @@ namespace DynamicMaps.DynamicMarkers
         public void OnShowInRaid(MapView map, string mapInternalName)
         {
             var gameWorld = Singleton<GameWorld>.Instance;
-            var exfils = gameWorld.ExfiltrationController.EligiblePoints(GameUtils.GetMainPlayer().Profile);
+            var profile = GameUtils.GetMainPlayer().Profile;
+
+            // get valid exfil points
+            ExfiltrationPoint[] exfils;
+            if (!GameUtils.IsScavRaid())
+            {
+                exfils = gameWorld.ExfiltrationController.EligiblePoints(profile);
+            }
+            else
+            {
+                var profileId = profile.ProfileId;
+                exfils = gameWorld.ExfiltrationController.ScavExfiltrationPoints
+                            .Where(p => p.EligibleIds.Contains(profileId))
+                            .ToArray();
+            }
 
             foreach (var exfil in exfils)
             {
