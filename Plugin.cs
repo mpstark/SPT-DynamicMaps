@@ -20,15 +20,13 @@ namespace DynamicMaps
 
         internal void Awake()
         {
-            // TODO: implement config
-            // Settings.Init(Config);
-            // Config.SettingChanged += (x, y) => DynamicMaps?.ReadConfig();
+            Settings.Init(Config);
+            Config.SettingChanged += (x, y) => Map?.ReadConfig();
 
             Instance = this;
 
             // patches
             new MapScreenShowPatch().Enable();
-            // new GameWorldOnGameStartedPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
         }
 

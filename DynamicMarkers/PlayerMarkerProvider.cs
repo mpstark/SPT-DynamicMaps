@@ -9,7 +9,7 @@ namespace DynamicMaps.DynamicMarkers
     {
         private PlayerMapMarker _playerMarker;
 
-        public void OnShowInRaid(MapView map, string mapInternalName)
+        public void OnShowInRaid(MapView map)
         {
             TryAddMarker(map);
         }
@@ -27,6 +27,11 @@ namespace DynamicMaps.DynamicMarkers
             {
                 TryAddMarker(map);
             }
+        }
+
+        public void OnDisable(MapView map)
+        {
+            TryRemoveMarker();
         }
 
         private void TryAddMarker(MapView map)

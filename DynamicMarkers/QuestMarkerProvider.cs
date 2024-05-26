@@ -10,7 +10,7 @@ namespace DynamicMaps
     {
         private List<MapMarker> _questMarkers = new List<MapMarker>();
 
-        public void OnShowInRaid(MapView map, string mapInternalName)
+        public void OnShowInRaid(MapView map)
         {
             if (GameUtils.IsScavRaid())
             {
@@ -23,7 +23,7 @@ namespace DynamicMaps
         public void OnHideInRaid(MapView map)
         {
             // TODO: don't just be lazy and try to update markers
-            RemoveAllMarkers();
+            TryRemoveMarkers();
         }
 
         public void OnMapChanged(MapView map, MapDef mapDef)
@@ -33,14 +33,19 @@ namespace DynamicMaps
                 return;
             }
 
-            RemoveAllMarkers();
+            TryRemoveMarkers();
             AddQuestObjectiveMarkers(map);
         }
 
         public void OnRaidEnd(MapView map)
         {
             QuestUtils.DiscardQuestData();
-            RemoveAllMarkers();
+            TryRemoveMarkers();
+        }
+
+        public void OnDisable(MapView map)
+        {
+            TryRemoveMarkers();
         }
 
         private void AddQuestObjectiveMarkers(MapView map)
@@ -57,7 +62,7 @@ namespace DynamicMaps
             }
         }
 
-        private void RemoveAllMarkers()
+        private void TryRemoveMarkers()
         {
             foreach (var marker in _questMarkers)
             {

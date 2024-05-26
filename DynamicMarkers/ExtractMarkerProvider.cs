@@ -12,10 +12,35 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class ExtractMarkerProvider : IDynamicMarkerProvider
     {
+        private bool _showExtractStatusInRaid = true;
+        public bool ShowExtractStatusInRaid
+        {
+            get
+            {
+                return _showExtractStatusInRaid;
+            }
+
+            set
+            {
+                if (_showExtractStatusInRaid == value)
+                {
+                    return;
+                }
+
+                _showExtractStatusInRaid = value;
+
+                // force update all statuses
+                foreach (var exfil in _extractMarkers.Keys)
+                {
+                    UpdateExfilStatus(exfil, exfil.Status);
+                }
+            }
+        }
+
         private Dictionary<ExfiltrationPoint, MapMarker> _extractMarkers
             = new Dictionary<ExfiltrationPoint, MapMarker>();
 
-        public void OnShowInRaid(MapView map, string mapInternalName)
+        public void OnShowInRaid(MapView map)
         {
             var gameWorld = Singleton<GameWorld>.Instance;
             var profile = GameUtils.GetMainPlayer().Profile;
@@ -57,10 +82,7 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnRaidEnd(MapView map)
         {
-            foreach (var exfil in _extractMarkers.Keys.ToList())
-            {
-                TryRemoveMarker(exfil);
-            }
+            TryRemoveMarkers();
         }
 
         public void OnMapChanged(MapView map, MapDef mapDef)
@@ -72,6 +94,19 @@ namespace DynamicMaps.DynamicMarkers
             }
         }
 
+        public void OnDisable(MapView map)
+        {
+            TryRemoveMarkers();
+        }
+
+        private void TryRemoveMarkers()
+        {
+            foreach (var exfil in _extractMarkers.Keys.ToList())
+            {
+                TryRemoveMarker(exfil);
+            }
+        }
+
         private void UpdateExfilStatus(ExfiltrationPoint exfil, EExfiltrationStatus status)
         {
             if (!_extractMarkers.ContainsKey(exfil))
@@ -80,6 +115,12 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             var marker = _extractMarkers[exfil];
+            if (!_showExtractStatusInRaid)
+            {
+                marker.Color = Color.yellow;
+                return;
+            }
+
             switch (exfil.Status)
             {
                 case EExfiltrationStatus.NotPresent:

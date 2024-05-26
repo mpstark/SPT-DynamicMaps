@@ -292,6 +292,7 @@ namespace DynamicMaps.UI.Components
             // shift map to center it
             // FIXME: this doesn't center in the parent
             RectTransform.anchoredPosition = Vector2.zero;
+
             var midpoint = MathUtils.GetMidpoint(CurrentMapDef.Bounds.Min, CurrentMapDef.Bounds.Max);
             ShiftMapToCoordinate(midpoint, 0);
         }
@@ -339,7 +340,7 @@ namespace DynamicMaps.UI.Components
             }
 
             // check if tweening to update _immediateMapAnchor, since the scroll rect might have moved the anchor
-            if (!DOTween.IsTweening(RectTransform, true))
+            if (!DOTween.IsTweening(RectTransform, true) || tweenTime == 0)
             {
                 _immediateMapAnchor = RectTransform.anchoredPosition;
             }
