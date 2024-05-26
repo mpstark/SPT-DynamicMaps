@@ -1,6 +1,5 @@
 ## Known Issues
 
-- There is no current way to view BSG's original maps
 - Maps are relatively low resolution due to long load times and concerns about GPU memory usage
 - Maps and map labels could be better aligned
 - Out of raid maps do not contain any quest markers

@@ -32,7 +32,9 @@ namespace DynamicMaps.UI
         private static Vector2 _playerPositionTextOffset = new Vector2(15f, -68f);
         private static float _positionTextFontSize = 15f;
 
+        public bool IsReplacingMapScreen = true;
         public RectTransform RectTransform => gameObject.GetRectTransform();
+
         private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
 
         private bool _lastShownInRaid = false;
@@ -204,7 +206,6 @@ namespace DynamicMaps.UI
         internal void Close()
         {
             // not called when hidden
-            _parentTransform.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
@@ -390,6 +391,8 @@ namespace DynamicMaps.UI
 
         internal void ReadConfig()
         {
+            IsReplacingMapScreen = Settings.Enabled.Value;
+
             _autoCenterOnPlayerMarker = Settings.AutoCenterOnPlayerMarker.Value;
             _autoSelectLevel = Settings.AutoSelectLevel.Value;
 

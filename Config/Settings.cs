@@ -9,12 +9,8 @@ namespace DynamicMaps.Config
         public static ConfigFile Config;
         public static List<ConfigEntryBase> ConfigEntries = new List<ConfigEntryBase>();
 
-        public const string MapTitle = "1. In Raid Map Settings";
-        public static ConfigEntry<bool> ResetZoomOnCenter;
-        public static ConfigEntry<float> CenteringZoomResetPoint;
-
-        public static ConfigEntry<bool> AutoCenterOnPlayerMarker;
-        public static ConfigEntry<bool> AutoSelectLevel;
+        public const string GeneralTitle = "1. General";
+        public static ConfigEntry<bool> Enabled;
 
         public const string DynamicMarkerTitle = "2. Dynamic Markers";
         public static ConfigEntry<bool> ShowPlayerMarker;
@@ -30,46 +26,26 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowExtractsInRaid;
         public static ConfigEntry<bool> ShowExtractStatusInRaid;
 
+        public const string InRaidTitle = "3. In-Raid";
+        public static ConfigEntry<bool> ResetZoomOnCenter;
+        public static ConfigEntry<float> CenteringZoomResetPoint;
+
+        public static ConfigEntry<bool> AutoCenterOnPlayerMarker;
+        public static ConfigEntry<bool> AutoSelectLevel;
+
         // public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
 
         public static void Init(ConfigFile Config)
         {
             Settings.Config = Config;
 
-            ConfigEntries.Add(AutoSelectLevel = Config.Bind(
-                MapTitle,
-                "Auto Select Level",
+            ConfigEntries.Add(Enabled = Config.Bind(
+                GeneralTitle,
+                "Enabled",
                 true,
                 new ConfigDescription(
-                    "If the level should be automatically selected based on the players position in raid",
+                    "If the map should replace the BSG default map screen, requires swapping away from modded map to refresh",
                     null,
-                    new ConfigurationManagerAttributes { })));
-
-            ConfigEntries.Add(AutoCenterOnPlayerMarker = Config.Bind(
-                MapTitle,
-                "Auto Center On Player Marker",
-                true,
-                new ConfigDescription(
-                    "If the player marker should be centered when showing the map in raid",
-                    null,
-                    new ConfigurationManagerAttributes { })));
-
-            ConfigEntries.Add(ResetZoomOnCenter = Config.Bind(
-                MapTitle,
-                "Reset Zoom On Center",
-                true,
-                new ConfigDescription(
-                    "If the zoom level should be reset each time that the map is opened while in raid",
-                    null,
-                    new ConfigurationManagerAttributes { })));
-
-            ConfigEntries.Add(CenteringZoomResetPoint = Config.Bind(
-                MapTitle,
-                "Centering On Player Zoom Level",
-                0.25f,
-                new ConfigDescription(
-                    "What zoom level should be used as while centering on the player (0 is fully zoomed out, and 1 is fully zoomed in)",
-                    new AcceptableValueRange<float>(0f, 1f),
                     new ConfigurationManagerAttributes { })));
 
             ConfigEntries.Add(ShowPlayerMarker = Config.Bind(
@@ -95,7 +71,7 @@ namespace DynamicMaps.Config
                 "Show Enemy Player Markers",
                 false,
                 new ConfigDescription(
-                    "If enemy player markers should be shown",
+                    "If enemy player markers should be shown (generally for debug)",
                     null,
                     new ConfigurationManagerAttributes { })));
 
@@ -104,7 +80,7 @@ namespace DynamicMaps.Config
                 "Show Scav Markers",
                 false,
                 new ConfigDescription(
-                    "If enemy scav markers should be shown",
+                    "If enemy scav markers should be shown (generally for debug)",
                     null,
                     new ConfigurationManagerAttributes { })));
 
@@ -142,6 +118,42 @@ namespace DynamicMaps.Config
                 new ConfigDescription(
                     "If extracts should be colored according to their status in raid",
                     null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(AutoSelectLevel = Config.Bind(
+                InRaidTitle,
+                "Auto Select Level",
+                true,
+                new ConfigDescription(
+                    "If the level should be automatically selected based on the players position in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(AutoCenterOnPlayerMarker = Config.Bind(
+                InRaidTitle,
+                "Auto Center On Player Marker",
+                true,
+                new ConfigDescription(
+                    "If the player marker should be centered when showing the map in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ResetZoomOnCenter = Config.Bind(
+                InRaidTitle,
+                "Reset Zoom On Center",
+                true,
+                new ConfigDescription(
+                    "If the zoom level should be reset each time that the map is opened while in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(CenteringZoomResetPoint = Config.Bind(
+                InRaidTitle,
+                "Centering On Player Zoom Level",
+                0.25f,
+                new ConfigDescription(
+                    "What zoom level should be used as while centering on the player (0 is fully zoomed out, and 1 is fully zoomed in)",
+                    new AcceptableValueRange<float>(0f, 1f),
                     new ConfigurationManagerAttributes { })));
 
 

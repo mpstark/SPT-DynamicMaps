@@ -1,5 +1,6 @@
 using System.Reflection;
 using Aki.Reflection.Patching;
+using DynamicMaps.Config;
 using EFT.UI.Map;
 using HarmonyLib;
 
@@ -15,6 +16,13 @@ namespace DynamicMaps.Patches
         [PatchPrefix]
         public static bool PatchPrefix(MapScreen __instance)
         {
+            if (!Settings.Enabled.Value)
+            {
+                // mod is disabled
+                Plugin.Instance.Map?.Close();
+                return true;
+            }
+
             // show instead
             Plugin.Instance.TryAttachToMapScreen(__instance);
             Plugin.Instance.Map?.Show();
@@ -32,6 +40,12 @@ namespace DynamicMaps.Patches
         [PatchPrefix]
         public static bool PatchPrefix(MapScreen __instance)
         {
+            if (!Settings.Enabled.Value)
+            {
+                // mod is disabled
+                return true;
+            }
+
             // show instead
             Plugin.Instance.Map?.Close();
             return false;

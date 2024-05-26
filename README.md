@@ -38,7 +38,27 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 
 ## Configuration
 
-There is no current configuration.
+### General
+
+- **Enabled**: If the map should replace the BSG default map screen, requires swapping away from modded map to refresh
+
+### Dynamic Markers
+
+- **Show Player Marker**: If the player marker should be shown in raid
+- **Show Friendly Player Markers**: If friendly player markers should be shown
+- **Show Enemy Player Markers**: If enemy player markers should be shown (generally for debug)
+- **Show Scav Markers**: If enemy scav markers should be shown (generally for debug)
+- **Show Locked Door Status**: If locked door markers should be updated with status based on key acquisition
+- **Show Quests In Raid**: If quests should be shown in raid
+- **Show Extracts In Raid**: If extracts should be shown in raid
+- **Show Extracts Status In Raid**: If extracts should be colored according to their status in raid
+
+### In-Raid
+
+- **Auto Select Level**: If the level should be automatically selected based on the players position in raid
+- **Auto Center On Player Marker**: If the player marker should be centered when showing the map in raid
+- **Reset Zoom On Center**: If the zoom level should be reset each time that the map is opened while in raid
+- **Centering On Player Zoom Level**: What zoom level should be used as while centering on the player (0 is fully zoomed out, and 1 is fully zoomed in)
 
 ## Installation
 

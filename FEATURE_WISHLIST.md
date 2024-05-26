@@ -2,7 +2,7 @@
 
 ### Configuration
 
-- Configure defaults for dynamic markers
+- Configure colors for dynamic markers
 - Lots of other configuration
 
 ### Marker/Label Filtering
