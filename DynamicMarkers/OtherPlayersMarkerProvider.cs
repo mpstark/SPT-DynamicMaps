@@ -11,46 +11,113 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class OtherPlayersMarkerProvider : IDynamicMarkerProvider
     {
+        private bool _showFriendlyPlayers = true;
+        public bool ShowFriendlyPlayers
+        {
+            get
+            {
+                return _showFriendlyPlayers;
+            }
+
+            set
+            {
+                if (value == _showFriendlyPlayers)
+                {
+                    return;
+                }
+
+                _showFriendlyPlayers = value;
+
+                if (_showFriendlyPlayers)
+                {
+                    TryAddMarkers();
+                }
+                else
+                {
+                    RemoveDisabledMarkers();
+                }
+            }
+        }
+
+        private bool _showEnemyPlayers = false;
+        public bool ShowEnemyPlayers
+        {
+            get
+            {
+                return _showEnemyPlayers;
+            }
+
+            set
+            {
+                if (value == _showEnemyPlayers)
+                {
+                    return;
+                }
+
+                _showEnemyPlayers = value;
+
+                if (_showEnemyPlayers)
+                {
+                    TryAddMarkers();
+                }
+                else
+                {
+                    RemoveDisabledMarkers();
+                }
+            }
+        }
+
+        private bool _showScavs = false;
+        public bool ShowScavs
+        {
+            get
+            {
+                return _showScavs;
+            }
+
+            set
+            {
+                if (value == _showScavs)
+                {
+                    return;
+                }
+
+                _showScavs = value;
+
+                if (_showScavs)
+                {
+                    TryAddMarkers();
+                }
+                else
+                {
+                    RemoveDisabledMarkers();
+                }
+            }
+        }
+
         private MapView _lastMapView;
         private Dictionary<IPlayer, PlayerMapMarker> _playerMarkers = new Dictionary<IPlayer, PlayerMapMarker>();
 
-        public void OnShowInRaid(MapView map, string mapInternalName)
+        public void OnShowInRaid(MapView map)
         {
-            // add all players that have spawned already in raid
-            var gameWorld = Singleton<GameWorld>.Instance;
-                foreach (var player in gameWorld.AllAlivePlayersList)
-                {
-                    if (player.IsYourPlayer || _playerMarkers.ContainsKey(player))
-                    {
-                        continue;
-                    }
-
-                    TryAddMarker(player);
-                }
-
             _lastMapView = map;
 
+            TryAddMarkers();
+
             // register to event to get all the new ones while map is showing
-            gameWorld.OnPersonAdd += TryAddMarker;
+            Singleton<GameWorld>.Instance.OnPersonAdd += TryAddMarker;
         }
 
         public void OnHideInRaid(MapView map)
         {
             // unregister from event while map isn't showing
-            var gameWorld = Singleton<GameWorld>.Instance;
-            gameWorld.OnPersonAdd -= TryAddMarker;
+            Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
         }
 
         public void OnRaidEnd(MapView map)
         {
             _lastMapView = map;
-
-            foreach (var player in _playerMarkers.Keys.ToList())
-            {
-                TryRemoveMarker(player);
-            }
-
-            _playerMarkers.Clear();
+            TryRemoveMarkers();
         }
 
         public void OnMapChanged(MapView map, MapDef mapDef)
@@ -60,6 +127,41 @@ namespace DynamicMaps.DynamicMarkers
             foreach (var player in _playerMarkers.Keys.ToList())
             {
                 TryRemoveMarker(player);
+                TryAddMarker(player);
+            }
+        }
+
+        public void OnDisable(MapView map)
+        {
+            TryRemoveMarkers();
+        }
+
+        private void TryRemoveMarkers()
+        {
+            foreach (var player in _playerMarkers.Keys.ToList())
+            {
+                TryRemoveMarker(player);
+            }
+
+            _playerMarkers.Clear();
+        }
+
+        private void TryAddMarkers()
+        {
+            if (!GameUtils.IsInRaid())
+            {
+                return;
+            }
+
+            // add all players that have spawned already in raid
+            var gameWorld = Singleton<GameWorld>.Instance;
+            foreach (var player in gameWorld.AllAlivePlayersList)
+            {
+                if (player.IsYourPlayer || _playerMarkers.ContainsKey(player))
+                {
+                    continue;
+                }
+
                 TryAddMarker(player);
             }
         }
@@ -78,7 +180,7 @@ namespace DynamicMaps.DynamicMarkers
             if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
             {
                 color = Color.blue;
-                category = "Allied Player";
+                category = "Friendly Player";
             }
             else if (player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec)
             {
@@ -86,11 +188,33 @@ namespace DynamicMaps.DynamicMarkers
                 category = "Enemy Player";
             }
 
+            if (category == "Scav" && !_showScavs
+             || category == "Friendly Player" && !_showFriendlyPlayers
+             || category == "Enemy Player" && !_showEnemyPlayers)
+            {
+                return;
+            }
+
             // try adding marker
             var marker = _lastMapView.AddPlayerMarker(player, category, color);
             player.OnIPlayerDeadOrUnspawn += TryRemoveMarker;
 
             _playerMarkers[player] = marker;
+        }
+
+        private void RemoveDisabledMarkers()
+        {
+            foreach (var player in _playerMarkers.Keys.ToList())
+            {
+                var marker = _playerMarkers[player];
+
+                if ((!_showFriendlyPlayers && marker.Category == "Friendly Player")
+                 || (!_showEnemyPlayers && marker.Category == "Enemy Player")
+                 || (!_showScavs && marker.Category == "Scav"))
+                {
+                    TryRemoveMarker(player);
+                }
+            }
         }
 
         private void TryRemoveMarker(IPlayer player)

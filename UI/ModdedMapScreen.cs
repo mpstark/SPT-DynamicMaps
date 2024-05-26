@@ -1,14 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Comfort.Common;
-using EFT.UI;
+using DynamicMaps.Config;
 using DynamicMaps.Data;
 using DynamicMaps.DynamicMarkers;
 using DynamicMaps.UI.Components;
 using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
+using EFT.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 namespace DynamicMaps.UI
 {
@@ -35,6 +36,7 @@ namespace DynamicMaps.UI
         private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
 
         private bool _lastShownInRaid = false;
+        private bool _isShown = false;
 
         // map and transport mechanism
         private ScrollRect _scrollRect;
@@ -48,7 +50,21 @@ namespace DynamicMaps.UI
         private PlayerPositionText _playerPositionText;
 
         // dynamic map marker providers
-        private List<IDynamicMarkerProvider> _dynamicMarkerProviders = new List<IDynamicMarkerProvider>();
+        private Dictionary<Type, IDynamicMarkerProvider> _dynamicMarkerProviders = new Dictionary<Type, IDynamicMarkerProvider>();
+
+        // config
+        private bool _autoCenterOnPlayerMarker = true;
+        private bool _autoSelectLevel = true;
+        private bool _resetZoomOnCenter = false;
+        private float _centeringZoomResetPoint = 0f;
+        private bool _showPlayerMarker = true;
+        private bool _showFriendlyPlayerMarkers = true;
+        private bool _showEnemyPlayerMarkers = false;
+        private bool _showScavMarkers = false;
+        private bool _showLockedDoorStatus = true;
+        private bool _showQuestsInRaid = true;
+        private bool _showExtractsInRaid = true;
+        private bool _showExtractStatusInRaid = true;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
@@ -110,14 +126,8 @@ namespace DynamicMaps.UI
             _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
             _playerPositionText.gameObject.SetActive(false);
 
-            // add dynamic marker providers
-            _dynamicMarkerProviders.Add(new PlayerMarkerProvider());
-            _dynamicMarkerProviders.Add(new ExtractMarkerProvider());
-            _dynamicMarkerProviders.Add(new LockedDoorMarkerMutator());
-            _dynamicMarkerProviders.Add(new QuestMarkerProvider());
-
-            // TODO: add back with configuration options
-            // _dynamicMarkerProviders.Add(new OtherPlayersMarkerProvider());
+            // read config before setting up marker providers
+            ReadConfig();
         }
 
         private void Update()
@@ -162,10 +172,14 @@ namespace DynamicMaps.UI
             {
                 OnHideOutOfRaid();
             }
+
+            _isShown = false;
         }
 
         internal void Show()
         {
+            _isShown = true;
+
             // make sure that the BSG map is disabled
             transform.parent.Find("MapBlock").gameObject.SetActive(false);
             transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
@@ -196,7 +210,7 @@ namespace DynamicMaps.UI
 
         internal void OnRaidEnd()
         {
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
@@ -240,11 +254,11 @@ namespace DynamicMaps.UI
             // this forces the load of the first of those
             _mapSelectDropdown.FilterByInternalMapName(mapInternalName);
 
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
-                    dynamicProvider.OnShowInRaid(_mapView, mapInternalName);
+                    dynamicProvider.OnShowInRaid(_mapView);
                 }
                 catch (Exception e)
                 {
@@ -261,17 +275,30 @@ namespace DynamicMaps.UI
                 return;
             }
 
-            // select layers to show
-            _mapView.SelectLevelByCoords(MathUtils.ConvertToMapPosition(player.Position));
+            var mapPosition = MathUtils.ConvertToMapPosition(player.Position);
 
-            // shift map to player position, Vector3 to Vector2 discards z
-            // TODO: this is annoying, but need something like it
-            // _mapView.ShiftMapToCoordinate(mapPosition, 0);
+            // select layers to show
+            if (_autoSelectLevel)
+            {
+                _mapView.SelectLevelByCoords(mapPosition);
+            }
+
+            if (_autoCenterOnPlayerMarker)
+            {
+                // change zoom to desired level
+                if (_resetZoomOnCenter)
+                {
+                    _mapView.SetMapZoom(GetInRaidStartingZoom(), 0);
+                }
+
+                // shift map to player position, Vector3 to Vector2 discards z
+                _mapView.ShiftMapToCoordinate(mapPosition, 0);
+            }
         }
 
         private void OnHideInRaid()
         {
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
@@ -305,7 +332,7 @@ namespace DynamicMaps.UI
                 _lastShownInRaid = false;
             }
 
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
@@ -322,7 +349,7 @@ namespace DynamicMaps.UI
 
         private void OnHideOutOfRaid()
         {
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
@@ -361,6 +388,93 @@ namespace DynamicMaps.UI
             _mapView.IncrementalZoomInto(zoomDelta, mouseRelative);
         }
 
+        internal void ReadConfig()
+        {
+            _autoCenterOnPlayerMarker = Settings.AutoCenterOnPlayerMarker.Value;
+            _autoSelectLevel = Settings.AutoSelectLevel.Value;
+
+            _resetZoomOnCenter = Settings.ResetZoomOnCenter.Value;
+            _centeringZoomResetPoint = Settings.CenteringZoomResetPoint.Value;
+
+            _showPlayerMarker = Settings.ShowPlayerMarker.Value;
+
+            _showFriendlyPlayerMarkers = Settings.ShowFriendlyPlayerMarkers.Value;
+            _showEnemyPlayerMarkers = Settings.ShowEnemyPlayerMarkers.Value;
+            _showScavMarkers = Settings.ShowScavMarkers.Value;
+
+            _showQuestsInRaid = Settings.ShowQuestsInRaid.Value;
+
+            _showLockedDoorStatus = Settings.ShowLockedDoorStatus.Value;
+
+            _showExtractsInRaid = Settings.ShowExtractsInRaid.Value;
+            _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
+
+            AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
+            AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
+            AddRemoveMarkerProvider<LockedDoorMarkerMutator>(_showLockedDoorStatus);
+
+            // extracts
+            AddRemoveMarkerProvider<ExtractMarkerProvider>(_showExtractsInRaid);
+            if (_showExtractsInRaid)
+            {
+                var provider = GetMarkerProvider<ExtractMarkerProvider>();
+                provider.ShowExtractStatusInRaid = _showExtractStatusInRaid;
+            }
+
+            // other player markers
+            var needOtherPlayerMarkers = _showFriendlyPlayerMarkers || _showEnemyPlayerMarkers || _showScavMarkers;
+            AddRemoveMarkerProvider<OtherPlayersMarkerProvider>(needOtherPlayerMarkers);
+
+            if (needOtherPlayerMarkers)
+            {
+                var provider = GetMarkerProvider<OtherPlayersMarkerProvider>();
+                provider.ShowFriendlyPlayers = _showFriendlyPlayerMarkers;
+                provider.ShowEnemyPlayers = _showEnemyPlayerMarkers;
+                provider.ShowScavs = _showScavMarkers;
+            }
+        }
+
+        private void AddRemoveMarkerProvider<T>(bool status) where T : IDynamicMarkerProvider, new()
+        {
+            if (status && !_dynamicMarkerProviders.ContainsKey(typeof(T)))
+            {
+                _dynamicMarkerProviders[typeof(T)] = new T();
+
+                // if the map is shown, need to call OnShowXXXX
+                if (_isShown && GameUtils.IsInRaid())
+                {
+                    _dynamicMarkerProviders[typeof(T)].OnShowInRaid(_mapView);
+                }
+                else if (_isShown && !GameUtils.IsInRaid())
+                {
+                    _dynamicMarkerProviders[typeof(T)].OnShowOutOfRaid(_mapView);
+                }
+            }
+            else if (!status && _dynamicMarkerProviders.ContainsKey(typeof(T)))
+            {
+                _dynamicMarkerProviders[typeof(T)].OnDisable(_mapView);
+                _dynamicMarkerProviders.Remove(typeof(T));
+            }
+        }
+
+        private T GetMarkerProvider<T>() where T : IDynamicMarkerProvider
+        {
+            if (!_dynamicMarkerProviders.ContainsKey(typeof(T)))
+            {
+                return default;
+            }
+
+            return (T)_dynamicMarkerProviders[typeof(T)];
+        }
+
+        private float GetInRaidStartingZoom()
+        {
+            var startingZoom = _mapView.ZoomMin;
+            startingZoom += _centeringZoomResetPoint * (_mapView.ZoomMax - _mapView.ZoomMin);
+
+            return startingZoom;
+        }
+
         private void ChangeMap(MapDef mapDef)
         {
             if (mapDef == null || _mapView.CurrentMapDef == mapDef)
@@ -375,7 +489,7 @@ namespace DynamicMaps.UI
             _mapSelectDropdown.OnLoadMap(mapDef);
             _levelSelectSlider.OnLoadMap(mapDef, _mapView.SelectedLevel);
 
-            foreach (var dynamicProvider in _dynamicMarkerProviders)
+            foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
                 try
                 {
