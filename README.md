@@ -2,11 +2,17 @@
 
 An SPT mod that adds a custom in-game map viewer in the place of the BSG map screen. Includes pre-configured maps made by [TarkovData](https://github.com/TarkovTracker/tarkovdata/) and [TarkovDev](https://github.com/the-hideout/tarkov-dev).
 
-![Dynamic Locks](Screenshots/dynamic_locks.png) ![Quest Indicators](Screenshots/quest_markers.png)
-
+#### Full screen out of raid maps with selector
 ![Out of Raid Map with selector](Screenshots/out_of_raid_map.png)
 
+#### Full screen in-raid with player marker
 ![In raid with player marker](Screenshots/in_raid_map.png)
+
+#### Dynamic Locks
+![Dynamic Locks](Screenshots/dynamic_locks.png)
+
+#### Quest Indicators
+![Quest Indicators](Screenshots/quest_markers.png)
 
 ### Features
 
