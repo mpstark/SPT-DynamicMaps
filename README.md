@@ -44,6 +44,8 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 ### General
 
 - **Enabled**: If the map should replace the BSG default map screen, requires swapping away from modded map to refresh
+- **Center on Player Hotkey**: Pressed while the map is open, centers the player
+- **Dump Info Hotkey**: Pressed while the map is open, dumps json MarkerDefs for extracts, loot, and switches into root of plugin folder (only shows in advanced config mode)
 
 ### Dynamic Markers
 
