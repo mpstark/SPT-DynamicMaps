@@ -379,7 +379,6 @@ namespace DynamicMaps.UI
 
         private void OnScroll(float scrollAmount)
         {
-            // TODO: add config for this
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (scrollAmount > 0)
