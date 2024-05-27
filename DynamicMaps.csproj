@@ -11,6 +11,7 @@
   <PropertyGroup>
     <TarkovDir Condition=" '$(TarkovDir)' == '' ">D:\Games\SPTarkov-3.8.3\</TarkovDir>
     <TarkovDebugDir Condition=" '$(TarkovDebugDir)' == '' ">D:\Games\SPTarkov-3.8.3-Debug\</TarkovDebugDir>
+    <TarkovPluginsSPTDir>$(TarkovDir)BepInEx\plugins\spt\</TarkovPluginsSPTDir>
     <TarkovManagedDir>$(TarkovDir)EscapeFromTarkov_Data\Managed\</TarkovManagedDir>
     <TarkovBepInExCoreDir>$(TarkovDir)BepInEx\core\</TarkovBepInExCoreDir>
   </PropertyGroup>
@@ -82,6 +83,10 @@
     </Reference>
     <Reference Include="BepinEx.Preloader">
       <HintPath>$(TarkovBepInExCoreDir)BepInEx.Preloader.dll</HintPath>
+    </Reference>
+
+    <Reference Include="aki-custom">
+      <HintPath>$(TarkovPluginsSPTDir)aki-custom.dll</HintPath>
     </Reference>
   </ItemGroup>
 

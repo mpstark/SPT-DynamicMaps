@@ -67,6 +67,7 @@ namespace DynamicMaps.UI
         private bool _showQuestsInRaid = true;
         private bool _showExtractsInRaid = true;
         private bool _showExtractStatusInRaid = true;
+        private bool _showAirdropsInRaid = true;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
@@ -412,9 +413,12 @@ namespace DynamicMaps.UI
             _showExtractsInRaid = Settings.ShowExtractsInRaid.Value;
             _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
 
+            _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
+
             AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
             AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
             AddRemoveMarkerProvider<LockedDoorMarkerMutator>(_showLockedDoorStatus);
+            AddRemoveMarkerProvider<AirdropMarkerProvider>(_showAirdropsInRaid);
 
             // extracts
             AddRemoveMarkerProvider<ExtractMarkerProvider>(_showExtractsInRaid);

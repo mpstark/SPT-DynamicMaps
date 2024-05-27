@@ -16,6 +16,7 @@ namespace DynamicMaps.Patches
         public static void PatchPostfix()
         {
             Plugin.Instance.Map?.OnRaidEnd();
+            AirdropBoxOnBoxLandPatch.OnRaidEnd();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace DynamicMaps
             // patches
             new MapScreenShowPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
+            new AirdropBoxOnBoxLandPatch().Enable();
         }
 
         /// <summary>
