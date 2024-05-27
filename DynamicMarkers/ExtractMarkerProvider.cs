@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
-using EFT;
-using EFT.Interactive;
 using DynamicMaps.Data;
 using DynamicMaps.UI.Components;
 using DynamicMaps.Utils;
+using EFT;
+using EFT.Interactive;
 using UnityEngine;
 
 namespace DynamicMaps.DynamicMarkers
@@ -30,9 +30,9 @@ namespace DynamicMaps.DynamicMarkers
                 _showExtractStatusInRaid = value;
 
                 // force update all statuses
-                foreach (var exfil in _extractMarkers.Keys)
+                foreach (var extract in _extractMarkers.Keys)
                 {
-                    UpdateExfilStatus(exfil, exfil.Status);
+                    UpdateExtractStatus(extract, extract.Status);
                 }
             }
         }
@@ -42,41 +42,28 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnShowInRaid(MapView map)
         {
-            var gameWorld = Singleton<GameWorld>.Instance;
-            var player = GameUtils.GetMainPlayer();
-
-            // get valid exfil points
-            IEnumerable<ExfiltrationPoint> exfils;
-            if (GameUtils.IsScavRaid())
+            // get valid extracts only on first time that this is run in a raid
+            if (_extractMarkers.Count == 0)
             {
-                exfils = gameWorld.ExfiltrationController.ScavExfiltrationPoints
-                            .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player))
-                            .Cast<ExfiltrationPoint>();
-            }
-            else
-            {
-                exfils = gameWorld.ExfiltrationController.ExfiltrationPoints
-                            .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player));
+                AddExtractMarkers(map);
             }
 
-            foreach (var exfil in exfils)
+            foreach (var extract in _extractMarkers.Keys)
             {
-                TryAddMarker(map, exfil);
-
                 // update color based on exfil status
-                UpdateExfilStatus(exfil, exfil.Status);
+                UpdateExtractStatus(extract, extract.Status);
 
                 // subscribe to status changes while map is shown
-                exfil.OnStatusChanged += UpdateExfilStatus;
+                extract.OnStatusChanged += UpdateExtractStatus;
             }
         }
 
         public void OnHideInRaid(MapView map)
         {
             // unsubscribe from updates while map is hidden
-            foreach (var exfil in _extractMarkers.Keys)
+            foreach (var extract in _extractMarkers.Keys)
             {
-                exfil.OnStatusChanged -= UpdateExfilStatus;
+                extract.OnStatusChanged -= UpdateExtractStatus;
             }
         }
 
@@ -87,10 +74,10 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnMapChanged(MapView map, MapDef mapDef)
         {
-            foreach (var exfil in _extractMarkers.Keys.ToList())
+            foreach (var extract in _extractMarkers.Keys.ToList())
             {
-                TryRemoveMarker(exfil);
-                TryAddMarker(map, exfil);
+                TryRemoveMarker(extract);
+                TryAddMarker(map, extract);
             }
         }
 
@@ -99,29 +86,54 @@ namespace DynamicMaps.DynamicMarkers
             TryRemoveMarkers();
         }
 
-        private void TryRemoveMarkers()
+        private void AddExtractMarkers(MapView map)
         {
-            foreach (var exfil in _extractMarkers.Keys.ToList())
+            var gameWorld = Singleton<GameWorld>.Instance;
+            var player = GameUtils.GetMainPlayer();
+
+            IEnumerable<ExfiltrationPoint> extracts;
+            if (GameUtils.IsScavRaid())
             {
-                TryRemoveMarker(exfil);
+                extracts = gameWorld.ExfiltrationController.ScavExfiltrationPoints
+                                .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player))
+                                .Cast<ExfiltrationPoint>();
+            }
+            else
+            {
+                extracts = gameWorld.ExfiltrationController.ExfiltrationPoints
+                                .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player));
+            }
+
+            // add markers, only this single time
+            foreach (var extract in extracts)
+            {
+                TryAddMarker(map, extract);
             }
         }
 
-        private void UpdateExfilStatus(ExfiltrationPoint exfil, EExfiltrationStatus status)
+        private void TryRemoveMarkers()
         {
-            if (!_extractMarkers.ContainsKey(exfil))
+            foreach (var extract in _extractMarkers.Keys.ToList())
+            {
+                TryRemoveMarker(extract);
+            }
+        }
+
+        private void UpdateExtractStatus(ExfiltrationPoint extract, EExfiltrationStatus status)
+        {
+            if (!_extractMarkers.ContainsKey(extract))
             {
                 return;
             }
 
-            var marker = _extractMarkers[exfil];
+            var marker = _extractMarkers[extract];
             if (!_showExtractStatusInRaid)
             {
                 marker.Color = Color.yellow;
                 return;
             }
 
-            switch (exfil.Status)
+            switch (extract.Status)
             {
                 case EExfiltrationStatus.NotPresent:
                     marker.Color = Color.red;
@@ -135,9 +147,9 @@ namespace DynamicMaps.DynamicMarkers
             }
         }
 
-        private void TryAddMarker(MapView map, ExfiltrationPoint exfil)
+        private void TryAddMarker(MapView map, ExfiltrationPoint extract)
         {
-            if (_extractMarkers.ContainsKey(exfil))
+            if (_extractMarkers.ContainsKey(extract))
             {
                 return;
             }
@@ -146,25 +158,27 @@ namespace DynamicMaps.DynamicMarkers
             {
                 Category = "Extract",
                 ImagePath = "Markers/exit.png",
-                Text = exfil.Settings.Name.BSGLocalized(),
-                Position = MathUtils.ConvertToMapPosition(exfil.transform)
+                Text = extract.Settings.Name.BSGLocalized(),
+                Position = MathUtils.ConvertToMapPosition(extract.transform)
             };
 
             var marker = map.AddMapMarker(markerDef);
-            _extractMarkers[exfil] = marker;
+            _extractMarkers[extract] = marker;
+
+            UpdateExtractStatus(extract, extract.Status);
         }
 
-        private void TryRemoveMarker(ExfiltrationPoint exfil)
+        private void TryRemoveMarker(ExfiltrationPoint extract)
         {
-            if (!_extractMarkers.ContainsKey(exfil))
+            if (!_extractMarkers.ContainsKey(extract))
             {
                 return;
             }
 
-            exfil.OnStatusChanged -= UpdateExfilStatus;
+            extract.OnStatusChanged -= UpdateExtractStatus;
 
-            _extractMarkers[exfil].ContainingMapView.RemoveMapMarker(_extractMarkers[exfil]);
-            _extractMarkers.Remove(exfil);
+            _extractMarkers[extract].ContainingMapView.RemoveMapMarker(_extractMarkers[extract]);
+            _extractMarkers.Remove(extract);
         }
 
         public void OnShowOutOfRaid(MapView map)
