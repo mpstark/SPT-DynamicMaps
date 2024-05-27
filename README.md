@@ -24,15 +24,18 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
 - Drag-based map pan and mousewheel-based map zoom controls
 - Map labels supported for orientation
 - Icon-based map markers placed both statically and dynamically. Currently:
-  - Static markers for all extracts for all maps out-of-raid
+  - In-raid dynamic player icon
   - In-raid dynamic current extracts for player
+  - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
+  - In-raid dynamic airdrop icons (generated when airdrop lands)
+  - In-raid dynamic other players/bots icons
+    - Friendly players will only show if using another mod that adds multiplayer or adds friendly bots (not sure if that exists)
+    - Enemy players and scavs off by default, intended for debug
+  - Static markers for all extracts for all maps out-of-raid
   - Statically-loaded locked door with dynamic icon and color based on key status
     - Out-of-raid, green with key means player has it in inventory, yellow with key means key in stash, red with lock otherwise
     - In-raid, green with key means palyer has the key, red with lock means player doesn't have key
   - Static markers for switches and levers
-  - In-raid dynamic player icon
-  - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
-  - Disabled in-raid bot markers (waiting for configuration and filter feature)
 
 See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_WISHLIST.md`](FEATURE_WISHLIST.md) for a list of things that I would like to work on in the future.
 
