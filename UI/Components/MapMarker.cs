@@ -169,11 +169,11 @@ namespace DynamicMaps.UI.Components
             labelGO.GetRectTransform().pivot = new Vector2(0.5f, 1f);
             labelGO.GetRectTransform().sizeDelta = size * _labelSizeMultiplier;
             marker.Label = labelGO.AddComponent<TextMeshProUGUI>();
-            marker.Label.fontSizeMin = _markerMinFontSize;
-            marker.Label.fontSizeMax = _markerMaxFontSize;
             marker.Label.alignment = TextAlignmentOptions.Top;
             marker.Label.enableWordWrapping = true;
             marker.Label.enableAutoSizing = true;
+            marker.Label.fontSizeMin = _markerMinFontSize;
+            marker.Label.fontSizeMax = _markerMaxFontSize;
             marker.Label.text = marker.Text;
 
             marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
@@ -192,8 +192,15 @@ namespace DynamicMaps.UI.Components
                 return;
             }
 
+            // try resetting text, since it seems like if outline fails, it doesn't size properly
+            Label.enableAutoSizing = true;
+            Label.enableWordWrapping = true;
+            Label.fontSizeMin = _markerMinFontSize;
+            Label.fontSizeMax = _markerMaxFontSize;
+            Label.alignment = TextAlignmentOptions.Top;
+            Label.text = $"{Label.text}";
+
             _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
-            Label.text = Label.text;  // try resetting text, since it seems like if outline fails, it doesn't size properly
         }
 
         protected virtual void OnDestroy()

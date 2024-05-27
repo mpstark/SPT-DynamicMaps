@@ -65,6 +65,7 @@ namespace DynamicMaps.Utils
                 text.outlineColor = new Color32(0, 0, 0, 255);
                 text.outlineWidth = 0.15f;
                 text.fontStyle = FontStyles.Bold;
+                text.ForceMeshUpdate(true, true);
                 return true;
             }
             catch (Exception e)
