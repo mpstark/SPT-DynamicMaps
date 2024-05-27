@@ -12,6 +12,7 @@ namespace DynamicMaps.Config
 
         public const string GeneralTitle = "1. General";
         public static ConfigEntry<bool> Enabled;
+
         public static ConfigEntry<KeyboardShortcut> CenterOnPlayerHotkey;
         public static ConfigEntry<KeyboardShortcut> DumpInfoHotkey;
 
