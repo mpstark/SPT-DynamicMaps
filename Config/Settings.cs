@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BepInEx.Configuration;
+using UnityEngine;
 
 // THIS IS HEAVILY BASED ON DRAKIAXYZ'S SPT-QuickMoveToContainer
 namespace DynamicMaps.Config
@@ -11,6 +12,8 @@ namespace DynamicMaps.Config
 
         public const string GeneralTitle = "1. General";
         public static ConfigEntry<bool> Enabled;
+        public static ConfigEntry<KeyboardShortcut> CenterOnPlayerHotkey;
+        public static ConfigEntry<KeyboardShortcut> DumpInfoHotkey;
 
         public const string DynamicMarkerTitle = "2. Dynamic Markers";
         public static ConfigEntry<bool> ShowPlayerMarker;
@@ -49,6 +52,24 @@ namespace DynamicMaps.Config
                     "If the map should replace the BSG default map screen, requires swapping away from modded map to refresh",
                     null,
                     new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(CenterOnPlayerHotkey = Config.Bind(
+                GeneralTitle,
+                "Center on Player Hotkey",
+                new KeyboardShortcut(KeyCode.Semicolon),
+                new ConfigDescription(
+                    "Pressed while the map is open, centers the player",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(DumpInfoHotkey = Config.Bind(
+                GeneralTitle,
+                "Dump Info Hotkey",
+                new KeyboardShortcut(KeyCode.D, KeyCode.LeftShift, KeyCode.LeftAlt),
+                new ConfigDescription(
+                    "Pressed while the map is open, dumps json MarkerDefs for extracts, loot, and switches into root of plugin folder",
+                    null,
+                    new ConfigurationManagerAttributes { IsAdvanced = true })));
 
             ConfigEntries.Add(ShowPlayerMarker = Config.Bind(
                 DynamicMarkerTitle,

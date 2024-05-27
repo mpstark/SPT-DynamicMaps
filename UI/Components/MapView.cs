@@ -19,12 +19,6 @@ namespace DynamicMaps.UI.Components
 
         public event Action<int> OnLevelSelected;
 
-        // TODO: do we need these?
-        // public event Action<MapMarker> OnMarkerAdded;
-        // public event Action OnMarkerRemoved;
-        // public event Action<MapDef> OnMapLoaded;
-        // public event Action<MapDef> OnMapUnloaded;
-
         public RectTransform RectTransform => gameObject.transform as RectTransform;
         public MapDef CurrentMapDef { get; private set; }
         public float CoordinateRotation { get; private set; }

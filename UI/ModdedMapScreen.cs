@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BepInEx.Configuration;
 using Comfort.Common;
 using DynamicMaps.Config;
 using DynamicMaps.Data;
@@ -69,6 +70,8 @@ namespace DynamicMaps.UI
         private bool _showExtractsInRaid = true;
         private bool _showExtractStatusInRaid = true;
         private bool _showAirdropsInRaid = true;
+        private KeyboardShortcut _centerPlayerShortcut;
+        private KeyboardShortcut _dumpShortcut;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
@@ -153,7 +156,7 @@ namespace DynamicMaps.UI
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Semicolon))
+            if (_centerPlayerShortcut.IsDown())
             {
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
@@ -162,7 +165,7 @@ namespace DynamicMaps.UI
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftAlt))
+            if (_dumpShortcut.IsDown())
             {
                 DumpUtils.DumpExtracts();
                 DumpUtils.DumpSwitches();
@@ -401,6 +404,8 @@ namespace DynamicMaps.UI
         internal void ReadConfig()
         {
             IsReplacingMapScreen = Settings.Enabled.Value;
+            _centerPlayerShortcut = Settings.CenterOnPlayerHotkey.Value;
+            _dumpShortcut = Settings.DumpInfoHotkey.Value;
 
             _autoCenterOnPlayerMarker = Settings.AutoCenterOnPlayerMarker.Value;
             _autoSelectLevel = Settings.AutoSelectLevel.Value;
