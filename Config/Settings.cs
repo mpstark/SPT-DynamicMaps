@@ -127,7 +127,7 @@ namespace DynamicMaps.Config
                 "Show Airdrops In Raid",
                 true,
                 new ConfigDescription(
-                    "If airdrops should be shown in raid",
+                    "If airdrops should be shown in raid when they land",
                     null,
                     new ConfigurationManagerAttributes { })));
 
