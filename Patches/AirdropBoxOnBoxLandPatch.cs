@@ -14,6 +14,8 @@ namespace DynamicMaps.Patches
 
         protected override MethodBase GetTargetMethod()
         {
+            GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+
             // thanks to TechHappy for the breadcrumb of what method to patch
             return AccessTools.Method(typeof(AirdropBox), "OnBoxLand");
         }

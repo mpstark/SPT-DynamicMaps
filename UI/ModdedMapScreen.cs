@@ -4,6 +4,7 @@ using Comfort.Common;
 using DynamicMaps.Config;
 using DynamicMaps.Data;
 using DynamicMaps.DynamicMarkers;
+using DynamicMaps.Patches;
 using DynamicMaps.UI.Components;
 using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
@@ -131,6 +132,13 @@ namespace DynamicMaps.UI
 
             // read config before setting up marker providers
             ReadConfig();
+
+            GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+        }
+
+        private void OnDestroy()
+        {
+            GameWorldOnDestroyPatch.OnRaidEnd -= OnRaidEnd;
         }
 
         private void Update()
