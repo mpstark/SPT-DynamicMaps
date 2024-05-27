@@ -4,6 +4,7 @@ using Comfort.Common;
 using DynamicMaps.Config;
 using DynamicMaps.Data;
 using DynamicMaps.DynamicMarkers;
+using DynamicMaps.Patches;
 using DynamicMaps.UI.Components;
 using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
@@ -67,6 +68,7 @@ namespace DynamicMaps.UI
         private bool _showQuestsInRaid = true;
         private bool _showExtractsInRaid = true;
         private bool _showExtractStatusInRaid = true;
+        private bool _showAirdropsInRaid = true;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
@@ -130,6 +132,13 @@ namespace DynamicMaps.UI
 
             // read config before setting up marker providers
             ReadConfig();
+
+            GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+        }
+
+        private void OnDestroy()
+        {
+            GameWorldOnDestroyPatch.OnRaidEnd -= OnRaidEnd;
         }
 
         private void Update()
@@ -412,9 +421,12 @@ namespace DynamicMaps.UI
             _showExtractsInRaid = Settings.ShowExtractsInRaid.Value;
             _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
 
+            _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
+
             AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
             AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
             AddRemoveMarkerProvider<LockedDoorMarkerMutator>(_showLockedDoorStatus);
+            AddRemoveMarkerProvider<AirdropMarkerProvider>(_showAirdropsInRaid);
 
             // extracts
             AddRemoveMarkerProvider<ExtractMarkerProvider>(_showExtractsInRaid);

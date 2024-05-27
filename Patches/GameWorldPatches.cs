@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Aki.Reflection.Patching;
 using EFT;
@@ -7,6 +8,8 @@ namespace DynamicMaps.Patches
 {
     internal class GameWorldOnDestroyPatch : ModulePatch
     {
+        internal static event Action OnRaidEnd;
+
         protected override MethodBase GetTargetMethod()
         {
             return AccessTools.Method(typeof(GameWorld), nameof(GameWorld.OnDestroy));
@@ -15,7 +18,7 @@ namespace DynamicMaps.Patches
         [PatchPostfix]
         public static void PatchPostfix()
         {
-            Plugin.Instance.Map?.OnRaidEnd();
+            OnRaidEnd?.Invoke();
         }
     }
 }

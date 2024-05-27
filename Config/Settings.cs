@@ -26,6 +26,8 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowExtractsInRaid;
         public static ConfigEntry<bool> ShowExtractStatusInRaid;
 
+        public static ConfigEntry<bool> ShowAirdropsInRaid;
+
         public const string InRaidTitle = "3. In-Raid";
         public static ConfigEntry<bool> ResetZoomOnCenter;
         public static ConfigEntry<float> CenteringZoomResetPoint;
@@ -117,6 +119,15 @@ namespace DynamicMaps.Config
                 true,
                 new ConfigDescription(
                     "If extracts should be colored according to their status in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowAirdropsInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Airdrops In Raid",
+                true,
+                new ConfigDescription(
+                    "If airdrops should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
