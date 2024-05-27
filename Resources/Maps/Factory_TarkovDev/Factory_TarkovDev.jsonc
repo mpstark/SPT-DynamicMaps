@@ -6,7 +6,7 @@
     "CoordinateRotation": 90,
     "Bounds": {
         "Min": {"x": -65, "y": -64.5},
-        "Max": {"x": 77.5, "y": 67.2}
+        "Max": {"x": 77.6, "y": 67.2}
     },
     "DefaultLevel": 0,
     "Layers": {
@@ -15,12 +15,12 @@
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_-1.png",
             "ImageBounds": {
                 "Min": {"x": -65, "y": -64.5},
-                "Max": {"x": 77.5, "y": 67.2}
+                "Max": {"x": 77.6, "y": 67.2}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -65, "y": -64.5, "z": -100},
-                    "Max": {"x": 77.5, "y": 67.2, "z": -1}
+                    "Max": {"x": 77.6, "y": 67.2, "z": -1}
                 }
             ]
         },
@@ -29,12 +29,12 @@
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_0.png",
             "ImageBounds": {
                 "Min": {"x": -65, "y": -64.5},
-                "Max": {"x": 77.5, "y": 67.2}
+                "Max": {"x": 77.6, "y": 67.2}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -65, "y": -64.5, "z": -1},
-                    "Max": {"x": 77.5, "y": 67.2, "z": 3}
+                    "Max": {"x": 77.6, "y": 67.2, "z": 3}
                 }
             ]
         },
@@ -43,12 +43,12 @@
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_1.png",
             "ImageBounds": {
                 "Min": {"x": -65, "y": -64.5},
-                "Max": {"x": 77.5, "y": 67.2}
+                "Max": {"x": 77.6, "y": 67.2}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -65, "y": -64.5, "z": 3},
-                    "Max": {"x": 77.5, "y": 67.2, "z": 6}
+                    "Max": {"x": 77.6, "y": 67.2, "z": 6}
                 }
             ]
         },
@@ -57,12 +57,12 @@
             "ImagePath": "Maps/Factory_TarkovDev/Layers/factory_layer_2.png",
             "ImageBounds": {
                 "Min": {"x": -65, "y": -64.5},
-                "Max": {"x": 77.5, "y": 67.2}
+                "Max": {"x": 77.6, "y": 67.2}
             },
             "GameBounds": [
                 {
                     "Min": {"x": -65, "y": -64.5, "z": 6},
-                    "Max": {"x": 77.5, "y": 67.2, "z": 100}
+                    "Max": {"x": 77.6, "y": 67.2, "z": 100}
                 }
             ]
         }
