@@ -69,8 +69,7 @@ namespace DynamicMaps.Utils
             }
             catch (Exception e)
             {
-                Plugin.Log.LogWarning($"Failed at setting outline: {e.Message}");
-                Plugin.Log.LogWarning($"{e.StackTrace}");
+                Plugin.Log.LogWarning($"Failed at setting outline. Will likely try again on next enable");
             }
 
             return false;

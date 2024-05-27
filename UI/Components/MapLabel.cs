@@ -87,6 +87,7 @@ namespace DynamicMaps.UI.Components
             }
 
             _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
+            Label.text = Label.text;  // try resetting text, since it seems like if outline fails, it doesn't size properly
         }
 
         public void HandleNewLayerStatus(LayerStatus status)

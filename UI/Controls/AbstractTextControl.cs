@@ -34,6 +34,7 @@ namespace DynamicMaps.UI.Controls
             }
 
             _hasSetOutline = UIUtils.TrySetTMPOutline(Text);
+            Text.text = Text.text;  // try resetting text, since it seems like if outline fails, it doesn't size properly
         }
     }
 }
