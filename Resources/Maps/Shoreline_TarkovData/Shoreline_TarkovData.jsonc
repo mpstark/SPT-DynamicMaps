@@ -484,7 +484,7 @@
             "Position": { "x": -142.583267, "y": -79.9176, "z": 0.164085388 },
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
-            "AssociatedItemId": "a0ea79b86f7741d4a35298e"
+            "AssociatedItemId": "5a0ea79b86f7741d4a35298e"
         },
         {
             "Text": "East Wing Room 306",
