@@ -187,20 +187,7 @@ namespace DynamicMaps.UI.Components
 
         protected virtual void OnEnable()
         {
-            if (_hasSetOutline || Label == null)
-            {
-                return;
-            }
-
-            // try resetting text, since it seems like if outline fails, it doesn't size properly
-            Label.enableAutoSizing = true;
-            Label.enableWordWrapping = true;
-            Label.fontSizeMin = _markerMinFontSize;
-            Label.fontSizeMax = _markerMaxFontSize;
-            Label.alignment = TextAlignmentOptions.Top;
-            Label.text = $"{Label.text}";
-
-            _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
+            TrySetOutlineAndResize();
         }
 
         protected virtual void OnDestroy()
@@ -265,6 +252,8 @@ namespace DynamicMaps.UI.Components
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            TrySetOutlineAndResize();
+
             _isInFullReveal = true;
             transform.SetAsLastSibling();
             HandleNewLayerStatus(LayerStatus.FullReveal);
@@ -274,6 +263,24 @@ namespace DynamicMaps.UI.Components
         {
             _isInFullReveal = false;
             OnPositionChanged?.Invoke(this);
+        }
+
+        private void TrySetOutlineAndResize()
+        {
+            if (_hasSetOutline || Label == null)
+            {
+                return;
+            }
+
+            // try resetting text, since it seems like if outline fails, it doesn't size properly
+            Label.enableAutoSizing = true;
+            Label.enableWordWrapping = true;
+            Label.fontSizeMin = _markerMinFontSize;
+            Label.fontSizeMax = _markerMaxFontSize;
+            Label.alignment = TextAlignmentOptions.Top;
+            Label.text = $"{Label.text}";
+
+            _hasSetOutline = UIUtils.TrySetTMPOutline(Label);
         }
     }
 }
