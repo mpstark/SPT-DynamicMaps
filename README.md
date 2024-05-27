@@ -34,7 +34,7 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
   - Static markers for all extracts for all maps out-of-raid
   - Statically-loaded locked door with dynamic icon and color based on key status
     - Out-of-raid, green with key means player has it in inventory, yellow with key means key in stash, red with lock otherwise
-    - In-raid, green with key means palyer has the key, red with lock means player doesn't have key
+    - In-raid, green with key means player has the key, red with lock means player doesn't have key
   - Static markers for switches and levers
 
 See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_WISHLIST.md`](FEATURE_WISHLIST.md) for a list of things that I would like to work on in the future.
