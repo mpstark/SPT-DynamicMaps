@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EFT.UI;
 using DynamicMaps.Data;
 using DynamicMaps.Utils;
+using EFT.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

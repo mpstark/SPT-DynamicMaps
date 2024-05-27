@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
-using EFT;
 using DynamicMaps.Data;
 using DynamicMaps.UI.Components;
 using DynamicMaps.Utils;
+using EFT;
 using UnityEngine;
 
 namespace DynamicMaps.DynamicMarkers

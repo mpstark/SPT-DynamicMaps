@@ -1,6 +1,6 @@
 using System;
-using EFT;
 using DynamicMaps.Utils;
+using EFT;
 using UnityEngine;
 
 namespace DynamicMaps.UI.Components

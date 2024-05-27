@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EFT.UI;
 using DynamicMaps.Data;
 using DynamicMaps.Utils;
+using EFT.UI;
 using UnityEngine;
 
 namespace DynamicMaps.UI.Controls

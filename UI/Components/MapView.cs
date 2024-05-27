@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using EFT;
 using DynamicMaps.Data;
 using DynamicMaps.Utils;
+using EFT;
 using UnityEngine;
 using UnityEngine.UI;
 
