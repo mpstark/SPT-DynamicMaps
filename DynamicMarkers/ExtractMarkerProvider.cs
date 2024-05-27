@@ -43,20 +43,20 @@ namespace DynamicMaps.DynamicMarkers
         public void OnShowInRaid(MapView map)
         {
             var gameWorld = Singleton<GameWorld>.Instance;
-            var profile = GameUtils.GetMainPlayer().Profile;
+            var player = GameUtils.GetMainPlayer();
 
             // get valid exfil points
-            ExfiltrationPoint[] exfils;
-            if (!GameUtils.IsScavRaid())
+            IEnumerable<ExfiltrationPoint> exfils;
+            if (GameUtils.IsScavRaid())
             {
-                exfils = gameWorld.ExfiltrationController.EligiblePoints(profile);
+                exfils = gameWorld.ExfiltrationController.ScavExfiltrationPoints
+                            .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player))
+                            .Cast<ExfiltrationPoint>();
             }
             else
             {
-                var profileId = profile.ProfileId;
-                exfils = gameWorld.ExfiltrationController.ScavExfiltrationPoints
-                            .Where(p => p.EligibleIds.Contains(profileId))
-                            .ToArray();
+                exfils = gameWorld.ExfiltrationController.ExfiltrationPoints
+                            .Where(p => p.isActiveAndEnabled && p.InfiltrationMatch(player));
             }
 
             foreach (var exfil in exfils)
