@@ -68,7 +68,7 @@ namespace DynamicMaps.Utils
                 text.ForceMeshUpdate(true, true);
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 Plugin.Log.LogWarning($"Failed at setting outline. Will likely try again on next enable");
             }
