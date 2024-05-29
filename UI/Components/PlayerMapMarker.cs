@@ -42,7 +42,7 @@ namespace DynamicMaps.UI.Components
         public static PlayerMapMarker Create(IPlayer player, GameObject parent, string imagePath, Color color, string category,
                                              Vector2 size, float degreesRotation, float scale)
         {
-            var name = $"{player.Profile.Nickname}";
+            var name = $"{player.Profile.GetCorrectedNickname()}";
             var marker = Create<PlayerMapMarker>(parent, name, category, imagePath, color,
                                                  MathUtils.ConvertToMapPosition(player.Position),
                                                  size, _pivot, degreesRotation, scale);
