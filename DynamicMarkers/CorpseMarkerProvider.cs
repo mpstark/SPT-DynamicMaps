@@ -200,7 +200,7 @@ namespace DynamicMaps.DynamicMarkers
             {
                 Category = "Other Corpse",
                 ImagePath = "Markers/skull.png",
-                Text = player.Profile.Nickname,
+                Text = player.Profile.GetCorrectedNickname(),
                 Color = Color.yellow,
                 Position = MathUtils.ConvertToMapPosition(player.Position)
             };
