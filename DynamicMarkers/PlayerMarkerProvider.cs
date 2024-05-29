@@ -7,6 +7,8 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class PlayerMarkerProvider : IDynamicMarkerProvider
     {
+        private static string _arrowIconPath = "Markers/arrow.png";
+
         private PlayerMapMarker _playerMarker;
 
         public void OnShowInRaid(MapView map)
@@ -48,7 +50,7 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // try adding the marker
-            _playerMarker = map.AddPlayerMarker(player, "Player", Color.green);
+            _playerMarker = map.AddPlayerMarker(player, "Player", Color.green, _arrowIconPath);
         }
 
         private void TryRemoveMarker()

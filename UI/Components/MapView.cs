@@ -82,9 +82,9 @@ namespace DynamicMaps.UI.Components
             return marker;
         }
 
-        public PlayerMapMarker AddPlayerMarker(IPlayer player, string category, Color color)
+        public PlayerMapMarker AddPlayerMarker(IPlayer player, string category, Color color, string imagePath)
         {
-            var marker = PlayerMapMarker.Create(player, MapMarkerContainer, "Markers/arrow.png", color, category,
+            var marker = PlayerMapMarker.Create(player, MapMarkerContainer, imagePath, color, category,
                                                 _markerSize, -CoordinateRotation, 1f/ZoomCurrent);
             marker.OnDeathOrDespawn += RemoveMapMarker;
             AddMapMarker(marker);

@@ -11,6 +11,9 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class OtherPlayersMarkerProvider : IDynamicMarkerProvider
     {
+        private static string _arrowIconPath = "Markers/arrow.png";
+        private static string _starIconPath = "Markers/star.png";
+
         private bool _showFriendlyPlayers = true;
         public bool ShowFriendlyPlayers
         {
@@ -85,6 +88,34 @@ namespace DynamicMaps.DynamicMarkers
                 _showScavs = value;
 
                 if (_showScavs)
+                {
+                    TryAddMarkers();
+                }
+                else
+                {
+                    RemoveDisabledMarkers();
+                }
+            }
+        }
+
+        private bool _showBosses = false;
+        public bool ShowBosses
+        {
+            get
+            {
+                return _showBosses;
+            }
+
+            set
+            {
+                if (value == _showBosses)
+                {
+                    return;
+                }
+
+                _showBosses = value;
+
+                if (_showBosses)
                 {
                     TryAddMarkers();
                 }
@@ -180,6 +211,8 @@ namespace DynamicMaps.DynamicMarkers
             // set category and color
             var category = "Scav";
             var color = Color.Lerp(Color.red, Color.yellow, 0.5f);
+            var imagePath = _arrowIconPath;
+
             var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
             if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
             {
@@ -191,8 +224,14 @@ namespace DynamicMaps.DynamicMarkers
                 color = Color.red;
                 category = "Enemy Player";
             }
+            else if (player.Profile.Side == EPlayerSide.Savage && player.Profile.Info.Settings.Role.CountAsBossForStatistics())
+            {
+                imagePath = _starIconPath;
+                category = "Boss";
+            }
 
             if (category == "Scav" && !_showScavs
+             || category == "Boss" && !_showBosses
              || category == "Friendly Player" && !_showFriendlyPlayers
              || category == "Enemy Player" && !_showEnemyPlayers)
             {
@@ -200,7 +239,7 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // try adding marker
-            var marker = _lastMapView.AddPlayerMarker(player, category, color);
+            var marker = _lastMapView.AddPlayerMarker(player, category, color, imagePath);
             player.OnIPlayerDeadOrUnspawn += TryRemoveMarker;
 
             _playerMarkers[player] = marker;
@@ -214,7 +253,8 @@ namespace DynamicMaps.DynamicMarkers
 
                 if ((!_showFriendlyPlayers && marker.Category == "Friendly Player")
                  || (!_showEnemyPlayers && marker.Category == "Enemy Player")
-                 || (!_showScavs && marker.Category == "Scav"))
+                 || (!_showScavs && marker.Category == "Scav")
+                 || (!_showBosses && marker.Category == "Boss"))
                 {
                     TryRemoveMarker(player);
                 }

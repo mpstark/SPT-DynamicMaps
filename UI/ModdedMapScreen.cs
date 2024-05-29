@@ -70,6 +70,7 @@ namespace DynamicMaps.UI
         private bool _showFriendlyPlayerMarkersInRaid = true;
         private bool _showEnemyPlayerMarkersInRaid = false;
         private bool _showScavMarkersInRaid = false;
+        private bool _showBossMarkersInRaid = false;
         private bool _showLockedDoorStatus = true;
         private bool _showQuestsInRaid = true;
         private bool _showExtractsInRaid = true;
@@ -577,6 +578,7 @@ namespace DynamicMaps.UI
             _showFriendlyPlayerMarkersInRaid = Settings.ShowFriendlyPlayerMarkersInRaid.Value;
             _showEnemyPlayerMarkersInRaid = Settings.ShowEnemyPlayerMarkersInRaid.Value;
             _showScavMarkersInRaid = Settings.ShowScavMarkersInRaid.Value;
+            _showBossMarkersInRaid = Settings.ShowBossMarkersInRaid.Value;
 
             _showQuestsInRaid = Settings.ShowQuestsInRaid.Value;
 
@@ -619,6 +621,7 @@ namespace DynamicMaps.UI
                 provider.ShowFriendlyPlayers = _showFriendlyPlayerMarkersInRaid;
                 provider.ShowEnemyPlayers = _showEnemyPlayerMarkersInRaid;
                 provider.ShowScavs = _showScavMarkersInRaid;
+                provider.ShowBosses = _showBossMarkersInRaid;
             }
 
             // corpse markers
