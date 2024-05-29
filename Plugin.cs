@@ -33,6 +33,7 @@ namespace DynamicMaps
             new MapScreenClosePatch().Enable();
             new BattleUIScreenShowPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
+            new GameWorldUnregisterPlayerPatch().Enable();
             new AirdropBoxOnBoxLandPatch().Enable();
         }
 

@@ -32,9 +32,9 @@ namespace DynamicMaps.Config
         public const string DynamicMarkerTitle = "2. Dynamic Markers";
         public static ConfigEntry<bool> ShowPlayerMarker;
 
-        public static ConfigEntry<bool> ShowFriendlyPlayerMarkers;
-        public static ConfigEntry<bool> ShowEnemyPlayerMarkers;
-        public static ConfigEntry<bool> ShowScavMarkers;
+        public static ConfigEntry<bool> ShowFriendlyPlayerMarkersInRaid;
+        public static ConfigEntry<bool> ShowEnemyPlayerMarkersInRaid;
+        public static ConfigEntry<bool> ShowScavMarkersInRaid;
 
         public static ConfigEntry<bool> ShowLockedDoorStatus;
 
@@ -44,6 +44,10 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowExtractStatusInRaid;
 
         public static ConfigEntry<bool> ShowAirdropsInRaid;
+
+        public static ConfigEntry<bool> ShowFriendlyCorpsesInRaid;
+        public static ConfigEntry<bool> ShowKilledCorpsesInRaid;
+        public static ConfigEntry<bool> ShowOtherCorpsesInRaid;
 
         public const string InRaidTitle = "3. In-Raid";
         public static ConfigEntry<bool> ResetZoomOnCenter;
@@ -187,30 +191,30 @@ namespace DynamicMaps.Config
                     null,
                     new ConfigurationManagerAttributes { })));
 
-            ConfigEntries.Add(ShowFriendlyPlayerMarkers = Config.Bind(
+            ConfigEntries.Add(ShowFriendlyPlayerMarkersInRaid = Config.Bind(
                 DynamicMarkerTitle,
                 "Show Friendly Player Markers",
                 true,
                 new ConfigDescription(
-                    "If friendly player markers should be shown",
+                    "If friendly player markers should be shown in-raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
-            ConfigEntries.Add(ShowEnemyPlayerMarkers = Config.Bind(
+            ConfigEntries.Add(ShowEnemyPlayerMarkersInRaid = Config.Bind(
                 DynamicMarkerTitle,
                 "Show Enemy Player Markers",
                 false,
                 new ConfigDescription(
-                    "If enemy player markers should be shown (generally for debug)",
+                    "If enemy player markers should be shown in-raid (generally for debug)",
                     null,
                     new ConfigurationManagerAttributes { })));
 
-            ConfigEntries.Add(ShowScavMarkers = Config.Bind(
+            ConfigEntries.Add(ShowScavMarkersInRaid = Config.Bind(
                 DynamicMarkerTitle,
                 "Show Scav Markers",
                 false,
                 new ConfigDescription(
-                    "If enemy scav markers should be shown (generally for debug)",
+                    "If enemy scav markers should be shown in-raid (generally for debug)",
                     null,
                     new ConfigurationManagerAttributes { })));
 
@@ -256,6 +260,33 @@ namespace DynamicMaps.Config
                 true,
                 new ConfigDescription(
                     "If airdrops should be shown in raid when they land",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowFriendlyCorpsesInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Friendly Corpses In Raid",
+                true,
+                new ConfigDescription(
+                    "If friendly corpses should be shown in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowKilledCorpsesInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Player-killed Corpses In Raid",
+                false,
+                new ConfigDescription(
+                    "If corpses killed by the player should be shown in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowOtherCorpsesInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Other Corpses In Raid",
+                false,
+                new ConfigDescription(
+                    "If corpses (other than friendly ones or ones killed by the player) should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
