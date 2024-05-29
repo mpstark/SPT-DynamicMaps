@@ -116,6 +116,8 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnRaidEnd(MapView map)
         {
+            Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
+
             _lastMapView = map;
             TryRemoveMarkers();
         }
@@ -133,6 +135,8 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnDisable(MapView map)
         {
+            Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
+
             TryRemoveMarkers();
         }
 

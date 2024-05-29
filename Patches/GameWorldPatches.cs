@@ -30,4 +30,20 @@ namespace DynamicMaps.Patches
             }
         }
     }
+
+    internal class GameWorldUnregisterPlayerPatch : ModulePatch
+    {
+        internal static event Action<IPlayer> OnUnregisterPlayer;
+
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(GameWorld), nameof(GameWorld.UnregisterPlayer));
+        }
+
+        [PatchPostfix]
+        public static void PatchPostfix(IPlayer iPlayer)
+        {
+            OnUnregisterPlayer?.Invoke(iPlayer);
+        }
+    }
 }

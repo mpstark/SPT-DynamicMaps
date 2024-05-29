@@ -67,14 +67,17 @@ namespace DynamicMaps.UI
         private bool _resetZoomOnCenter = false;
         private float _centeringZoomResetPoint = 0f;
         private bool _showPlayerMarker = true;
-        private bool _showFriendlyPlayerMarkers = true;
-        private bool _showEnemyPlayerMarkers = false;
-        private bool _showScavMarkers = false;
+        private bool _showFriendlyPlayerMarkersInRaid = true;
+        private bool _showEnemyPlayerMarkersInRaid = false;
+        private bool _showScavMarkersInRaid = false;
         private bool _showLockedDoorStatus = true;
         private bool _showQuestsInRaid = true;
         private bool _showExtractsInRaid = true;
         private bool _showExtractStatusInRaid = true;
         private bool _showAirdropsInRaid = true;
+        private bool _showFriendlyCorpsesInRaid = true;
+        private bool _showKilledCorpsesInRaid = false;
+        private bool _showOtherCorpsesInRaid = false;
         private KeyboardShortcut _centerPlayerShortcut;
         private KeyboardShortcut _dumpShortcut;
         private KeyboardShortcut _moveMapUpShortcut;
@@ -571,9 +574,9 @@ namespace DynamicMaps.UI
 
             _showPlayerMarker = Settings.ShowPlayerMarker.Value;
 
-            _showFriendlyPlayerMarkers = Settings.ShowFriendlyPlayerMarkers.Value;
-            _showEnemyPlayerMarkers = Settings.ShowEnemyPlayerMarkers.Value;
-            _showScavMarkers = Settings.ShowScavMarkers.Value;
+            _showFriendlyPlayerMarkersInRaid = Settings.ShowFriendlyPlayerMarkersInRaid.Value;
+            _showEnemyPlayerMarkersInRaid = Settings.ShowEnemyPlayerMarkersInRaid.Value;
+            _showScavMarkersInRaid = Settings.ShowScavMarkersInRaid.Value;
 
             _showQuestsInRaid = Settings.ShowQuestsInRaid.Value;
 
@@ -583,6 +586,10 @@ namespace DynamicMaps.UI
             _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
 
             _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
+
+            _showFriendlyCorpsesInRaid = Settings.ShowFriendlyCorpsesInRaid.Value;
+            _showKilledCorpsesInRaid = Settings.ShowKilledCorpsesInRaid.Value;
+            _showOtherCorpsesInRaid = Settings.ShowOtherCorpsesInRaid.Value;
 
             if (_peekComponent != null)
             {
@@ -604,15 +611,25 @@ namespace DynamicMaps.UI
             }
 
             // other player markers
-            var needOtherPlayerMarkers = _showFriendlyPlayerMarkers || _showEnemyPlayerMarkers || _showScavMarkers;
+            var needOtherPlayerMarkers = _showFriendlyPlayerMarkersInRaid || _showEnemyPlayerMarkersInRaid || _showScavMarkersInRaid;
             AddRemoveMarkerProvider<OtherPlayersMarkerProvider>(needOtherPlayerMarkers);
-
             if (needOtherPlayerMarkers)
             {
                 var provider = GetMarkerProvider<OtherPlayersMarkerProvider>();
-                provider.ShowFriendlyPlayers = _showFriendlyPlayerMarkers;
-                provider.ShowEnemyPlayers = _showEnemyPlayerMarkers;
-                provider.ShowScavs = _showScavMarkers;
+                provider.ShowFriendlyPlayers = _showFriendlyPlayerMarkersInRaid;
+                provider.ShowEnemyPlayers = _showEnemyPlayerMarkersInRaid;
+                provider.ShowScavs = _showScavMarkersInRaid;
+            }
+
+            // corpse markers
+            var needCorpseMarkers = _showFriendlyCorpsesInRaid || _showKilledCorpsesInRaid || _showOtherCorpsesInRaid;
+            AddRemoveMarkerProvider<CorpseMarkerProvider>(needCorpseMarkers);
+            if (needCorpseMarkers)
+            {
+                var provider = GetMarkerProvider<CorpseMarkerProvider>();
+                provider.ShowFriendlyCorpses = _showFriendlyCorpsesInRaid;
+                provider.ShowKilledCorpses = _showKilledCorpsesInRaid;
+                provider.ShowOtherCorpses = _showOtherCorpsesInRaid;
             }
         }
 
