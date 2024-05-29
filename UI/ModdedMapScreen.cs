@@ -342,8 +342,12 @@ namespace DynamicMaps.UI
                 }
             }
 
+            // reset peek and remove reference, it will be destroyed very shortly with parent object
             _peekComponent?.EndPeek();
             _peekComponent = null;
+
+            // unload map completely when raid ends, since we've removed markers
+            _mapView.UnloadMap();
         }
 
         private void AdjustSizeAndPosition()
