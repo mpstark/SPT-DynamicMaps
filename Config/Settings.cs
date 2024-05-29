@@ -285,7 +285,7 @@ namespace DynamicMaps.Config
             ConfigEntries.Add(ShowKilledCorpsesInRaid = Config.Bind(
                 DynamicMarkerTitle,
                 "Show Player-killed Corpses In Raid",
-                false,
+                true,
                 new ConfigDescription(
                     "If corpses killed by the player should be shown in raid",
                     null,
@@ -312,7 +312,7 @@ namespace DynamicMaps.Config
             ConfigEntries.Add(AutoCenterOnPlayerMarker = Config.Bind(
                 InRaidTitle,
                 "Auto Center On Player Marker",
-                true,
+                false,
                 new ConfigDescription(
                     "If the player marker should be centered when showing the map in raid",
                     null,
@@ -330,7 +330,7 @@ namespace DynamicMaps.Config
             ConfigEntries.Add(CenteringZoomResetPoint = Config.Bind(
                 InRaidTitle,
                 "Centering On Player Zoom Level",
-                0.25f,
+                0.15f,
                 new ConfigDescription(
                     "What zoom level should be used as while centering on the player (0 is fully zoomed out, and 1 is fully zoomed in)",
                     new AcceptableValueRange<float>(0f, 1f),
