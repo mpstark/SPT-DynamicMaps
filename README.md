@@ -28,9 +28,10 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
   - In-raid dynamic current extracts for player
   - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
   - In-raid dynamic airdrop icons (generated when airdrop lands)
+  - In-raid dynamic markers for corpses
   - In-raid dynamic other players/bots icons
     - Friendly players will only show if using another mod that adds multiplayer or adds friendly bots (not sure if that exists)
-    - Enemy players and scavs off by default, intended for debug
+    - Enemy players, bosses, and scavs off by default, intended for mostly debug
   - Static markers for all extracts for all maps out-of-raid
   - Statically-loaded locked door with dynamic icon and color based on key status
     - Out-of-raid, green with key means player has it in inventory, yellow with key means key in stash, red with lock otherwise
@@ -43,8 +44,13 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 
 ### General
 
-- **Enabled**: If the map should replace the BSG default map screen, requires swapping away from modded map to refresh
+- **Replace Map Screen**: If the map should replace the BSG default map screen, requires swapping away from modded map to refresh
 - **Center on Player Hotkey**: Pressed while the map is open, centers the player
+- **Move Map * Hotkey**: Hotkey to move the map *
+- **Move Map Hotkey Speed**: How fast the map should move, units are map percent per second
+- **Change Map Level * Hotkey**: Hotkey to move the map level * (shift-scroll also does this in map screen)
+- **Zoom Map * Hotkey**: Hotkey to zoom the map * (scroll also does this in map screen)
+- **Zoom Map Hotkey Speed**: Zoom Map Hotkey Speed
 - **Dump Info Hotkey**: Pressed while the map is open, dumps json MarkerDefs for extracts, loot, and switches into root of plugin folder (only shows in advanced config mode)
 
 ### Dynamic Markers
@@ -53,11 +59,15 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 - **Show Friendly Player Markers**: If friendly player markers should be shown
 - **Show Enemy Player Markers**: If enemy player markers should be shown (generally for debug)
 - **Show Scav Markers**: If enemy scav markers should be shown (generally for debug)
+- **Show Boss Markers**: If enemy boss markers should be shown
 - **Show Locked Door Status**: If locked door markers should be updated with status based on key acquisition
 - **Show Quests In Raid**: If quests should be shown in raid
 - **Show Extracts In Raid**: If extracts should be shown in raid
 - **Show Extracts Status In Raid**: If extracts should be colored according to their status in raid
 - **Show Airdrop In Raid**: If airdrops should be shown in raid when they land
+- **Show Friendly Corpses In Raid**: If friendly corpses should be shown in raid
+- **Show Player-killed Corpses In Raid**: If corpses killed by the player should be shown in raid
+- **Show Other Corpses In Raid**: If corpses (other than friendly ones or ones killed by the player) should be shown in raid
 
 ### In-Raid
 
@@ -65,6 +75,8 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 - **Auto Center On Player Marker**: If the player marker should be centered when showing the map in raid
 - **Reset Zoom On Center**: If the zoom level should be reset each time that the map is opened while in raid
 - **Centering On Player Zoom Level**: What zoom level should be used as while centering on the player (0 is fully zoomed out, and 1 is fully zoomed in)
+- **Peek at Map Shortcut**: The keyboard shortcut to peek at the map
+- **Hold for Peek**: If the shortcut should be held to keep it open. If disabled, button toggles
 
 ## Installation
 

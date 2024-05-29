@@ -339,7 +339,7 @@ namespace DynamicMaps.Config
             ConfigEntries.Add(PeekShortcut = Config.Bind(
                 InRaidTitle,
                 "Peek at Map Shortcut",
-                new KeyboardShortcut(UnityEngine.KeyCode.M),
+                new KeyboardShortcut(KeyCode.M),
                 new ConfigDescription(
                     "The keyboard shortcut to peek at the map",
                     null,
