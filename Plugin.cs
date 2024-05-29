@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
-using EFT.UI.Map;
+using Comfort.Common;
 using DynamicMaps.Config;
 using DynamicMaps.Patches;
 using DynamicMaps.UI;
+using EFT.UI;
+using EFT.UI.Map;
 
 namespace DynamicMaps
 {
@@ -26,7 +28,10 @@ namespace DynamicMaps
             Instance = this;
 
             // patches
+            new CommonUIAwakePatch().Enable();
             new MapScreenShowPatch().Enable();
+            new MapScreenClosePatch().Enable();
+            new BattleUIScreenShowPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
             new AirdropBoxOnBoxLandPatch().Enable();
         }
@@ -34,14 +39,31 @@ namespace DynamicMaps
         /// <summary>
         /// Attach to the map screen
         /// </summary>
-        internal void TryAttachToMapScreen(MapScreen screen)
+        internal void TryAttachToMapScreen(MapScreen mapScreen)
         {
             if (Map != null)
             {
                 return;
             }
 
-            Map = ModdedMapScreen.Create(screen.gameObject);
+            Log.LogInfo("Trying to attach to MapScreen");
+
+            // attach to common UI first to call awake and set things up, then attach to sleeping map screen
+            Map = ModdedMapScreen.Create(Singleton<CommonUI>.Instance.gameObject);
+            Map.transform.SetParent(mapScreen.transform);
+        }
+
+        /// <summary>
+        /// Attach the peek component
+        /// </summary>
+        internal void TryAttachToBattleUIScreen(BattleUIScreen battleUI)
+        {
+            if (Map == null)
+            {
+                return;
+            }
+
+            Map.TryAddPeekComponent(battleUI);
         }
     }
 }

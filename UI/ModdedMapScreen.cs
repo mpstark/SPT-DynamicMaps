@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using BepInEx.Configuration;
 using Comfort.Common;
@@ -21,6 +22,7 @@ namespace DynamicMaps.UI
 
         private static float _positionTweenTime = 0.25f;
         private static float _scrollZoomScaler = 1.75f;
+        private static float _zoomScrollTweenTime = 0.25f;
 
         private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
         private static Vector2 _mapSelectDropdownPosition = new Vector2(-780f, -50f);
@@ -39,7 +41,6 @@ namespace DynamicMaps.UI
 
         private RectTransform _parentTransform => gameObject.transform.parent as RectTransform;
 
-        private bool _lastShownInRaid = false;
         private bool _isShown = false;
 
         // map and transport mechanism
@@ -52,6 +53,10 @@ namespace DynamicMaps.UI
         private MapSelectDropdown _mapSelectDropdown;
         private CursorPositionText _cursorPositionText;
         private PlayerPositionText _playerPositionText;
+
+        // peek
+        private MapPeekComponent _peekComponent;
+        private bool _isPeeking => _peekComponent != null && _peekComponent.IsPeeking;
 
         // dynamic map marker providers
         private Dictionary<Type, IDynamicMarkerProvider> _dynamicMarkerProviders = new Dictionary<Type, IDynamicMarkerProvider>();
@@ -72,15 +77,20 @@ namespace DynamicMaps.UI
         private bool _showAirdropsInRaid = true;
         private KeyboardShortcut _centerPlayerShortcut;
         private KeyboardShortcut _dumpShortcut;
+        private KeyboardShortcut _moveMapUpShortcut;
+        private KeyboardShortcut _moveMapDownShortcut;
+        private KeyboardShortcut _moveMapLeftShortcut;
+        private KeyboardShortcut _moveMapRightShortcut;
+        private float _moveMapSpeed = 0.25f;
+        private KeyboardShortcut _moveMapLevelUpShortcut;
+        private KeyboardShortcut _moveMapLevelDownShortcut;
+        private KeyboardShortcut _zoomMapInShortcut;
+        private KeyboardShortcut _zoomMapOutShortcut;
+        private float _zoomMapHotkeySpeed = 2.5f;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
             var go = UIUtils.CreateUIGameObject(parent, "ModdedMapBlock");
-
-            // set width and height based on parent
-            var rect = parent.GetRectTransform().rect;
-            go.GetRectTransform().sizeDelta = new Vector2(rect.width, rect.height);
-
             return go.AddComponent<ModdedMapScreen>();
         }
 
@@ -96,11 +106,8 @@ namespace DynamicMaps.UI
             var scrollMaskImage = scrollMaskGO.AddComponent<Image>();
             scrollMaskImage.color = new Color(0f, 0f, 0f, 0.5f);
             _scrollMask = scrollMaskGO.AddComponent<Mask>();
-            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
-            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
 
             // set up scroll rect
-            scrollRectGO.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
             _scrollRect = scrollRectGO.AddComponent<ScrollRect>();
             _scrollRect.scrollSensitivity = 0;  // don't scroll on mouse wheel
             _scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
@@ -110,33 +117,36 @@ namespace DynamicMaps.UI
             // create map controls
 
             // level select slider
-            var sliderPrefab = _parentTransform.Find("MapBlock/ZoomScroll").gameObject;
-            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, RectTransform, _levelSliderPosition);
+            var sliderPrefab = Singleton<CommonUI>.Instance.transform.Find(
+                "Common UI/InventoryScreen/Map Panel/MapBlock/ZoomScroll").gameObject;
+            _levelSelectSlider = LevelSelectSlider.Create(sliderPrefab, RectTransform);
             _levelSelectSlider.OnLevelSelectedBySlider += _mapView.SelectTopLevel;
             _mapView.OnLevelSelected += (level) => _levelSelectSlider.SelectedLevel = level;
 
             // map select dropdown, this will call LoadMap on the first option
             var selectPrefab = Singleton<CommonUI>.Instance.transform.Find(
                 "Common UI/InventoryScreen/SkillsAndMasteringPanel/BottomPanel/SkillsPanel/Options/Filter").gameObject;
-            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, RectTransform, _mapSelectDropdownPosition, _mapSelectDropdownSize);
+            _mapSelectDropdown = MapSelectDropdown.Create(selectPrefab, RectTransform);
             _mapSelectDropdown.OnMapSelected += ChangeMap;
 
             // texts
             _cursorPositionText = CursorPositionText.Create(gameObject, _mapView.RectTransform, _positionTextFontSize);
             _cursorPositionText.RectTransform.anchorMin = _textAnchor;
             _cursorPositionText.RectTransform.anchorMax = _textAnchor;
-            _cursorPositionText.RectTransform.anchoredPosition = _cursorPositionTextOffset;
 
             _playerPositionText = PlayerPositionText.Create(gameObject, _positionTextFontSize);
             _playerPositionText.RectTransform.anchorMin = _textAnchor;
             _playerPositionText.RectTransform.anchorMax = _textAnchor;
-            _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
             _playerPositionText.gameObject.SetActive(false);
 
             // read config before setting up marker providers
             ReadConfig();
 
             GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+
+            // load initial maps from path
+            _mapSelectDropdown.LoadMapDefsFromPath(_mapRelPath);
+            PrecacheMapLayerImages();
         }
 
         private void OnDestroy()
@@ -156,16 +166,76 @@ namespace DynamicMaps.UI
                 }
             }
 
-            if (_centerPlayerShortcut.IsDown())
+            // change level hotkeys
+            if (_moveMapLevelUpShortcut.BetterIsDown())
+            {
+                _levelSelectSlider.ChangeLevelBy(1);
+            }
+
+            if (_moveMapLevelDownShortcut.BetterIsDown())
+            {
+                _levelSelectSlider.ChangeLevelBy(-1);
+            }
+
+            // shift hotkeys
+            var shiftMapX = 0f;
+            var shiftMapY = 0f;
+            if (_moveMapUpShortcut.BetterIsPressed())
+            {
+                shiftMapY += 1f;
+            }
+
+            if (_moveMapDownShortcut.BetterIsPressed())
+            {
+                shiftMapY -= 1f;
+            }
+
+            if (_moveMapLeftShortcut.BetterIsPressed())
+            {
+                shiftMapX -= 1f;
+            }
+
+            if (_moveMapRightShortcut.BetterIsPressed())
+            {
+                shiftMapX += 1f;
+            }
+
+            if (shiftMapX != 0f || shiftMapY != 0f)
+            {
+                _mapView.ScaledShiftMap(new Vector2(shiftMapX, shiftMapY), _moveMapSpeed * Time.deltaTime);
+            }
+
+            // zoom hotkeys
+            var zoomAmount = 0f;
+            if (_zoomMapOutShortcut.BetterIsPressed())
+            {
+                zoomAmount -= 1f;
+            }
+
+            if (_zoomMapInShortcut.BetterIsPressed())
+            {
+                zoomAmount += 1f;
+            }
+
+            if (zoomAmount != 0f)
+            {
+                var currentCenter = _mapView.RectTransform.anchoredPosition / _mapView.ZoomCurrent;
+                var zoomDelta = _mapView.ZoomCurrent * zoomAmount * (_zoomMapHotkeySpeed * Time.deltaTime);
+                _mapView.IncrementalZoomInto(zoomDelta, currentCenter, 0f);
+            }
+
+            if (_centerPlayerShortcut.BetterIsDown())
             {
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
                 {
-                    _mapView.ShiftMapToCoordinate(MathUtils.ConvertToMapPosition(player.Position), _positionTweenTime);
+                    var mapPosition = MathUtils.ConvertToMapPosition(player.Position);
+                    _mapView.ShiftMapToCoordinate(mapPosition, _positionTweenTime);
+                    _mapView.SelectLevelByCoords(mapPosition);
                 }
             }
 
-            if (_dumpShortcut.IsDown())
+            if (_dumpShortcut.BetterIsDown())
             {
                 DumpUtils.DumpExtracts();
                 DumpUtils.DumpSwitches();
@@ -173,31 +243,32 @@ namespace DynamicMaps.UI
             }
         }
 
-        private void OnDisable()
+        // private void OnDisable()
+        // {
+        //     OnHide();
+        // }
+
+        internal void OnMapScreenShow()
         {
-            _mapSelectDropdown?.TryCloseDropdown();
+            _peekComponent?.EndPeek();
 
-            // close isn't called when hidden
-            if (GameUtils.IsInRaid())
-            {
-                OnHideInRaid();
-            }
-            else
-            {
-                OnHideOutOfRaid();
-            }
+            transform.parent.Find("MapBlock").gameObject.SetActive(false);
+            transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(true);
 
-            _isShown = false;
+            Show();
+        }
+
+        internal void OnMapScreenClose()
+        {
+            Hide();
         }
 
         internal void Show()
         {
-            _isShown = true;
+            AdjustSizeAndPosition();
 
-            // make sure that the BSG map is disabled
-            transform.parent.Find("MapBlock").gameObject.SetActive(false);
-            transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
-            transform.parent.gameObject.SetActive(true);
+            _isShown = true;
             gameObject.SetActive(true);
 
             // populate map select dropdown
@@ -215,10 +286,40 @@ namespace DynamicMaps.UI
             }
         }
 
-        internal void Close()
+        internal void Hide()
         {
-            // not called when hidden
+            _mapSelectDropdown?.TryCloseDropdown();
+
+            // close isn't called when hidden
+            if (GameUtils.IsInRaid())
+            {
+                Plugin.Log.LogInfo("Hiding map in raid");
+                OnHideInRaid();
+            }
+            else
+            {
+                Plugin.Log.LogInfo("Hiding map out-of-raid");
+                OnHideOutOfRaid();
+            }
+
+            _isShown = false;
             gameObject.SetActive(false);
+        }
+
+        internal void TryAddPeekComponent(BattleUIScreen battleUI)
+        {
+            if (_peekComponent != null)
+            {
+                return;
+            }
+
+            Plugin.Log.LogInfo("Trying to attach peek component to BattleUI");
+
+            _peekComponent = MapPeekComponent.Create(battleUI.gameObject);
+            _peekComponent.MapScreen = this;
+            _peekComponent.MapScreenTrueParent = _parentTransform;
+
+            ReadConfig();
         }
 
         internal void OnRaidEnd()
@@ -236,36 +337,80 @@ namespace DynamicMaps.UI
                     Plugin.Log.LogError($"  {e.StackTrace}");
                 }
             }
+
+            _peekComponent?.EndPeek();
+            _peekComponent = null;
+        }
+
+        private void AdjustSizeAndPosition()
+        {
+            // set width and height based on inventory screen
+            var rect = Singleton<CommonUI>.Instance.InventoryScreen.GetRectTransform().rect;
+            RectTransform.sizeDelta = new Vector2(rect.width, rect.height);
+            RectTransform.anchoredPosition = Vector2.zero;
+
+            _scrollRect.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
+
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
+
+            _levelSelectSlider.RectTransform.anchoredPosition = _levelSliderPosition;
+
+            _mapSelectDropdown.RectTransform.sizeDelta = _mapSelectDropdownSize;
+            _mapSelectDropdown.RectTransform.anchoredPosition = _mapSelectDropdownPosition;
+
+            _cursorPositionText.RectTransform.anchoredPosition = _cursorPositionTextOffset;
+            _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
+        }
+
+        private void AdjustForOutOfRaid()
+        {
+            // adjust mask
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
+
+            // turn on cursor and off player position texts
+            _cursorPositionText.gameObject.SetActive(true);
+            _playerPositionText.gameObject.SetActive(false);
+        }
+
+        private void AdjustForInRaid()
+        {
+            // adjust mask
+            _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
+
+            // turn both cursor and player position texts on
+            _cursorPositionText.gameObject.SetActive(true);
+            _playerPositionText.gameObject.SetActive(true);
+        }
+
+        private void AdjustForPeek()
+        {
+            // adjust mask
+            _scrollMask.GetRectTransform().anchoredPosition = Vector2.zero;
+            _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
+
+            // turn both cursor and player position texts off
+            _cursorPositionText.gameObject.SetActive(false);
+            _playerPositionText.gameObject.SetActive(false);
         }
 
         private void OnShowInRaid()
         {
-            if (!_lastShownInRaid)
+            if (_isPeeking)
             {
-                // ony do the first time that is shown in raid until shown out of raid
-                _lastShownInRaid = true;
-
-                // adjust mask
-                _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
-                _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
-
-                // show player position text
-                _playerPositionText.gameObject.SetActive(true);
-
-                // GetOrAddComponent is a BSG extension method under GClass reference
-                // var dotSpawner = GameUtils.GetMainPlayer().gameObject.GetOrAddComponent<PlayerDotSpawner>();
-                // dotSpawner.MapView = _mapView;
+                AdjustForPeek();
             }
-
-            var mapInternalName = GameUtils.GetCurrentMapInternalName();
-            if (string.IsNullOrEmpty(mapInternalName))
+            else
             {
-                return;
+                AdjustForInRaid();
             }
 
             // filter dropdown to only maps containing the internal map name
-            // this forces the load of the first of those
+            var mapInternalName = GameUtils.GetCurrentMapInternalName();
             _mapSelectDropdown.FilterByInternalMapName(mapInternalName);
+            _mapSelectDropdown.LoadFirstAvailableMap();
 
             foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
             {
@@ -328,21 +473,15 @@ namespace DynamicMaps.UI
 
         private void OnShowOutOfRaid()
         {
-            if (_lastShownInRaid)
+            AdjustForOutOfRaid();
+
+            // clear filter on dropdown
+            _mapSelectDropdown.ClearFilter();
+
+            // load first available map if no maps loaded
+            if (_mapView.CurrentMapDef == null)
             {
-                // only do if adjusting from viewing in raid
-
-                // adjust mask
-                _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
-                _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
-
-                // clear filter on dropdown
-                _mapSelectDropdown.ClearFilter();
-
-                // hide player position text
-                _playerPositionText.gameObject.SetActive(false);
-
-                _lastShownInRaid = false;
+                _mapSelectDropdown.LoadFirstAvailableMap();
             }
 
             foreach (var dynamicProvider in _dynamicMarkerProviders.Values)
@@ -379,6 +518,11 @@ namespace DynamicMaps.UI
 
         private void OnScroll(float scrollAmount)
         {
+            if (_isPeeking)
+            {
+                return;
+            }
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (scrollAmount > 0)
@@ -397,14 +541,27 @@ namespace DynamicMaps.UI
                 _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
 
             var zoomDelta = scrollAmount * _mapView.ZoomCurrent * _scrollZoomScaler;
-            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative);
+            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative, _zoomScrollTweenTime);
         }
 
         internal void ReadConfig()
         {
-            IsReplacingMapScreen = Settings.Enabled.Value;
+            IsReplacingMapScreen = Settings.ReplaceMapScreen.Value;
             _centerPlayerShortcut = Settings.CenterOnPlayerHotkey.Value;
             _dumpShortcut = Settings.DumpInfoHotkey.Value;
+
+            _moveMapUpShortcut = Settings.MoveMapUpHotkey.Value;
+            _moveMapDownShortcut = Settings.MoveMapDownHotkey.Value;
+            _moveMapLeftShortcut = Settings.MoveMapLeftHotkey.Value;
+            _moveMapRightShortcut = Settings.MoveMapRightHotkey.Value;
+            _moveMapSpeed = Settings.MapMoveHotkeySpeed.Value;
+
+            _moveMapLevelUpShortcut = Settings.ChangeMapLevelUpHotkey.Value;
+            _moveMapLevelDownShortcut = Settings.ChangeMapLevelDownHotkey.Value;
+
+            _zoomMapInShortcut = Settings.ZoomMapInHotkey.Value;
+            _zoomMapOutShortcut = Settings.ZoomMapOutHotkey.Value;
+            _zoomMapHotkeySpeed = Settings.ZoomMapHotkeySpeed.Value;
 
             _autoCenterOnPlayerMarker = Settings.AutoCenterOnPlayerMarker.Value;
             _autoSelectLevel = Settings.AutoSelectLevel.Value;
@@ -426,6 +583,12 @@ namespace DynamicMaps.UI
             _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
 
             _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
+
+            if (_peekComponent != null)
+            {
+                _peekComponent.PeekShortcut = Settings.PeekShortcut.Value;
+                _peekComponent.HoldForPeek = Settings.HoldForPeek.Value;
+            }
 
             AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
             AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
@@ -519,6 +682,26 @@ namespace DynamicMaps.UI
                     Plugin.Log.LogError($"Dynamic marker provider {dynamicProvider} threw exception in ChangeMap");
                     Plugin.Log.LogError($"  Exception given was: {e.Message}");
                     Plugin.Log.LogError($"  {e.StackTrace}");
+                }
+            }
+        }
+
+        private void PrecacheMapLayerImages()
+        {
+            Singleton<CommonUI>.Instance.StartCoroutine(
+                PrecacheCoroutine(_mapSelectDropdown.GetMapDefs()));
+        }
+
+        private static IEnumerator PrecacheCoroutine(IEnumerable<MapDef> mapDefs)
+        {
+            foreach (var mapDef in mapDefs)
+            {
+                foreach (var layerDef in mapDef.Layers.Values)
+                {
+                    // just load sprite to cache it, one a frame
+                    Plugin.Log.LogInfo($"Precaching sprite: {layerDef.ImagePath}");
+                    TextureUtils.GetOrLoadCachedSprite(layerDef.ImagePath);
+                    yield return null;
                 }
             }
         }

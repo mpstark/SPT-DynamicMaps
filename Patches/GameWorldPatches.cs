@@ -15,10 +15,19 @@ namespace DynamicMaps.Patches
             return AccessTools.Method(typeof(GameWorld), nameof(GameWorld.OnDestroy));
         }
 
-        [PatchPostfix]
-        public static void PatchPostfix()
+        [PatchPrefix]
+        public static void PatchPrefix()
         {
-            OnRaidEnd?.Invoke();
+            try
+            {
+                OnRaidEnd?.Invoke();
+            }
+            catch(Exception e)
+            {
+                Plugin.Log.LogError($"Caught error while doing end of raid calculations");
+                Plugin.Log.LogError($"{e.Message}");
+                Plugin.Log.LogError($"{e.StackTrace}");
+            }
         }
     }
 }
