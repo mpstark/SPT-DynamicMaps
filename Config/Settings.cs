@@ -39,6 +39,9 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> AutoCenterOnPlayerMarker;
         public static ConfigEntry<bool> AutoSelectLevel;
 
+        public static ConfigEntry<KeyboardShortcut> PeekShortcut;
+        public static ConfigEntry<bool> HoldForPeek;
+
         // public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
 
         public static void Init(ConfigFile Config)
@@ -189,15 +192,23 @@ namespace DynamicMaps.Config
                     new AcceptableValueRange<float>(0f, 1f),
                     new ConfigurationManagerAttributes { })));
 
+            ConfigEntries.Add(PeekShortcut = Config.Bind(
+                InRaidTitle,
+                "Peek at Map Shortcut",
+                new KeyboardShortcut(UnityEngine.KeyCode.M),
+                new ConfigDescription(
+                    "The keyboard shortcut to peek at the map",
+                    null,
+                    new ConfigurationManagerAttributes { })));
 
-            // ConfigEntries.Add(KeyboardShortcut = Config.Bind(
-            //     GeneralTitle,
-            //     "Keyboard Shortcut",
-            //     new KeyboardShortcut(UnityEngine.KeyCode.M),
-            //     new ConfigDescription(
-            //         "The keyboard shortcut to open the map",
-            //         null,
-            //         new ConfigurationManagerAttributes { })));
+            ConfigEntries.Add(HoldForPeek = Config.Bind(
+                InRaidTitle,
+                "Hold for Peek",
+                true,
+                new ConfigDescription(
+                    "If the shortcut should be held to keep it open. If disabled, button toggles",
+                    null,
+                    new ConfigurationManagerAttributes { })));
 
             RecalcOrder();
         }

@@ -52,7 +52,7 @@ namespace DynamicMaps.UI.Controls
         private List<int> _levels = new List<int>();
         private bool _hasSetOutline = false;
 
-        public static LevelSelectSlider Create(GameObject prefab, Transform parent, Vector2 position)
+        public static LevelSelectSlider Create(GameObject prefab, Transform parent)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "LevelSelectScrollbar";
@@ -61,7 +61,6 @@ namespace DynamicMaps.UI.Controls
 
             // position to top left
             var oldPosition = go.GetRectTransform().anchoredPosition;
-            go.GetRectTransform().anchoredPosition = position;
 
             // remove useless component
             GameObject.Destroy(go.GetComponent<MapZoomer>());

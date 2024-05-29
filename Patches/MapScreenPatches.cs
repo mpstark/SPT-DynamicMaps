@@ -19,13 +19,12 @@ namespace DynamicMaps.Patches
             if (!Settings.Enabled.Value)
             {
                 // mod is disabled
-                Plugin.Instance.Map?.Close();
+                Plugin.Instance.Map?.OnMapScreenClose();
                 return true;
             }
 
             // show instead
-            Plugin.Instance.TryAttachToMapScreen(__instance);
-            Plugin.Instance.Map?.Show();
+            Plugin.Instance.Map?.OnMapScreenShow();
             return false;
         }
     }
@@ -46,8 +45,8 @@ namespace DynamicMaps.Patches
                 return true;
             }
 
-            // show instead
-            Plugin.Instance.Map?.Close();
+            // close instead
+            Plugin.Instance.Map?.OnMapScreenClose();
             return false;
         }
     }

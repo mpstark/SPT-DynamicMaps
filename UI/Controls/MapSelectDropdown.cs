@@ -22,7 +22,7 @@ namespace DynamicMaps.UI.Controls
         private List<MapDef> _selectableMapDefs;
         private string _nameFilter = null;
 
-        public static MapSelectDropdown Create(GameObject prefab, Transform parent, Vector2 position, Vector2 size)
+        public static MapSelectDropdown Create(GameObject prefab, Transform parent)
         {
             var go = GameObject.Instantiate(prefab);
             go.name = "MapSelectDropdown";
@@ -30,8 +30,6 @@ namespace DynamicMaps.UI.Controls
             var rectTransform = go.GetRectTransform();
             rectTransform.SetParent(parent);
             rectTransform.localScale = Vector3.one;
-            rectTransform.sizeDelta = size;
-            rectTransform.anchoredPosition = position; // this is lazy, prob should adjust all of the anchors
 
             var dropdown = go.AddComponent<MapSelectDropdown>();
             return dropdown;
@@ -61,7 +59,7 @@ namespace DynamicMaps.UI.Controls
             _dropdown.Show(_selectableMapDefs.Select(def => def.DisplayName));
 
             // TODO: this references a BSG method of GInterface390
-            _dropdown.OnValueChanged.Bind(OnSelectDropdownMap, 0);
+            _dropdown.OnValueChanged.Subscribe(OnSelectDropdownMap);
 
             gameObject.SetActive(_selectableMapDefs.Count > 1);
         }
@@ -107,6 +105,21 @@ namespace DynamicMaps.UI.Controls
 
                     return m.MapInternalNames.Contains(_nameFilter);
                 }).OrderBy(m => m.DisplayName);
+        }
+
+        public IEnumerable<MapDef> GetMapDefs()
+        {
+            return _mapDefs.Values;
+        }
+
+        public void LoadFirstAvailableMap()
+        {
+            if (_selectableMapDefs.Count  == 0)
+            {
+                return;
+            }
+
+            OnSelectDropdownMap(0);
         }
 
         public void FilterByInternalMapName(string internalMapName)
