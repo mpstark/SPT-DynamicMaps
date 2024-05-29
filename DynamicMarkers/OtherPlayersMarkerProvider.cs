@@ -14,6 +14,24 @@ namespace DynamicMaps.DynamicMarkers
         private static string _arrowIconPath = "Markers/arrow.png";
         private static string _starIconPath = "Markers/star.png";
 
+        private static HashSet<WildSpawnType> _bosses = new HashSet<WildSpawnType>
+        {
+            WildSpawnType.bossBoar,
+            WildSpawnType.bossBully,
+            WildSpawnType.bossGluhar,
+            WildSpawnType.bossKilla,
+            WildSpawnType.bossKnight,
+            WildSpawnType.followerBigPipe,
+            WildSpawnType.followerBirdEye,
+            WildSpawnType.bossKolontay,
+            WildSpawnType.bossKojaniy,
+            WildSpawnType.bossSanitar,
+            WildSpawnType.bossTagilla,
+            WildSpawnType.bossZryachiy,
+            (WildSpawnType) 4206927,  // Punisher
+            (WildSpawnType) 199, // Legion
+        };
+
         private bool _showFriendlyPlayers = true;
         public bool ShowFriendlyPlayers
         {
@@ -224,7 +242,7 @@ namespace DynamicMaps.DynamicMarkers
                 color = Color.red;
                 category = "Enemy Player";
             }
-            else if (player.Profile.Side == EPlayerSide.Savage && player.Profile.Info.Settings.Role.CountAsBossForStatistics())
+            else if (player.Profile.Side == EPlayerSide.Savage && _bosses.Contains(player.Profile.Info.Settings.Role))
             {
                 imagePath = _starIconPath;
                 category = "Boss";
