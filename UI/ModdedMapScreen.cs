@@ -545,7 +545,7 @@ namespace DynamicMaps.UI
 
         internal void ReadConfig()
         {
-            IsReplacingMapScreen = Settings.Enabled.Value;
+            IsReplacingMapScreen = Settings.ReplaceMapScreen.Value;
             _centerPlayerShortcut = Settings.CenterOnPlayerHotkey.Value;
             _dumpShortcut = Settings.DumpInfoHotkey.Value;
 

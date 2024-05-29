@@ -16,7 +16,7 @@ namespace DynamicMaps.Patches
         [PatchPrefix]
         public static bool PatchPrefix(MapScreen __instance)
         {
-            if (!Settings.Enabled.Value)
+            if (!Settings.ReplaceMapScreen.Value)
             {
                 // mod is disabled
                 Plugin.Instance.Map?.OnMapScreenClose();
@@ -39,7 +39,7 @@ namespace DynamicMaps.Patches
         [PatchPrefix]
         public static bool PatchPrefix(MapScreen __instance)
         {
-            if (!Settings.Enabled.Value)
+            if (!Settings.ReplaceMapScreen.Value)
             {
                 // mod is disabled
                 return true;

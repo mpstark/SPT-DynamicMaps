@@ -11,7 +11,7 @@ namespace DynamicMaps.Config
         public static List<ConfigEntryBase> ConfigEntries = new List<ConfigEntryBase>();
 
         public const string GeneralTitle = "1. General";
-        public static ConfigEntry<bool> Enabled;
+        public static ConfigEntry<bool> ReplaceMapScreen;
 
         public static ConfigEntry<KeyboardShortcut> CenterOnPlayerHotkey;
         public static ConfigEntry<KeyboardShortcut> DumpInfoHotkey;
@@ -61,9 +61,9 @@ namespace DynamicMaps.Config
         {
             Settings.Config = Config;
 
-            ConfigEntries.Add(Enabled = Config.Bind(
+            ConfigEntries.Add(ReplaceMapScreen = Config.Bind(
                 GeneralTitle,
-                "Enabled",
+                "Replace Map Screen",
                 true,
                 new ConfigDescription(
                     "If the map should replace the BSG default map screen, requires swapping away from modded map to refresh",
