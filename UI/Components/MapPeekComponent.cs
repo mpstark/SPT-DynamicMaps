@@ -64,6 +64,9 @@ namespace DynamicMaps.UI.Components
                 return;
             }
 
+            // just in case something else is attached and tries to be in front
+            transform.SetAsLastSibling();
+
             IsPeeking = true;
 
             // attach map screen to peek mask
