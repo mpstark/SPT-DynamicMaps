@@ -250,7 +250,7 @@ namespace DynamicMaps.UI
 
         internal void OnMapScreenShow()
         {
-            _peekComponent?.ClosePeek();
+            _peekComponent?.EndPeek();
 
             transform.parent.Find("MapBlock").gameObject.SetActive(false);
             transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
@@ -338,6 +338,7 @@ namespace DynamicMaps.UI
                 }
             }
 
+            _peekComponent?.EndPeek();
             _peekComponent = null;
         }
 

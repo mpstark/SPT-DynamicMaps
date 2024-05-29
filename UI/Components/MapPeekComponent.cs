@@ -36,11 +36,11 @@ namespace DynamicMaps.UI.Components
                 // hold for peek
                 if (PeekShortcut.BetterIsPressed())
                 {
-                    OpenPeek();
+                    BeginPeek();
                 }
                 else
                 {
-                    ClosePeek();
+                    EndPeek();
                 }
             }
             else if (!HoldForPeek && PeekShortcut.BetterIsDown())
@@ -48,16 +48,16 @@ namespace DynamicMaps.UI.Components
                 // toggle peek
                 if (!IsPeeking)
                 {
-                    OpenPeek();
+                    BeginPeek();
                 }
                 else
                 {
-                    ClosePeek();
+                    EndPeek();
                 }
             }
         }
 
-        internal void OpenPeek()
+        internal void BeginPeek()
         {
             if (IsPeeking)
             {
@@ -71,7 +71,7 @@ namespace DynamicMaps.UI.Components
             MapScreen.Show();
         }
 
-        internal void ClosePeek()
+        internal void EndPeek()
         {
             if (!IsPeeking)
             {

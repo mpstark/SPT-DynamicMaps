@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Aki.Reflection.Patching;
 using DynamicMaps.Config;
@@ -14,18 +15,29 @@ namespace DynamicMaps.Patches
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(MapScreen __instance)
+        public static bool PatchPrefix()
         {
-            if (!Settings.ReplaceMapScreen.Value)
+            try
             {
-                // mod is disabled
-                Plugin.Instance.Map?.OnMapScreenClose();
+                if (!Settings.ReplaceMapScreen.Value)
+                {
+                    // mod is disabled
+                    Plugin.Instance.Map?.OnMapScreenClose();
+                    return true;
+                }
+
+                // show instead
+                Plugin.Instance.Map?.OnMapScreenShow();
+                return false;
+            }
+            catch(Exception e)
+            {
+                Plugin.Log.LogError($"Caught error while trying to show map");
+                Plugin.Log.LogError($"{e.Message}");
+                Plugin.Log.LogError($"{e.StackTrace}");
+
                 return true;
             }
-
-            // show instead
-            Plugin.Instance.Map?.OnMapScreenShow();
-            return false;
         }
     }
 
@@ -37,17 +49,28 @@ namespace DynamicMaps.Patches
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(MapScreen __instance)
+        public static bool PatchPrefix()
         {
-            if (!Settings.ReplaceMapScreen.Value)
+            try
             {
-                // mod is disabled
+                if (!Settings.ReplaceMapScreen.Value)
+                {
+                    // mod is disabled
+                    return true;
+                }
+
+                // close instead
+                Plugin.Instance.Map?.OnMapScreenClose();
+                return false;
+            }
+            catch(Exception e)
+            {
+                Plugin.Log.LogError($"Caught error while trying to close map");
+                Plugin.Log.LogError($"{e.Message}");
+                Plugin.Log.LogError($"{e.StackTrace}");
+
                 return true;
             }
-
-            // close instead
-            Plugin.Instance.Map?.OnMapScreenClose();
-            return false;
         }
     }
 }
