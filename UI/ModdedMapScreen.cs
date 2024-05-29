@@ -22,6 +22,7 @@ namespace DynamicMaps.UI
 
         private static float _positionTweenTime = 0.25f;
         private static float _scrollZoomScaler = 1.75f;
+        private static float _zoomScrollTweenTime = 0.25f;
 
         private static Vector2 _levelSliderPosition = new Vector2(15f, 750f);
         private static Vector2 _mapSelectDropdownPosition = new Vector2(-780f, -50f);
@@ -55,6 +56,7 @@ namespace DynamicMaps.UI
 
         // peek
         private MapPeekComponent _peekComponent;
+        private bool _isPeeking => _peekComponent != null && _peekComponent.IsPeeking;
 
         // dynamic map marker providers
         private Dictionary<Type, IDynamicMarkerProvider> _dynamicMarkerProviders = new Dictionary<Type, IDynamicMarkerProvider>();
@@ -75,6 +77,16 @@ namespace DynamicMaps.UI
         private bool _showAirdropsInRaid = true;
         private KeyboardShortcut _centerPlayerShortcut;
         private KeyboardShortcut _dumpShortcut;
+        private KeyboardShortcut _moveMapUpShortcut;
+        private KeyboardShortcut _moveMapDownShortcut;
+        private KeyboardShortcut _moveMapLeftShortcut;
+        private KeyboardShortcut _moveMapRightShortcut;
+        private float _moveMapSpeed = 0.25f;
+        private KeyboardShortcut _moveMapLevelUpShortcut;
+        private KeyboardShortcut _moveMapLevelDownShortcut;
+        private KeyboardShortcut _zoomMapInShortcut;
+        private KeyboardShortcut _zoomMapOutShortcut;
+        private float _zoomMapHotkeySpeed = 2.5f;
 
         internal static ModdedMapScreen Create(GameObject parent)
         {
@@ -154,16 +166,76 @@ namespace DynamicMaps.UI
                 }
             }
 
-            if (_centerPlayerShortcut.IsDown())
+            // change level hotkeys
+            if (_moveMapLevelUpShortcut.BetterIsDown())
+            {
+                _levelSelectSlider.ChangeLevelBy(1);
+            }
+
+            if (_moveMapLevelDownShortcut.BetterIsDown())
+            {
+                _levelSelectSlider.ChangeLevelBy(-1);
+            }
+
+            // shift hotkeys
+            var shiftMapX = 0f;
+            var shiftMapY = 0f;
+            if (_moveMapUpShortcut.BetterIsPressed())
+            {
+                shiftMapY += 1f;
+            }
+
+            if (_moveMapDownShortcut.BetterIsPressed())
+            {
+                shiftMapY -= 1f;
+            }
+
+            if (_moveMapLeftShortcut.BetterIsPressed())
+            {
+                shiftMapX -= 1f;
+            }
+
+            if (_moveMapRightShortcut.BetterIsPressed())
+            {
+                shiftMapX += 1f;
+            }
+
+            if (shiftMapX != 0f || shiftMapY != 0f)
+            {
+                _mapView.ScaledShiftMap(new Vector2(shiftMapX, shiftMapY), _moveMapSpeed * Time.deltaTime);
+            }
+
+            // zoom hotkeys
+            var zoomAmount = 0f;
+            if (_zoomMapOutShortcut.BetterIsPressed())
+            {
+                zoomAmount -= 1f;
+            }
+
+            if (_zoomMapInShortcut.BetterIsPressed())
+            {
+                zoomAmount += 1f;
+            }
+
+            if (zoomAmount != 0f)
+            {
+                var currentCenter = _mapView.RectTransform.anchoredPosition / _mapView.ZoomCurrent;
+                var zoomDelta = _mapView.ZoomCurrent * zoomAmount * (_zoomMapHotkeySpeed * Time.deltaTime);
+                _mapView.IncrementalZoomInto(zoomDelta, currentCenter, 0f);
+            }
+
+            if (_centerPlayerShortcut.BetterIsDown())
             {
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
                 {
-                    _mapView.ShiftMapToCoordinate(MathUtils.ConvertToMapPosition(player.Position), _positionTweenTime);
+                    var mapPosition = MathUtils.ConvertToMapPosition(player.Position);
+                    _mapView.ShiftMapToCoordinate(mapPosition, _positionTweenTime);
+                    _mapView.SelectLevelByCoords(mapPosition);
                 }
             }
 
-            if (_dumpShortcut.IsDown())
+            if (_dumpShortcut.BetterIsDown())
             {
                 DumpUtils.DumpExtracts();
                 DumpUtils.DumpSwitches();
@@ -325,7 +397,7 @@ namespace DynamicMaps.UI
 
         private void OnShowInRaid()
         {
-            if (_peekComponent != null && _peekComponent.IsPeeking)
+            if (_isPeeking)
             {
                 AdjustForPeek();
             }
@@ -445,6 +517,11 @@ namespace DynamicMaps.UI
 
         private void OnScroll(float scrollAmount)
         {
+            if (_isPeeking)
+            {
+                return;
+            }
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (scrollAmount > 0)
@@ -463,7 +540,7 @@ namespace DynamicMaps.UI
                 _mapView.RectTransform, Input.mousePosition, null, out Vector2 mouseRelative);
 
             var zoomDelta = scrollAmount * _mapView.ZoomCurrent * _scrollZoomScaler;
-            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative);
+            _mapView.IncrementalZoomInto(zoomDelta, mouseRelative, _zoomScrollTweenTime);
         }
 
         internal void ReadConfig()
@@ -471,6 +548,19 @@ namespace DynamicMaps.UI
             IsReplacingMapScreen = Settings.Enabled.Value;
             _centerPlayerShortcut = Settings.CenterOnPlayerHotkey.Value;
             _dumpShortcut = Settings.DumpInfoHotkey.Value;
+
+            _moveMapUpShortcut = Settings.MoveMapUpHotkey.Value;
+            _moveMapDownShortcut = Settings.MoveMapDownHotkey.Value;
+            _moveMapLeftShortcut = Settings.MoveMapLeftHotkey.Value;
+            _moveMapRightShortcut = Settings.MoveMapRightHotkey.Value;
+            _moveMapSpeed = Settings.MapMoveHotkeySpeed.Value;
+
+            _moveMapLevelUpShortcut = Settings.ChangeMapLevelUpHotkey.Value;
+            _moveMapLevelDownShortcut = Settings.ChangeMapLevelDownHotkey.Value;
+
+            _zoomMapInShortcut = Settings.ZoomMapInHotkey.Value;
+            _zoomMapOutShortcut = Settings.ZoomMapOutHotkey.Value;
+            _zoomMapHotkeySpeed = Settings.ZoomMapHotkeySpeed.Value;
 
             _autoCenterOnPlayerMarker = Settings.AutoCenterOnPlayerMarker.Value;
             _autoSelectLevel = Settings.AutoSelectLevel.Value;

@@ -13,7 +13,6 @@ namespace DynamicMaps.UI.Components
     public class MapView : MonoBehaviour
     {
         private static Vector2 _markerSize = new Vector2(30, 30);
-        private static float _zoomTweenTime = 0.25f;
         private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
         private static float _zoomMinScaler = 1.1f; // divider against ratio of a provided rect
 
@@ -315,15 +314,15 @@ namespace DynamicMaps.UI.Components
             }
         }
 
-        public void IncrementalZoomInto(float zoomDelta, Vector2 rectPoint)
+        public void IncrementalZoomInto(float zoomDelta, Vector2 rectPoint, float zoomTweenTime)
         {
             var zoomNew = Mathf.Clamp(ZoomCurrent + zoomDelta, ZoomMin, ZoomMax);
             var actualDelta = zoomNew - ZoomCurrent;
             var rotatedPoint = MathUtils.GetRotatedVector2(rectPoint, CoordinateRotation);
 
             // have to shift first, so that the tween is started in the shift first
-            ShiftMap(-rotatedPoint * actualDelta, _zoomTweenTime);
-            SetMapZoom(zoomNew, _zoomTweenTime);
+            ShiftMap(-rotatedPoint * actualDelta, zoomTweenTime);
+            SetMapZoom(zoomNew, zoomTweenTime);
         }
 
         public void ShiftMap(Vector2 shift, float tweenTime)
@@ -348,6 +347,14 @@ namespace DynamicMaps.UI.Components
             var rotatedCoord = MathUtils.GetRotatedVector2(coord, CoordinateRotation);
             var currentCenter = RectTransform.anchoredPosition / ZoomCurrent;
             ShiftMap((-rotatedCoord - currentCenter) * ZoomCurrent, tweenTime);
+        }
+
+        public void ScaledShiftMap(Vector2 shiftIncrements, float incrementScale)
+        {
+            var smallestDimension = Mathf.Min(CurrentMapDef.Bounds.Max.x - CurrentMapDef.Bounds.Min.x,
+                                              CurrentMapDef.Bounds.Max.y - CurrentMapDef.Bounds.Min.y);
+            var incrementSize = smallestDimension * ZoomCurrent * incrementScale;
+            ShiftMap(shiftIncrements * incrementSize, 0);
         }
 
         private MapLayer FindMatchingLayerByCoordinate(Vector3 coordinate)
