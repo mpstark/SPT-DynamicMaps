@@ -75,6 +75,7 @@ namespace DynamicMaps.UI
         private bool _showQuestsInRaid = true;
         private bool _showExtractsInRaid = true;
         private bool _showExtractStatusInRaid = true;
+        private bool _showBTRInRaid = true;
         private bool _showAirdropsInRaid = true;
         private bool _showFriendlyCorpsesInRaid = true;
         private bool _showKilledCorpsesInRaid = false;
@@ -592,6 +593,8 @@ namespace DynamicMaps.UI
             _showExtractsInRaid = Settings.ShowExtractsInRaid.Value;
             _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
 
+            _showBTRInRaid = Settings.ShowBTRInRaid.Value;
+
             _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
 
             _showFriendlyCorpsesInRaid = Settings.ShowFriendlyCorpsesInRaid.Value;
@@ -608,6 +611,7 @@ namespace DynamicMaps.UI
             AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
             AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
             AddRemoveMarkerProvider<LockedDoorMarkerMutator>(_showLockedDoorStatus);
+            AddRemoveMarkerProvider<BTRMarkerProvider>(_showBTRInRaid);
             AddRemoveMarkerProvider<AirdropMarkerProvider>(_showAirdropsInRaid);
 
             // extracts

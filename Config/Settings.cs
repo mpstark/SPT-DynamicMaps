@@ -44,6 +44,8 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowExtractsInRaid;
         public static ConfigEntry<bool> ShowExtractStatusInRaid;
 
+        public static ConfigEntry<bool> ShowBTRInRaid;
+
         public static ConfigEntry<bool> ShowAirdropsInRaid;
 
         public static ConfigEntry<bool> ShowFriendlyCorpsesInRaid;
@@ -262,6 +264,15 @@ namespace DynamicMaps.Config
                 true,
                 new ConfigDescription(
                     "If extracts should be colored according to their status in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowBTRInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show BTR In Raid",
+                true,
+                new ConfigDescription(
+                    "If the BTR should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
