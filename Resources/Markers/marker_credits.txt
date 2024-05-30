@@ -1,7 +1,8 @@
-CC BY 3.0 License
-https://creativecommons.org/licenses/by/3.0/deed.en
+Marker Credits
 
 ---
+
+CC BY 3.0 License: https://creativecommons.org/licenses/by/3.0/deed.en
 
 Exit door icon by Delapouite under CC BY 3.0
 https://game-icons.net/1x1/delapouite/exit-door.html
@@ -34,5 +35,12 @@ Above images were changed with the below changes
   - Scaled down to 60x60 images
   - Black outline added
   - Some icons combined or resized
+
+---
+
+CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
+
+BTR icon by Kuromi under CC BY-NC-SA 4.0
+https://github.com/schkuromi/icons
 
 ---
