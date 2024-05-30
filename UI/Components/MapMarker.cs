@@ -93,6 +93,23 @@ namespace DynamicMaps.UI.Components
             }
         }
 
+        private Vector2 _size = new Vector2(30f, 30f);
+        public Vector2 Size
+        {
+            get
+            {
+                return _size;
+            }
+
+            set
+            {
+                _size = value;
+                RectTransform.sizeDelta = _size;
+                Image.GetRectTransform().sizeDelta = _size;
+                Label.GetRectTransform().sizeDelta = _size * _labelSizeMultiplier;
+            }
+        }
+
         public Dictionary<LayerStatus, float> ImageAlphaLayerStatus { get; protected set; } = new Dictionary<LayerStatus, float>
             {
                 {LayerStatus.Hidden, 0.0f},
@@ -179,6 +196,7 @@ namespace DynamicMaps.UI.Components
             marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
 
             marker.Color = color;
+            marker._size = size;
 
             marker.Label.gameObject.SetActive(false);
 

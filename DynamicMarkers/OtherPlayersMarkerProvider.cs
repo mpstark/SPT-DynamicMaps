@@ -165,9 +165,12 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnRaidEnd(MapView map)
         {
-            Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
+            var gameWorld = Singleton<GameWorld>.Instance;
+            if (gameWorld != null)
+            {
+                gameWorld.OnPersonAdd -= TryAddMarker;
+            }
 
-            _lastMapView = map;
             TryRemoveMarkers();
         }
 
@@ -221,7 +224,7 @@ namespace DynamicMaps.DynamicMarkers
 
         private void TryAddMarker(IPlayer player)
         {
-            if (_lastMapView == null || _playerMarkers.ContainsKey(player))
+            if (_lastMapView == null || player.IsBTRShooter() || _playerMarkers.ContainsKey(player))
             {
                 return;
             }

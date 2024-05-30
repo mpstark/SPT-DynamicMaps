@@ -4,6 +4,7 @@ using System.Reflection;
 using Aki.Reflection.Utils;
 using Comfort.Common;
 using EFT;
+using EFT.Vehicle;
 using HarmonyLib;
 
 namespace DynamicMaps.Utils
@@ -49,6 +50,12 @@ namespace DynamicMaps.Utils
             return PlayerProfile;
         }
 
+        public static BTRView GetBTRView()
+        {
+            var gameWorld = Singleton<GameWorld>.Instance;
+            return gameWorld?.BtrController?.BtrView;
+        }
+
         public static bool IsScavRaid()
         {
             var player = GetMainPlayer();
@@ -64,6 +71,12 @@ namespace DynamicMaps.Utils
 
             // TODO: use reflection to get rid of this gclass reference
             return id.Localized();
+        }
+
+        public static bool IsBTRShooter(this IPlayer player)
+        {
+            return player.Profile.Side == EPlayerSide.Savage
+                && player.Profile.Info.Settings.Role == WildSpawnType.shooterBTR;
         }
     }
 }
