@@ -106,13 +106,13 @@ namespace DynamicMaps.Utils
         public static bool IsPMC(this IPlayer player)
         {
             return player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec;
-		    }
+        }
 
         public static bool DidMainPlayerKill(this IPlayer player)
         {
             var victims = GetMainPlayer()?.Profile?.EftStats?.Victims;
             return victims?.FirstOrDefault(v => v.ProfileId == player.ProfileId) != null;
-		    }
+        }
 
         public static bool IsBTRShooter(this IPlayer player)
         {
