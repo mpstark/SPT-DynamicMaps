@@ -25,6 +25,13 @@ namespace DynamicMaps.Utils
         private static FieldInfo _conditionListField = AccessTools.Field(_templateConditionsConditionsField.FieldType, "list_0");
         //
 
+        // TODO: move to config
+        private const string _questCategory = "Quest";
+        private const string _questImagePath = "Markers/quest.png";
+        private static Vector2 _questPivot = new Vector2(0.5f, 0f);
+        private static Color _questColor = Color.green;
+        //
+
         public static List<TriggerWithId> TriggersWithIds;
         public static List<LootItem> QuestItems;
 
@@ -324,11 +331,11 @@ namespace DynamicMaps.Utils
         {
             return new MapMarkerDef
             {
-                Category = "Quest",
-                Color = Color.green,
-                ImagePath = "Markers/quest.png",
+                Category = _questCategory,
+                Color = _questColor,
+                ImagePath = _questImagePath,
                 Position = position,
-                Pivot = new Vector2(0.5f, 0f),
+                Pivot = _questPivot,
                 Text = questName
             };
         }

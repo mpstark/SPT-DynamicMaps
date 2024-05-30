@@ -7,11 +7,13 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class BTRMarkerProvider : IDynamicMarkerProvider
     {
+        // TODO: move to config
         private static string _btrIconPath = "Markers/btr.png";
-        private static Color _btrMarkerColor = new Color(54f/255f, 100f/255f, 42f/255f);
-        private static Vector2 _btrMarkerSize = new Vector2(45, 45f);
-        private static string _btrMarkerName = "BTR";
-        private static string _btrMarkerCategory = "BTR";
+        private static Color _btrColor = new Color(54f/255f, 100f/255f, 42f/255f);
+        private static Vector2 _btrSize = new Vector2(45, 45f);
+        private static string _btrName = "BTR";
+        private static string _btrCategory = "BTR";
+        //
 
         private MapMarker _btrMarker;
 
@@ -55,8 +57,8 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // try adding the marker
-            _btrMarker = map.AddTransformMarker(btrView.transform, _btrMarkerName, _btrMarkerCategory, _btrMarkerColor,
-                                                _btrIconPath, _btrMarkerSize);
+            _btrMarker = map.AddTransformMarker(btrView.transform, _btrName, _btrCategory, _btrColor,
+                                                _btrIconPath, _btrSize);
         }
 
         private void TryRemoveMarker()

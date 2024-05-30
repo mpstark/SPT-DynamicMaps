@@ -11,6 +11,18 @@ namespace DynamicMaps.Utils
 {
     public static class DumpUtils
     {
+        private const string _extractCategory = "Extract";
+        private const string _extractImagePath = "Markers/exit.png";
+        private static Color _extractScavColor = Color.Lerp(Color.yellow, Color.red, 0.5f);
+        private static Color _extractPMCColor = Color.green;
+
+        private const string _switchCategory = "Switch";
+        private const string _switchImagePath = "Markers/lever.png";
+
+        private const string _lockedDoorCategory = "Locked Door";
+        private const string _lockedDoorImagePath = "Markers/door_with_lock.png";
+        private static Color _lockedDoorColor = Color.yellow;
+
         public static void DumpExtracts()
         {
             var gameWorld = Singleton<GameWorld>.Instance;
@@ -23,12 +35,12 @@ namespace DynamicMaps.Utils
             {
                 var dumped = new MapMarkerDef
                 {
-                    Category = "Extract",
+                    Category = _extractCategory,
                     ShowInRaid = false,
-                    ImagePath = "Markers/exit.png",
+                    ImagePath = _extractImagePath,
                     Text = scavExfil.Settings.Name.BSGLocalized(),
                     Position = MathUtils.ConvertToMapPosition(scavExfil.transform),
-                    Color = Color.Lerp(Color.yellow, Color.red, 0.5f)
+                    Color = _extractScavColor
                 };
 
                 dump.Add(dumped);
@@ -38,12 +50,12 @@ namespace DynamicMaps.Utils
             {
                 var dumped = new MapMarkerDef
                 {
-                    Category = "Extract",
+                    Category = _extractCategory,
                     ShowInRaid = false,
-                    ImagePath = "Markers/exit.png",
+                    ImagePath = _extractImagePath,
                     Text = pmcExfil.Settings.Name.BSGLocalized(),
                     Position = MathUtils.ConvertToMapPosition(pmcExfil.transform),
-                    Color = Color.green
+                    Color = _extractPMCColor
                 };
 
                 dump.Add(dumped);
@@ -70,8 +82,8 @@ namespace DynamicMaps.Utils
 
                 var dumped = new MapMarkerDef
                 {
-                    Category = "Switch",
-                    ImagePath = "Markers/lever.png",
+                    Category = _switchCategory,
+                    ImagePath = _switchImagePath,
                     Text = @switch.name,
                     Position = MathUtils.ConvertToMapPosition(@switch.transform)
                 };
@@ -102,11 +114,11 @@ namespace DynamicMaps.Utils
                 var dumped = new MapMarkerDef
                 {
                     Text = $"door {i++}",
-                    Category = "LockedDoor",
-                    ImagePath = "Markers/door_with_lock.png",
+                    Category = _lockedDoorCategory,
+                    ImagePath = _lockedDoorImagePath,
                     Position = MathUtils.ConvertToMapPosition(locked.transform),
                     AssociatedItemId = locked.KeyId,
-                    Color = Color.yellow
+                    Color = _lockedDoorColor
                 };
 
                 dump.Add(dumped);

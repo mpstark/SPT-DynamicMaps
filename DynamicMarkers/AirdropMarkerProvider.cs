@@ -14,6 +14,14 @@ namespace DynamicMaps.DynamicMarkers
         private MapView _lastMapView;
         private Dictionary<AirdropBox, MapMarker> _airdropMarkers = new Dictionary<AirdropBox, MapMarker>();
 
+        // TODO: move to config
+        private const string _airdropName = "Airdrop";
+        private const string _airdropCategory = "Airdrop";
+        private const string _airdropImagePath = "Markers/airdrop.png";
+        private static Vector2 _airdropPivot = new Vector2(0.5f, 0.25f);
+        private static Color _airdropColor = Color.Lerp(Color.red, Color.white, 0.333f);
+        //
+
         public void OnShowInRaid(MapView map)
         {
             _lastMapView = map;
@@ -65,12 +73,12 @@ namespace DynamicMaps.DynamicMarkers
 
             var markerDef = new MapMarkerDef
             {
-                Category = "Airdrop",
-                Color = Color.Lerp(Color.red, Color.white, 0.333f),
-                ImagePath = "Markers/airdrop.png",
+                Category = _airdropCategory,
+                Color = _airdropColor,
+                ImagePath = _airdropImagePath,
                 Position = MathUtils.ConvertToMapPosition(airdrop.transform),
-                Pivot = new Vector2(0.5f, 0.25f),
-                Text = "Airdrop"
+                Pivot = _airdropPivot,
+                Text = _airdropName
             };
 
             var marker = _lastMapView.AddMapMarker(markerDef);

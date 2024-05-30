@@ -12,6 +12,15 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class ExtractMarkerProvider : IDynamicMarkerProvider
     {
+        // TODO: move to config
+        private const string _extractCategory = "Extract";
+        private const string _extractImagePath = "Markers/exit.png";
+        private static Color _extractDefaultColor = Color.yellow;
+        private static Color _extractOpenColor = Color.green;
+        private static Color _extractHasRequirementsColor = Color.yellow;
+        private static Color _extractClosedColor = Color.red;
+        //
+
         private bool _showExtractStatusInRaid = true;
         public bool ShowExtractStatusInRaid
         {
@@ -129,20 +138,20 @@ namespace DynamicMaps.DynamicMarkers
             var marker = _extractMarkers[extract];
             if (!_showExtractStatusInRaid)
             {
-                marker.Color = Color.yellow;
+                marker.Color = _extractDefaultColor;
                 return;
             }
 
             switch (extract.Status)
             {
                 case EExfiltrationStatus.NotPresent:
-                    marker.Color = Color.red;
+                    marker.Color = _extractClosedColor;
                     break;
                 case EExfiltrationStatus.UncompleteRequirements:
-                    marker.Color = Color.yellow;
+                    marker.Color = _extractHasRequirementsColor;
                     return;
                 default:
-                    marker.Color = Color.green;
+                    marker.Color = _extractOpenColor;
                     break;
             }
         }
@@ -156,8 +165,8 @@ namespace DynamicMaps.DynamicMarkers
 
             var markerDef = new MapMarkerDef
             {
-                Category = "Extract",
-                ImagePath = "Markers/exit.png",
+                Category = _extractCategory,
+                ImagePath = _extractImagePath,
                 Text = extract.Settings.Name.BSGLocalized(),
                 Position = MathUtils.ConvertToMapPosition(extract.transform)
             };
