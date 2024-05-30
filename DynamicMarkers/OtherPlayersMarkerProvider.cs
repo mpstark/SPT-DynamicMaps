@@ -11,26 +11,26 @@ namespace DynamicMaps.DynamicMarkers
 {
     public class OtherPlayersMarkerProvider : IDynamicMarkerProvider
     {
-        private static string _arrowIconPath = "Markers/arrow.png";
-        private static string _starIconPath = "Markers/star.png";
+        private const string _arrowImagePath = "Markers/arrow.png";
+        private const string _starImagePath = "Markers/star.png";
 
-        private static HashSet<WildSpawnType> _bosses = new HashSet<WildSpawnType>
-        {
-            WildSpawnType.bossBoar,
-            WildSpawnType.bossBully,
-            WildSpawnType.bossGluhar,
-            WildSpawnType.bossKilla,
-            WildSpawnType.bossKnight,
-            WildSpawnType.followerBigPipe,
-            WildSpawnType.followerBirdEye,
-            WildSpawnType.bossKolontay,
-            WildSpawnType.bossKojaniy,
-            WildSpawnType.bossSanitar,
-            WildSpawnType.bossTagilla,
-            WildSpawnType.bossZryachiy,
-            (WildSpawnType) 4206927,  // Punisher
-            (WildSpawnType) 199, // Legion
-        };
+        // TODO: bring these all out to config
+        private const string _friendlyPlayerCategory = "Friendly Player";
+        private const string _friendlyPlayerImagePath = _arrowImagePath;
+        private static Color _friendlyPlayerColor = Color.blue;
+
+        private const string _enemyPlayerCategory = "Enemy Player";
+        private const string _enemyPlayerImagePath = _arrowImagePath;
+        private static Color _enemyPlayerColor = Color.red;
+
+        private const string _scavCategory = "Scav";
+        private const string _scavImagePath = _arrowImagePath;
+        private static Color _scavColor = Color.Lerp(Color.red, Color.yellow, 0.5f);
+
+        private const string _bossCategory = "Boss";
+        private const string _bossImagePath = _starImagePath;
+        private static Color _bossColor = Color.Lerp(Color.red, Color.yellow, 0.5f);
+        //
 
         private bool _showFriendlyPlayers = true;
         public bool ShowFriendlyPlayers
@@ -42,21 +42,7 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showFriendlyPlayers)
-                {
-                    return;
-                }
-
-                _showFriendlyPlayers = value;
-
-                if (_showFriendlyPlayers)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+                HandleSetBoolOption(ref _showFriendlyPlayers, value);
             }
         }
 
@@ -70,21 +56,7 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showEnemyPlayers)
-                {
-                    return;
-                }
-
-                _showEnemyPlayers = value;
-
-                if (_showEnemyPlayers)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+                HandleSetBoolOption(ref _showEnemyPlayers, value);
             }
         }
 
@@ -98,21 +70,7 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showScavs)
-                {
-                    return;
-                }
-
-                _showScavs = value;
-
-                if (_showScavs)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+                HandleSetBoolOption(ref _showScavs, value);
             }
         }
 
@@ -126,21 +84,7 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showBosses)
-                {
-                    return;
-                }
-
-                _showBosses = value;
-
-                if (_showBosses)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+                HandleSetBoolOption(ref _showBosses, value);
             }
         }
 
@@ -227,31 +171,30 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // set category and color
-            var category = "Scav";
-            var color = Color.Lerp(Color.red, Color.yellow, 0.5f);
-            var imagePath = _arrowIconPath;
+            var category = _scavCategory;
+            var imagePath = _scavImagePath;
+            var color = _scavColor;
 
-            var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
-            if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
+            if (player.IsGroupedWithMainPlayer())
             {
-                color = Color.blue;
-                category = "Friendly Player";
+                category = _friendlyPlayerCategory;
+                imagePath = _friendlyPlayerImagePath;
+                color = _friendlyPlayerColor;
             }
-            else if (player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec)
+            else if (player.IsTrackedBoss())
             {
-                color = Color.red;
-                category = "Enemy Player";
+                category = _bossCategory;
+                imagePath = _bossImagePath;
+                color = _bossColor;
             }
-            else if (player.Profile.Side == EPlayerSide.Savage && _bosses.Contains(player.Profile.Info.Settings.Role))
+            else if (player.IsPMC())
             {
-                imagePath = _starIconPath;
-                category = "Boss";
+                category = _enemyPlayerCategory;
+                imagePath = _enemyPlayerImagePath;
+                color = _enemyPlayerColor;
             }
 
-            if (category == "Scav" && !_showScavs
-             || category == "Boss" && !_showBosses
-             || category == "Friendly Player" && !_showFriendlyPlayers
-             || category == "Enemy Player" && !_showEnemyPlayers)
+            if (!ShouldShowCategory(category))
             {
                 return;
             }
@@ -268,11 +211,7 @@ namespace DynamicMaps.DynamicMarkers
             foreach (var player in _playerMarkers.Keys.ToList())
             {
                 var marker = _playerMarkers[player];
-
-                if ((!_showFriendlyPlayers && marker.Category == "Friendly Player")
-                 || (!_showEnemyPlayers && marker.Category == "Enemy Player")
-                 || (!_showScavs && marker.Category == "Scav")
-                 || (!_showBosses && marker.Category == "Boss"))
+                if (!ShouldShowCategory(marker.Category))
                 {
                     TryRemoveMarker(player);
                 }
@@ -291,6 +230,42 @@ namespace DynamicMaps.DynamicMarkers
             _playerMarkers.Remove(player);
         }
 
+        private bool ShouldShowCategory(string category)
+        {
+            switch (category)
+            {
+                case _friendlyPlayerCategory:
+                    return _showFriendlyPlayers;
+                case _enemyPlayerCategory:
+                    return _showEnemyPlayers;
+                case _scavCategory:
+                    return _showScavs;
+                case _bossCategory:
+                    return _showBosses;
+                default:
+                    return false;
+            }
+        }
+
+        private void HandleSetBoolOption(ref bool boolOption, bool value)
+        {
+            if (value == boolOption)
+            {
+                return;
+            }
+
+            boolOption = value;
+
+            if (boolOption)
+            {
+                TryAddMarkers();
+            }
+            else
+            {
+                RemoveDisabledMarkers();
+            }
+        }
+
         public void OnShowOutOfRaid(MapView map)
         {
             // do nothing
@@ -300,10 +275,5 @@ namespace DynamicMaps.DynamicMarkers
         {
             // do nothing
         }
-
-        public static bool PlayerIsBoss(IPlayer player)
-        {
-			return player.Profile.Side == EPlayerSide.Savage && _bosses.Contains(player.Profile.Info.Settings.Role);
-		}
     }
 }

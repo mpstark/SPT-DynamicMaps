@@ -48,6 +48,7 @@ namespace DynamicMaps.Config
 
         public static ConfigEntry<bool> ShowFriendlyCorpsesInRaid;
         public static ConfigEntry<bool> ShowKilledCorpsesInRaid;
+        public static ConfigEntry<bool> ShowBossCorpsesInRaid;
         public static ConfigEntry<bool> ShowOtherCorpsesInRaid;
 
         public const string InRaidTitle = "3. In-Raid";
@@ -287,7 +288,16 @@ namespace DynamicMaps.Config
                 "Show Player-killed Corpses In Raid",
                 true,
                 new ConfigDescription(
-                    "If corpses killed by the player should be shown in raid",
+                    "If corpses killed by the player should be shown in raid, killed bosses will be shown in another color",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowBossCorpsesInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Boss Corpses In Raid",
+                false,
+                new ConfigDescription(
+                    "If boss corpses (other than ones killed by the player) should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 

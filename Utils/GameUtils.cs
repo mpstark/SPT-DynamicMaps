@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Aki.Reflection.Utils;
@@ -20,6 +21,24 @@ namespace DynamicMaps.Utils
         private static PropertyInfo _sessionProfileProperty = AccessTools.Property(_profileInterface, "Profile");
         public static ISession Session => ClientAppUtils.GetMainApp().GetClientBackEndSession();
         public static Profile PlayerProfile => _sessionProfileProperty.GetValue(Session) as Profile;
+
+        private static HashSet<WildSpawnType> _trackedBosses = new HashSet<WildSpawnType>
+        {
+            WildSpawnType.bossBoar,
+            WildSpawnType.bossBully,
+            WildSpawnType.bossGluhar,
+            WildSpawnType.bossKilla,
+            WildSpawnType.bossKnight,
+            WildSpawnType.followerBigPipe,
+            WildSpawnType.followerBirdEye,
+            WildSpawnType.bossKolontay,
+            WildSpawnType.bossKojaniy,
+            WildSpawnType.bossSanitar,
+            WildSpawnType.bossTagilla,
+            WildSpawnType.bossZryachiy,
+            (WildSpawnType) 4206927,  // Punisher
+            (WildSpawnType) 199, // Legion
+        };
 
         public static bool IsInRaid()
         {
@@ -65,5 +84,27 @@ namespace DynamicMaps.Utils
             // TODO: use reflection to get rid of this gclass reference
             return id.Localized();
         }
+
+        public static bool IsGroupedWithMainPlayer(this IPlayer player)
+        {
+            var mainPlayerGroupId = GetMainPlayer().GroupId;
+            return !string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId;
+        }
+
+        public static bool IsTrackedBoss(this IPlayer player)
+        {
+			return player.Profile.Side == EPlayerSide.Savage && _trackedBosses.Contains(player.Profile.Info.Settings.Role);
+		}
+
+        public static bool IsPMC(this IPlayer player)
+        {
+            return player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec;
+		}
+
+        public static bool DidMainPlayerKill(this IPlayer player)
+        {
+            var victims = GetMainPlayer()?.Profile?.EftStats?.Victims;
+            return victims?.FirstOrDefault(v => v.ProfileId == player.ProfileId) != null;
+		}
     }
 }
