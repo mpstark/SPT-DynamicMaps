@@ -215,21 +215,21 @@ namespace DynamicMaps.DynamicMarkers
                 markerDef.Color = Color.blue;
                 markerDef.Category = "Friendly Corpse";
             }
-            else if (victim != null && OtherPlayersMarkerProvider.PlayerIsBoss(player))
-            {
-                var orangeColor = new Color(255,165,0);
-				markerDef.Color = orangeColor;
-				markerDef.Category = "Boss Corpse";
-			}
             else if (victim != null)
             {
-                markerDef.Color = Color.red;
-                markerDef.Category = "Killed Corpse";
-            }
+                if (OtherPlayersMarkerProvider.PlayerIsBoss(player))
+                {
+				    markerDef.Color = Color.magenta;
+				    markerDef.Category = "Boss Corpse";
+                }
+                else
+                {
+                    markerDef.Color = Color.red;
+                    markerDef.Category = "Killed Corpse";
+                }
+			}
 
-            if (markerDef.Category == "Friendly Corpse" && !_showFriendlyCorpses
-             || (markerDef.Category == "Killed Corpse" || markerDef.Category == "Boss Corpse") && !_showKilledCorpses
-             || markerDef.Category == "Other Corpse" && !_showOtherCorpses)
+            if (!ShouldShowCorpseMarker(markerDef))
             {
                 return;
             }
@@ -238,6 +238,22 @@ namespace DynamicMaps.DynamicMarkers
             var marker = _lastMapView.AddMapMarker(markerDef);
             _corpseMarkers[player] = marker;
         }
+
+        private bool ShouldShowCorpseMarker(MapMarkerDef markerDef)
+        {
+            switch (markerDef.Category)
+            {
+				case "Friendly Corpse":
+					return _showFriendlyCorpses;
+				case "Killed Corpse":
+                case "Boss Corpse":
+					return _showKilledCorpses;
+				case "Other Corpse":
+					return _showOtherCorpses;
+                default:
+					return true;
+			}
+		}
 
         private void RemoveDisabledMarkers()
         {
