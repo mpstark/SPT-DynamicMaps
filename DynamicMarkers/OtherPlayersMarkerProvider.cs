@@ -300,5 +300,10 @@ namespace DynamicMaps.DynamicMarkers
         {
             // do nothing
         }
+
+        public static bool PlayerIsBoss(IPlayer player)
+        {
+			return player.Profile.Side == EPlayerSide.Savage && _bosses.Contains(player.Profile.Info.Settings.Role);
+		}
     }
 }

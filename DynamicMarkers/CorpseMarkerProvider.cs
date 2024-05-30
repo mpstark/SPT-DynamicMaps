@@ -208,19 +208,27 @@ namespace DynamicMaps.DynamicMarkers
             // set category and color
             var victims = GameUtils.GetMainPlayer()?.Profile?.EftStats?.Victims;
             var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
+
+            var victim = victims.FirstOrDefault(v => v.ProfileId == player.ProfileId);
             if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
             {
                 markerDef.Color = Color.blue;
                 markerDef.Category = "Friendly Corpse";
             }
-            else if (victims.FirstOrDefault(v => v.ProfileId == player.ProfileId) != null)
+            else if (victim != null && OtherPlayersMarkerProvider.PlayerIsBoss(player))
+            {
+                var orangeColor = new Color(255,165,0);
+				markerDef.Color = orangeColor;
+				markerDef.Category = "Boss Corpse";
+			}
+            else if (victim != null)
             {
                 markerDef.Color = Color.red;
                 markerDef.Category = "Killed Corpse";
             }
 
             if (markerDef.Category == "Friendly Corpse" && !_showFriendlyCorpses
-             || markerDef.Category == "Killed Corpse" && !_showKilledCorpses
+             || (markerDef.Category == "Killed Corpse" || markerDef.Category == "Boss Corpse") && !_showKilledCorpses
              || markerDef.Category == "Other Corpse" && !_showOtherCorpses)
             {
                 return;
