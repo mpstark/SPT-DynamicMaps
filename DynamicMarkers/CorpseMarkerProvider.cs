@@ -17,6 +17,30 @@ namespace DynamicMaps.DynamicMarkers
     {
         private static FieldInfo _playerCorpseField = AccessTools.Field(typeof(Player), "Corpse");
 
+        private const string _skullImagePath = "Markers/skull.png";
+
+        // TODO: move to config
+        private const string _friendlyCorpseCategory = "Friendly Corpse";
+        private const string _friendlyCorpseImagePath = _skullImagePath;
+        private static Color _friendlyCorpseColor = Color.blue;
+
+        private const string _killedCorpseCategory = "Killed Corpse";
+        private const string _killedCorpseImagePath = _skullImagePath;
+        private static Color _killedCorpseColor = Color.red;
+
+        private const string _killedBossCorpseCategory = "Killed Boss Corpse";
+        private const string _killedBossCorpseImagePath = _skullImagePath;
+        private static Color _killedBossCorpseColor = Color.magenta;
+
+        private const string _bossCorpseCategory = "Boss Corpse";
+        private const string _bossCorpseImagePath = _skullImagePath;
+        private static Color _bossCorpseColor = Color.magenta;
+
+        private const string _otherCorpseCategory = "Other Corpse";
+        private const string _otherCorpseImagePath = _skullImagePath;
+        private static Color _otherCorpseColor = Color.white;
+        //
+
         private bool _showFriendlyCorpses = true;
         public bool ShowFriendlyCorpses
         {
@@ -27,21 +51,35 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showFriendlyCorpses)
-                {
-                    return;
-                }
+                HandleSetBoolOption(ref _showFriendlyCorpses, value);
+            }
+        }
 
-                _showFriendlyCorpses = value;
+        private bool _showKilledCorpses = true;
+        public bool ShowKilledCorpses
+        {
+            get
+            {
+                return _showKilledCorpses;
+            }
 
-                if (_showFriendlyCorpses)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+            set
+            {
+                HandleSetBoolOption(ref _showKilledCorpses, value);
+            }
+        }
+
+        private bool _showBossCorpses = false;
+        public bool ShowBossCorpses
+        {
+            get
+            {
+                return _showBossCorpses;
+            }
+
+            set
+            {
+                HandleSetBoolOption(ref _showBossCorpses, value);
             }
         }
 
@@ -55,49 +93,7 @@ namespace DynamicMaps.DynamicMarkers
 
             set
             {
-                if (value == _showOtherCorpses)
-                {
-                    return;
-                }
-
-                _showOtherCorpses = value;
-
-                if (_showOtherCorpses)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
-            }
-        }
-
-        private bool _showKilledCorpses = false;
-        public bool ShowKilledCorpses
-        {
-            get
-            {
-                return _showKilledCorpses;
-            }
-
-            set
-            {
-                if (value == _showKilledCorpses)
-                {
-                    return;
-                }
-
-                _showKilledCorpses = value;
-
-                if (_showKilledCorpses)
-                {
-                    TryAddMarkers();
-                }
-                else
-                {
-                    RemoveDisabledMarkers();
-                }
+                HandleSetBoolOption(ref _showOtherCorpses, value);
             }
         }
 
@@ -196,35 +192,49 @@ namespace DynamicMaps.DynamicMarkers
                 return;
             }
 
-            var markerDef = new MapMarkerDef
-            {
-                Category = "Other Corpse",
-                ImagePath = "Markers/skull.png",
-                Text = player.Profile.GetCorrectedNickname(),
-                Color = Color.yellow,
-                Position = MathUtils.ConvertToMapPosition(player.Position)
-            };
-
             // set category and color
-            var victims = GameUtils.GetMainPlayer()?.Profile?.EftStats?.Victims;
-            var mainPlayerGroupId = GameUtils.GetMainPlayer().GroupId;
-            if (!string.IsNullOrEmpty(mainPlayerGroupId) && player.GroupId == mainPlayerGroupId)
+            var category = _otherCorpseCategory;
+            var imagePath = _otherCorpseImagePath;
+            var color = _otherCorpseColor;
+
+            if (player.IsGroupedWithMainPlayer())
             {
-                markerDef.Color = Color.blue;
-                markerDef.Category = "Friendly Corpse";
+                category = _friendlyCorpseCategory;
+                imagePath = _friendlyCorpseImagePath;
+                color = _friendlyCorpseColor;
             }
-            else if (victims.FirstOrDefault(v => v.ProfileId == player.ProfileId) != null)
+            else if (player.IsTrackedBoss() && player.DidMainPlayerKill())
             {
-                markerDef.Color = Color.red;
-                markerDef.Category = "Killed Corpse";
+                category = _killedBossCorpseCategory;
+                imagePath = _killedBossCorpseImagePath;
+                color = _killedBossCorpseColor;
+            }
+            else if (player.DidMainPlayerKill())
+            {
+                category = _killedCorpseCategory;
+                imagePath = _killedCorpseImagePath;
+                color = _killedCorpseColor;
+            }
+            else if (player.IsTrackedBoss())
+            {
+                category = _bossCorpseCategory;
+                imagePath = _bossCorpseImagePath;
+                color = _bossCorpseColor;
             }
 
-            if (markerDef.Category == "Friendly Corpse" && !_showFriendlyCorpses
-             || markerDef.Category == "Killed Corpse" && !_showKilledCorpses
-             || markerDef.Category == "Other Corpse" && !_showOtherCorpses)
+            if (!ShouldShowCategory(category))
             {
                 return;
             }
+
+            var markerDef = new MapMarkerDef
+            {
+                Category = category,
+                ImagePath = imagePath,
+                Text = player.Profile.GetCorrectedNickname(),
+                Color = color,
+                Position = MathUtils.ConvertToMapPosition(player.Position)
+            };
 
             // try adding marker
             var marker = _lastMapView.AddMapMarker(markerDef);
@@ -236,10 +246,7 @@ namespace DynamicMaps.DynamicMarkers
             foreach (var corpse in _corpseMarkers.Keys.ToList())
             {
                 var marker = _corpseMarkers[corpse];
-
-                if ((!_showFriendlyCorpses && marker.Category == "Friendly Corpse")
-                 || (!_showKilledCorpses && marker.Category == "Killed Corpse")
-                 || (!_showOtherCorpses && marker.Category == "Other Corpse"))
+                if (!ShouldShowCategory(marker.Category))
                 {
                     TryRemoveMarker(corpse);
                 }
@@ -255,6 +262,43 @@ namespace DynamicMaps.DynamicMarkers
 
             _corpseMarkers[player].ContainingMapView.RemoveMapMarker(_corpseMarkers[player]);
             _corpseMarkers.Remove(player);
+        }
+
+        private bool ShouldShowCategory(string category)
+        {
+            switch (category)
+            {
+                case _friendlyCorpseCategory:
+                    return _showFriendlyCorpses;
+                case _killedCorpseCategory:
+                case _killedBossCorpseCategory:
+                    return _showKilledCorpses;
+                case _bossCorpseCategory:
+                    return _showOtherCorpses;
+                case _otherCorpseCategory:
+                    return _showOtherCorpses;
+                default:
+                    return false;
+            }
+        }
+
+        private void HandleSetBoolOption(ref bool boolOption, bool value)
+        {
+            if (value == boolOption)
+            {
+                return;
+            }
+
+            boolOption = value;
+
+            if (boolOption)
+            {
+                TryAddMarkers();
+            }
+            else
+            {
+                RemoveDisabledMarkers();
+            }
         }
 
         public void OnShowOutOfRaid(MapView map)

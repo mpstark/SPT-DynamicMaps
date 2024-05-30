@@ -79,6 +79,7 @@ namespace DynamicMaps.UI
         private bool _showAirdropsInRaid = true;
         private bool _showFriendlyCorpsesInRaid = true;
         private bool _showKilledCorpsesInRaid = false;
+        private bool _showBossCorpsesInRaid = false;
         private bool _showOtherCorpsesInRaid = false;
         private KeyboardShortcut _centerPlayerShortcut;
         private KeyboardShortcut _dumpShortcut;
@@ -598,6 +599,7 @@ namespace DynamicMaps.UI
 
             _showFriendlyCorpsesInRaid = Settings.ShowFriendlyCorpsesInRaid.Value;
             _showKilledCorpsesInRaid = Settings.ShowKilledCorpsesInRaid.Value;
+            _showBossCorpsesInRaid = Settings.ShowBossCorpsesInRaid.Value;
             _showOtherCorpsesInRaid = Settings.ShowOtherCorpsesInRaid.Value;
 
             if (_peekComponent != null)
@@ -640,6 +642,7 @@ namespace DynamicMaps.UI
                 var provider = GetMarkerProvider<CorpseMarkerProvider>();
                 provider.ShowFriendlyCorpses = _showFriendlyCorpsesInRaid;
                 provider.ShowKilledCorpses = _showKilledCorpsesInRaid;
+                provider.ShowBossCorpses = _showBossCorpsesInRaid;
                 provider.ShowOtherCorpses = _showOtherCorpsesInRaid;
             }
         }
