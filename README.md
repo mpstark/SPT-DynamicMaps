@@ -27,6 +27,7 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
   - In-raid dynamic player icon
   - In-raid dynamic current extracts for player
   - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
+  - In-raid dynamic BTR icon (with icon by Kuromi, see [`marker_credits.txt`](Resources/Markers/marker_credits.txt) for more info)
   - In-raid dynamic airdrop icons (generated when airdrop lands)
   - In-raid dynamic markers for corpses
   - In-raid dynamic other players/bots icons
@@ -64,9 +65,11 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 - **Show Quests In Raid**: If quests should be shown in raid
 - **Show Extracts In Raid**: If extracts should be shown in raid
 - **Show Extracts Status In Raid**: If extracts should be colored according to their status in raid
+- **Show BTR In Raid**: If the BTR should be shown in raid
 - **Show Airdrop In Raid**: If airdrops should be shown in raid when they land
 - **Show Friendly Corpses In Raid**: If friendly corpses should be shown in raid
-- **Show Player-killed Corpses In Raid**: If corpses killed by the player should be shown in raid
+- **Show Player-killed Corpses In Raid**: If corpses killed by the player should be shown in raid, killed bosses will be shown in another color
+- **Show Boss Corpses In Raid**: If boss corpses (other than ones killed by the player) should be shown in raid
 - **Show Other Corpses In Raid**: If corpses (other than friendly ones or ones killed by the player) should be shown in raid
 
 ### In-Raid
