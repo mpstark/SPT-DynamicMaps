@@ -2,12 +2,15 @@
 
 ### Configuration
 
-- Configure colors for dynamic markers
-- Lots of other configuration
+- Configure colors/icons for dynamic markers
 
 ### Marker/Label Filtering
 
 - Be able to toggle on/off categories of marker and labels
+
+### Heatmaps
+
+- Heatmap for enemies and loot would be cool
 
 ### Map Markers
 
@@ -41,7 +44,6 @@
 
 ### Overlay
 
-- Add an overlay map mode
 - Add option to select a marker and have an overlay UI pointing to the marker
 
 ### Immersion and Difficulty
