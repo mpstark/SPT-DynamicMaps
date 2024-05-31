@@ -1,4 +1,3 @@
-using System;
 using DynamicMaps.Utils;
 using EFT;
 using UnityEngine;
