@@ -95,7 +95,6 @@ namespace DynamicMaps.UI.Components
         {
             var marker = PlayerMapMarker.Create(player, MapMarkerContainer, imagePath, color, category,
                                                 _markerSize, -CoordinateRotation, 1f/ZoomCurrent);
-            marker.OnDeathOrDespawn += RemoveMapMarker;
             AddMapMarker(marker);
             return marker;
         }

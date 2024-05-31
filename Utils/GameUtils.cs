@@ -12,7 +12,8 @@ namespace DynamicMaps.Utils
 {
     public static class GameUtils
     {
-        // reflection to avoid unnecessary references of GClass
+        // reflection
+        private static FieldInfo _playerCorpseField = AccessTools.Field(typeof(Player), "Corpse");
         private static Type _profileInterface = typeof(ISession).GetInterfaces().First(i =>
             {
                 var properties = i.GetProperties();
@@ -22,6 +23,7 @@ namespace DynamicMaps.Utils
         private static PropertyInfo _sessionProfileProperty = AccessTools.Property(_profileInterface, "Profile");
         public static ISession Session => ClientAppUtils.GetMainApp().GetClientBackEndSession();
         public static Profile PlayerProfile => _sessionProfileProperty.GetValue(Session) as Profile;
+        //
 
         private static HashSet<WildSpawnType> _trackedBosses = new HashSet<WildSpawnType>
         {
@@ -118,6 +120,11 @@ namespace DynamicMaps.Utils
         {
             return player.Profile.Side == EPlayerSide.Savage
                 && player.Profile.Info.Settings.Role == WildSpawnType.shooterBTR;
+        }
+
+        public static bool HasCorpse(this Player player)
+        {
+            return _playerCorpseField.GetValue(player) != null;
         }
     }
 }

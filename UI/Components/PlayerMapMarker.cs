@@ -10,32 +10,7 @@ namespace DynamicMaps.UI.Components
         private static float _maxCallbackTime = 0.5f;  // how often to call callback in seconds
         private static Vector2 _pivot = new Vector2(0.5f, 0.5f);
 
-        public event Action<MapMarker> OnDeathOrDespawn;
-
-        private IPlayer _player;
-        public IPlayer Player
-        {
-            get
-            {
-                return _player;
-            }
-
-            private set
-            {
-                if (_player == value)
-                {
-                    return;
-                }
-
-                if (_player != null)
-                {
-                    _player.OnIPlayerDeadOrUnspawn -= HandleDeathOrDespawn;
-                }
-
-                _player = value;
-                _player.OnIPlayerDeadOrUnspawn += HandleDeathOrDespawn;
-            }
-        }
+        public IPlayer Player { get; private set; }
 
         private float _callbackTime = _maxCallbackTime;  // make sure to start with a callback
 
@@ -81,26 +56,6 @@ namespace DynamicMaps.UI.Components
             }
 
             MoveAndRotate(MathUtils.ConvertToMapPosition(Player.Position), -Player.Rotation.x, callback);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            if (_player != null)
-            {
-                _player.OnIPlayerDeadOrUnspawn -= HandleDeathOrDespawn;
-            }
-        }
-
-        private void HandleDeathOrDespawn(IPlayer player)
-        {
-            if (_player != player)
-            {
-                return;
-            }
-
-            OnDeathOrDespawn?.Invoke(this);
         }
     }
 }

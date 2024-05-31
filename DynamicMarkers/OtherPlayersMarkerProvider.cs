@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Comfort.Common;
 using DynamicMaps.Data;
+using DynamicMaps.Patches;
 using DynamicMaps.UI.Components;
 using DynamicMaps.Utils;
 using EFT;
@@ -89,31 +90,42 @@ namespace DynamicMaps.DynamicMarkers
         }
 
         private MapView _lastMapView;
-        private Dictionary<IPlayer, PlayerMapMarker> _playerMarkers = new Dictionary<IPlayer, PlayerMapMarker>();
+        private Dictionary<Player, PlayerMapMarker> _playerMarkers = new Dictionary<Player, PlayerMapMarker>();
 
         public void OnShowInRaid(MapView map)
         {
             _lastMapView = map;
 
             TryAddMarkers();
+            RemoveDeadPlayers();
 
             // register to event to get all the new ones while map is showing
             Singleton<GameWorld>.Instance.OnPersonAdd += TryAddMarker;
+
+            // register to events to get when players die
+            GameWorldUnregisterPlayerPatch.OnUnregisterPlayer += OnUnregisterPlayer;
+            PlayerOnDeadPatch.OnDead += TryRemoveMarker;
         }
 
         public void OnHideInRaid(MapView map)
         {
-            // unregister from event while map isn't showing
+            // unregister from events while map isn't showing
             Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
+            GameWorldUnregisterPlayerPatch.OnUnregisterPlayer -= OnUnregisterPlayer;
+            PlayerOnDeadPatch.OnDead -= TryRemoveMarker;
         }
 
         public void OnRaidEnd(MapView map)
         {
+            // unregister from events since map is ending
             var gameWorld = Singleton<GameWorld>.Instance;
             if (gameWorld != null)
             {
                 gameWorld.OnPersonAdd -= TryAddMarker;
             }
+
+            GameWorldUnregisterPlayerPatch.OnUnregisterPlayer -= OnUnregisterPlayer;
+            PlayerOnDeadPatch.OnDead -= TryRemoveMarker;
 
             TryRemoveMarkers();
         }
@@ -131,7 +143,15 @@ namespace DynamicMaps.DynamicMarkers
 
         public void OnDisable(MapView map)
         {
-            Singleton<GameWorld>.Instance.OnPersonAdd -= TryAddMarker;
+            // unregister from events since provider is being disabled
+            var gameWorld = Singleton<GameWorld>.Instance;
+            if (gameWorld != null)
+            {
+                gameWorld.OnPersonAdd -= TryAddMarker;
+            }
+
+            GameWorldUnregisterPlayerPatch.OnUnregisterPlayer -= OnUnregisterPlayer;
+            PlayerOnDeadPatch.OnDead -= TryRemoveMarker;
 
             TryRemoveMarkers();
         }
@@ -166,8 +186,37 @@ namespace DynamicMaps.DynamicMarkers
             }
         }
 
-        private void TryAddMarker(IPlayer player)
+        private void OnUnregisterPlayer(IPlayer iPlayer)
         {
+            var player = iPlayer as Player;
+            if (player == null)
+            {
+                return;
+            }
+
+            TryRemoveMarker(player);
+        }
+
+        private void RemoveDeadPlayers()
+        {
+            foreach (var player in _playerMarkers.Keys.ToList())
+            {
+                var marker = _playerMarkers[player];
+                if (player.HasCorpse())
+                {
+                    TryRemoveMarker(player);
+                }
+            }
+        }
+
+        private void TryAddMarker(IPlayer iPlayer)
+        {
+            var player = iPlayer as Player;
+            if (player == null)
+            {
+                return;
+            }
+
             if (_lastMapView == null || player.IsBTRShooter() || _playerMarkers.ContainsKey(player))
             {
                 return;
@@ -204,8 +253,6 @@ namespace DynamicMaps.DynamicMarkers
 
             // try adding marker
             var marker = _lastMapView.AddPlayerMarker(player, category, color, imagePath);
-            player.OnIPlayerDeadOrUnspawn += TryRemoveMarker;
-
             _playerMarkers[player] = marker;
         }
 
@@ -221,14 +268,13 @@ namespace DynamicMaps.DynamicMarkers
             }
         }
 
-        private void TryRemoveMarker(IPlayer player)
+        private void TryRemoveMarker(Player player)
         {
             if (!_playerMarkers.ContainsKey(player))
             {
                 return;
             }
 
-            player.OnIPlayerDeadOrUnspawn -= TryRemoveMarker;
             _playerMarkers[player].ContainingMapView.RemoveMapMarker(_playerMarkers[player]);
             _playerMarkers.Remove(player);
         }

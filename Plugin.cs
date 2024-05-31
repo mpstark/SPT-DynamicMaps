@@ -28,13 +28,14 @@ namespace DynamicMaps
             Instance = this;
 
             // patches
+            new BattleUIScreenShowPatch().Enable();
             new CommonUIAwakePatch().Enable();
             new MapScreenShowPatch().Enable();
             new MapScreenClosePatch().Enable();
-            new BattleUIScreenShowPatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
             new GameWorldUnregisterPlayerPatch().Enable();
             new AirdropBoxOnBoxLandPatch().Enable();
+            new PlayerOnDeadPatch().Enable();
         }
 
         /// <summary>

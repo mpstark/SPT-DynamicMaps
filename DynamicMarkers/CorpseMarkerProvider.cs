@@ -1,22 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Comfort.Common;
 using DynamicMaps.Data;
 using DynamicMaps.Patches;
 using DynamicMaps.UI.Components;
 using DynamicMaps.Utils;
 using EFT;
-using EFT.Interactive;
-using HarmonyLib;
 using UnityEngine;
 
 namespace DynamicMaps.DynamicMarkers
 {
     public class CorpseMarkerProvider : IDynamicMarkerProvider
     {
-        private static FieldInfo _playerCorpseField = AccessTools.Field(typeof(Player), "Corpse");
-
         private const string _skullImagePath = "Markers/skull.png";
 
         // TODO: move to config
@@ -147,8 +142,7 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             var player = iPlayer as Player;
-            var corpse = _playerCorpseField.GetValue(player) as Corpse;
-            if (corpse != null)
+            if (player.HasCorpse())
             {
                 TryAddMarker(player);
             }
@@ -175,8 +169,7 @@ namespace DynamicMaps.DynamicMarkers
             var gameWorld = Singleton<GameWorld>.Instance;
             foreach (var player in gameWorld.AllPlayersEverExisted)
             {
-                var corpse = _playerCorpseField.GetValue(player) as Corpse;
-                if (corpse == null || _corpseMarkers.ContainsKey(player))
+                if (!player.HasCorpse() || _corpseMarkers.ContainsKey(player))
                 {
                     continue;
                 }
