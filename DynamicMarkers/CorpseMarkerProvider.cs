@@ -267,7 +267,6 @@ namespace DynamicMaps.DynamicMarkers
                 case _killedBossCorpseCategory:
                     return _showKilledCorpses;
                 case _bossCorpseCategory:
-                    return _showOtherCorpses;
                 case _otherCorpseCategory:
                     return _showOtherCorpses;
                 default:
