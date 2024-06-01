@@ -77,6 +77,20 @@ namespace DynamicMaps.UI.Components
             }
         }
 
+        private float _rotation = 0f;
+        public float Rotation
+        {
+            get
+            {
+                return _rotation;
+            }
+
+            set
+            {
+                SetRotation(value);
+            }
+        }
+
         private Color _color = Color.white;
         public Color Color
         {
@@ -226,6 +240,7 @@ namespace DynamicMaps.UI.Components
 
         public void SetRotation(float degreesRotation)
         {
+            _rotation = degreesRotation;
             Image.gameObject.GetRectTransform().localRotation = Quaternion.Euler(0, 0, degreesRotation - _initialRotation);
         }
 

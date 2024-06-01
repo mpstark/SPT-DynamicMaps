@@ -44,6 +44,8 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowExtractsInRaid;
         public static ConfigEntry<bool> ShowExtractStatusInRaid;
 
+        public static ConfigEntry<bool> ShowDroppedBackpackInRaid;
+
         public static ConfigEntry<bool> ShowBTRInRaid;
 
         public static ConfigEntry<bool> ShowAirdropsInRaid;
@@ -264,6 +266,15 @@ namespace DynamicMaps.Config
                 true,
                 new ConfigDescription(
                     "If extracts should be colored according to their status in raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowDroppedBackpackInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Dropped Backpack In Raid",
+                true,
+                new ConfigDescription(
+                    "If the player's dropped backpack (not anyone elses) should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 

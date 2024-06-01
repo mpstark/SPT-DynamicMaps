@@ -1,10 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DynamicMaps.Utils
 {
     public static class MathUtils
     {
+        public enum RotationAxis
+        {
+            X, Y, Z
+        }
+
         public static Vector2 GetRotatedVector2(Vector2 vector, float degreeRotation)
         {
             var x = vector.x;
@@ -47,9 +51,19 @@ namespace DynamicMaps.Utils
             return ConvertToMapPosition(transform.position);
         }
 
-        public static float ConvertToMapRotation(Transform transform)
+        public static float ConvertToMapRotation(Transform transform, RotationAxis axis = RotationAxis.Y)
         {
-            return -transform.rotation.eulerAngles.y;
+            switch (axis)
+            {
+                case RotationAxis.X:
+                    return -transform.rotation.eulerAngles.x;
+                case RotationAxis.Y:
+                    return -transform.rotation.eulerAngles.y;
+                case RotationAxis.Z:
+                    return -transform.rotation.eulerAngles.z;
+            }
+
+            return 0f;
         }
     }
 }

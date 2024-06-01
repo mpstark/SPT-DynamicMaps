@@ -39,7 +39,7 @@ namespace DynamicMaps.UI.Components
             LabelAlphaLayerStatus[LayerStatus.FullReveal] = 1.00f;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (Player == null)
             {

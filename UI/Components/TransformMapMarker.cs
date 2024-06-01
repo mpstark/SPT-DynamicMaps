@@ -9,6 +9,7 @@ namespace DynamicMaps.UI.Components
         private static Vector2 _pivot = new Vector2(0.5f, 0.5f);
 
         public Transform FollowingTransform { get; private set; }
+        public MathUtils.RotationAxis RotationAxis { get; set; } = MathUtils.RotationAxis.Y;
 
         private float _callbackTime = _maxCallbackTime;  // make sure to start with a callback
 
@@ -37,9 +38,21 @@ namespace DynamicMaps.UI.Components
             LabelAlphaLayerStatus[LayerStatus.FullReveal] = 1.00f;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (FollowingTransform == null)
+            {
+                return;
+            }
+
+            var mapPosition = MathUtils.ConvertToMapPosition(FollowingTransform);
+            var mapRotation = MathUtils.ConvertToMapRotation(FollowingTransform, RotationAxis);
+
+            // check if in exactly the same place and skip updating if it is
+            if (mapPosition.x.ApproxEquals(Position.x)
+             && mapPosition.y.ApproxEquals(Position.y)
+             && mapPosition.z.ApproxEquals(Position.z)
+             && mapRotation.ApproxEquals(Rotation))
             {
                 return;
             }
@@ -52,9 +65,7 @@ namespace DynamicMaps.UI.Components
                 _callbackTime = 0f;
             }
 
-            MoveAndRotate(MathUtils.ConvertToMapPosition(FollowingTransform),
-                          MathUtils.ConvertToMapRotation(FollowingTransform),
-                          callback);
+            MoveAndRotate(mapPosition, mapRotation, callback);
         }
     }
 }
