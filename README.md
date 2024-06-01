@@ -14,6 +14,15 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
 #### Quest Indicators
 ![Quest Indicators](Screenshots/quest_markers.png)
 
+#### BTR Marker
+![BTR Marker](Screenshots/btr_marker.png)
+
+#### Airdrop Marker
+![Airdrop Marker](Screenshots/airdrop_marker.png)
+
+#### Corpse Markers
+![Corpse Markers](Screenshots/corpse_markers.png)
+
 ### Features
 
 - Map organized in stacked layers / levels
@@ -94,4 +103,5 @@ Distributed under the MIT license. See [`LICENSE.txt`](LICENSE.txt) for more det
 - [CJ](https://github.com/CJ-SPT) for letting me hack on [StashSearch](https://github.com/CJ-SPT/StashSearch) as my first SPT-AKI modding experience
 - [DrakiaXYZ](https://github.com/DrakiaXYZ) for having multiple great mods to look at for examples
 - [Arys](https://github.com/Nympfonic) for being awesome
+- [Kuromi](https://github.com/schkuromi/) for the BTR icon and constant support
 - Multiple people in the SPT Discord for suggestions and encouragement

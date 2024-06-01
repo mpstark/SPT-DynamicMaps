@@ -34,7 +34,6 @@
 - Add car trunk icon, locked/with key
 - Add car door icon, locked/with key
 - Add safe icon, locked/with key
-- Add BTR icon
 
 ### Maps
 
