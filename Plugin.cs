@@ -34,8 +34,11 @@ namespace DynamicMaps
             new MapScreenClosePatch().Enable();
             new GameWorldOnDestroyPatch().Enable();
             new GameWorldUnregisterPlayerPatch().Enable();
+            new GameWorldRegisterLootItemPatch().Enable();
+            new GameWorldDestroyLootPatch().Enable();
             new AirdropBoxOnBoxLandPatch().Enable();
             new PlayerOnDeadPatch().Enable();
+            new PlayerInventoryThrowItemPatch().Enable();
         }
 
         /// <summary>

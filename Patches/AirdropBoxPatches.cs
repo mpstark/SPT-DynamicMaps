@@ -12,9 +12,15 @@ namespace DynamicMaps.Patches
         internal static event Action<AirdropBox> OnAirdropLanded;
         internal static List<AirdropBox> Airdrops = new List<AirdropBox>();
 
+        private bool _hasRegisteredEvents = false;
+
         protected override MethodBase GetTargetMethod()
         {
-            GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+            if (!_hasRegisteredEvents)
+            {
+                GameWorldOnDestroyPatch.OnRaidEnd += OnRaidEnd;
+                _hasRegisteredEvents = true;
+            }
 
             // thanks to TechHappy for the breadcrumb of what method to patch
             return AccessTools.Method(typeof(AirdropBox), "OnBoxLand");
