@@ -106,9 +106,9 @@ namespace DynamicMaps.Utils
                     // check against previously created markers for duplicate position
                     foreach (var marker in markers)
                     {
-                        if (marker.Position.x.ApproxEquals(position.x)
-                         && marker.Position.y.ApproxEquals(position.y)
-                         && marker.Position.z.ApproxEquals(position.z))
+                        if (MathUtils.ApproxEquals(marker.Position.x, position.x)
+                         && MathUtils.ApproxEquals(marker.Position.y, position.y)
+                         && MathUtils.ApproxEquals(marker.Position.z, position.z))
                         {
                             isDuplicate = true;
                             break;

@@ -1,3 +1,4 @@
+using Comfort.Common;
 using DynamicMaps.Utils;
 using UnityEngine;
 
@@ -49,10 +50,10 @@ namespace DynamicMaps.UI.Components
             var mapRotation = MathUtils.ConvertToMapRotation(FollowingTransform, RotationAxis);
 
             // check if in exactly the same place and skip updating if it is
-            if (mapPosition.x.ApproxEquals(Position.x)
-             && mapPosition.y.ApproxEquals(Position.y)
-             && mapPosition.z.ApproxEquals(Position.z)
-             && mapRotation.ApproxEquals(Rotation))
+            if (MathUtils.ApproxEquals(Position.x, mapPosition.x)
+             && MathUtils.ApproxEquals(Position.y, mapPosition.y)
+             && MathUtils.ApproxEquals(Position.z, mapPosition.z)
+             && MathUtils.ApproxEquals(Rotation, mapRotation))
             {
                 return;
             }
