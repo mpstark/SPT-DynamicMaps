@@ -17,7 +17,7 @@ namespace DynamicMaps.DynamicMarkers
         // TODO: move to config
         private const string _friendlyCorpseCategory = "Friendly Corpse";
         private const string _friendlyCorpseImagePath = _skullImagePath;
-        private static Color _friendlyCorpseColor = Color.blue;
+        private static Color _friendlyCorpseColor = Color.Lerp(Color.blue, Color.white, 0.5f);
 
         private const string _killedCorpseCategory = "Killed Corpse";
         private const string _killedCorpseImagePath = _skullImagePath;
@@ -30,6 +30,14 @@ namespace DynamicMaps.DynamicMarkers
         private const string _bossCorpseCategory = "Boss Corpse";
         private const string _bossCorpseImagePath = _skullImagePath;
         private static Color _bossCorpseColor = Color.magenta;
+
+        private const string _friendlyKilledCorpseCategory = "Friendly Killed Corpse";
+        private const string _friendlyKilledCorpseImagePath = _skullImagePath;
+        private static Color _friendlyKilledCorpseColor = Color.Lerp(Color.Lerp(Color.blue, Color.white, 0.5f), Color.red, 0.5f);
+
+        private const string _friendlyKilledBossCorpseCategory = "Friendly Killed Boss Corpse";
+        private const string _friendlyKilledBossCorpseImagePath = _skullImagePath;
+        private static Color _friendlyKilledBossCorpseColor = Color.magenta;
 
         private const string _otherCorpseCategory = "Other Corpse";
         private const string _otherCorpseImagePath = _skullImagePath;
@@ -61,6 +69,20 @@ namespace DynamicMaps.DynamicMarkers
             set
             {
                 HandleSetBoolOption(ref _showKilledCorpses, value);
+            }
+        }
+
+        private bool _showFriendlyKilledCorpses = true;
+        public bool ShowFriendlyKilledCorpses
+        {
+            get
+            {
+                return _showFriendlyKilledCorpses;
+            }
+
+            set
+            {
+                HandleSetBoolOption(ref _showFriendlyKilledCorpses, value);
             }
         }
 
@@ -208,6 +230,18 @@ namespace DynamicMaps.DynamicMarkers
                 imagePath = _killedCorpseImagePath;
                 color = _killedCorpseColor;
             }
+            else if (player.IsTrackedBoss() && player.DidTeammateKill())
+            {
+                category = _friendlyKilledBossCorpseCategory;
+                imagePath = _friendlyKilledBossCorpseImagePath;
+                color = _friendlyKilledBossCorpseColor;
+            }
+            else if (player.DidTeammateKill())
+            {
+                category = _friendlyKilledCorpseCategory;
+                imagePath = _friendlyKilledCorpseImagePath;
+                color = _friendlyKilledCorpseColor;
+            }
             else if (player.IsTrackedBoss())
             {
                 category = _bossCorpseCategory;
@@ -266,8 +300,11 @@ namespace DynamicMaps.DynamicMarkers
                 case _killedCorpseCategory:
                 case _killedBossCorpseCategory:
                     return _showKilledCorpses;
-                case _bossCorpseCategory:
+                case _friendlyKilledCorpseCategory:
+                case _friendlyKilledBossCorpseCategory:
+                    return _showFriendlyKilledCorpses;
                 case _otherCorpseCategory:
+                case _bossCorpseCategory:
                     return _showOtherCorpses;
                 default:
                     return false;
