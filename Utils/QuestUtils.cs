@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +21,13 @@ namespace DynamicMaps.Utils
         private static FieldInfo _playerQuestControllerField = AccessTools.Field(typeof(Player), "_questController");
         private static PropertyInfo _questControllerQuestsProperty = AccessTools.Property(typeof(AbstractQuestControllerClass), "Quests");
         private static FieldInfo _questsListField = AccessTools.Field(_questControllerQuestsProperty.PropertyType, "list_1");
+
+        private static MethodInfo _questsGetConditionalMethod = AccessTools.Method(_questControllerQuestsProperty.PropertyType, "GetConditional", new Type[] { typeof(string) });
+
+        private static Type _questType = _questControllerQuestsProperty.PropertyType.BaseType.GetGenericArguments()[0];
+        private static PropertyInfo _questNecessaryConditions = AccessTools.Property(_questType, "NecessaryConditions");
+        private static MethodInfo _questIsConditionDone = AccessTools.Method(_questType, "IsConditionDone");
+
         private static FieldInfo _conditionCounterTemplateField = AccessTools.Field(typeof(ConditionCounterCreator), "_templateConditions");
         private static FieldInfo _templateConditionsConditionsField = AccessTools.Field(_conditionCounterTemplateField.FieldType, "Conditions");
         private static FieldInfo _conditionListField = AccessTools.Field(_templateConditionsConditionsField.FieldType, "list_0");
@@ -82,17 +90,17 @@ namespace DynamicMaps.Utils
             var quests = GetIncompleteQuests(player);
             foreach (var quest in quests)
             {
-                markers.AddRange(GetMarkerDefsForQuest(quest));
+                markers.AddRange(GetMarkerDefsForQuest(player, quest));
             }
 
             return markers;
         }
 
-        internal static IEnumerable<MapMarkerDef> GetMarkerDefsForQuest(QuestDataClass quest)
+        internal static IEnumerable<MapMarkerDef> GetMarkerDefsForQuest(Player player, QuestDataClass quest)
         {
             var markers = new List<MapMarkerDef>();
 
-            var conditions = GetIncompleteQuestConditions(quest);
+            var conditions = GetIncompleteQuestConditions(player, quest);
             foreach (var condition in conditions)
             {
                 var questName = quest.Template.NameLocaleKey.BSGLocalized();
@@ -242,7 +250,7 @@ namespace DynamicMaps.Utils
             }
         }
 
-        internal static IEnumerable<Condition> GetIncompleteQuestConditions(QuestDataClass quest)
+        private static IEnumerable<Condition> GetIncompleteQuestConditions(Player player, QuestDataClass quest)
         {
             // TODO: Template.Conditions is a GClass reference
             if (quest?.Template?.Conditions == null)
@@ -267,7 +275,7 @@ namespace DynamicMaps.Utils
                 }
 
                 // filter out completed conditions
-                if (quest.CompletedConditions.Contains(condition.id))
+                if (IsConditionCompleted(player, quest, condition))
                 {
                     continue;
                 }
@@ -276,7 +284,7 @@ namespace DynamicMaps.Utils
             }
         }
 
-        internal static IEnumerable<QuestDataClass> GetIncompleteQuests(Player player)
+        private static IEnumerable<QuestDataClass> GetIncompleteQuests(Player player)
         {
             var questController = _playerQuestControllerField.GetValue(player);
             if (questController == null)
@@ -320,6 +328,47 @@ namespace DynamicMaps.Utils
 
                 yield return quest;
             }
+        }
+
+        private static bool IsConditionCompleted(Player player, QuestDataClass questData, Condition condition)
+        {
+            if (!questData.CompletedConditions.Contains(condition.id))
+            {
+                return false;
+            }
+
+            var questController = _playerQuestControllerField.GetValue(player);
+            if (questController == null)
+            {
+                return false;
+            }
+
+            var quests = _questControllerQuestsProperty.GetValue(questController);
+            if (quests == null)
+            {
+                return false;
+            }
+
+            var quest = _questsGetConditionalMethod.Invoke(quests, new object[] { questData.Id });
+            if (quest == null)
+            {
+                return false;
+            }
+
+            var necessaryConditions = _questNecessaryConditions.GetValue(quest) as IEnumerable<Condition>;
+            if (necessaryConditions == null)
+            {
+                return false;
+            }
+
+            var matchingCondition = necessaryConditions.FirstOrDefault(c => c.id == condition.id);
+            if (matchingCondition == null)
+            {
+                return false;
+            }
+
+            var isComplete = (bool)_questIsConditionDone.Invoke(quest, new object[] { matchingCondition });
+            return isComplete;
         }
 
         private static IEnumerable<TriggerWithId> GetZoneTriggers(this IEnumerable<TriggerWithId> triggerWithIds, string zoneId)
