@@ -309,15 +309,8 @@ namespace DynamicMaps.Utils
 
             foreach (var quest in questsList)
             {
-                if (quest == null)
-                {
-                    Plugin.Log.LogError($"Skipping a null quest");
-                    continue;
-                }
-
                 if (quest?.Template?.Conditions == null)
                 {
-                    Plugin.Log.LogError($"quest?.Template?.Conditions == null, skipping quest with id: {quest.Id}");
                     continue;
                 }
 
