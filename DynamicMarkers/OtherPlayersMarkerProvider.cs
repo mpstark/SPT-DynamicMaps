@@ -18,7 +18,7 @@ namespace DynamicMaps.DynamicMarkers
         // TODO: bring these all out to config
         private const string _friendlyPlayerCategory = "Friendly Player";
         private const string _friendlyPlayerImagePath = _arrowImagePath;
-        private static Color _friendlyPlayerColor = Color.blue;
+        private static Color _friendlyPlayerColor = Color.Lerp(Color.blue, Color.white, 0.5f);
 
         private const string _enemyPlayerCategory = "Enemy Player";
         private const string _enemyPlayerImagePath = _arrowImagePath;

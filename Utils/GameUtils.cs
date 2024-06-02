@@ -14,6 +14,7 @@ namespace DynamicMaps.Utils
     {
         // reflection
         private static FieldInfo _playerCorpseField = AccessTools.Field(typeof(Player), "Corpse");
+        private static FieldInfo _playerLastAggressorField = AccessTools.Field(typeof(Player), "LastAggressor");
         private static Type _profileInterface = typeof(ISession).GetInterfaces().First(i =>
             {
                 var properties = i.GetProperties();
@@ -112,8 +113,36 @@ namespace DynamicMaps.Utils
 
         public static bool DidMainPlayerKill(this IPlayer player)
         {
-            var victims = GetMainPlayer()?.Profile?.EftStats?.Victims;
-            return victims?.FirstOrDefault(v => v.ProfileId == player.ProfileId) != null;
+            var aggressor = _playerLastAggressorField.GetValue(player) as IPlayer;
+            if (aggressor == null)
+            {
+                return false;
+            }
+
+            var mainPlayer = GetMainPlayer();
+            if (aggressor.ProfileId == mainPlayer.ProfileId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool DidTeammateKill(this IPlayer player)
+        {
+            var aggressor = _playerLastAggressorField.GetValue(player) as IPlayer;
+            if (aggressor == null || string.IsNullOrEmpty(aggressor.GroupId))
+            {
+                return false;
+            }
+
+            var mainPlayer = GetMainPlayer();
+            if (aggressor.ProfileId != mainPlayer.ProfileId && aggressor.GroupId == GetMainPlayer().GroupId)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public static bool IsBTRShooter(this IPlayer player)

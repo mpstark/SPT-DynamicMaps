@@ -66,22 +66,6 @@ namespace DynamicMaps.UI
         private bool _autoSelectLevel = true;
         private bool _resetZoomOnCenter = false;
         private float _centeringZoomResetPoint = 0f;
-        private bool _showPlayerMarker = true;
-        private bool _showFriendlyPlayerMarkersInRaid = true;
-        private bool _showEnemyPlayerMarkersInRaid = false;
-        private bool _showScavMarkersInRaid = false;
-        private bool _showBossMarkersInRaid = false;
-        private bool _showLockedDoorStatus = true;
-        private bool _showQuestsInRaid = true;
-        private bool _showExtractsInRaid = true;
-        private bool _showExtractStatusInRaid = true;
-        private bool _showDroppedBackpackInRaid = true;
-        private bool _showBTRInRaid = true;
-        private bool _showAirdropsInRaid = true;
-        private bool _showFriendlyCorpsesInRaid = true;
-        private bool _showKilledCorpsesInRaid = false;
-        private bool _showBossCorpsesInRaid = false;
-        private bool _showOtherCorpsesInRaid = false;
         private KeyboardShortcut _centerPlayerShortcut;
         private KeyboardShortcut _dumpShortcut;
         private KeyboardShortcut _moveMapUpShortcut;
@@ -580,74 +564,58 @@ namespace DynamicMaps.UI
             _resetZoomOnCenter = Settings.ResetZoomOnCenter.Value;
             _centeringZoomResetPoint = Settings.CenteringZoomResetPoint.Value;
 
-            _showPlayerMarker = Settings.ShowPlayerMarker.Value;
-
-            _showFriendlyPlayerMarkersInRaid = Settings.ShowFriendlyPlayerMarkersInRaid.Value;
-            _showEnemyPlayerMarkersInRaid = Settings.ShowEnemyPlayerMarkersInRaid.Value;
-            _showScavMarkersInRaid = Settings.ShowScavMarkersInRaid.Value;
-            _showBossMarkersInRaid = Settings.ShowBossMarkersInRaid.Value;
-
-            _showQuestsInRaid = Settings.ShowQuestsInRaid.Value;
-
-            _showLockedDoorStatus = Settings.ShowLockedDoorStatus.Value;
-
-            _showExtractsInRaid = Settings.ShowExtractsInRaid.Value;
-            _showExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
-
-            _showDroppedBackpackInRaid = Settings.ShowDroppedBackpackInRaid.Value;
-
-            _showBTRInRaid = Settings.ShowBTRInRaid.Value;
-
-            _showAirdropsInRaid = Settings.ShowAirdropsInRaid.Value;
-
-            _showFriendlyCorpsesInRaid = Settings.ShowFriendlyCorpsesInRaid.Value;
-            _showKilledCorpsesInRaid = Settings.ShowKilledCorpsesInRaid.Value;
-            _showBossCorpsesInRaid = Settings.ShowBossCorpsesInRaid.Value;
-            _showOtherCorpsesInRaid = Settings.ShowOtherCorpsesInRaid.Value;
-
             if (_peekComponent != null)
             {
                 _peekComponent.PeekShortcut = Settings.PeekShortcut.Value;
                 _peekComponent.HoldForPeek = Settings.HoldForPeek.Value;
             }
 
-            AddRemoveMarkerProvider<PlayerMarkerProvider>(_showPlayerMarker);
-            AddRemoveMarkerProvider<QuestMarkerProvider>(_showQuestsInRaid);
-            AddRemoveMarkerProvider<LockedDoorMarkerMutator>(_showLockedDoorStatus);
-            AddRemoveMarkerProvider<BackpackMarkerProvider>(_showDroppedBackpackInRaid);
-            AddRemoveMarkerProvider<BTRMarkerProvider>(_showBTRInRaid);
-            AddRemoveMarkerProvider<AirdropMarkerProvider>(_showAirdropsInRaid);
+            AddRemoveMarkerProvider<PlayerMarkerProvider>(Settings.ShowPlayerMarker.Value);
+            AddRemoveMarkerProvider<QuestMarkerProvider>(Settings.ShowQuestsInRaid.Value);
+            AddRemoveMarkerProvider<LockedDoorMarkerMutator>(Settings.ShowLockedDoorStatus.Value);
+            AddRemoveMarkerProvider<BackpackMarkerProvider>(Settings.ShowDroppedBackpackInRaid.Value);
+            AddRemoveMarkerProvider<BTRMarkerProvider>(Settings.ShowBTRInRaid.Value);
+            AddRemoveMarkerProvider<AirdropMarkerProvider>(Settings.ShowAirdropsInRaid.Value);
 
             // extracts
-            AddRemoveMarkerProvider<ExtractMarkerProvider>(_showExtractsInRaid);
-            if (_showExtractsInRaid)
+            AddRemoveMarkerProvider<ExtractMarkerProvider>(Settings.ShowExtractsInRaid.Value);
+            if (Settings.ShowExtractsInRaid.Value)
             {
                 var provider = GetMarkerProvider<ExtractMarkerProvider>();
-                provider.ShowExtractStatusInRaid = _showExtractStatusInRaid;
+                provider.ShowExtractStatusInRaid = Settings.ShowExtractStatusInRaid.Value;
             }
 
             // other player markers
-            var needOtherPlayerMarkers = _showFriendlyPlayerMarkersInRaid || _showEnemyPlayerMarkersInRaid || _showScavMarkersInRaid;
+            var needOtherPlayerMarkers = Settings.ShowFriendlyPlayerMarkersInRaid.Value
+                                      || Settings.ShowEnemyPlayerMarkersInRaid.Value
+                                      || Settings.ShowScavMarkersInRaid.Value;
+
             AddRemoveMarkerProvider<OtherPlayersMarkerProvider>(needOtherPlayerMarkers);
             if (needOtherPlayerMarkers)
             {
                 var provider = GetMarkerProvider<OtherPlayersMarkerProvider>();
-                provider.ShowFriendlyPlayers = _showFriendlyPlayerMarkersInRaid;
-                provider.ShowEnemyPlayers = _showEnemyPlayerMarkersInRaid;
-                provider.ShowScavs = _showScavMarkersInRaid;
-                provider.ShowBosses = _showBossMarkersInRaid;
+                provider.ShowFriendlyPlayers = Settings.ShowFriendlyPlayerMarkersInRaid.Value;
+                provider.ShowEnemyPlayers = Settings.ShowEnemyPlayerMarkersInRaid.Value;
+                provider.ShowScavs = Settings.ShowScavMarkersInRaid.Value;
+                provider.ShowBosses = Settings.ShowBossMarkersInRaid.Value;
             }
 
             // corpse markers
-            var needCorpseMarkers = _showFriendlyCorpsesInRaid || _showKilledCorpsesInRaid || _showOtherCorpsesInRaid;
+            var needCorpseMarkers = Settings.ShowFriendlyCorpsesInRaid.Value
+                                 || Settings.ShowKilledCorpsesInRaid.Value
+                                 || Settings.ShowFriendlyKilledCorpsesInRaid.Value
+                                 || Settings.ShowBossCorpsesInRaid.Value
+                                 || Settings.ShowOtherCorpsesInRaid.Value;
+
             AddRemoveMarkerProvider<CorpseMarkerProvider>(needCorpseMarkers);
             if (needCorpseMarkers)
             {
                 var provider = GetMarkerProvider<CorpseMarkerProvider>();
-                provider.ShowFriendlyCorpses = _showFriendlyCorpsesInRaid;
-                provider.ShowKilledCorpses = _showKilledCorpsesInRaid;
-                provider.ShowBossCorpses = _showBossCorpsesInRaid;
-                provider.ShowOtherCorpses = _showOtherCorpsesInRaid;
+                provider.ShowFriendlyCorpses = Settings.ShowFriendlyCorpsesInRaid.Value;
+                provider.ShowKilledCorpses = Settings.ShowKilledCorpsesInRaid.Value;
+                provider.ShowFriendlyKilledCorpses = Settings.ShowFriendlyKilledCorpsesInRaid.Value;
+                provider.ShowBossCorpses = Settings.ShowBossCorpsesInRaid.Value;
+                provider.ShowOtherCorpses = Settings.ShowOtherCorpsesInRaid.Value;
             }
         }
 
