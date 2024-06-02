@@ -74,10 +74,12 @@ See [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) for known current issues and [`FEATURE_
 - **Show Quests In Raid**: If quests should be shown in raid
 - **Show Extracts In Raid**: If extracts should be shown in raid
 - **Show Extracts Status In Raid**: If extracts should be colored according to their status in raid
+- **Show Dropped Backpack In Raid**: If the player's dropped backpacks (not anyone elses) should be shown in raid
 - **Show BTR In Raid**: If the BTR should be shown in raid
 - **Show Airdrop In Raid**: If airdrops should be shown in raid when they land
 - **Show Friendly Corpses In Raid**: If friendly corpses should be shown in raid
 - **Show Player-killed Corpses In Raid**: If corpses killed by the player should be shown in raid, killed bosses will be shown in another color
+- **Show Friendly-killed Corpses In Raid**: If corpses killed by friendly players should be shown in raid, killed bosses will be shown in another color
 - **Show Boss Corpses In Raid**: If boss corpses (other than ones killed by the player) should be shown in raid
 - **Show Other Corpses In Raid**: If corpses (other than friendly ones or ones killed by the player) should be shown in raid
 

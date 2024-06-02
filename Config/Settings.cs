@@ -275,7 +275,7 @@ namespace DynamicMaps.Config
                 "Show Dropped Backpack In Raid",
                 true,
                 new ConfigDescription(
-                    "If the player's dropped backpack (not anyone elses) should be shown in raid",
+                    "If the player's dropped backpacks (not anyone elses) should be shown in raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
