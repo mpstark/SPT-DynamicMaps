@@ -13,6 +13,7 @@ namespace DynamicMaps.UI.Components
         public MathUtils.RotationAxis RotationAxis { get; set; } = MathUtils.RotationAxis.Y;
 
         private float _callbackTime = _maxCallbackTime;  // make sure to start with a callback
+        private bool _warnedAttachedIsDisabled = false;
 
         public static TransformMapMarker Create(Transform followingTransform, GameObject parent, string imagePath, Color color,
                                                 string name, string category, Vector2 size, float degreesRotation, float scale)
@@ -44,6 +45,21 @@ namespace DynamicMaps.UI.Components
             if (FollowingTransform == null)
             {
                 return;
+            }
+
+            if (!FollowingTransform.gameObject.activeInHierarchy)
+            {
+                if (!_warnedAttachedIsDisabled)
+                {
+                    Plugin.Log.LogWarning($"FollowingTransform for TransformMapMarker has been disabled without removing the map marker");
+                    Color = Color.red;
+                    _warnedAttachedIsDisabled = true;
+                }
+                return;
+            }
+            else
+            {
+                _warnedAttachedIsDisabled = false;
             }
 
             var mapPosition = MathUtils.ConvertToMapPosition(FollowingTransform);
