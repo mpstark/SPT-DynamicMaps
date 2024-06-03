@@ -26,8 +26,7 @@ namespace DynamicMaps.DynamicMarkers
                 }
 
                 // TODO: GetAllItems is a BSG extension method under GClass
-                var hasKey = player.Inventory.Equipment.GetAllItems()
-                    .FirstOrDefault(i => i.TemplateId == marker.AssociatedItemId) != null;
+                var hasKey = player.Inventory.Equipment.GetAllItems().Any(i => i.TemplateId == marker.AssociatedItemId);
 
                 marker.Image.sprite = hasKey
                     ? TextureUtils.GetOrLoadCachedSprite(doorWithKeyPath)
@@ -52,10 +51,8 @@ namespace DynamicMaps.DynamicMarkers
                 }
 
                 // TODO: GetAllItems is a BSG extension method under GClass
-                var keyInStash = profile.Inventory.Stash.GetAllItems()
-                    .FirstOrDefault(i => i.TemplateId == marker.AssociatedItemId) != null;
-                var keyInEquipment = profile.Inventory.Equipment.GetAllItems()
-                    .FirstOrDefault(i => i.TemplateId == marker.AssociatedItemId) != null;
+                var keyInStash = profile.Inventory.Stash.GetAllItems().Any(i => i.TemplateId == marker.AssociatedItemId);
+                var keyInEquipment = profile.Inventory.Equipment.GetAllItems().Any(i => i.TemplateId == marker.AssociatedItemId);
 
                 // change icon
                 marker.Image.sprite = (keyInStash || keyInEquipment)
