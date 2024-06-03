@@ -36,7 +36,7 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
 - Icon-based map markers placed both statically and dynamically. Currently:
   - In-raid dynamic player icon
   - In-raid dynamic current extracts for player
-  - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
+  - In-raid dynamic quest icons (loosely based on [Prop's GTFO](https://github.com/dvize/GTFO))
   - In-raid dynamic player-dropped backpacks
   - In-raid dynamic BTR icon (with icon by Kuromi, see [`marker_credits.txt`](Resources/Markers/marker_credits.txt) for more info)
   - In-raid dynamic airdrop icons (generated when airdrop lands)
