@@ -303,8 +303,9 @@ namespace DynamicMaps.DynamicMarkers
                 case _friendlyKilledCorpseCategory:
                 case _friendlyKilledBossCorpseCategory:
                     return _showFriendlyKilledCorpses;
-                case _otherCorpseCategory:
                 case _bossCorpseCategory:
+                    return _showBossCorpses;
+                case _otherCorpseCategory:
                     return _showOtherCorpses;
                 default:
                     return false;
