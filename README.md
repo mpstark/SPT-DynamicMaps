@@ -26,16 +26,18 @@ An SPT mod that adds a custom in-game map viewer in the place of the BSG map scr
 ### Features
 
 - Map organized in stacked layers / levels
-  - Automatic selection of layer based on player position
-  - Manual control available on left of map screen
+  - Text map labels supported overlaid on map
+  - Automatic selection of layer based on player position (configurable)
+  - Manual level control available on left of map screen (as well as shift-scroll and configurable hotkeys)
 - Automatic min/max zoom based on size of map
 - Support for coordinate rotation, since BSG decided to make north different direction on many of the maps
-- Drag-based map pan and mousewheel-based map zoom controls
-- Map labels supported for orientation
+- Drag-based map pan and mousewheel-based map zoom controls; additional hotkeys for map control available (configurable)
+- Peek at map hotkey (configurable)
 - Icon-based map markers placed both statically and dynamically. Currently:
   - In-raid dynamic player icon
   - In-raid dynamic current extracts for player
   - In-raid dynamic quest icons (based on [Prop's GTFO](https://github.com/dvize/GTFO))
+  - In-raid dynamic player-dropped backpacks
   - In-raid dynamic BTR icon (with icon by Kuromi, see [`marker_credits.txt`](Resources/Markers/marker_credits.txt) for more info)
   - In-raid dynamic airdrop icons (generated when airdrop lands)
   - In-raid dynamic markers for corpses
