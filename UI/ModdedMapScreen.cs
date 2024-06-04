@@ -588,6 +588,7 @@ namespace DynamicMaps.UI
             // other player markers
             var needOtherPlayerMarkers = Settings.ShowFriendlyPlayerMarkersInRaid.Value
                                       || Settings.ShowEnemyPlayerMarkersInRaid.Value
+                                      || Settings.ShowBossMarkersInRaid.Value
                                       || Settings.ShowScavMarkersInRaid.Value;
 
             AddRemoveMarkerProvider<OtherPlayersMarkerProvider>(needOtherPlayerMarkers);

@@ -287,10 +287,10 @@ namespace DynamicMaps.DynamicMarkers
                     return _showFriendlyPlayers;
                 case _enemyPlayerCategory:
                     return _showEnemyPlayers;
-                case _scavCategory:
-                    return _showScavs;
                 case _bossCategory:
                     return _showBosses;
+                case _scavCategory:
+                    return _showScavs;
                 default:
                     return false;
             }
