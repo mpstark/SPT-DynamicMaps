@@ -28,20 +28,23 @@ namespace DynamicMaps.Utils
 
         private static HashSet<WildSpawnType> _trackedBosses = new HashSet<WildSpawnType>
         {
-            WildSpawnType.bossBoar,
-            WildSpawnType.bossBully,
-            WildSpawnType.bossGluhar,
+            WildSpawnType.bossBoar,             // Kaban
+            WildSpawnType.bossBully,            // Reshala
+            WildSpawnType.bossGluhar,           // Glukhar
             WildSpawnType.bossKilla,
             WildSpawnType.bossKnight,
             WildSpawnType.followerBigPipe,
             WildSpawnType.followerBirdEye,
             WildSpawnType.bossKolontay,
-            WildSpawnType.bossKojaniy,
+            WildSpawnType.bossKojaniy,          // Shturman
             WildSpawnType.bossSanitar,
             WildSpawnType.bossTagilla,
             WildSpawnType.bossZryachiy,
-            (WildSpawnType) 4206927,  // Punisher
-            (WildSpawnType) 199, // Legion
+            WildSpawnType.gifter,               // Santa
+            WildSpawnType.arenaFighterEvent,    // Blood Hounds
+            WildSpawnType.sectantPriest,        // Cultist Priest
+            (WildSpawnType) 4206927,            // Punisher
+            (WildSpawnType) 199,                // Legion
         };
 
         public static bool IsInRaid()
