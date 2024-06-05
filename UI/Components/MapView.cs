@@ -139,6 +139,7 @@ namespace DynamicMaps.UI.Components
 
             _markers.Remove(marker);
             marker.OnPositionChanged -= UpdateLayerBound;
+            DOTween.Kill(marker.transform);
             marker.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
             GameObject.Destroy(marker.gameObject);
         }
@@ -160,6 +161,7 @@ namespace DynamicMaps.UI.Components
             }
 
             _labels.Remove(label);
+            DOTween.Kill(label.transform);
             label.gameObject.SetActive(false);  // destroy not guaranteed to be called immediately
             GameObject.Destroy(label.gameObject);
         }
