@@ -357,7 +357,7 @@ namespace DynamicMaps.Utils
             var matchingCondition = necessaryConditions.FirstOrDefault(c => c.id == condition.id);
             if (matchingCondition == null)
             {
-                return false;
+                return true;
             }
 
             var isComplete = (bool)_questIsConditionDone.Invoke(quest, new object[] { matchingCondition });
