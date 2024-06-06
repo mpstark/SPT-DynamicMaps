@@ -65,7 +65,7 @@ namespace DynamicMaps.Patches
 
         internal static void OnDestroyLoot(LootItem lootItem)
         {
-            if (lootItem == null)
+            if (lootItem == null || lootItem.Item == null)
             {
                 return;
             }

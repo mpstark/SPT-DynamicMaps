@@ -100,7 +100,7 @@ namespace DynamicMaps.DynamicMarkers
 
         private void OnRegisterLoot(LootItem lootItem)
         {
-            if (lootItem == null)
+            if (lootItem == null || lootItem.Item == null)
             {
                 return;
             }
@@ -120,7 +120,7 @@ namespace DynamicMaps.DynamicMarkers
 
         private void OnDestroyLoot(LootItem lootItem)
         {
-            if (lootItem == null)
+            if (lootItem == null || lootItem.Item == null)
             {
                 return;
             }
@@ -145,8 +145,13 @@ namespace DynamicMaps.DynamicMarkers
 
         private void TryAddMarker(MapView map, LootItem lootItem)
         {
+            if (lootItem == null || lootItem.Item == null)
+            {
+                return;
+            }
+
             var itemNetId = lootItem.GetNetId();
-            if (lootItem == null || _backpackMarkers.ContainsKey(itemNetId))
+            if (_backpackMarkers.ContainsKey(itemNetId))
             {
                 return;
             }
