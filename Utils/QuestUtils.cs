@@ -325,9 +325,16 @@ namespace DynamicMaps.Utils
 
         private static bool IsConditionCompleted(Player player, QuestDataClass questData, Condition condition)
         {
+            // CompletedConditions is inaccurate, need to recheck if something is in there
             if (!questData.CompletedConditions.Contains(condition.id))
             {
                 return false;
+            }
+
+            // don't recheck optional objectives
+            if (!condition.IsNecessary)
+            {
+                return true;
             }
 
             var questController = _playerQuestControllerField.GetValue(player);
