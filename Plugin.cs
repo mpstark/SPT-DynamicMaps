@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using Comfort.Common;
+using DrakiaXYZ.VersionChecker;
 using DynamicMaps.Config;
 using DynamicMaps.Patches;
 using DynamicMaps.UI;
@@ -14,6 +16,7 @@ namespace DynamicMaps
     [BepInPlugin("com.mpstark.DynamicMaps", "DynamicMaps", BuildInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
+        public const int TarkovVersion = 29197;
         public static Plugin Instance;
         public static ManualLogSource Log => Instance.Logger;
         public static string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -22,6 +25,11 @@ namespace DynamicMaps
 
         internal void Awake()
         {
+            if (!VersionChecker.CheckEftVersion(Logger, Info, Config))
+            {
+                throw new Exception("Invalid EFT Version");
+            }
+
             Settings.Init(Config);
             Config.SettingChanged += (x, y) => Map?.ReadConfig();
 
