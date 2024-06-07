@@ -27,7 +27,7 @@ namespace DrakiaXYZ.VersionChecker
             int buildVersion = DynamicMaps.Plugin.TarkovVersion;
             if (currentVersion != buildVersion)
             {
-                string errorMessage = $"ERROR: This version of Stash Search was built for Tarkov {buildVersion}, but you are running {currentVersion}. Please download the correct plugin version.";
+                string errorMessage = $"ERROR: This version of DynamicMaps was built for Tarkov {buildVersion}, but you are running {currentVersion}. Please download the correct plugin version.";
                 Logger.LogError(errorMessage);
                 Chainloader.DependencyErrors.Add(errorMessage);
 
