@@ -25,7 +25,6 @@ namespace DynamicMaps.Utils
         private static MethodInfo _questsGetConditionalMethod = AccessTools.Method(_questControllerQuestsProperty.PropertyType, "GetConditional", new Type[] { typeof(string) });
 
         private static Type _questType = _questControllerQuestsProperty.PropertyType.BaseType.GetGenericArguments()[0];
-        private static PropertyInfo _questNecessaryConditions = AccessTools.Property(_questType, "NecessaryConditions");
         private static MethodInfo _questIsConditionDone = AccessTools.Method(_questType, "IsConditionDone");
 
         private static FieldInfo _conditionCounterTemplateField = AccessTools.Field(typeof(ConditionCounterCreator), "_templateConditions");
@@ -325,16 +324,11 @@ namespace DynamicMaps.Utils
 
         private static bool IsConditionCompleted(Player player, QuestDataClass questData, Condition condition)
         {
-            // CompletedConditions is inaccurate, need to recheck if something is in there
-            if (!questData.CompletedConditions.Contains(condition.id))
+            // CompletedConditions is inaccurate (it doesn't reset when some quests do on death)
+            // and also does not contain optional objectives, need to recheck if something is in there
+            if (condition.IsNecessary && !questData.CompletedConditions.Contains(condition.id))
             {
                 return false;
-            }
-
-            // don't recheck optional objectives
-            if (!condition.IsNecessary)
-            {
-                return true;
             }
 
             var questController = _playerQuestControllerField.GetValue(player);
@@ -355,20 +349,7 @@ namespace DynamicMaps.Utils
                 return false;
             }
 
-            var necessaryConditions = _questNecessaryConditions.GetValue(quest) as IEnumerable<Condition>;
-            if (necessaryConditions == null)
-            {
-                return false;
-            }
-
-            var matchingCondition = necessaryConditions.FirstOrDefault(c => c.id == condition.id);
-            if (matchingCondition == null)
-            {
-                return true;
-            }
-
-            var isComplete = (bool)_questIsConditionDone.Invoke(quest, new object[] { matchingCondition });
-            return isComplete;
+            return (bool)_questIsConditionDone.Invoke(quest, new object[] { condition });
         }
 
         private static IEnumerable<TriggerWithId> GetZoneTriggers(this IEnumerable<TriggerWithId> triggerWithIds, string zoneId)
