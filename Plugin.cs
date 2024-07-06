@@ -9,15 +9,17 @@ using DynamicMaps.Patches;
 using DynamicMaps.UI;
 using EFT.UI;
 using EFT.UI.Map;
+using EFT.UI.Screens;
+using static EFT.UI.EftBattleUIScreen;
 
 namespace DynamicMaps
 {
     // the version number here is generated on build and may have a warning if not yet built
     [BepInPlugin("com.mpstark.DynamicMaps", "DynamicMaps", BuildInfo.Version)]
-    [BepInDependency("com.spt-aki.custom")]
+    [BepInDependency("com.SPT.custom")]
     public class Plugin : BaseUnityPlugin
     {
-        public const int TarkovVersion = 29197;
+        public const int TarkovVersion = 30626;
         public static Plugin Instance;
         public static ManualLogSource Log => Instance.Logger;
         public static string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -70,7 +72,7 @@ namespace DynamicMaps
         /// <summary>
         /// Attach the peek component
         /// </summary>
-        internal void TryAttachToBattleUIScreen(BattleUIScreen battleUI)
+        internal void TryAttachToBattleUIScreen(BattleUIScreen<GClass3136, EEftScreenType> battleUI)
         {
             if (Map == null)
             {

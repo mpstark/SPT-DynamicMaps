@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Aki.Custom.Airdrops;
-using Aki.Reflection.Patching;
+using SPT.Custom.Airdrops;
+using SPT.Reflection.Patching;
 using HarmonyLib;
 
 namespace DynamicMaps.Patches

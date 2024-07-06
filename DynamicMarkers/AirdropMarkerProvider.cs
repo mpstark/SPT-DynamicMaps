@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Aki.Custom.Airdrops;
+using SPT.Custom.Airdrops;
 using DynamicMaps.Data;
 using DynamicMaps.Patches;
 using DynamicMaps.UI.Components;
