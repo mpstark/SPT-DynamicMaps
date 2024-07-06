@@ -17,9 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Aki.Reflection">
-      <HintPath>$(TarkovManagedDir)Aki.Reflection.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>$(TarkovManagedDir)Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -85,8 +82,12 @@
       <HintPath>$(TarkovBepInExCoreDir)BepInEx.Preloader.dll</HintPath>
     </Reference>
 
-    <Reference Include="aki-custom">
-      <HintPath>$(TarkovPluginsSPTDir)aki-custom.dll</HintPath>
+    <Reference Include="spt-reflection">
+      <HintPath>$(TarkovPluginsSPTDir)spt-reflection.dll</HintPath>
+    </Reference>
+	  
+    <Reference Include="spt-custom">
+      <HintPath>$(TarkovPluginsSPTDir)spt-custom.dll</HintPath>
     </Reference>
   </ItemGroup>
 

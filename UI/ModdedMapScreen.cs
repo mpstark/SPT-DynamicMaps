@@ -11,8 +11,10 @@ using DynamicMaps.UI.Components;
 using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
 using EFT.UI;
+using EFT.UI.Screens;
 using UnityEngine;
 using UnityEngine.UI;
+using static EFT.UI.EftBattleUIScreen;
 
 namespace DynamicMaps.UI
 {
@@ -297,7 +299,7 @@ namespace DynamicMaps.UI
             gameObject.SetActive(false);
         }
 
-        internal void TryAddPeekComponent(BattleUIScreen battleUI)
+        internal void TryAddPeekComponent(BattleUIScreen<GClass3136, EEftScreenType> battleUI)
         {
             if (_peekComponent != null)
             {
