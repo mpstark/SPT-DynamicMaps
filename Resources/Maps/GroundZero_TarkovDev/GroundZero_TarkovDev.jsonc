@@ -2,7 +2,7 @@
     "DisplayName": "Ground Zero (TarkovDev)",
     "Author": "Tarkov.dev",
     "AuthorLink": "https://tarkov.dev",
-    "MapInternalNames": [ "Sandbox" ],
+    "MapInternalNames": [ "Sandbox", "Sandbox_high" ],
     "CoordinateRotation": 180,
     "Bounds": {
         "Min": {"x": -99, "y": -124},
