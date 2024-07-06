@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TarkovDir Condition=" '$(TarkovDir)' == '' ">D:\Games\SPTarkov-3.8.3\</TarkovDir>
-    <TarkovDebugDir Condition=" '$(TarkovDebugDir)' == '' ">D:\Games\SPTarkov-3.8.3-Debug\</TarkovDebugDir>
+    <TarkovDir Condition=" '$(TarkovDir)' == '' ">D:\Games\SPTarkov-3.9.0\</TarkovDir>
+    <TarkovDebugDir Condition=" '$(TarkovDebugDir)' == '' ">D:\Games\SPTarkov-3.9.0-Debug\</TarkovDebugDir>
     <TarkovPluginsSPTDir>$(TarkovDir)BepInEx\plugins\spt\</TarkovPluginsSPTDir>
     <TarkovManagedDir>$(TarkovDir)EscapeFromTarkov_Data\Managed\</TarkovManagedDir>
     <TarkovBepInExCoreDir>$(TarkovDir)BepInEx\core\</TarkovBepInExCoreDir>
@@ -85,7 +85,6 @@
     <Reference Include="spt-reflection">
       <HintPath>$(TarkovPluginsSPTDir)spt-reflection.dll</HintPath>
     </Reference>
-	  
     <Reference Include="spt-custom">
       <HintPath>$(TarkovPluginsSPTDir)spt-custom.dll</HintPath>
     </Reference>
