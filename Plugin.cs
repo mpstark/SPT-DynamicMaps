@@ -9,8 +9,6 @@ using DynamicMaps.Patches;
 using DynamicMaps.UI;
 using EFT.UI;
 using EFT.UI.Map;
-using EFT.UI.Screens;
-using static EFT.UI.EftBattleUIScreen;
 
 namespace DynamicMaps
 {
@@ -72,7 +70,7 @@ namespace DynamicMaps
         /// <summary>
         /// Attach the peek component
         /// </summary>
-        internal void TryAttachToBattleUIScreen(BattleUIScreen<GClass3136, EEftScreenType> battleUI)
+        internal void TryAttachToBattleUIScreen(EftBattleUIScreen battleUI)
         {
             if (Map == null)
             {
