@@ -202,7 +202,7 @@ namespace DynamicMaps.DynamicMarkers
             foreach (var player in _playerMarkers.Keys.ToList())
             {
                 var marker = _playerMarkers[player];
-                if (player.HasCorpse())
+                if (player.HasCorpse() || !Singleton<GameWorld>.Instance.AllAlivePlayersList.Contains(player))
                 {
                     TryRemoveMarker(player);
                 }
