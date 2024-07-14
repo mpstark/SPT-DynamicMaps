@@ -97,7 +97,7 @@ namespace DynamicMaps.DynamicMarkers
             _lastMapView = map;
 
             TryAddMarkers();
-            RemoveDeadPlayers();
+            RemoveNonActivePlayers();
 
             // register to event to get all the new ones while map is showing
             Singleton<GameWorld>.Instance.OnPersonAdd += TryAddMarker;
@@ -197,12 +197,12 @@ namespace DynamicMaps.DynamicMarkers
             TryRemoveMarker(player);
         }
 
-        private void RemoveDeadPlayers()
+        private void RemoveNonActivePlayers()
         {
+            var alivePlayers = new HashSet<Player>(Singleton<GameWorld>.Instance.AllAlivePlayersList);
             foreach (var player in _playerMarkers.Keys.ToList())
             {
-                var marker = _playerMarkers[player];
-                if (player.HasCorpse() || !Singleton<GameWorld>.Instance.AllAlivePlayersList.Contains(player))
+                if (player.HasCorpse() || !alivePlayers.Contains(player))
                 {
                     TryRemoveMarker(player);
                 }
