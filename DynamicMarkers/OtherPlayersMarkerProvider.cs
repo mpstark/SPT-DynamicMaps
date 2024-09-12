@@ -217,7 +217,7 @@ namespace DynamicMaps.DynamicMarkers
                 return;
             }
 
-            if (_lastMapView == null || player.IsBTRShooter() || _playerMarkers.ContainsKey(player))
+            if (_lastMapView == null || player.IsBTRShooter() || _playerMarkers.ContainsKey(player) || player.IsDedicatedServer())
             {
                 return;
             }

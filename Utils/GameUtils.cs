@@ -114,6 +114,12 @@ namespace DynamicMaps.Utils
             return player.Profile.Side == EPlayerSide.Bear || player.Profile.Side == EPlayerSide.Usec;
         }
 
+        public static bool IsDedicatedServer(this IPlayer player)
+        {
+            string pattern = @"^dedicated_[a-fA-F0-9]{24}$";
+            return Regex.IsMatch(player.Profile.GetCorrectedNickname(), pattern);
+        }
+
         public static bool DidMainPlayerKill(this IPlayer player)
         {
             var aggressor = _playerLastAggressorField.GetValue(player) as IPlayer;
