@@ -78,6 +78,7 @@ namespace DynamicMaps
             }
 
             Map.TryAddPeekComponent(battleUI);
+            Map.TryAddMiniMapComponent(battleUI);
         }
     }
 }

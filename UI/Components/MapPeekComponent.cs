@@ -1,5 +1,6 @@
 using BepInEx.Configuration;
 using DynamicMaps.Utils;
+using EFT.UI.Map;
 using UnityEngine;
 
 namespace DynamicMaps.UI.Components
@@ -27,6 +28,7 @@ namespace DynamicMaps.UI.Components
         private void Awake()
         {
             RectTransform = gameObject.GetRectTransform();
+            IsPeeking = false;
         }
 
         private void Update()
@@ -63,6 +65,12 @@ namespace DynamicMaps.UI.Components
             {
                 return;
             }
+            MapScreen.WasMinimapActive = MapScreen.IsMinimapActive;
+
+            if (MapScreen.IsMinimapActive && MapScreen.MiniMapComponent != null)
+            {
+                MapScreen.MiniMapComponent.EndMiniMap();
+            }
 
             // just in case something else is attached and tries to be in front
             transform.SetAsLastSibling();
@@ -86,6 +94,13 @@ namespace DynamicMaps.UI.Components
             // un-attach map screen and re-attach to true parent
             MapScreen.Hide();
             MapScreen.transform.SetParent(MapScreenTrueParent);
+
+            if (MapScreen.WasMinimapActive && MapScreen.MiniMapComponent != null)
+            {
+                MapScreen.MiniMapComponent.BeginMiniMap();
+            }
+
+            MapScreen.WasMinimapActive = MapScreen.IsMinimapActive;
         }
     }
 }

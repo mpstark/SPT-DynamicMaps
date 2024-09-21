@@ -14,7 +14,7 @@ namespace DynamicMaps.UI.Components
     {
         private static Vector2 _markerSize = new Vector2(30, 30);
         private static float _zoomMaxScaler = 10f;  // multiplier against zoomMin
-        private static float _zoomMinScaler = 1.1f; // divider against ratio of a provided rect
+        private static float _zoomMinScaler = .9f; // divider against ratio of a provided rect
 
         public event Action<int> OnLevelSelected;
 
@@ -286,8 +286,10 @@ namespace DynamicMaps.UI.Components
         {
             // set zoom min and max based on size of map and size of mask
             var mapSize = RectTransform.sizeDelta;
-            ZoomMin = Mathf.Min(parentTransform.sizeDelta.x / mapSize.x, parentTransform.sizeDelta.y / mapSize.y) / _zoomMinScaler;
-            ZoomMax = _zoomMaxScaler * ZoomMin;
+            var parentSize = parentTransform.sizeDelta;
+
+            ZoomMin = Mathf.Min(parentSize.x / mapSize.x, parentSize.y / mapSize.y) / _zoomMinScaler;
+            ZoomMax = Mathf.Max(_zoomMaxScaler * ZoomMin, 1.0f);
 
             // this will set everything up for initial zoom
             SetMapZoom(ZoomMin, 0);

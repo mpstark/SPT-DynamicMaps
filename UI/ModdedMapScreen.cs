@@ -11,6 +11,7 @@ using DynamicMaps.UI.Components;
 using DynamicMaps.UI.Controls;
 using DynamicMaps.Utils;
 using EFT.UI;
+using EFT.UI.Map;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,8 +56,12 @@ namespace DynamicMaps.UI
         private PlayerPositionText _playerPositionText;
 
         // peek
-        private MapPeekComponent _peekComponent;
-        private bool _isPeeking => _peekComponent != null && _peekComponent.IsPeeking;
+        internal MapPeekComponent PeekComponent;
+        internal MapMiniComponent MiniMapComponent;
+        public bool IsPeeking => PeekComponent != null && PeekComponent.IsPeeking;
+        public bool IsMinimapActive => MiniMapComponent != null && MiniMapComponent.IsActive;
+        private float _mainMapZoom;
+        public bool WasMinimapActive = false;
 
         // dynamic map marker providers
         private Dictionary<Type, IDynamicMarkerProvider> _dynamicMarkerProviders = new Dictionary<Type, IDynamicMarkerProvider>();
@@ -157,6 +162,21 @@ namespace DynamicMaps.UI
                 }
             }
 
+            if (Settings.MiniMapZoomIn.Value.BetterIsDown())
+            {
+                var currentZoom = _mapView.ZoomCurrent + 1f;
+                _mapView.SetMapZoom(currentZoom, .5f);
+                Settings.MiniMapZoom.Value = currentZoom;
+                Settings.Config.Save();
+            }
+            else if (Settings.MiniMapZoomOut.Value.BetterIsDown())
+            {
+                var currentZoom = _mapView.ZoomCurrent - 1f;
+                _mapView.SetMapZoom(currentZoom, .5f);
+                Settings.MiniMapZoom.Value = currentZoom;
+                Settings.Config.Save();
+            }
+
             // change level hotkeys
             if (_moveMapLevelUpShortcut.BetterIsDown())
             {
@@ -215,7 +235,7 @@ namespace DynamicMaps.UI
                 _mapView.IncrementalZoomInto(zoomDelta, currentCenter, 0f);
             }
 
-            if (_centerPlayerShortcut.BetterIsDown())
+            if (_centerPlayerShortcut.BetterIsDown() || IsMinimapActive)
             {
                 var player = GameUtils.GetMainPlayer();
                 if (player != null)
@@ -241,7 +261,18 @@ namespace DynamicMaps.UI
 
         internal void OnMapScreenShow()
         {
-            _peekComponent?.EndPeek();
+            if(PeekComponent != null)
+            {
+                PeekComponent.EndPeek();
+            }
+
+            if (WasMinimapActive)
+            {
+                if(MiniMapComponent != null)
+                {
+                    MiniMapComponent.EndMiniMap();
+                }
+            }
 
             transform.parent.Find("MapBlock").gameObject.SetActive(false);
             transform.parent.Find("EmptyBlock").gameObject.SetActive(false);
@@ -253,11 +284,20 @@ namespace DynamicMaps.UI
         internal void OnMapScreenClose()
         {
             Hide();
+            if (WasMinimapActive)
+            {
+                if(MiniMapComponent != null)
+                {
+                    MiniMapComponent.BeginMiniMap();
+                }
+            }
         }
 
         internal void Show()
         {
             AdjustSizeAndPosition();
+
+            _mainMapZoom = _mapView.ZoomCurrent;
 
             _isShown = true;
             gameObject.SetActive(true);
@@ -299,16 +339,32 @@ namespace DynamicMaps.UI
 
         internal void TryAddPeekComponent(EftBattleUIScreen battleUI)
         {
-            if (_peekComponent != null)
+            if (PeekComponent != null)
             {
                 return;
             }
 
             Plugin.Log.LogInfo("Trying to attach peek component to BattleUI");
 
-            _peekComponent = MapPeekComponent.Create(battleUI.gameObject);
-            _peekComponent.MapScreen = this;
-            _peekComponent.MapScreenTrueParent = _parentTransform;
+            PeekComponent = MapPeekComponent.Create(battleUI.gameObject);
+            PeekComponent.MapScreen = this;
+            PeekComponent.MapScreenTrueParent = _parentTransform;
+
+            ReadConfig();
+        }
+
+        internal void TryAddMiniMapComponent(EftBattleUIScreen battleUI)
+        {
+            if (MiniMapComponent != null)
+            {
+                return;
+            }
+
+            Plugin.Log.LogInfo("Trying to attach mini map component to BattleUI");
+
+            MiniMapComponent = MapMiniComponent.Create(battleUI.gameObject);
+            MiniMapComponent.MapScreen = this;
+            MiniMapComponent.MapScreenTrueParent = _parentTransform;
 
             ReadConfig();
         }
@@ -330,9 +386,19 @@ namespace DynamicMaps.UI
             }
 
             // reset peek and remove reference, it will be destroyed very shortly with parent object
-            _peekComponent?.EndPeek();
-            Destroy(_peekComponent.gameObject);
-            _peekComponent = null;
+            if(PeekComponent != null)
+            {
+                PeekComponent.EndPeek();
+                Destroy(PeekComponent.gameObject);
+                PeekComponent = null;
+            }
+
+            if (MiniMapComponent != null)
+            {
+                MiniMapComponent.EndMiniMap();
+                Destroy(MiniMapComponent.gameObject);
+                MiniMapComponent = null;
+            }
 
             // unload map completely when raid ends, since we've removed markers
             _mapView.UnloadMap();
@@ -365,6 +431,10 @@ namespace DynamicMaps.UI
             _scrollMask.GetRectTransform().anchoredPosition = _maskPositionOutOfRaid;
             _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierOutOfRaid;
 
+            _mapView.SetMapZoom(_mainMapZoom, .5f);
+
+            _levelSelectSlider.RectTransform.anchoredPosition = _levelSliderPosition;
+
             // turn on cursor and off player position texts
             _cursorPositionText.gameObject.SetActive(true);
             _playerPositionText.gameObject.SetActive(false);
@@ -372,31 +442,55 @@ namespace DynamicMaps.UI
 
         private void AdjustForInRaid()
         {
-            // adjust mask
             _scrollMask.GetRectTransform().anchoredPosition = _maskPositionInRaid;
             _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta + _maskSizeModifierInRaid;
 
-            // turn both cursor and player position texts on
+            _levelSelectSlider.gameObject.SetActive(true);
             _cursorPositionText.gameObject.SetActive(true);
             _playerPositionText.gameObject.SetActive(true);
+
+            _mapView.SetMapZoom(_mainMapZoom, .5f);
+
+            _cursorPositionText.RectTransform.anchoredPosition = _cursorPositionTextOffset;
+            _playerPositionText.RectTransform.anchoredPosition = _playerPositionTextOffset;
         }
 
         private void AdjustForPeek()
         {
-            // adjust mask
             _scrollMask.GetRectTransform().anchoredPosition = Vector2.zero;
             _scrollMask.GetRectTransform().sizeDelta = RectTransform.sizeDelta;
 
-            // turn both cursor and player position texts off
+            _mapView.SetMapZoom(_mainMapZoom, .5f);
+
+            _levelSelectSlider.gameObject.SetActive(true);
+            _cursorPositionText.gameObject.SetActive(false);
+            _playerPositionText.gameObject.SetActive(false);
+        }
+
+        private void AdjustForMiniMap()
+        {
+            _scrollMask.GetRectTransform().anchoredPosition = Settings.MiniMapAnchoredPosition.Value;
+            _scrollMask.GetRectTransform().sizeDelta = Settings.MiniMapSizeDelta.Value;
+            _scrollMask.GetRectTransform().anchorMin = Settings.MiniMapAnchorMin.Value;
+            _scrollMask.GetRectTransform().anchorMax = Settings.MiniMapAnchorMax.Value;
+            _scrollMask.GetRectTransform().pivot = Settings.MiniMapPivot.Value;
+
+            _mapView.SetMapZoom(Settings.MiniMapZoom.Value, .5f);
+
+            _levelSelectSlider.gameObject.SetActive(false);
             _cursorPositionText.gameObject.SetActive(false);
             _playerPositionText.gameObject.SetActive(false);
         }
 
         private void OnShowInRaid()
         {
-            if (_isPeeking)
+            if (IsPeeking)
             {
                 AdjustForPeek();
+            }
+            else if (IsMinimapActive)
+            {
+                AdjustForMiniMap();
             }
             else
             {
@@ -514,7 +608,7 @@ namespace DynamicMaps.UI
 
         private void OnScroll(float scrollAmount)
         {
-            if (_isPeeking)
+            if (IsPeeking || IsMinimapActive)
             {
                 return;
             }
@@ -565,10 +659,22 @@ namespace DynamicMaps.UI
             _resetZoomOnCenter = Settings.ResetZoomOnCenter.Value;
             _centeringZoomResetPoint = Settings.CenteringZoomResetPoint.Value;
 
-            if (_peekComponent != null)
+            if (PeekComponent != null)
             {
-                _peekComponent.PeekShortcut = Settings.PeekShortcut.Value;
-                _peekComponent.HoldForPeek = Settings.HoldForPeek.Value;
+                PeekComponent.PeekShortcut = Settings.PeekShortcut.Value;
+                PeekComponent.HoldForPeek = Settings.HoldForPeek.Value;
+            }
+
+            if (MiniMapComponent != null)
+            {
+                MiniMapComponent.ActivateMiniMap = Settings.MiniMapKey.Value;
+                if (IsMinimapActive)
+                {
+                    _scrollMask.GetRectTransform().anchoredPosition = Settings.MiniMapAnchoredPosition.Value;
+                    _scrollMask.GetRectTransform().sizeDelta = Settings.MiniMapSizeDelta.Value;
+
+                    _mapView.SetMapZoom(Settings.MiniMapZoom.Value, .5f);
+                }
             }
 
             AddRemoveMarkerProvider<PlayerMarkerProvider>(Settings.ShowPlayerMarker.Value);
