@@ -8,7 +8,7 @@ using DynamicMaps.UI.Components;
 using DynamicMaps.Utils;
 using EFT;
 using UnityEngine;
-using System.Timers;
+using System.Collections;
 
 namespace DynamicMaps.DynamicMarkers
 {
@@ -26,7 +26,6 @@ namespace DynamicMaps.DynamicMarkers
         private static Color _bossColor = Color.Lerp(Color.red, Color.yellow, 0.7f);
 
         //
-        private System.Timers.Timer _updateTimer;
         private bool _isMapVisible = false;
         private bool _timerRunning = false;
         private static Vector2 _markerSize = new Vector2(30, 30);
@@ -37,36 +36,21 @@ namespace DynamicMaps.DynamicMarkers
         
         public EnemyHotZonesProvider()
             {
-                // Timer erstellen und konfigurieren
-                _updateTimer = new System.Timers.Timer(_updateIntervall * 1000); // 30 Sekunden in Millisekunden
-                _updateTimer.Elapsed += OnTimerElapsed; // Timer-Event registrieren
-                _updateTimer.AutoReset = false; // Timer soll sich nicht automatisch zurücksetzen
+
             }
 
         public void OnShowInRaid(MapView map)
         {
             _lastMapView = map;
             _isMapVisible = true;
-            Plugin.Log.LogInfo("Showing map in raid Hotzones called");
 
+            Plugin.Log.LogInfo(_timerRunning);
             if(!_timerRunning)
             {
                 PerformUpdate();
                 _timerRunning = true;
-                _updateTimer.Start();
-            }
-        }
-
-        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            if (_isMapVisible)
-            {
-                PerformUpdate();
-                _updateTimer.Start();
-            }
-            else
-            {
-                _timerRunning = false;
+                _lastMapView.StartCoroutine(UpdateMarkersPeriodically());
+                Plugin.Log.LogInfo("Timer startet");
             }
         }
 
@@ -74,20 +58,37 @@ namespace DynamicMaps.DynamicMarkers
         {
                 Plugin.Log.LogInfo("Hotzones performing update");
                 TryRemoveMarkers();
-                Plugin.Log.LogInfo("Hotzones removed Markers");
                 TryAddMarkers();
                 RemoveNonActivePlayers();
 
         }
+        
+        private IEnumerator UpdateMarkersPeriodically()
+        {
+            while (_timerRunning)
+            {
+                yield return new WaitForSeconds(_updateIntervall);
+
+                if (_isMapVisible)
+                {
+                    PerformUpdate();
+                }
+                else
+                {
+                    _timerRunning = false;
+                }
+            }
+        }
+        
         public void OnHideInRaid(MapView map)
         {
             _isMapVisible = false;
+            _timerRunning = false;
         }
 
         public void OnRaidEnd(MapView map)
         {
             TryRemoveMarkers();
-            _updateTimer.Stop();
             _isMapVisible = false;
             _timerRunning = false;
         }
@@ -134,7 +135,6 @@ namespace DynamicMaps.DynamicMarkers
             {
                 return;
             }
-            Plugin.Log.LogInfo("Trying to add Marker for players");
             // add all players that have spawned already in raid
             var gameWorld = Singleton<GameWorld>.Instance;
             foreach (var player in gameWorld.AllAlivePlayersList)
@@ -186,8 +186,8 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             // set category and color
-            var category = "Blub";
-            var imagePath = _arrowImagePath;
+            var category = "HotZone";
+            var imagePath = _circleImagePath;
             var color = _scavColor;
 
             if (player.IsTrackedBoss())
@@ -200,13 +200,9 @@ namespace DynamicMaps.DynamicMarkers
             }
 
             var position = MathUtils.ConvertToMapPosition(player.Position);
-            //position.z = 0f;
             // try adding marker
-            var name = $"{player.Profile.GetCorrectedNickname()}";
-             
 
-            //var marker = _lastMapView.AddHotZonesMarker(category, name, color, imagePath, position,_markerSize,1f);
-            var marker = _lastMapView.AddPlayerMarker(player, category, color, imagePath);
+            var marker = _lastMapView.AddHotZonesMarker(category, "HotZone", color, imagePath, position,_markerSize,2f);
             _playerHotZoneMarkers[player] = marker;
         }
 
@@ -224,7 +220,6 @@ namespace DynamicMaps.DynamicMarkers
             {
                 return;
             }
-
             _playerHotZoneMarkers[player].ContainingMapView.RemoveMapMarker(_playerHotZoneMarkers[player]);
             _playerHotZoneMarkers.Remove(player);
         }

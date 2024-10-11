@@ -78,10 +78,9 @@ namespace DynamicMaps.UI.Components
         public HotZonesMarker AddHotZonesMarker(string category, string text, Color color, string imagePath, Vector3 position, Vector2 size,
                                                 float scale )
         {
-            Plugin.Log.LogInfo("Called AddHotZonesMarker");
             var marker = HotZonesMarker.Create(MapMarkerContainer, text, category, color, imagePath, position, size, 
-                                                -CoordinateRotation, 1f/ZoomCurrent);
-            //AddMapMarker(marker);
+                                                -CoordinateRotation, scale*ZoomCurrent);
+            AddMapMarker(marker);
             return marker;
         }
         
@@ -330,6 +329,11 @@ namespace DynamicMaps.UI.Components
             var things = _markers.Cast<MonoBehaviour>().Concat(_labels);
             foreach (var thing in things)
             {
+                // Skip HotZonesMarker
+                if (thing is HotZonesMarker)
+                    {
+                        continue; 
+                    }
                 thing.GetRectTransform().DOScale(1 / ZoomCurrent * Vector3.one, tweenTime);
             }
         }

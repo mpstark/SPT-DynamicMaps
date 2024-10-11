@@ -170,26 +170,26 @@ namespace DynamicMaps.UI.Components
                             where T : MapMarker
         {
             var go = UIUtils.CreateUIGameObject(parent, $"MapMarker {text}");
-Plugin.Log.LogInfo("1");
+
             // this is to receive mouse events
             var fakeImage = go.AddComponent<Image>();
             fakeImage.color = Color.clear;
             fakeImage.raycastTarget = true;
-Plugin.Log.LogInfo("2");
+
             var rectTransform = go.GetRectTransform();
             rectTransform.anchoredPosition = position;
             rectTransform.sizeDelta = size;
             rectTransform.localScale = scale * Vector2.one;
             rectTransform.localRotation = Quaternion.Euler(0, 0, degreesRotation);
             rectTransform.pivot = pivot;
-Plugin.Log.LogInfo("3");
+
             var marker = go.AddComponent<T>();
             marker.Text = text;
             marker.Category = category;
             marker.Position = position;
             marker._initialRotation = degreesRotation;
             marker.ShowInRaid = showInRaid;
-Plugin.Log.LogInfo("4"+ imageRelativePath);
+
             // image
             var imageGO = UIUtils.CreateUIGameObject(go, "image");
             imageGO.AddComponent<CanvasRenderer>();
@@ -199,7 +199,7 @@ Plugin.Log.LogInfo("4"+ imageRelativePath);
             marker.Image.raycastTarget = false;
             marker.Image.sprite = TextureUtils.GetOrLoadCachedSprite(imageRelativePath);
             marker.Image.type = Image.Type.Simple;
-Plugin.Log.LogInfo("5" + text);
+
             // var outline = imageGO.AddComponent<Outline>();
             // outline.effectColor = Color.black;
             // outline.effectDistance = Vector2.one;
@@ -207,31 +207,25 @@ Plugin.Log.LogInfo("5" + text);
             // label
             var labelGO = UIUtils.CreateUIGameObject(go, "label");
             labelGO.AddComponent<CanvasRenderer>();
-            Plugin.Log.LogInfo("5.1");
             labelGO.GetRectTransform().anchorMin = new Vector2(0.5f, 0f);
             labelGO.GetRectTransform().anchorMax = new Vector2(0.5f, 0f);
             labelGO.GetRectTransform().pivot = new Vector2(0.5f, 1f);
             labelGO.GetRectTransform().sizeDelta = size * _labelSizeMultiplier;
-            Plugin.Log.LogInfo("5.2");
             marker.Label = labelGO.AddComponent<TextMeshProUGUI>();
-            Plugin.Log.LogInfo("5.2.1");
             marker.Label.alignment = TextAlignmentOptions.Top;
-            Plugin.Log.LogInfo("5.2.2");
             marker.Label.enableWordWrapping = true;
-            Plugin.Log.LogInfo("5.2.3");
             marker.Label.enableAutoSizing = true;
-            Plugin.Log.LogInfo("5.3");
             marker.Label.fontSizeMin = _markerMinFontSize;
             marker.Label.fontSizeMax = _markerMaxFontSize;
             marker.Label.text = marker.Text;
-Plugin.Log.LogInfo("6");
+
             marker._hasSetOutline = UIUtils.TrySetTMPOutline(marker.Label);
-Plugin.Log.LogInfo("7");
+
             marker.Color = color;
             marker._size = size;
-Plugin.Log.LogInfo("8");
+
             marker.Label.gameObject.SetActive(false);
-Plugin.Log.LogInfo("return");
+
             return marker;
         }
 

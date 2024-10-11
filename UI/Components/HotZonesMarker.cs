@@ -17,7 +17,6 @@ namespace DynamicMaps.UI.Components
         public static HotZonesMarker Create(GameObject parent, string text, string category, Color color, string imagePath, Vector3 position, 
                                             Vector2 size, float degreesRotation, float scale )
         {
-            Plugin.Log.LogInfo("Called HotZonesMarker Create");
             var mapMarker = Create<HotZonesMarker>(parent, text, "HotZone", imagePath, color, 
                                                     position, size, _pivot, degreesRotation, scale);
 
