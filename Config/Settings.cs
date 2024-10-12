@@ -33,7 +33,6 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowPlayerMarker;
 
         public static ConfigEntry<bool> ShowFriendlyPlayerMarkersInRaid;
-        public static ConfigEntry<bool> ShowHotZonesInRaid;
         public static ConfigEntry<bool> ShowEnemyPlayerMarkersInRaid;
         public static ConfigEntry<bool> ShowScavMarkersInRaid;
         public static ConfigEntry<bool> ShowBossMarkersInRaid;
@@ -66,6 +65,11 @@ namespace DynamicMaps.Config
 
         public static ConfigEntry<KeyboardShortcut> PeekShortcut;
         public static ConfigEntry<bool> HoldForPeek;
+
+        public const string EnemyHotZones = "4. Enemey Hot Zones";
+        public static ConfigEntry<bool> ShowHotZonesInRaid;
+        public static ConfigEntry<bool> UnifyZonesColors;
+        public static ConfigEntry<float> HotZonesMarkerScale;
 
         // public static ConfigEntry<KeyboardShortcut> KeyboardShortcut;
 
@@ -214,15 +218,6 @@ namespace DynamicMaps.Config
                 false,
                 new ConfigDescription(
                     "If enemy player markers should be shown in-raid (generally for debug)",
-                    null,
-                    new ConfigurationManagerAttributes { })));
-
-            ConfigEntries.Add(ShowHotZonesInRaid = Config.Bind(
-                DynamicMarkerTitle,
-                "Show Enemy Hot Zones in Raid",
-                false,
-                new ConfigDescription(
-                    "If enemy hot zones should be shown in-raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 
@@ -406,6 +401,32 @@ namespace DynamicMaps.Config
                     null,
                     new ConfigurationManagerAttributes { })));
 
+            ConfigEntries.Add(ShowHotZonesInRaid = Config.Bind(
+                EnemyHotZones,
+                "Show Enemy Hot Zones in Raid",
+                false,
+                new ConfigDescription(
+                    "If enemy hot zones should be shown in-raid",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+            
+            ConfigEntries.Add(UnifyZonesColors = Config.Bind(
+                EnemyHotZones,
+                "Unify Zone Colors",
+                true,
+                new ConfigDescription(
+                    "Uses only 1 zone color instead of 3 different for the different enemy types",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(HotZonesMarkerScale = Config.Bind(
+                EnemyHotZones,
+                "Scale multiplyier of the Hot Zones",
+                2f,
+                new ConfigDescription(
+                    "How big the Hot Zones should be",
+                    new AcceptableValueRange<float>(0.5f, 4f),
+                    new ConfigurationManagerAttributes { })));
             RecalcOrder();
         }
 

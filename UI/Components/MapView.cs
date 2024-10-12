@@ -79,7 +79,7 @@ namespace DynamicMaps.UI.Components
                                                 float scale )
         {
             var marker = HotZonesMarker.Create(MapMarkerContainer, text, category, color, imagePath, position, size, 
-                                                -CoordinateRotation, scale*ZoomCurrent);
+                                                -CoordinateRotation, 2f * scale/ZoomCurrent);
             AddMapMarker(marker);
             return marker;
         }
