@@ -27,6 +27,12 @@ namespace DynamicMaps.UI.Components
                     {LayerStatus.OnTop, 1.0f},
                     {LayerStatus.FullReveal, 1.0f},
                 }},
+                {"HotZone", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.25f},
+                    {LayerStatus.Underneath, 0.25f},
+                    {LayerStatus.OnTop, 0.25f},
+                    {LayerStatus.FullReveal, 0.25f},
+                }},
             };
         public static Dictionary<string, Dictionary<LayerStatus, float>> CategoryLabelAlphaLayerStatus { get; protected set; }
             = new Dictionary<string, Dictionary<LayerStatus, float>>
@@ -42,6 +48,12 @@ namespace DynamicMaps.UI.Components
                     {LayerStatus.Underneath, 0.0f},
                     {LayerStatus.OnTop, 1.0f},
                     {LayerStatus.FullReveal, 1.0f},
+                }},
+                {"HotZone", new Dictionary<LayerStatus, float> {
+                    {LayerStatus.Hidden, 0.0f},
+                    {LayerStatus.Underneath, 0.0f},
+                    {LayerStatus.OnTop, 0.0f},
+                    {LayerStatus.FullReveal, 0.0f},
                 }},
             };
 

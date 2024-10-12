@@ -339,6 +339,22 @@
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "AssociatedItemId": "61a64492ba05ef10d62adcc1"
+        },
+		{
+            "Text": "Leon's hideout",
+            "ImagePath": "Markers/door_with_lock.png",
+            "Position": { "x": -74.92, "y": -291.20, "z": 9.05 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "AssociatedItemId": "664d3de85f2355673b09aed5"
+        },
+		{
+            "Text": "USEC cottage room",
+            "ImagePath": "Markers/door_with_lock.png",
+            "Position": { "x": -110.72, "y": -14.23, "z": 20.9 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "AssociatedItemId": "66265d7be65f224b2e17c6aa"
         }
     ]
 }

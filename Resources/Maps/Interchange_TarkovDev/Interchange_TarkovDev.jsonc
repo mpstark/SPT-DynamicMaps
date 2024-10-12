@@ -628,6 +628,14 @@
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "AssociatedItemId": "5ad5ccd186f774446d5706e9"
-        }
+        },
+        {
+			"Text": "Grumpy's hideout",
+            "ImagePath": "Markers/door_with_lock.png",
+			"Position": { "x": -199.4, "y": -348.68, "z": 21 },
+			"Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+			"AssociatedItemId": "664d3dd590294949fe2d81b7"
+		}
     ]
 }

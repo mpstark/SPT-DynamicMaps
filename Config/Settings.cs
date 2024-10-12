@@ -33,6 +33,7 @@ namespace DynamicMaps.Config
         public static ConfigEntry<bool> ShowPlayerMarker;
 
         public static ConfigEntry<bool> ShowFriendlyPlayerMarkersInRaid;
+        public static ConfigEntry<bool> ShowHotZonesInRaid;
         public static ConfigEntry<bool> ShowEnemyPlayerMarkersInRaid;
         public static ConfigEntry<bool> ShowScavMarkersInRaid;
         public static ConfigEntry<bool> ShowBossMarkersInRaid;
@@ -213,6 +214,15 @@ namespace DynamicMaps.Config
                 false,
                 new ConfigDescription(
                     "If enemy player markers should be shown in-raid (generally for debug)",
+                    null,
+                    new ConfigurationManagerAttributes { })));
+
+            ConfigEntries.Add(ShowHotZonesInRaid = Config.Bind(
+                DynamicMarkerTitle,
+                "Show Enemy Hot Zones in Raid",
+                false,
+                new ConfigDescription(
+                    "If enemy hot zones should be shown in-raid",
                     null,
                     new ConfigurationManagerAttributes { })));
 

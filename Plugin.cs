@@ -13,7 +13,7 @@ using EFT.UI.Map;
 namespace DynamicMaps
 {
     // the version number here is generated on build and may have a warning if not yet built
-    [BepInPlugin("com.mpstark.DynamicMaps", "DynamicMaps", BuildInfo.Version)]
+    [BepInPlugin("com.mpstark.DynamicMaps", "DynamicMaps", "0.0.2")]
     [BepInDependency("com.SPT.custom")]
     public class Plugin : BaseUnityPlugin
     {

@@ -533,6 +533,14 @@
             "Category": "LockedDoor",
             "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
             "AssociatedItemId": "5a0ee37f86f774023657a86f"
+        },
+		{
+            "Text": "Voron's hideout",
+            "ImagePath": "Markers/door_with_lock.png",
+            "Position": { "x": -240.23, "y": 197.64, "z": -40.66 },
+            "Category": "LockedDoor",
+            "Color": { "r": 1.0, "g": 0.921568632, "b": 0.0156862754, "a": 1.0 },
+            "AssociatedItemId": "664d3ddfdda2e85aca370d75"
         }
         // {
         //     "Text": "safe 1",
