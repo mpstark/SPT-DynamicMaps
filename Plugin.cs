@@ -17,7 +17,7 @@ namespace DynamicMaps
     [BepInDependency("com.SPT.custom")]
     public class Plugin : BaseUnityPlugin
     {
-        public const int TarkovVersion = 30626;
+        public const int TarkovVersion = 35665;
         public static Plugin Instance;
         public static ManualLogSource Log => Instance.Logger;
         public static string Path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
