@@ -40,6 +40,7 @@
 - Could load higher resolution from asset bundle, as that uses different pipeline, and wouldn't be so slow
 - Could use additional layers on the same level to overlay higher resolution buildings
 - Update for more detail on building interiors
+- An update to showing the map on a second monitor
 
 ### Overlay
 
